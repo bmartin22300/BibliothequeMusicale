@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-
 <html>
 <head>
-	<script src="js/generateHtml.js"></script>	
+<meta charset="ISO-8859-1">
+<title>Bibliotheque musicale - Accueil</title>
 </head>
 <body>
 	
