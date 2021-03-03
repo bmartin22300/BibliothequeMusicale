@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Object.Client;
+
 public class MainServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,7 +36,9 @@ public class MainServlet extends HttpServlet {
 	}
 	
 	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws NumberFormatException, SQLException {
-        String pageName="/Accueil.jsp";
+		request.setAttribute("isClient", false);
+		request.setAttribute("isAdministrateur", false);
+        String pageName="/JSP/Utilisateur/Accueil.jsp";
         RequestDispatcher rd = getServletContext().getRequestDispatcher(pageName);
         try {
               rd.forward(request, response);
