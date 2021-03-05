@@ -46,7 +46,6 @@ CREATE TABLE IF NOT EXISTS `info_team08_schema`.`Client` (
   `styleMusiquePrefere` VARCHAR(45) NULL,
   `Playlist_idPlaylist` INT NOT NULL,
   PRIMARY KEY (`mail`, `password`, `Playlist_idPlaylist`),
-  INDEX `fk_Client_Playlist1_idx` (`Playlist_idPlaylist` ASC) VISIBLE,
   CONSTRAINT `fk_Client_Playlist1`
     FOREIGN KEY (`Playlist_idPlaylist`)
     REFERENCES `info_team08_schema`.`Playlist` (`idPlaylist`)
@@ -80,7 +79,6 @@ CREATE TABLE IF NOT EXISTS `info_team08_schema`.`TitreMusical` (
   `genre` INT NOT NULL,
   `Catalogue_idCatalogue` INT NOT NULL,
   PRIMARY KEY (`idTitreMusical`, `Catalogue_idCatalogue`),
-  INDEX `fk_TitreMusical_Catalogue1_idx` (`Catalogue_idCatalogue` ASC) VISIBLE,
   CONSTRAINT `fk_TitreMusical_Catalogue1`
     FOREIGN KEY (`Catalogue_idCatalogue`)
     REFERENCES `info_team08_schema`.`Catalogue` (`idCatalogue`)
@@ -103,8 +101,6 @@ CREATE TABLE IF NOT EXISTS `info_team08_schema`.`Album` (
   `TitreMusical_idTitreMusical` INT NOT NULL,
   `Catalogue_idCatalogue` INT NOT NULL,
   PRIMARY KEY (`idAlbum`, `Catalogue_idCatalogue`),
-  INDEX `fk_Album_TitreMusical1_idx` (`TitreMusical_idTitreMusical` ASC) VISIBLE,
-  INDEX `fk_Album_Catalogue1_idx` (`Catalogue_idCatalogue` ASC) VISIBLE,
   CONSTRAINT `fk_Album_TitreMusical1`
     FOREIGN KEY (`TitreMusical_idTitreMusical`)
     REFERENCES `info_team08_schema`.`TitreMusical` (`idTitreMusical`)
@@ -131,7 +127,6 @@ CREATE TABLE IF NOT EXISTS `info_team08_schema`.`Podcast` (
   `categorie` INT NOT NULL,
   `Catalogue_idCatalogue` INT NOT NULL,
   PRIMARY KEY (`idPodcast`, `Catalogue_idCatalogue`),
-  INDEX `fk_Podcast_Catalogue1_idx` (`Catalogue_idCatalogue` ASC) VISIBLE,
   CONSTRAINT `fk_Podcast_Catalogue1`
     FOREIGN KEY (`Catalogue_idCatalogue`)
     REFERENCES `info_team08_schema`.`Catalogue` (`idCatalogue`)
@@ -151,7 +146,6 @@ CREATE TABLE IF NOT EXISTS `info_team08_schema`.`Radio` (
   `genre` INT NOT NULL,
   `Catalogue_idCatalogue` INT NOT NULL,
   PRIMARY KEY (`idRadio`, `Catalogue_idCatalogue`),
-  INDEX `fk_Radio_Catalogue1_idx` (`Catalogue_idCatalogue` ASC) VISIBLE,
   CONSTRAINT `fk_Radio_Catalogue1`
     FOREIGN KEY (`Catalogue_idCatalogue`)
     REFERENCES `info_team08_schema`.`Catalogue` (`idCatalogue`)
@@ -173,7 +167,6 @@ CREATE TABLE IF NOT EXISTS `info_team08_schema`.`Interprete` (
   `dateNaissance` DATE NULL,
   `Album_idAlbum` INT NOT NULL,
   PRIMARY KEY (`idInterprete`),
-  INDEX `fk_Interprete_Album_idx` (`Album_idAlbum` ASC) VISIBLE,
   CONSTRAINT `fk_Interprete_Album`
     FOREIGN KEY (`Album_idAlbum`)
     REFERENCES `info_team08_schema`.`Album` (`idAlbum`)
@@ -205,8 +198,6 @@ CREATE TABLE IF NOT EXISTS `info_team08_schema`.`ElementsPlaylist` (
   `Playlist_idPlaylist` INT NOT NULL,
   `Catalogue_idCatalogue` INT NOT NULL,
   PRIMARY KEY (`Playlist_idPlaylist`, `Catalogue_idCatalogue`),
-  INDEX `fk_Playlist_has_Catalogue_Catalogue1_idx` (`Catalogue_idCatalogue` ASC) VISIBLE,
-  INDEX `fk_Playlist_has_Catalogue_Playlist1_idx` (`Playlist_idPlaylist` ASC) VISIBLE,
   CONSTRAINT `fk_Playlist_has_Catalogue_Playlist1`
     FOREIGN KEY (`Playlist_idPlaylist`)
     REFERENCES `info_team08_schema`.`Playlist` (`idPlaylist`)
