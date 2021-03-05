@@ -27,6 +27,10 @@ public class ClientServlet extends HttpServlet {//clientServlet
 		
 		//affection vue
         if(servletPath.equals("/AuthentificationClient")) {
+        	authentification.setClient(false);//remise à faux lors de la déconnexion
+    		authentification.setAdministrateur(false);//remise à faux lors de la déconnexion
+    		request.setAttribute("isClient", authentification.isClient());
+    		request.setAttribute("isAdministrateur", authentification.isAdministrateur());
         	request.setAttribute("isErrorLogin", false);
         	request.setAttribute("notLogged", false);
         	vue = "/JSP/Utilisateur/AuthentificationClient.jsp";
@@ -40,10 +44,32 @@ public class ClientServlet extends HttpServlet {//clientServlet
                 	vue = "/JSP/Client/GestionPlaylist.jsp";
                 }else {
                 	if(servletPath.equals("/ProfilClient")) {
+                		//affectation paramètres
+                        request.setAttribute("civilité", "Monsieur");
+                		request.setAttribute("nom", "Martin");
+                		request.setAttribute("prénom", "Baptiste");
+                		request.setAttribute("email", "bmartin@enssat.fr");
+                		request.setAttribute("adresse", "22 rue Félix le Dantec, 22300");
+                		request.setAttribute("nbEcoutes", 357);
+                		request.setAttribute("dateDeNaissance", "27/01/199");
+                		
                     	vue = "/JSP/Client/ProfilClient.jsp";
                     }else {
                     	if(servletPath.equals("/AccueilClient")) {
                         	vue = "/JSP/Client/AccueilClient.jsp";
+                        }else {
+                        	if(servletPath.equals("/ModficationProfilClient")) {
+                        		//affectation paramètres
+                                request.setAttribute("civilité", "Monsieur");
+                        		request.setAttribute("nom", "Martin");
+                        		request.setAttribute("prénom", "Baptiste");
+                        		request.setAttribute("email", "bmartin@enssat.fr");
+                        		request.setAttribute("adresse", "22 rue Félix le Dantec, 22300");
+                        		request.setAttribute("nbEcoutes", 357);
+                        		request.setAttribute("dateDeNaissance", "27/01/199");
+                        		
+                        		vue = "/JSP/Client/MofificationProfilClient.jsp";
+                        	}
                         }
                     }
                 }
@@ -66,7 +92,7 @@ public class ClientServlet extends HttpServlet {//clientServlet
 		String motDePasse = request.getParameter("password");
 		authentification.setPseudonyme(pseudonyme);
 		authentification.setMotDePasse(motDePasse);
-		if(pseudonyme.equals("test") && motDePasse.equals("test")) {
+		if(pseudonyme.equals("test") && motDePasse.equals("test")) {//TODO : penser à utiliser un requête SQL préparée contre l'injection de code 
 			request.setAttribute("isClient", true);
 			request.setAttribute("isAdministrateur", false);
 			authentification.setClient(true);
