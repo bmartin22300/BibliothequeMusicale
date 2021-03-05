@@ -1,14 +1,15 @@
 <% boolean isClient = (boolean)request.getAttribute("isClient"); %>
 <% boolean isAdministrateur = (boolean)request.getAttribute("isAdministrateur"); %>
+<% String pseudonyme = (String)request.getAttribute("pseudonyme"); %>
 
 <!-- navbar -->
 <div class="topnav">
 	<!-- client -->
-	<% if(isClient==true){ %>
-		<a class="active" href="Client/AccueilClient.jsp">Accueil</a>
-		<a href="Client/GestionPlaylist.jsp">Gérer mes playlists</a>
-		<a href="Client/ProfilClient.jsp">Modifier mon profil</a>
-		<a href="Utilisateur/Accueil.jsp">Déconnexion</a>	
+	<% if(isClient==true){ %>	
+		<a class="active" href=AccueilClient>Accueil</a>
+		<a href=GestionPlaylist>Gérer mes playlists</a>
+		<a href=ProfilClient>Modifier mon profil</a>
+		<a href=Accueil>Déconnexion</a>	
 	<% }else{ %>
 		<!-- administrateur -->
 		<% if(isAdministrateur==true){ %>
@@ -20,8 +21,8 @@
 			<a href="Utilisateur/Accueil.jsp">Déconnexion</a>	
 		<!-- utilisateur -->
 		<% }else{ %>
-			<a class="active" href="Utilisateur/Accueil.jsp">Accueil</a>
-			<a href="Utilisateur/AuthentificationClient.jsp">Connexion</a>
+			<a class="active" href=Accueil>Accueil</a>
+			<a href=AuthentificationClient>Connexion</a>
 		<%} %>
 	<%} %>
 </div>

@@ -14,10 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import Object.Authentification;
 import Object.Client;
 
-public class MainServlet extends HttpServlet {//utilisateurServlet
+public class AdministrateurServlet extends HttpServlet {
 	
 	public String vue = "/JSP/Utilisateur/Accueil.jsp";
-	Authentification authentification = new Authentification();//TODO : ne peut-on pas s'en débarasser ? // pratique pour sauvegarder le pseudo... entre les pages
+	Authentification authentification = new Authentification();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
@@ -40,8 +40,6 @@ public class MainServlet extends HttpServlet {//utilisateurServlet
 	}
 	
 	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws NumberFormatException, SQLException {
-		authentification.setClient(false);//remise à faux lors de la déconnexion
-		authentification.setAdministrateur(false);//remise à faux lors de la déconnexion
 		request.setAttribute("isClient", authentification.isClient());
 		request.setAttribute("isAdministrateur", authentification.isAdministrateur());
 		request.setAttribute("pseudonyme", authentification.getPseudonyme());

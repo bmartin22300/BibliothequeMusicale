@@ -8,10 +8,8 @@
 <body>
 	<%@include file="../header.jsp" %>
 	<%@page import="java.util.List,Object.Client"%>
-	<% 
-	String parametre = request.getParameter( "auteur" );
-    out.println( parametre );
-            %>
+	
+	<a>Pseudonyme : <%= pseudonyme %></a>
 	
 </body>
 </html>

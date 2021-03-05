@@ -7,5 +7,6 @@
 </head>
 <body>
 	<%@include file="../header.jsp" %>
+	accueilClient
 </body>
 </html>
