@@ -11,6 +11,7 @@ CALL nouveau_client_complet('client@gmail.com', 'client', 'Homme', 'clientNom', 
 CALL nouveau_client_complet('natalieriviera@free.fr', 'ordinateur', 'Femme', 'Riviera', 'Natalie', '1950-2-10', '2 place de la rouille, 22300, Lannion', 'Rock');
 CALL nouveau_client('jaimelavie@free.fr', 'maispastouslesjours');
 
+CALL authentification_client('natalieriviera@free.fr', 'ordinateur');
 SELECT * FROM Client;
 
 -- Création Interprète
