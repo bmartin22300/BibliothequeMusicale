@@ -1,32 +1,27 @@
 package Object;
 
+import java.sql.Date;
 import java.util.List;
 
 public class Album extends ElementCatalogue{
 	private String nom;
-	private String interprète;
-	private int durée;
-	private int annéeCréation;
+	private List<Interprete> interpretes;
+	private Date dateSortie;
+	private int duree;
 	private List<TitreMusical> titres;
 	
-	public Album(boolean recommandé, String nom, String interprète, int durée, int annéeCréation,
+	// Constructeur
+	public Album(boolean recommande, int nbEcoute, String nom, List<Interprete> interpretes, Date dateSortie, int duree,
 			List<TitreMusical> titres) {
-		super(recommandé);
+		super(recommande, nbEcoute);
 		this.nom = nom;
-		this.interprète = interprète;
-		this.durée = durée;
-		this.annéeCréation = annéeCréation;
+		this.interpretes = interpretes;
+		this.dateSortie = dateSortie;
+		this.duree = duree;
 		this.titres = titres;
 	}
 	
-	public void ajouterTitre(ElementCatalogue elementMusical) {
-		
-	}
-	
-	public void supprimerTitre(ElementCatalogue elementMusical) {
-		
-	}
-
+	// Getters et Setters
 	public String getNom() {
 		return nom;
 	}
@@ -35,28 +30,28 @@ public class Album extends ElementCatalogue{
 		this.nom = nom;
 	}
 
-	public String getInterprète() {
-		return interprète;
+	public List<Interprete> getInterprete() {
+		return interpretes;
 	}
 
-	public void setInterprète(String interprète) {
-		this.interprète = interprète;
+	public void setInterprete(List<Interprete> interpretes) {
+		this.interpretes = interpretes;
 	}
 
-	public int getDurée() {
-		return durée;
+	public Date getDateSortie() {
+		return dateSortie;
 	}
 
-	public void setDurée(int durée) {
-		this.durée = durée;
+	public void setDateSortie(Date dateSortie) {
+		this.dateSortie = dateSortie;
 	}
 
-	public int getAnnéeCréation() {
-		return annéeCréation;
+	public int getDuree() {
+		return duree;
 	}
 
-	public void setAnnéeCréation(int annéeCréation) {
-		this.annéeCréation = annéeCréation;
+	public void setDuree(int duree) {
+		this.duree = duree;
 	}
 
 	public List<TitreMusical> getTitres() {
@@ -66,4 +61,16 @@ public class Album extends ElementCatalogue{
 	public void setTitres(List<TitreMusical> titres) {
 		this.titres = titres;
 	}
+	
+	// MÃ©thodes de classe
+	/*
+	public void ajouterTitre(ElementCatalogue elementMusical) {
+		
+	}
+	
+	public void supprimerTitre(ElementCatalogue elementMusical) {
+		
+	}*/
+
+	
 }

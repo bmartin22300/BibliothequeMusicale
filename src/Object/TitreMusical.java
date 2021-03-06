@@ -1,22 +1,27 @@
 package Object;
 
+import java.sql.Date;
+import java.util.List;
+
 public class TitreMusical extends ElementCatalogue{
 	private String titre;
-	private String interprète;
-	private int durée;
-	private int annéeCréation;
-	private int nbEcouteMensuel;
+	private List<Interprete> interpretes;
+	private Date dateCreation;
+	private int duree;
+	private Genre genre;
 	
-	public TitreMusical(boolean recommandé, String titre, String interprète, int durée, int annéeCréation,
-			int nbEcouteMensuel) {
-		super(recommandé);
+	// Constructeur
+	public TitreMusical(boolean recommande, int nbEcoute, String titre, List<Interprete> interpretes, Date dateCreation,
+			int duree, Genre genre) {
+		super(recommande, nbEcoute);
 		this.titre = titre;
-		this.interprète = interprète;
-		this.durée = durée;
-		this.annéeCréation = annéeCréation;
-		this.nbEcouteMensuel = nbEcouteMensuel;
+		this.interpretes = interpretes;
+		this.dateCreation = dateCreation;
+		this.duree = duree;
+		this.genre = genre;
 	}
 
+	// Getters et Setters
 	public String getTitre() {
 		return titre;
 	}
@@ -25,37 +30,36 @@ public class TitreMusical extends ElementCatalogue{
 		this.titre = titre;
 	}
 
-	public String getInterprète() {
-		return interprète;
+	public List<Interprete> getInterprete() {
+		return interpretes;
 	}
 
-	public void setInterprète(String interprète) {
-		this.interprète = interprète;
+	public void setInterprete(List<Interprete> interpretes) {
+		this.interpretes = interpretes;
 	}
 
-	public int getDurée() {
-		return durée;
+	public Date getDateCreation() {
+		return dateCreation;
 	}
 
-	public void setDurée(int durée) {
-		this.durée = durée;
+	public void setDateCreation(Date dateCreation) {
+		this.dateCreation = dateCreation;
 	}
 
-	public int getAnnéeCréation() {
-		return annéeCréation;
+	public int getDuree() {
+		return duree;
 	}
 
-	public void setAnnéeCréation(int annéeCréation) {
-		this.annéeCréation = annéeCréation;
+	public void setDuree(int duree) {
+		this.duree = duree;
 	}
 
-	public int getNbEcouteMensuel() {
-		return nbEcouteMensuel;
+	public Genre getGenre() {
+		return genre;
 	}
 
-	public void setNbEcouteMensuel(int nbEcouteMensuel) {
-		this.nbEcouteMensuel = nbEcouteMensuel;
+	public void setGenre(Genre genre) {
+		this.genre = genre;
 	}
-	
-	
+
 }

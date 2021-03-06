@@ -2,20 +2,21 @@ package Object;
 
 public class Podcast extends ElementCatalogue {
 	private String titre;
-	private String interprète;
-	private String catégorie;
-	private int durée;
-
-	public Podcast(boolean recommandé, String titre, String interprète, String catégorie, int durée) {
-		super(recommandé);
+	private String duree;
+	private String pseudoAuteur;
+	private String categorie;
+	
+	// Constructeur
+	public Podcast(boolean recommande, int nbEcoute, String titre, String duree, String pseudoAuteur,
+			String categorie) {
+		super(recommande, nbEcoute);
 		this.titre = titre;
-		this.interprète = interprète;
-		this.catégorie = catégorie;
-		this.durée = durée;
+		this.duree = duree;
+		this.pseudoAuteur = pseudoAuteur;
+		this.categorie = categorie;
 	}
 
-
-
+	// Getters et Setters
 	public String getTitre() {
 		return titre;
 	}
@@ -24,27 +25,27 @@ public class Podcast extends ElementCatalogue {
 		this.titre = titre;
 	}
 
-	public String getInterprète() {
-		return interprète;
+	public String getDuree() {
+		return duree;
 	}
 
-	public void setInterprète(String interprète) {
-		this.interprète = interprète;
+	public void setDuree(String duree) {
+		this.duree = duree;
 	}
 
-	public String getCatégorie() {
-		return catégorie;
+	public String getPseudoAuteur() {
+		return pseudoAuteur;
 	}
 
-	public void setCatégorie(String catégorie) {
-		this.catégorie = catégorie;
+	public void setPseudoAuteur(String pseudoAuteur) {
+		this.pseudoAuteur = pseudoAuteur;
 	}
 
-	public int getDurée() {
-		return durée;
+	public String getCategorie() {
+		return categorie;
 	}
 
-	public void setDurée(int durée) {
-		this.durée = durée;
-	}
+	public void setCategorie(String categorie) {
+		this.categorie = categorie;
+	}	
 }

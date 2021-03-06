@@ -2,29 +2,32 @@ package Object;
 
 import java.util.List;
 
-public class Playlist extends ElementCatalogue{
-	private String nom;
-	private List<ElementCatalogue> éléments;
+public class Playlist {
+	private String nomPlaylist;
+	private List<ElementCatalogue> elementsCatalogue;
 	
-	public Playlist(boolean recommandé, String nom, List<ElementCatalogue> éléments) {
-		super(recommandé);
-		this.nom = nom;
-		this.éléments = éléments;
+	// Constructeurs
+	public Playlist(String nomPlaylist, List<ElementCatalogue> elementsCatalogue, List<ElementCatalogue> get) {
+		super();
+		this.nomPlaylist = nomPlaylist;
+		this.elementsCatalogue = elementsCatalogue;
 	}
 
-	public String getNom() {
-		return nom;
+	// Getters et Setters
+	public String getNomPlaylist() {
+		return nomPlaylist;
 	}
 
-	public void setNom(String nom) {
-		this.nom = nom;
+	public void setNomPlaylist(String nomPlaylist) {
+		this.nomPlaylist = nomPlaylist;
 	}
 
-	public List<ElementCatalogue> getÉléments() {
-		return éléments;
+	public List<ElementCatalogue> getElementsCatalogue() {
+		return elementsCatalogue;
 	}
 
-	public void setÉléments(List<ElementCatalogue> éléments) {
-		this.éléments = éléments;
+	public void setElementsCatalogue(List<ElementCatalogue> elementsCatalogue) {
+		this.elementsCatalogue = elementsCatalogue;
 	}
+	
 }

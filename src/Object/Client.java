@@ -4,32 +4,116 @@ import java.util.Date;
 import java.util.List;
 
 public class Client {
-	private String civilité;
+	private String mail;
+	private String password;
+	private String civilite;
 	private String nom;
-	private String prénom;
-	private String email;
-	private String mdp;
-	private String adresse;
+	private String prenom;
 	private Date dateNaissance;
+	private String adresseFacturation;
 	private int nbEcoute;
 	private List<Playlist> playlists;
-	private List<Genre> genres;
+	private Genre styleMusiquePrefere;
 	
-	public Client(String civilité, String nom, String prénom, String email, String mdp, String adresse,
-			Date dateNaissance, int nbEcoute, List<Playlist> playlists, List<Genre> genres) {
+	// Constructeur
+	public Client(String mail, String password, String civilite, String nom, String prenom, Date dateNaissance,
+			String adresseFacturation, int nbEcoute, List<Playlist> playlists, Genre styleMusiquePrefere) {
 		super();
-		this.civilité = civilité;
+		this.mail = mail;
+		this.password = password;
+		this.civilite = civilite;
 		this.nom = nom;
-		this.prénom = prénom;
-		this.email = email;
-		this.mdp = mdp;
-		this.adresse = adresse;
+		this.prenom = prenom;
 		this.dateNaissance = dateNaissance;
+		this.adresseFacturation = adresseFacturation;
 		this.nbEcoute = nbEcoute;
 		this.playlists = playlists;
-		this.genres = genres;
+		this.styleMusiquePrefere = styleMusiquePrefere;
+	}
+
+	// Getters et Setters
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getCivilite() {
+		return civilite;
+	}
+
+	public void setCivilite(String civilite) {
+		this.civilite = civilite;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+	public Date getDateNaissance() {
+		return dateNaissance;
+	}
+
+	public void setDateNaissance(Date dateNaissance) {
+		this.dateNaissance = dateNaissance;
+	}
+
+	public String getAdresseFacturation() {
+		return adresseFacturation;
+	}
+
+	public void setAdresseFacturation(String adresseFacturation) {
+		this.adresseFacturation = adresseFacturation;
+	}
+
+	public int getNbEcoute() {
+		return nbEcoute;
+	}
+
+	public void setNbEcoute(int nbEcoute) {
+		this.nbEcoute = nbEcoute;
+	}
+
+	public List<Playlist> getPlaylists() {
+		return playlists;
+	}
+
+	public void setPlaylists(List<Playlist> playlists) {
+		this.playlists = playlists;
+	}
+
+	public Genre getStyleMusiquePrefere() {
+		return styleMusiquePrefere;
+	}
+
+	public void setStyleMusiquePrefere(Genre styleMusiquePrefere) {
+		this.styleMusiquePrefere = styleMusiquePrefere;
 	}
 	
+	// Methodes de classe
+	/*
 	public boolean authentification(String email, String motDePasse) {
 		return true;
 	}
@@ -50,7 +134,7 @@ public class Client {
 		
 	}
 	
-	public void créerPlaylist(String nomPlaylist) {
+	public void crï¿½erPlaylist(String nomPlaylist) {
 		
 	}
 	
@@ -68,85 +152,6 @@ public class Client {
 	
 	public void selection(ElementCatalogue nomElementCatalogue) {
 		
-	}
+	}*/
 
-	public String getCivilité() {
-		return civilité;
-	}
-
-	public void setCivilité(String civilité) {
-		this.civilité = civilité;
-	}
-
-	public String getNom() {
-		return nom;
-	}
-
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
-	public String getPrénom() {
-		return prénom;
-	}
-
-	public void setPrénom(String prénom) {
-		this.prénom = prénom;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getMdp() {
-		return mdp;
-	}
-
-	public void setMdp(String mdp) {
-		this.mdp = mdp;
-	}
-
-	public String getAdresse() {
-		return adresse;
-	}
-
-	public void setAdresse(String adresse) {
-		this.adresse = adresse;
-	}
-
-	public Date getDateNaissance() {
-		return dateNaissance;
-	}
-
-	public void setDateNaissance(Date dateNaissance) {
-		this.dateNaissance = dateNaissance;
-	}
-
-	public int getNbEcoute() {
-		return nbEcoute;
-	}
-
-	public void setNbEcoute(int nbEcoute) {
-		this.nbEcoute = nbEcoute;
-	}
-
-	public List<Playlist> getPlaylists() {
-		return playlists;
-	}
-
-	public void setPlaylists(List<Playlist> playlists) {
-		this.playlists = playlists;
-	}
-
-	public List<Genre> getGenres() {
-		return genres;
-	}
-
-	public void setGenres(List<Genre> genres) {
-		this.genres = genres;
-	}
 }

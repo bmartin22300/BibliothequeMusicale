@@ -1,15 +1,58 @@
 package Object;
 
 public class Administrateur {
-	private String email;
-	private String mdp;
-	
-	public Administrateur(String email, String mdp) {
+	private String mail;
+	private String password;
+	private boolean profilGestionClient;
+	private boolean profilGestionMusique;
+
+	// Constructeur
+	public Administrateur(String mail, String password, boolean profilGestionClient, boolean profilGestionMusique) {
 		super();
-		this.email = email;
-		this.mdp = mdp;
+		this.mail = mail;
+		this.password = password;
+		this.profilGestionClient = profilGestionClient;
+		this.profilGestionMusique = profilGestionMusique;
 	}
 	
+	// Getters et Setters
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public boolean isProfilGestionClient() {
+		return profilGestionClient;
+	}
+
+	public void setProfilGestionClient(boolean profilGestionClient) {
+		this.profilGestionClient = profilGestionClient;
+	}
+
+	public boolean isProfilGestionMusique() {
+		return profilGestionMusique;
+	}
+
+	public void setProfilGestionMusique(boolean profilGestionMusique) {
+		this.profilGestionMusique = profilGestionMusique;
+	}	
+	
+	
+	// MÃ©thodes de classe
+	
+	
+	/*
 	public void consulterStatistiques() {
 		
 	}
@@ -22,7 +65,7 @@ public class Administrateur {
 		
 	}
 	
-	public void rechercherClient(String nom, String prénom) {
+	public void rechercherClient(String nom, String prenom) {
 		
 	}
 	
@@ -36,18 +79,7 @@ public class Administrateur {
 	
 	public ElementCatalogue selectionerElementMusical(ElementCatalogue elementCatalogue) {
 		return elementCatalogue;
-	}
+	}*/
 	
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getMdp() {
-		return mdp;
-	}
-	public void setMdp(String mdp) {
-		this.mdp = mdp;
-	}
+
 }
