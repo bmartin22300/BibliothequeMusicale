@@ -7,6 +7,5 @@
 </head>
 <body>
 	<%@include file="../header.jsp" %>
-	<% administrateur=true; %>
 </body>
 </html>

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Object.Authentification;
+import Object.Utilisateur;
 
 public class ClientServlet extends HttpServlet {//clientServlet
 	
@@ -88,11 +89,68 @@ public class ClientServlet extends HttpServlet {//clientServlet
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/*
+		 String action = request.getParameter("action");
+		if(action.equals("ProfilClient")) {
+			
+			String pseudonyme = request.getParameter("username");
+			String motDePasse = request.getParameter("password");
+			authentification.setPseudonyme(pseudonyme);
+			authentification.setMotDePasse(motDePasse);
+			
+			//affectation paramètres
+            request.setAttribute("civilité", "Monsieur");
+    		request.setAttribute("nom", "Martin");
+    		request.setAttribute("prénom", "Baptiste");
+    		request.setAttribute("email", "bmartin@enssat.fr");
+    		request.setAttribute("adresse", "22 rue Félix le Dantec, 22300");
+    		request.setAttribute("nbEcoutes", 357);
+    		request.setAttribute("dateDeNaissance", "27/01/199");
+			
+			vue = "/JSP/Client/AccueilClient.jsp";
+			RequestDispatcher rd = getServletContext().getRequestDispatcher(vue);
+			try {
+	              rd.forward(request, response);
+	        } catch (ServletException e) {
+	              e.printStackTrace();
+	        } catch (IOException e) {
+	              e.printStackTrace();
+	        }
+		}else {
+			if(action.equals("AuthentificationClient")) {
+				String pseudonyme = request.getParameter("username");
+				String motDePasse = request.getParameter("password");
+				authentification.setPseudonyme(pseudonyme);
+				authentification.setMotDePasse(motDePasse);
+				if(pseudonyme.equals("test") && motDePasse.equals("test")) {//TODO : penser à utiliser un requête SQL préparée contre l'injection de code 
+					request.setAttribute("isClient", true);
+					request.setAttribute("isAdministrateur", false);
+					authentification.setClient(true);
+					vue = "/JSP/Client/AccueilClient.jsp";
+				}else {
+					request.setAttribute("isClient", false);
+					request.setAttribute("isAdministrateur", false);
+					request.setAttribute("isErrorLogin", true);
+					request.setAttribute("notLogged", false);
+					vue = "/JSP/Utilisateur/AuthentificationClient.jsp";
+				}
+				RequestDispatcher rd = getServletContext().getRequestDispatcher(vue);
+				try {
+		              rd.forward(request, response);
+		        } catch (ServletException e) {
+		              e.printStackTrace();
+		        } catch (IOException e) {
+		              e.printStackTrace();
+		        }
+			}
+		}
+		 */
 		String pseudonyme = request.getParameter("username");
 		String motDePasse = request.getParameter("password");
 		authentification.setPseudonyme(pseudonyme);
 		authentification.setMotDePasse(motDePasse);
-		if(pseudonyme.equals("test") && motDePasse.equals("test")) {//TODO : penser à utiliser un requête SQL préparée contre l'injection de code 
+		Utilisateur u = new Utilisateur();
+		if(u.authentification(pseudonyme, motDePasse)) {//TODO : penser à utiliser un requête SQL préparée contre l'injection de code 
 			request.setAttribute("isClient", true);
 			request.setAttribute("isAdministrateur", false);
 			authentification.setClient(true);
