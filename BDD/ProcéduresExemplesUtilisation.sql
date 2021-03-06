@@ -47,8 +47,8 @@ CALL nouveau_titre("L'Europe", '2001', 'Rock');CALL association_titre_interprete
 
 -- Création Album
 CALL nouveau_album('Des Visages des Figures','2001'); -- idAlbum = 16
-CALL association_album_interprete(16, 'Noir Désir');
-CALL ajout_titre_album(4,16);
+CALL association_album_interprete(16, 'Noir Désir'); -- Remplissage table AlbumInterprete
+CALL ajout_titre_album(4,16); -- Ajout de titre 4 à l'album 16
 CALL ajout_titre_album(5,16);
 CALL ajout_titre_album(6,16);
 CALL ajout_titre_album(7,16);
@@ -65,3 +65,17 @@ SELECT * FROM AlbumInterprete;
 SELECT * FROM ElementCatalogue;
 SELECT * FROM TitreMusical;
 SELECT * FROM Discographie;
+
+CALL reset_Vues_Catalogue();
+SELECT * FROM ElementCatalogue;
+
+-- On regarde des éléments du catalogue
+CALL regarder(1);CALL regarder(1);
+CALL regarder(2);
+CALL regarder(5);CALL regarder(5);CALL regarder(5);CALL regarder(5);
+CALL regarder(10);CALL regarder(10);CALL regarder(10);
+
+-- On recommande un élément du catalogue
+CALL recommander(6);
+
+SELECT * FROM ElementCatalogue;
