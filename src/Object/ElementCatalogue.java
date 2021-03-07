@@ -9,10 +9,11 @@ public abstract class ElementCatalogue {
 	private List<Playlist> playlists;
 
 	// Constructeur
-	public ElementCatalogue(boolean recommande, int nbEcoute) {
+	public ElementCatalogue(int idCatalogue) {
 		super();
-		this.recommande = recommande;
-		this.nbEcoute = nbEcoute;
+		this.setIdCatalogue(idCatalogue);
+		this.recommande = false;
+		this.nbEcoute = 0;
 	}
 
 	// Getters et Setters
@@ -38,6 +39,14 @@ public abstract class ElementCatalogue {
 
 	public void setPlaylists(List<Playlist> playlists) {
 		this.playlists = playlists;
+	}
+
+	public int getIdCatalogue() {
+		return idCatalogue;
+	}
+
+	public void setIdCatalogue(int idCatalogue) {
+		this.idCatalogue = idCatalogue;
 	}
 	
 	

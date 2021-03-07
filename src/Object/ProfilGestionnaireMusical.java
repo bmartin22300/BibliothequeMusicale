@@ -1,9 +1,12 @@
 package Object;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.Year;
+import java.util.List;
 
 import Interface.ProfilGestionnaireMusicalInterface;
 
@@ -75,7 +78,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 
 	// Methodes specifiques a la classe
 	@Override
-	public void creerTitre(String titre, String anneeCreation, String genre) {
+	public TitreMusical creerTitre(String titre, Year anneeCreation, List<Interprete> interpretes, int duree, Genre genre) {
 		// Récupérer une connexion de type java.sql.Connection
 		Connection connexion = DBManager.getInstance().getConnection();
 		
@@ -87,20 +90,36 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 			// Prepared statement 
 			PreparedStatement preparedQuery = connexion.prepareStatement(request);
 			preparedQuery.setString(1, titre);
-			preparedQuery.setString(2, anneeCreation);
-			preparedQuery.setString(3, genre);
+			preparedQuery.setString(2, anneeCreation.toString());
+			preparedQuery.setString(3, genre.toString()); //Marche probablement pas
 			
-			// Execution
 			preparedQuery.executeUpdate();
+			
+			ResultSet rs = preparedQuery.getGeneratedKeys();
+            if(rs.next()) // Ajout des interpretes
+            {
+                int last_inserted_id = rs.getInt(1);
+                
+				for(Interprete interprete : interpretes){
+					ajoutDiscographie(last_inserted_id, interprete.getPseudonyme());
+				}
+				
+				return new TitreMusical(last_inserted_id, titre, interpretes, anneeCreation, duree, genre);
+                
+            }
+            else {
+            	return null;
+            }		
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
 	}
 
 	@Override
-	public void creerInterprete(String pseudo) {
+	public Interprete creerInterprete(String pseudo) {
 		// Récupérer une connexion de type java.sql.Connection
 		Connection connexion = DBManager.getInstance().getConnection();
 		
@@ -114,16 +133,22 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 			preparedQuery.setString(1, pseudo);
 			
 			// Execution
-			preparedQuery.executeUpdate();
+			if(preparedQuery.executeUpdate()>0) {
+				return new Interprete(pseudo);
+			}
+			else{
+				return null;
+			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
 	}
 
 	@Override
-	public void creerInterprete(String pseudo, String prenom, String nom, String dateNaissance) {
+	public Interprete creerInterprete(String pseudo, String prenom, String nom, Date dateNaissance) {
 		// Récupérer une connexion de type java.sql.Connection
 		Connection connexion = DBManager.getInstance().getConnection();
 		
@@ -137,15 +162,21 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 			preparedQuery.setString(1, pseudo);
 			preparedQuery.setString(2, prenom);
 			preparedQuery.setString(3, nom);
-			preparedQuery.setString(4, dateNaissance);
+			preparedQuery.setString(4, dateNaissance.toString());
 			
 			// Execution
-			preparedQuery.executeUpdate();
+			if(preparedQuery.executeUpdate()>0) {
+				return new Interprete(pseudo, prenom, nom, dateNaissance);
+			}
+			else{
+				return null;
+			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
 	}
 
 	@Override

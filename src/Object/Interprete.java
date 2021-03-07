@@ -20,6 +20,10 @@ public class Interprete {
 		this.dateNaissance = dateNaissance;
 	}
 	
+	public Interprete(String pseudo) {
+		this.pseudonyme=pseudo;
+	}
+
 	// Getters et Setters
 	public String getPseudonyme() {
 		return pseudonyme;
