@@ -1,23 +1,26 @@
 package Object;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
-public class Client {
+import Interface.ClientInterface;
+
+public class Client implements ClientInterface {
 	private String mail;
 	private String password;
 	private String civilite;
 	private String nom;
 	private String prenom;
-	private String dateNaissance; // A modifier en Date
+	private Date dateNaissance;
 	private String adresseFacturation;
 	private int nbEcoute;
+	private Genre styleMusiquePrefere;
 	private List<Playlist> playlists;
-	private String styleMusiquePrefere; // A modifier en Genre
+	
 	
 	// Constructeurs
-	public Client(String mail, String password, String civilite, String nom, String prenom, String dateNaissance,
-			String adresseFacturation, String styleMusiquePrefere) {
+	public Client(String mail, String password, String civilite, String nom, String prenom, Date dateNaissance,
+			String adresseFacturation, Genre styleMusiquePrefere) {
 		super();
 		this.mail = mail;
 		this.password = password;
@@ -34,6 +37,21 @@ public class Client {
 		super();
 		this.mail = mail;
 		this.password = password;
+	}
+
+	public Client(String mail, String password, String civilite, String nom, String prenom, Date dateNaissance,
+			String adresseFacturation, int nbEcoute, Genre styleMusiquePrefere, List<Playlist> playlists) {
+		super();
+		this.mail = mail;
+		this.password = password;
+		this.civilite = civilite;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.dateNaissance = dateNaissance;
+		this.adresseFacturation = adresseFacturation;
+		this.nbEcoute = nbEcoute;
+		this.styleMusiquePrefere = styleMusiquePrefere;
+		this.playlists = playlists;
 	}
 
 	// Getters et Setters
@@ -77,11 +95,11 @@ public class Client {
 		this.prenom = prenom;
 	}
 
-	public String getDateNaissance() {
+	public Date getDateNaissance() {
 		return dateNaissance;
 	}
 
-	public void setDateNaissance(String dateNaissance) {
+	public void setDateNaissance(Date dateNaissance) {
 		this.dateNaissance = dateNaissance;
 	}
 
@@ -109,12 +127,91 @@ public class Client {
 		this.playlists = playlists;
 	}
 
-	public String getStyleMusiquePrefere() {
+	public Genre getStyleMusiquePrefere() {
 		return styleMusiquePrefere;
 	}
 
-	public void setStyleMusiquePrefere(String styleMusiquePrefere) {
+	public void setStyleMusiquePrefere(Genre styleMusiquePrefere) {
 		this.styleMusiquePrefere = styleMusiquePrefere;
+	}
+
+	@Override
+	public void regarderElementCatalogue(ElementCatalogue elementCatalogue) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<ElementCatalogue> rechercherParNom(String nom) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ElementCatalogue> rechercherParInterprete(String interprete) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ElementCatalogue> rechercherParGenre(Genre genre) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ElementCatalogue> rechercherParDateSortie(Date date) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ElementCatalogue> parcourirCatalogue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean creerPlaylist(String nomPlaylist, List<ElementCatalogue> elementsCatalogue) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean supprimerPlaylist(Playlist playlist) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean modifierPlaylist(Playlist playlist, List<ElementCatalogue> elementsCatalogue) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean changerNomPlaylist(Playlist playlist, String nom) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean retirerDePlaylist(ElementCatalogue elementCatalogue, Playlist playlist) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean ajouterAPlaylist(ElementCatalogue elementCatalogue, Playlist playlist) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean modifierInformationsPerso(String password, String civilite, String nom, String prenom,
+			Date dateNaissance, String adresseFacturation, Genre styleMusiquePrefere) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 	// Methodes de classe

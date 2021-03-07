@@ -1,10 +1,11 @@
 package Object;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.List;
 
 import Interface.UtilisateurInterface;
 
@@ -41,7 +42,11 @@ public class Utilisateur implements UtilisateurInterface {
 			
 			// Execution
 			if(rs.next()) {// Vrai si les identifiants correspondent ‡ un compte
-				return new Client(mail, password);
+				
+				List<Playlist> playlists = null; //TODO : rÈcupÈrer les playlists du client ‡ l'authentification
+				
+				return new Client(rs.getString("mail"), rs.getString("password"), rs.getString("civilite"), rs.getString("nom"), 
+						rs.getString("prenom"),rs.getDate("dateNaissance"), rs.getString("adresseFacturation"),rs.getInt("nbEcoute"), Genre.valueOf(rs.getString("nomGenre")), playlists);
 			}
 			else{
 				return null;
@@ -86,7 +91,7 @@ public class Utilisateur implements UtilisateurInterface {
 	
 	@Override
 	public Client creerCompte(String mail, String password, String civilite, String nom, String prenom,
-		String dateNaissance, String adresseFacturation, String styleMusiquePrefere) {
+		Date dateNaissance, String adresseFacturation, Genre styleMusiquePrefere) {
 		
 		// R√©cup√©rer une connexion de type java.sql.Connection
 		Connection connexion = DBManager.getInstance().getConnection();
@@ -103,9 +108,9 @@ public class Utilisateur implements UtilisateurInterface {
 			preparedQuery.setString(3, civilite);
 			preparedQuery.setString(4, nom);
 			preparedQuery.setString(5, prenom);
-			preparedQuery.setString(6, dateNaissance);
+			preparedQuery.setString(6, dateNaissance.toString());
 			preparedQuery.setString(7, adresseFacturation);
-			preparedQuery.setString(8, styleMusiquePrefere);
+			preparedQuery.setString(8, styleMusiquePrefere.toString());
 			
 			// Execution
 			if(preparedQuery.executeUpdate()>0) {
@@ -127,5 +132,21 @@ public class Utilisateur implements UtilisateurInterface {
 	
 		//TODO : pour utiliser "CALL regarder(idCatalogue_ INT)", besoin de conna√Ætre l'identifiant de l'√©l√©ment du catalogue, ajout attribut que je donne √† la cr√©ation?
 		
+	}
+
+
+
+	@Override
+	public List<ElementCatalogue> morceauxPopulaires() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public List<ElementCatalogue> recommandationsDuMoment() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -1,11 +1,14 @@
 package Object;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ProfilGestionnaireClient extends Administrateur{
+import Interface.ProfilGestionnaireClientInterface;
+
+public class ProfilGestionnaireClient extends Administrateur implements ProfilGestionnaireClientInterface{
 
 	public ProfilGestionnaireClient(String mail, String password) {
 		super(mail,password);
@@ -69,5 +72,47 @@ public class ProfilGestionnaireClient extends Administrateur{
 			e.printStackTrace();
 		}
 		return null;		
+	}
+
+	@Override
+	public boolean modifierNomClient(Client client, String nom) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean modifierPrenomClient(Client client, String prenom) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean modifierPasswordClient(Client client, String password) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean modifierCiviliteClient(Client client, String civilite) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean modifierDateNaissanceClient(Client client, Date dateNaissance) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean modifierAdresseClient(Client client, String adresse) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean modifierStyleClient(Client client, Genre style) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

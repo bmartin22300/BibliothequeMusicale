@@ -4,8 +4,9 @@ import java.util.List;
 
 public abstract class ElementCatalogue {
 	private int idCatalogue;
-	private boolean recommande;
 	private int nbEcoute;
+	private int nbEcouteMois;
+	private boolean recommande;
 	private List<Playlist> playlists;
 
 	// Constructeur
@@ -14,9 +15,18 @@ public abstract class ElementCatalogue {
 		this.idCatalogue = idCatalogue;
 		this.recommande = false;
 		this.nbEcoute = 0;
+		this.nbEcouteMois = 0;
 	}
 
-	// Getters et Setters
+	// Getters et Setters	
+	public int getNbEcouteMois() {
+		return nbEcouteMois;
+	}
+
+	public void setNbEcouteMois(int nbEcouteMois) {
+		this.nbEcouteMois = nbEcouteMois;
+	}
+
 	public boolean isRecommande() {
 		return recommande;
 	}

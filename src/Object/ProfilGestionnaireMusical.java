@@ -104,7 +104,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 					ajoutDiscographie(last_inserted_id, interprete.getPseudonyme());
 				}
 				
-				return new TitreMusical(last_inserted_id, titre, interpretes, anneeCreation, duree, genre);
+				return new TitreMusical(last_inserted_id, titre, anneeCreation, duree, genre, interpretes);
             }
             else {
             	return null;
@@ -254,14 +254,86 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 	
 	//TODO -- En travaux
 	@Override
-	public void creerPlaylist(String nom, String mail) {
+	public List<ElementCatalogue> rechercherParNom(String nom) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override
-	public void ajoutElementCataloguePlaylist(int idCatalogue, int idPlaylist) {
+	public List<ElementCatalogue> rechercherParInterprete(String interprete) {
 		// TODO Auto-generated method stub
-		
+		return null;
+	}
+
+	@Override
+	public List<ElementCatalogue> rechercherParGenre(Genre genre) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ElementCatalogue> rechercherParDateSortie(Date date) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ElementCatalogue> parcourirCatalogue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean supprimerElementCatalogue(ElementCatalogue elementCatalogue) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Interprete obtenirInterprete(String pseudo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean modifierInterprete(String pseudo, String prenom, String nom, Date dateNaissance) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean supprimerInterprete(Interprete interprete) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Radio creerRadio(String nom, Genre genreMusical) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Podcast creerPodcast(String titre, int duree, String PseudoAuteur, String categorie) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean recommander(ElementCatalogue elementCatalogue) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<TitreMusical> topTitresEcoutes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Client> topUtilisateursEcoutes() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
