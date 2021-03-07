@@ -42,7 +42,7 @@ public class AdministrateurServlet extends HttpServlet {
 	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws NumberFormatException, SQLException {
 		request.setAttribute("isClient", authentification.isClient());
 		request.setAttribute("isAdministrateur", authentification.isAdministrateur());
-		request.setAttribute("pseudonyme", authentification.getPseudonyme());
+		request.setAttribute("mail", authentification.getMail());
 		request.setAttribute("motDePasse", authentification.getMotDePasse());
 		vue="/JSP/Utilisateur/Accueil.jsp";
         RequestDispatcher rd = getServletContext().getRequestDispatcher(vue);

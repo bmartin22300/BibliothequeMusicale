@@ -17,11 +17,16 @@
 	
 	<div class="cardProfile">
 	  <img src="ExternalRessource/User/profile.jpg" alt="John" style="width:100%">
-	  <h1><%= pseudonyme %></h1>
-	  <p class="title"><%= email %></p>
-	  <p><%= prénom %> <%= nom %></p>
-	  <p><%= adresse %></p>
-	  <p><%= dateDeNaissance %></p>
+	  <h1><%= email %></h1>
+	  <% if(prénom!=null){ %>
+	  	<p class="title"><%= prénom %> <%= nom %></p>
+	  <% } %>
+	   <% if(adresse!=null){ %>
+	  	<p><%= adresse %></p>
+	   <% } %>
+	   <% if(dateDeNaissance!=null){ %>
+	   	<p><%= dateDeNaissance %></p>
+	   <% } %>
 	  <p>Nombre d'écoutes : <%= nbEcoutes %></p>
 	  <a href="#"><i class="fa fa-dribbble"></i></a>
 	  <a href="#"><i class="fa fa-twitter"></i></a>

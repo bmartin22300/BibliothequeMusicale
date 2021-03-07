@@ -44,7 +44,7 @@ public class MainServlet extends HttpServlet {//utilisateurServlet
 		authentification.setAdministrateur(false);//remise à faux lors de la déconnexion
 		request.setAttribute("isClient", authentification.isClient());
 		request.setAttribute("isAdministrateur", authentification.isAdministrateur());
-		request.setAttribute("pseudonyme", authentification.getPseudonyme());
+		request.setAttribute("mail", authentification.getMail());
 		request.setAttribute("motDePasse", authentification.getMotDePasse());
 		vue="/JSP/Utilisateur/Accueil.jsp";
         RequestDispatcher rd = getServletContext().getRequestDispatcher(vue);

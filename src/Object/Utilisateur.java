@@ -23,7 +23,7 @@ public class Utilisateur implements UtilisateurInterface {
 	
 	
 	@Override
-	public boolean authentification(String mail, String password) {
+	public Client authentification(String mail, String password) {
 		// Récupérer une connexion de type java.sql.Connection
 		Connection connexion = DBManager.getInstance().getConnection();
 		
@@ -39,14 +39,19 @@ public class Utilisateur implements UtilisateurInterface {
 			// Retour
 			ResultSet rs = preparedQuery.executeQuery();
 			
-			// Vrai si les identifiants correspondent à un compte
-			return rs.next();
+			// Execution
+			if(rs.next()) {// Vrai si les identifiants correspondent � un compte
+				return new Client(mail, password);
+			}
+			else{
+				return null;
+			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return false;		
+		return null;		
 	}
 	
 	@Override
@@ -56,7 +61,6 @@ public class Utilisateur implements UtilisateurInterface {
 		Connection connexion = DBManager.getInstance().getConnection();
 		
 		try {
-			
 			// Exécuter la requête SQL et récupérer un java.sql.ResultSet
 			String request = "CALL nouveau_client(?, ?);";
 			

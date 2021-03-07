@@ -1,6 +1,6 @@
 <% boolean isClient = (boolean)request.getAttribute("isClient"); %>
 <% boolean isAdministrateur = (boolean)request.getAttribute("isAdministrateur"); %>
-<% String pseudonyme = (String)request.getAttribute("pseudonyme"); %>
+<% String mail = (String)request.getAttribute("mail"); %>
 
 <!-- navbar -->
 <div class="topnav">

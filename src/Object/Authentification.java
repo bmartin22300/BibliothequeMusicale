@@ -1,32 +1,32 @@
 package Object;
 
 public class Authentification {
-	private String pseudonyme;
+	private String mail;
 	private String motDePasse;
 	private boolean isClient;
 	private boolean isAdministrateur;
 	
 	public Authentification() {
 		super();
-		this.pseudonyme = "a";
+		this.mail = "a";
 		this.motDePasse = "b";
 		this.isClient = false;
 		this.isAdministrateur = false;
 	}
 	
-	public Authentification(String pseudonyme, String motDePasse, boolean isClient, boolean isAdministrateur) {
+	public Authentification(String mail, String motDePasse, boolean isClient, boolean isAdministrateur) {
 		super();
-		this.pseudonyme = pseudonyme;
+		this.mail = mail;
 		this.motDePasse = motDePasse;
 		this.isClient = isClient;
 		this.isAdministrateur = isAdministrateur;
 	}
 	
-	public String getPseudonyme() {
-		return pseudonyme;
+	public String getMail() {
+		return mail;
 	}
-	public void setPseudonyme(String pseudonyme) {
-		this.pseudonyme = pseudonyme;
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 	public String getMotDePasse() {
 		return motDePasse;

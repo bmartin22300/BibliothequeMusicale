@@ -26,6 +26,7 @@
     <url-pattern>/GestionPlaylist</url-pattern>
     <url-pattern>/ProfilClient</url-pattern>
 	<url-pattern>/ModficationProfilClient</url-pattern>
+	<url-pattern>/InscriptionClient</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>

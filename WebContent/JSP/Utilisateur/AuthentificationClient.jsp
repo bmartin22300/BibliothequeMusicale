@@ -10,11 +10,13 @@
 	<br>
 	
 	<!-- formulaire de connexion -->
-	<form action="AuthentificationClient" method="POST">
+	<form method="POST">
+		<input name="action" type="hidden" value="AuthentificationClient">
+	
         <h1>Connexion</h1>
         
-        <label><b>Pseudonyme</b></label>
-        <input type="text" placeholder="Entrer le pseudonyme" name="username" required>
+        <label><b>Mail</b></label>
+        <input type="text" placeholder="Entrer le mail" name="mail" required>
 
         <label><b>Mot de passe</b></label>
         <input type="password" placeholder="Entrer le mot de passe" name="password" required>
@@ -35,6 +37,10 @@
     	<a>Attention : merci de ne pas jouer avec l'url sinon j'appelle Adopi !</a>
     	<br>
     <% } %>
+    
+    <!-- inscription client -->
+    <a href="InscriptionClient">Créer un compte</a>	
+    <br>
     
     <!-- connexion administrateur -->
     <a href="AuthentificationAdministrateur">Connexion administrateur</a>	

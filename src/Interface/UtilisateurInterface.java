@@ -9,7 +9,7 @@ public interface UtilisateurInterface {
 
 	public Client creerCompte(String mail, String password);
 
-	public boolean authentification(String mail, String password);
+	public Client authentification(String mail, String password);
 	
 	//TODO
 	public void regarderElementCatalogue(ElementCatalogue elementCatalogue);
