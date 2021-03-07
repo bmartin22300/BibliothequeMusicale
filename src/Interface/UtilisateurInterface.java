@@ -1,15 +1,16 @@
 package Interface;
 
-import java.util.Date;
-
-import Object.Genre;
+import Object.ElementCatalogue;
 
 public interface UtilisateurInterface {
 	
 	public void creerCompte(String mail, String password, String civilite, String nom, String prenom, String dateNaissance, String adresseFacturation, String styleMusiquePrefere);
 
-	void creerCompte(String mail, String password);
+	public void creerCompte(String mail, String password);
 
-	boolean authentification(String mail, String password);
+	public boolean authentification(String mail, String password);
+	
+	//TODO
+	public void regarderElementCatalogue(ElementCatalogue elementCatalogue);
 	
 }

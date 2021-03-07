@@ -1,18 +1,16 @@
 package Object;
 
-public class Administrateur {
+import Interface.AdministrateurInterface;
+
+public abstract class Administrateur implements AdministrateurInterface {
 	private String mail;
 	private String password;
-	private boolean profilGestionClient;
-	private boolean profilGestionMusique;
 
 	// Constructeur
 	public Administrateur(String mail, String password, boolean profilGestionClient, boolean profilGestionMusique) {
 		super();
 		this.mail = mail;
 		this.password = password;
-		this.profilGestionClient = profilGestionClient;
-		this.profilGestionMusique = profilGestionMusique;
 	}
 	
 	// Getters et Setters
@@ -30,27 +28,12 @@ public class Administrateur {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public boolean isProfilGestionClient() {
-		return profilGestionClient;
-	}
-
-	public void setProfilGestionClient(boolean profilGestionClient) {
-		this.profilGestionClient = profilGestionClient;
-	}
-
-	public boolean isProfilGestionMusique() {
-		return profilGestionMusique;
-	}
-
-	public void setProfilGestionMusique(boolean profilGestionMusique) {
-		this.profilGestionMusique = profilGestionMusique;
 	}	
 	
-	
 	// Méthodes de classe
+	public abstract boolean authentification(String mail, String password);
 	
+	public abstract void creerAdmin(String mail, String password);
 	
 	/*
 	public void consulterStatistiques() {
