@@ -9,75 +9,79 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Object.Authentification;
 import Object.Client;
 import Object.Utilisateur;
 
 public class ClientServlet extends HttpServlet {//clientServlet
 	
-	public String vue = "/JSP/Utilisateur/AuthentificationClient.jsp";
-	Authentification authentification = new Authentification();
-	Utilisateur u = new Utilisateur();
+	public String vue;
 	Client client;
+	Utilisateur utilisateur=new Utilisateur();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String servletPath = request.getServletPath();//récupération URL
         
-        //affectation paramètres
-        request.setAttribute("isClient", authentification.isClient());
-		request.setAttribute("isAdministrateur", authentification.isAdministrateur());
-		request.setAttribute("mail", authentification.getMail());
-		request.setAttribute("motDePasse", authentification.getMotDePasse());
+        //affectation paramètres à la vue
+        request.setAttribute("isAdministrateur", false);
 		
-		//affection vue
-        if(servletPath.equals("/AuthentificationClient")) {
-        	authentification.setClient(false);//remise à faux lors de la déconnexion
-    		authentification.setAdministrateur(false);//remise à faux lors de la déconnexion
-    		request.setAttribute("isClient", authentification.isClient());
-    		request.setAttribute("isAdministrateur", authentification.isAdministrateur());
-        	request.setAttribute("isErrorLogin", false);
-        	request.setAttribute("notLogged", false);
-        	vue = "/JSP/Utilisateur/AuthentificationClient.jsp";
-        }else {
-        	if(servletPath.equals("/InscriptionClient")) {
-        		vue = "/JSP/Utilisateur/InscriptionClient.jsp";
-        	}else {
-        		//section authentifié
-        		if(client==null) {//verification que le client est connecté / authentification.isClient()==false / TODO vérifier que ça marche après déconnexion, supprimer authentification
-            		request.setAttribute("isErrorLogin", false);
-            		request.setAttribute("notLogged", true);
-            		vue = "/JSP/Utilisateur/AuthentificationClient.jsp";
-            	}else {
-            		//affectation paramètres clients
-            		request.setAttribute("password", client.getPassword());
-                    request.setAttribute("civilité", client.getCivilite());
-            		request.setAttribute("nom", client.getNom());
-            		request.setAttribute("prénom", client.getPrenom());
-            		request.setAttribute("email", client.getMail());
-            		request.setAttribute("adresse", client.getAdresseFacturation());
-            		request.setAttribute("nbEcoutes", client.getNbEcoute());
-            		request.setAttribute("dateDeNaissance", client.getDateNaissance());
-          
-            		if(servletPath.equals("/GestionPlaylist")) {
-                    	vue = "/JSP/Client/GestionPlaylist.jsp";
-                    }else {
-                    	if(servletPath.equals("/ProfilClient")) {
-                        	vue = "/JSP/Client/ProfilClient.jsp";
-                        }else {
-                        	if(servletPath.equals("/AccueilClient")) {
-                            	vue = "/JSP/Client/AccueilClient.jsp";
-                            }else {
-                            	if(servletPath.equals("/ModficationProfilClient")) {                            		
-                            		vue = "/JSP/Client/ModificationProfilClient.jsp";
-                            	}
-                            }
-                        }
-                    }
-            	}
-        	}
-        }
-        
-        //affichage jsp	
+        //section utilisateur non connecté
+		if(servletPath.equals("/AuthentificationClient")) {	
+			//affectation paramètres à la vue
+			request.setAttribute("isClient", false);
+			request.setAttribute("isErrorLogin", false);
+			request.setAttribute("notLogged", false);
+			
+			//affection vue
+			vue = "/JSP/Utilisateur/AuthentificationClient.jsp";
+		}else {
+			if(servletPath.equals("/InscriptionClient")) {
+				//affectation paramètres à la vue
+				request.setAttribute("isClient", false);
+				//affection vue
+				vue = "/JSP/Utilisateur/InscriptionClient.jsp";
+			}else {
+				//section client
+				if(client==null) {//verification que le client est connecté 
+					//affectation paramètres à la vue
+					request.setAttribute("isClient", false);
+		    		request.setAttribute("isErrorLogin", false);
+		    		request.setAttribute("notLogged", true);
+		    		
+		    		//affection vue
+		    		vue = "/JSP/Utilisateur/AuthentificationClient.jsp";
+		    	}else {
+		    		//affectation paramètres à la vue
+		    		request.setAttribute("isClient", true);
+		    		request.setAttribute("password", client.getPassword());
+		            request.setAttribute("civilité", client.getCivilite());
+		    		request.setAttribute("nom", client.getNom());
+		    		request.setAttribute("prénom", client.getPrenom());
+		    		request.setAttribute("email", client.getMail());
+		    		request.setAttribute("adresse", client.getAdresseFacturation());
+		    		request.setAttribute("nbEcoutes", client.getNbEcoute());
+		    		request.setAttribute("dateDeNaissance", client.getDateNaissance());
+		  
+		    		//affection vue
+		    		if(servletPath.equals("/GestionPlaylist")) {
+		            	vue = "/JSP/Client/GestionPlaylist.jsp";
+		            }else {
+		            	if(servletPath.equals("/ProfilClient")) {
+		                	vue = "/JSP/Client/ProfilClient.jsp";
+		                }else {
+		                	if(servletPath.equals("/AccueilClient")) {
+		                    	vue = "/JSP/Client/AccueilClient.jsp";
+		                    }else {
+		                    	if(servletPath.equals("/ModficationProfilClient")) {                            		
+		                    		vue = "/JSP/Client/ModificationProfilClient.jsp";
+		                    	}
+		                    }
+		                }
+		            }
+		    	}
+			}
+		}
+		
+        //affichage vue	
         RequestDispatcher rd = getServletContext().getRequestDispatcher(vue);
         try {
               rd.forward(request, response);
@@ -91,39 +95,49 @@ public class ClientServlet extends HttpServlet {//clientServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");//de quel form je viens ?
 		
+		//affectation paramètres à la vue
+		request.setAttribute("isAdministrateur", false);
+		
 		//récupération des paramètres du form
 		String mail = request.getParameter("mail");
 		String motDePasse = request.getParameter("password");
 		
-		//attribution des paramètres à l'authentificateur
-		authentification.setMail(mail);
-		authentification.setMotDePasse(motDePasse);
-		
-		if(action.equals("ProfilClient")) {
+		if(action.equals("ModificationProfilClient")) {
 			//récupération paramètres
 			String prénom = request.getParameter("prénom");
 			String nom = request.getParameter("nom");
 			String adresse = request.getParameter("adresse");
 			String dateDeNaissance = request.getParameter("dateDeNaissance");
 			
+			//affectation paramètres à la vue
+			request.setAttribute("isClient", true);
+            request.setAttribute("civilité", client.getCivilite());
+    		request.setAttribute("nom", client.getNom());
+    		request.setAttribute("prénom", client.getPrenom());
+    		request.setAttribute("email", client.getMail());
+    		request.setAttribute("adresse", client.getAdresseFacturation());
+    		request.setAttribute("nbEcoutes", client.getNbEcoute());
+    		request.setAttribute("dateDeNaissance", client.getDateNaissance());
+			
 			//mise à jour BDD
 			//TODO implémenter la procédure SQL
 			
     		//choix de la vue
-			vue = "/JSP/Client/AccueilClient.jsp";
+			vue = "/JSP/Client/ProfilClient.jsp";
 		}else {
 			if(action.equals("AuthentificationClient")) {
-				client = u.authentification(mail, motDePasse);
+				//requête à la BDD
+				client = utilisateur.authentification(mail, motDePasse);
+				
 				if(client!=null) {
+					//affectation paramètres à la vue
 					request.setAttribute("isClient", true);
-					request.setAttribute("isAdministrateur", false);
-					authentification.setClient(true);
 					
 					//choix de la vue
 					vue = "/JSP/Client/AccueilClient.jsp";
-				}else {
+				}else {//échec
+					//affectation paramètres à la vue
 					request.setAttribute("isClient", false);
-					request.setAttribute("isAdministrateur", false);
 					request.setAttribute("isErrorLogin", true);
 					request.setAttribute("notLogged", false);
 					
@@ -132,17 +146,18 @@ public class ClientServlet extends HttpServlet {//clientServlet
 				}
 			}else {
 				if(action.equals("InscriptionClient")) {
-					client = u.creerCompte(mail, motDePasse);
+					//requête à la BDD
+					client = utilisateur.creerCompte(mail, motDePasse);
+					
 					if(client!=null) {
+						//affectation paramètres à la vue
 						request.setAttribute("isClient", true);
-						request.setAttribute("isAdministrateur", false);
-						authentification.setClient(true);
 						
 						//choix de la vue
 						vue = "/JSP/Client/AccueilClient.jsp";
-					}else {
+					}else {//échec
+						//affectation paramètres à la vue
 						request.setAttribute("isClient", false);
-						request.setAttribute("isAdministrateur", false);
 						request.setAttribute("isErrorLogin", false);
 						request.setAttribute("notLogged", false);
 						
@@ -152,6 +167,7 @@ public class ClientServlet extends HttpServlet {//clientServlet
 				}
 			}
 		}
+		
 		//affichage de la vue
 		RequestDispatcher rd = getServletContext().getRequestDispatcher(vue);
 		try {

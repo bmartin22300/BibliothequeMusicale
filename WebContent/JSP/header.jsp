@@ -1,6 +1,5 @@
 <% boolean isClient = (boolean)request.getAttribute("isClient"); %>
 <% boolean isAdministrateur = (boolean)request.getAttribute("isAdministrateur"); %>
-<% String mail = (String)request.getAttribute("mail"); %>
 
 <!-- navbar -->
 <div class="topnav">
@@ -13,12 +12,12 @@
 	<% }else{ %>
 		<!-- administrateur -->
 		<% if(isAdministrateur==true){ %>
-			<a class="active" href="Administrateur/AccueilAdministrateur.jsp">Accueil</a>
-			<a href="Administrateur/ModificationCatalogue.jsp">Modifier le catalogue</a>
-			<a href="Administrateur/ModificationProfil.jsp">Modifier un profil client</a>
-			<a href="Administrateur/Statistiques.jsp">Consulter les statistiques</a>
-			<a href="Administrateur/ProfilAdministrateur.jsp">Modifier mon profil</a>
-			<a href="Utilisateur/Accueil.jsp">Déconnexion</a>	
+			<a class="active" href=AccueilAdministrateur>Accueil</a>
+			<a href=ModificationCatalogue>Modifier le catalogue</a>
+			<a href=ModificationProfil>Modifier un profil client</a>
+			<a href=Statistiques>Consulter les statistiques</a>
+			<a href=ProfilAdministrateur>Modifier mon profil</a>
+			<a href=Accueil>Déconnexion</a>	
 		<!-- utilisateur -->
 		<% }else{ %>
 			<a class="active" href=Accueil>Accueil</a>

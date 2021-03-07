@@ -3,15 +3,15 @@
   <display-name>BibliothequeMusicale</display-name>
   
   <servlet>
-    <display-name>MainServlet</display-name>
-    <servlet-name>MainServlet</servlet-name>
-    <servlet-class>Servlet.MainServlet</servlet-class>
+    <display-name>UtilisateurServlet</display-name>
+    <servlet-name>UtilisateurServlet</servlet-name>
+    <servlet-class>Servlet.UtilisateurServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>MainServlet</servlet-name>
+    <servlet-name>UtilisateurServlet</servlet-name>
     <url-pattern>/MainServlet</url-pattern>
+    <url-pattern>/UtilisateurServlet</url-pattern>
     <url-pattern>/Accueil</url-pattern>
-    <url-pattern>/AuthentificationAdministrateur</url-pattern>
   </servlet-mapping>
   
   <servlet>
@@ -22,11 +22,27 @@
   <servlet-mapping>
     <servlet-name>ClientServlet</servlet-name>
     <url-pattern>/AuthentificationClient</url-pattern>
+    <url-pattern>/InscriptionClient</url-pattern>
     <url-pattern>/AccueilClient</url-pattern>
     <url-pattern>/GestionPlaylist</url-pattern>
     <url-pattern>/ProfilClient</url-pattern>
 	<url-pattern>/ModficationProfilClient</url-pattern>
-	<url-pattern>/InscriptionClient</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <display-name>AdministrateurServlet</display-name>
+    <servlet-name>AdministrateurServlet</servlet-name>
+    <servlet-class>Servlet.AdministrateurServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdministrateurServlet</servlet-name>
+    <url-pattern>/AuthentificationAdministrateur</url-pattern>
+    <url-pattern>/InscriptionAdministrateur</url-pattern>
+    <url-pattern>/AccueilAdministrateur</url-pattern>
+    <url-pattern>/ProfilAdministrateur</url-pattern>
+    <url-pattern>/Statistiques</url-pattern>
+    <url-pattern>/ModificationProfil</url-pattern>
+    <url-pattern>/ModificationCatalogue</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>
