@@ -11,9 +11,9 @@ public class Album extends ElementCatalogue{
 	private List<TitreMusical> titres;
 	
 	// Constructeur
-	public Album(boolean recommande, int nbEcoute, String nom, List<Interprete> interpretes, Date dateSortie, int duree,
+	public Album(int idCatalogue, String nom, List<Interprete> interpretes, Date dateSortie, int duree,
 			List<TitreMusical> titres) {
-		super(recommande, nbEcoute);
+		super(idCatalogue);
 		this.nom = nom;
 		this.interpretes = interpretes;
 		this.dateSortie = dateSortie;

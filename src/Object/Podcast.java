@@ -7,9 +7,9 @@ public class Podcast extends ElementCatalogue {
 	private String categorie;
 	
 	// Constructeur
-	public Podcast(boolean recommande, int nbEcoute, String titre, String duree, String pseudoAuteur,
+	public Podcast(int idCatalogue, boolean recommande, String titre, String duree, String pseudoAuteur,
 			String categorie) {
-		super(recommande, nbEcoute);
+		super(idCatalogue);
 		this.titre = titre;
 		this.duree = duree;
 		this.pseudoAuteur = pseudoAuteur;

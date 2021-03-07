@@ -7,8 +7,8 @@ public class Radio extends ElementCatalogue{
 	private Genre genre;
 	
 	// Constructeur
-	public Radio(boolean recommande, int nbEcoute, String nom, Genre genre) {
-		super(recommande, nbEcoute);
+	public Radio(int idCatalogue, String nom, Genre genre) {
+		super(idCatalogue);
 		this.nom = nom;
 		this.genre = genre;
 	}
