@@ -9,8 +9,8 @@ import Interface.ProfilGestionnaireMusicalInterface;
 
 public class ProfilGestionnaireMusical extends Administrateur implements ProfilGestionnaireMusicalInterface{
 
-	public ProfilGestionnaireMusical(String mail, String password, boolean profilGestionClient, boolean profilGestionMusique) {
-		super(mail,password,profilGestionClient,profilGestionMusique);
+	public ProfilGestionnaireMusical(String mail, String password) {
+		super(mail,password);
 	}
 
 	// Methodes heritees d'Administrateur
@@ -42,7 +42,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 	}
 
 	@Override
-	public void creerAdmin(String mail, String password) {
+	public Administrateur creerAdmin(String mail, String password) {
 		// Récupérer une connexion de type java.sql.Connection
 		Connection connexion = DBManager.getInstance().getConnection();
 		
@@ -59,12 +59,18 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 			preparedQuery.setBoolean(4, true); // Profil gestion Musique
 			
 			// Execution
-			preparedQuery.executeUpdate();
+			if(preparedQuery.executeUpdate()>0) {
+				return new ProfilGestionnaireMusical(mail, password);
+			}
+			else{
+				return null;
+			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
 	}
 
 	// Methodes specifiques a la classe

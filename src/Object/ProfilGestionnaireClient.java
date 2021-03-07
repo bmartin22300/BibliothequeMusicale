@@ -7,8 +7,8 @@ import java.sql.SQLException;
 
 public class ProfilGestionnaireClient extends Administrateur{
 
-	public ProfilGestionnaireClient(String mail, String password, boolean profilGestionClient, boolean profilGestionMusique) {
-		super(mail,password,profilGestionClient,profilGestionMusique);
+	public ProfilGestionnaireClient(String mail, String password) {
+		super(mail,password);
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class ProfilGestionnaireClient extends Administrateur{
 	}
 	
 	@Override
-	public void creerAdmin(String mail, String password) {
+	public Administrateur creerAdmin(String mail, String password) {
 		
 		// Récupérer une connexion de type java.sql.Connection
 		Connection connexion = DBManager.getInstance().getConnection();
@@ -57,11 +57,17 @@ public class ProfilGestionnaireClient extends Administrateur{
 			preparedQuery.setBoolean(4, false); // Profil gestion Musique
 			
 			// Execution
-			preparedQuery.executeUpdate();
+			if(preparedQuery.executeUpdate()>0) {
+				return new ProfilGestionnaireClient(mail, password);
+			}
+			else{
+				return null;
+			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
+		}
+		return null;		
 	}
 }

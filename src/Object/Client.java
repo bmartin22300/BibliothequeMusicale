@@ -9,15 +9,15 @@ public class Client {
 	private String civilite;
 	private String nom;
 	private String prenom;
-	private Date dateNaissance;
+	private String dateNaissance; // A modifier en Date
 	private String adresseFacturation;
 	private int nbEcoute;
 	private List<Playlist> playlists;
-	private Genre styleMusiquePrefere;
+	private String styleMusiquePrefere; // A modifier en Genre
 	
-	// Constructeur
-	public Client(String mail, String password, String civilite, String nom, String prenom, Date dateNaissance,
-			String adresseFacturation, int nbEcoute, List<Playlist> playlists, Genre styleMusiquePrefere) {
+	// Constructeurs
+	public Client(String mail, String password, String civilite, String nom, String prenom, String dateNaissance,
+			String adresseFacturation, String styleMusiquePrefere) {
 		super();
 		this.mail = mail;
 		this.password = password;
@@ -26,9 +26,14 @@ public class Client {
 		this.prenom = prenom;
 		this.dateNaissance = dateNaissance;
 		this.adresseFacturation = adresseFacturation;
-		this.nbEcoute = nbEcoute;
-		this.playlists = playlists;
+		this.nbEcoute = 0;
 		this.styleMusiquePrefere = styleMusiquePrefere;
+	}
+
+	public Client(String mail, String password) {
+		super();
+		this.mail = mail;
+		this.password = password;
 	}
 
 	// Getters et Setters
@@ -72,11 +77,11 @@ public class Client {
 		this.prenom = prenom;
 	}
 
-	public Date getDateNaissance() {
+	public String getDateNaissance() {
 		return dateNaissance;
 	}
 
-	public void setDateNaissance(Date dateNaissance) {
+	public void setDateNaissance(String dateNaissance) {
 		this.dateNaissance = dateNaissance;
 	}
 
@@ -104,11 +109,11 @@ public class Client {
 		this.playlists = playlists;
 	}
 
-	public Genre getStyleMusiquePrefere() {
+	public String getStyleMusiquePrefere() {
 		return styleMusiquePrefere;
 	}
 
-	public void setStyleMusiquePrefere(Genre styleMusiquePrefere) {
+	public void setStyleMusiquePrefere(String styleMusiquePrefere) {
 		this.styleMusiquePrefere = styleMusiquePrefere;
 	}
 	

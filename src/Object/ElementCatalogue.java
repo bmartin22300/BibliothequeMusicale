@@ -3,6 +3,7 @@ package Object;
 import java.util.List;
 
 public abstract class ElementCatalogue {
+	private int idCatalogue;
 	private boolean recommande;
 	private int nbEcoute;
 	private List<Playlist> playlists;

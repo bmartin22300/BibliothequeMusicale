@@ -50,20 +50,12 @@ public class Utilisateur implements UtilisateurInterface {
 	}
 	
 	@Override
-	public void creerCompte(String mail, String password) {
-	
-		//Statement statement=null;
+	public Client creerCompte(String mail, String password) {
 		
 		// Récupérer une connexion de type java.sql.Connection
 		Connection connexion = DBManager.getInstance().getConnection();
 		
 		try {
-			/*// Créer un java.sql.Statement depuis cette connexion
-			statement = connexion.createStatement();
-			
-			// Exécuter la requête SQL et récupérer un java.sql.ResultSet
-			String request = "call nouveau_client('"+ mail +"','"+ password+"');";
-			statement.executeQuery(request);*/
 			
 			// Exécuter la requête SQL et récupérer un java.sql.ResultSet
 			String request = "CALL nouveau_client(?, ?);";
@@ -74,16 +66,22 @@ public class Utilisateur implements UtilisateurInterface {
 			preparedQuery.setString(2, password);
 			
 			// Execution
-			preparedQuery.executeUpdate();
+			if(preparedQuery.executeUpdate()>0) {
+				return new Client(mail, password);
+			}
+			else{
+				return null;
+			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
+		}
+		return null;		
 	}
 	
 	@Override
-	public void creerCompte(String mail, String password, String civilite, String nom, String prenom,
+	public Client creerCompte(String mail, String password, String civilite, String nom, String prenom,
 		String dateNaissance, String adresseFacturation, String styleMusiquePrefere) {
 		
 		// Récupérer une connexion de type java.sql.Connection
@@ -106,12 +104,18 @@ public class Utilisateur implements UtilisateurInterface {
 			preparedQuery.setString(8, styleMusiquePrefere);
 			
 			// Execution
-			preparedQuery.executeUpdate();
+			if(preparedQuery.executeUpdate()>0) {
+				return new Client(mail, password, civilite, nom, prenom, dateNaissance, adresseFacturation, styleMusiquePrefere);
+			}
+			else{
+				return null;
+			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
 	}
 
 	@Override

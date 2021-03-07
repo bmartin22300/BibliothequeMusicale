@@ -7,10 +7,8 @@ public abstract class Administrateur implements AdministrateurInterface {
 	private String password;
 
 	// Constructeur
-	public Administrateur(String mail, String password, boolean profilGestionClient, boolean profilGestionMusique) {
+	public Administrateur(String mail, String password) {
 		super();
-		this.mail = mail;
-		this.password = password;
 	}
 	
 	// Getters et Setters
@@ -33,7 +31,7 @@ public abstract class Administrateur implements AdministrateurInterface {
 	// Méthodes de classe
 	public abstract boolean authentification(String mail, String password);
 	
-	public abstract void creerAdmin(String mail, String password);
+	public abstract Administrateur creerAdmin(String mail, String password);
 	
 	/*
 	public void consulterStatistiques() {
