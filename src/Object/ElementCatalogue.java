@@ -11,7 +11,7 @@ public abstract class ElementCatalogue {
 	// Constructeur
 	public ElementCatalogue(int idCatalogue) {
 		super();
-		this.setIdCatalogue(idCatalogue);
+		this.idCatalogue = idCatalogue;
 		this.recommande = false;
 		this.nbEcoute = 0;
 	}

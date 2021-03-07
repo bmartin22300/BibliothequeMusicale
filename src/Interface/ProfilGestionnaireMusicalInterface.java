@@ -28,6 +28,4 @@ public interface ProfilGestionnaireMusicalInterface extends AdministrateurInterf
 	public void creerPlaylist(String nom, String mail);
 	
 	public void ajoutElementCataloguePlaylist(int idCatalogue, int idPlaylist);
-	
-
 }

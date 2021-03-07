@@ -105,7 +105,6 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 				}
 				
 				return new TitreMusical(last_inserted_id, titre, interpretes, anneeCreation, duree, genre);
-                
             }
             else {
             	return null;
