@@ -1,6 +1,9 @@
 package Object;
 
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 import Interface.ClientInterface;
@@ -207,10 +210,54 @@ public class Client implements ClientInterface {
 		return false;
 	}
 
+	/*
+	 * Fonction modifierInformations, met à jour les informations du client dans la BD puis dans l'objet
+	 * Renvoie true si la modification peut avoir lieu, false sinon
+	 */
 	@Override
-	public boolean modifierInformationsPerso(String password, String civilite, String nom, String prenom,
+	public boolean modifierInformations(String password, String civilite, String nom, String prenom,
 			Date dateNaissance, String adresseFacturation, Genre styleMusiquePrefere) {
-		// TODO Auto-generated method stub
+		// Recuperer la connexion
+		Connection connexion = DBManager.getInstance().getConnection();
+		
+		try {
+			
+			// Maj BDD
+			String request = "CALL modifier_client(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+			
+			// Prepared statement 
+			PreparedStatement preparedQuery = connexion.prepareStatement(request);
+			preparedQuery.setString(1, this.getMail());
+			preparedQuery.setString(2, password);
+			preparedQuery.setString(3, civilite);
+			preparedQuery.setString(4, nom);
+			preparedQuery.setString(5, prenom);
+			preparedQuery.setString(6, dateNaissance.toString());
+			preparedQuery.setString(7, adresseFacturation);
+			preparedQuery.setString(8, styleMusiquePrefere.toString());
+			
+			// Execution
+			if(preparedQuery.executeUpdate()>0) { // Succes de la modification
+				
+				// Maj Objet
+				this.setPassword(password);
+				this.setCivilite(civilite);
+				this.setNom(nom);
+				this.setPrenom(prenom);
+				this.setDateNaissance(dateNaissance);
+				this.setAdresseFacturation(adresseFacturation);
+				this.setStyleMusiquePrefere(styleMusiquePrefere);
+				
+				return true;
+			}
+			else{ // La mise a jour echoue
+				return false;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return false;
 	}
 	

@@ -8,7 +8,8 @@ import Object.ElementCatalogue;
 import Object.Genre;
 
 public interface UtilisateurInterface {
-	
+
+	//A verifier
 	public Client creerCompte(String mail, String password, String civilite, String nom, String prenom, Date dateNaissance, String adresseFacturation, Genre styleMusiquePrefere);
 
 	public Client creerCompte(String mail, String password);
@@ -16,6 +17,7 @@ public interface UtilisateurInterface {
 	public Client authentification(String mail, String password);
 	
 	//TODO
+	
 	public void regarderElementCatalogue(ElementCatalogue elementCatalogue);
 	
 	public List<ElementCatalogue> morceauxPopulaires();

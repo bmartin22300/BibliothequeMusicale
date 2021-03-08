@@ -14,6 +14,9 @@ import Object.TitreMusical;
 
 public interface ProfilGestionnaireMusicalInterface extends AdministrateurInterface {
 	
+	//A verifier
+	
+	//TODO
 	public Interprete creerInterprete(String pseudo);
 	
 	public Interprete creerInterprete(String pseudo, String prenom, String nom, Date dateNaissance);
@@ -27,8 +30,7 @@ public interface ProfilGestionnaireMusicalInterface extends AdministrateurInterf
 	
 	public void ajoutTitreAlbum(int idTitre, int idAlbum);
 	
-	
-	//TODO
+
 	//Comme dans Client
 	public List<ElementCatalogue> rechercherParNom(String nom);
 	public List<ElementCatalogue> rechercherParInterprete(String interprete);

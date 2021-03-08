@@ -7,6 +7,8 @@ import Object.Genre;
 
 public interface ProfilGestionnaireClientInterface extends AdministrateurInterface {
 	
+	//A verifier
+	
 	//TODO
 	
 	//Modifications utilisateur
