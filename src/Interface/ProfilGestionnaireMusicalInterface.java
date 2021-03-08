@@ -16,6 +16,8 @@ public interface ProfilGestionnaireMusicalInterface extends AdministrateurInterf
 
 	// Valide	
 	
+	
+	
 	//A verifier - Tester
 	// Interprete
 	public Interprete creerInterprete(String pseudo);
@@ -25,12 +27,13 @@ public interface ProfilGestionnaireMusicalInterface extends AdministrateurInterf
 	
 	// TitreMusical
 	public TitreMusical creerTitre(String titre, Year anneeCreation, List<Interprete> interpretes, int duree, Genre genre);
-//	public boolean modifierTitre(TitreMusical titreMusical, String titre, Year anneeCreation, List<Interprete> interpretes, int duree, Genre genre);
-//	public boolean supprimerTitre(TitreMusical titreMusical);
-//	
-//	public void ajoutDiscographie(TitreMusical titre, Interprete interprete);
-//	
-//	// Album
+	public boolean modifierTitre(TitreMusical titreMusical, String titre, Year anneeCreation, int duree, Genre genre);
+	public boolean supprimerTitre(TitreMusical titreMusical);
+	
+	public boolean ajouterDiscographie(TitreMusical titre, Interprete interprete);
+	public boolean retirerDiscographie(TitreMusical titre, Interprete interprete);
+	
+	// Album
 //	public Album creerAlbum(String nom, String anneeSortie, List<TitreMusical> titres);
 //	public boolean ajoutTitreAlbum(TitreMusical titre, Album album);
 //	public boolean suppressionTitreAlbum(TitreMusical titre, Album album);
@@ -62,10 +65,11 @@ public interface ProfilGestionnaireMusicalInterface extends AdministrateurInterf
 	
 	// TitreMusical
 	//public TitreMusical creerTitre(String titre, Year anneeCreation, List<Interprete> interpretes, int duree, Genre genre);
-	public boolean modifierTitre(TitreMusical titreMusical, String titre, Year anneeCreation, List<Interprete> interpretes, int duree, Genre genre);
-	public boolean supprimerTitre(TitreMusical titreMusical);
+	//public boolean modifierTitre(TitreMusical titreMusical, String titre, Year anneeCreation, int duree, Genre genre);
+	//public boolean supprimerTitre(TitreMusical titreMusical);
 	
-	public void ajoutDiscographie(TitreMusical titre, Interprete interprete);
+	//public boolean ajouterDiscographie(TitreMusical titre, Interprete interprete);
+	//public boolean retirerDiscographie(TitreMusical titre, Interprete interprete);
 	
 	// Album
 	public Album creerAlbum(String nom, String anneeSortie, List<TitreMusical> titres);

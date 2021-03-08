@@ -40,16 +40,16 @@ CALL association_titre_interprete(3, 'Edith Piaf');
 
 CALL nouveau_titre("L'enfant roi", '2001', 363, 'Rock');CALL association_titre_interprete(4, 'Noir Désir');
 CALL nouveau_titre("Le grand incendie", '2001', 276, 'Rock');CALL association_titre_interprete(5, 'Noir Désir');
-CALL nouveau_titre("Le vent nous portera", '2001', 'Rock');CALL association_titre_interprete(6, 'Noir Désir');
-CALL nouveau_titre("Des armes", '2001', 'Rock');CALL association_titre_interprete(7, 'Noir Désir');
-CALL nouveau_titre("L'appartement", '2001', 'Rock');CALL association_titre_interprete(8, 'Noir Désir');
-CALL nouveau_titre("Des visages des figures", '2001', 'Rock');CALL association_titre_interprete(9, 'Noir Désir');
-CALL nouveau_titre("Son style 1", '2001', 'Rock');CALL association_titre_interprete(10, 'Noir Désir');
-CALL nouveau_titre("Son style 2", '2001', 'Rock');CALL association_titre_interprete(11, 'Noir Désir');
-CALL nouveau_titre("À l'envers à l'endroit", '2001', 'Rock');CALL association_titre_interprete(12, 'Noir Désir');
-CALL nouveau_titre("Lost", '2001', 'Rock');CALL association_titre_interprete(13, 'Noir Désir');
-CALL nouveau_titre("Bouquet de nerfs", '2001', 'Rock');CALL association_titre_interprete(14, 'Noir Désir');
-CALL nouveau_titre("L'Europe", '2001', 'Rock');CALL association_titre_interprete(15, 'Noir Désir');
+CALL nouveau_titre("Le vent nous portera", '2001', 288, 'Rock');CALL association_titre_interprete(6, 'Noir Désir');
+CALL nouveau_titre("Des armes", '2001', 168, 'Rock');CALL association_titre_interprete(7, 'Noir Désir');
+CALL nouveau_titre("L'appartement", '2001', 251, 'Rock');CALL association_titre_interprete(8, 'Noir Désir');
+CALL nouveau_titre("Des visages des figures", '2001', 314, 'Rock');CALL association_titre_interprete(9, 'Noir Désir');
+CALL nouveau_titre("Son style 1", '2001', 126, 'Rock');CALL association_titre_interprete(10, 'Noir Désir');
+CALL nouveau_titre("Son style 2", '2001', 151, 'Rock');CALL association_titre_interprete(11, 'Noir Désir');
+CALL nouveau_titre("À l'envers à l'endroit", '2001', 247, 'Rock');CALL association_titre_interprete(12, 'Noir Désir');
+CALL nouveau_titre("Lost", '2001', 203, 'Rock');CALL association_titre_interprete(13, 'Noir Désir');
+CALL nouveau_titre("Bouquet de nerfs", '2001', 313, 'Rock');CALL association_titre_interprete(14, 'Noir Désir');
+CALL nouveau_titre("L'Europe", '2001', 1424, 'Rock');CALL association_titre_interprete(15, 'Noir Désir');
 
 -- Création Album
 CALL nouveau_album('Des Visages des Figures','2001'); -- idAlbum = 16
@@ -67,8 +67,16 @@ CALL ajout_titre_album(13,16);
 CALL ajout_titre_album(14,16);
 CALL ajout_titre_album(15,16);
 
+CALL nouveau_titre("Mauvais", '1901', 135, 'Variete');
+-- CALL modifier_titre(17, "PasSiMauvais", '1960', 190, 'Rock');
+-- CALL supprimer_titre(17);
+-- CALL association_titre_interprete(17, 'Noir Désir');
+-- CALL dissociation_titre_interprete(17, 'Noir Désir');
+
 CALL reset_Vues_Catalogue();
 SELECT * FROM ElementCatalogue;
+SELECT * FROM TitreMusical;
+SELECT * FROM Discographie;
 
 -- On regarde des éléments du catalogue
 CALL regarder(1);CALL regarder(1);
