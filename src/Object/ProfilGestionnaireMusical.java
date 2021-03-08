@@ -17,8 +17,12 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 	}
 
 	// Methodes heritees d'Administrateur
+	/*
+	 * Fonction authentification v�rifie l'existence du couple mail, password ayant les droits de GestionnaireMusical
+	 * Renvoie l'objet ProfilGestionnaireMusical correspondant s'il est trouv�, null sinon
+	 */
 	@Override
-	public boolean authentification(String mail, String password) {
+	public Administrateur authentification(String mail, String password) {
 		// Récupérer une connexion de type java.sql.Connection
 		Connection connexion = DBManager.getInstance().getConnection();
 		
@@ -35,15 +39,21 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 			ResultSet rs = preparedQuery.executeQuery();
 			
 			// Vrai si les identifiants correspondent à un compte
-			return rs.next();
+			if(rs.next()) {
+				return new ProfilGestionnaireMusical(mail, password);
+			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return false;
+		return null;
 	}
 
+	/*
+	 * Fonction creerAdmin ajoute un administrateur ayant les droits de GestionnaireMusical
+	 * Renvoie l'objet ProfilGestionnaireMusical correspondant si l'insertion � la BDD reussit, null sinon
+	 */
 	@Override
 	public Administrateur creerAdmin(String mail, String password) {
 		// Récupérer une connexion de type java.sql.Connection
@@ -101,7 +111,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
                 int last_inserted_id = rs.getInt(1);
                 
 				for(Interprete interprete : interpretes){
-					ajoutDiscographie(last_inserted_id, interprete.getPseudonyme());
+					//ajoutDiscographie(last_inserted_id, interprete.getPseudonyme());
 				}
 				
 				return new TitreMusical(last_inserted_id, titre, anneeCreation, duree, genre, interpretes);
@@ -178,7 +188,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 		return null;
 	}
 
-	@Override
+	/*@Override
 	public void ajoutDiscographie(int idTitre, String pseudoInterprete) {
 		// Récupérer une connexion de type java.sql.Connection
 		Connection connexion = DBManager.getInstance().getConnection();
@@ -200,10 +210,10 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
-	}
+	}*/
 
 	@Override
-	public void creerAlbum(String nom, String anneeSortie) {
+	public Album creerAlbum(String nom, String anneeSortie, List<TitreMusical> titres) {
 		// Récupérer une connexion de type java.sql.Connection
 		Connection connexion = DBManager.getInstance().getConnection();
 		
@@ -224,10 +234,11 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
 	}
 
 	@Override
-	public void ajoutTitreAlbum(int idTitre, int idAlbum) {
+	public boolean ajoutTitreAlbum(TitreMusical titre, Album album) {
 		// Récupérer une connexion de type java.sql.Connection
 		Connection connexion = DBManager.getInstance().getConnection();
 		
@@ -238,8 +249,8 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 			
 			// Prepared statement 
 			PreparedStatement preparedQuery = connexion.prepareStatement(request);
-			preparedQuery.setInt(1, idTitre);
-			preparedQuery.setInt(2, idAlbum);
+			preparedQuery.setInt(1, titre.getIdCatalogue());
+			preparedQuery.setInt(2, album.getIdCatalogue());
 
 			// Execution
 			preparedQuery.executeUpdate();
@@ -247,53 +258,13 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
+		}
+		return false;	
 	}
 	
 	
 	
 	//TODO -- En travaux
-	@Override
-	public List<ElementCatalogue> rechercherParNom(String nom) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ElementCatalogue> rechercherParInterprete(String interprete) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ElementCatalogue> rechercherParGenre(Genre genre) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ElementCatalogue> rechercherParDateSortie(Date date) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ElementCatalogue> parcourirCatalogue() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean supprimerElementCatalogue(ElementCatalogue elementCatalogue) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Interprete obtenirInterprete(String pseudo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public boolean modifierInterprete(String pseudo, String prenom, String nom, Date dateNaissance) {
@@ -335,5 +306,60 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 	public List<Client> topUtilisateursEcoutes() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean modifierTitre(TitreMusical titreMusical, String titre, Year anneeCreation,
+			List<Interprete> interpretes, int duree, Genre genre) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean supprimerTitre(TitreMusical titreMusical) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void ajoutDiscographie(TitreMusical titre, Interprete interprete) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean suppressionTitreAlbum(TitreMusical titre, Album album) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void ajoutAlbumInterprete(Album album, Interprete interprete) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean modifierRadio(Radio radio, String nom, Genre genreMusical) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean supprimerRadio(Radio radio) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean modifierPodcast(String titre, int duree, String PseudoAuteur, String categorie) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean supprimerPodcast(Podcast podcast) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

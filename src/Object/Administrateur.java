@@ -1,5 +1,8 @@
 package Object;
 
+import java.sql.Date;
+import java.util.List;
+
 import Interface.AdministrateurInterface;
 
 public abstract class Administrateur implements AdministrateurInterface {
@@ -29,38 +32,145 @@ public abstract class Administrateur implements AdministrateurInterface {
 	}	
 	
 	// Méthodes de classe
-	public abstract boolean authentification(String mail, String password);
+	public abstract Administrateur authentification(String mail, String password);
 	
 	public abstract Administrateur creerAdmin(String mail, String password);
-	
-	/*
-	public void consulterStatistiques() {
-		
-	}
-	
-	public boolean authentification(String email, String motDePasse) {
-		return true;
-	}
-	
-	public void rechercherElement(String nomElementCatalogue) {
-		
-	}
-	
-	public void rechercherClient(String nom, String prenom) {
-		
-	}
-	
-	public void modifierProfilClient() {
-		
-	}
-	
-	public Client selectionerClient(Client client) {
-		return client;
-	}
-	
-	public ElementCatalogue selectionerElementMusical(ElementCatalogue elementCatalogue) {
-		return elementCatalogue;
-	}*/
-	
 
+	@Override
+	public List<TitreMusical> topTitresEcoutes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Client> topUtilisateursEcoutes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Client> rechercherParMailClient(String recherche) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Client> rechercherParNomClient(String recherche) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Client> rechercherParPrenomClient(String recherche) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ElementCatalogue> rechercherParNomCatalogue(String recherche) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ElementCatalogue> rechercherParInterpreteCatalogue(String recherche) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ElementCatalogue> rechercherParGenreCatalogue(Genre genre) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ElementCatalogue> rechercherParDateSortieCatalogue(Date date) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ElementCatalogue> parcourirCatalogueCatalogue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<TitreMusical> rechercherParNomTitre(String recherche) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<TitreMusical> rechercherParInterpreteTitre(String recherche) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<TitreMusical> rechercherParGenreTitre(Genre genre) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<TitreMusical> rechercherParDateSortieTitre(Date date) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<TitreMusical> parcourirCatalogueTitre() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Album> rechercherParNomAlbum(String recherche) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Album> rechercherParInterpreteAlbum(String recherche) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Album> rechercherParGenreAlbum(Genre genre) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Album> rechercherParDateSortieAlbum(Date date) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Album> parcourirCatalogueAlbum() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Interprete> rechercherParPseudoInterprete(String recherche) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Interprete> rechercherParPrenomInterprete(String recherche) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Interprete> rechercherParNomInterprete(String recherche) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -7,17 +7,12 @@ import Object.Genre;
 
 public interface ProfilGestionnaireClientInterface extends AdministrateurInterface {
 	
-	//A verifier
+	// Valide
+	
+	//A verifier - Tester
 	
 	//TODO
 	
-	//Modifications utilisateur
-	public boolean modifierNomClient(Client client, String nom);
-	public boolean modifierPrenomClient(Client client, String prenom);
-	public boolean modifierPasswordClient(Client client, String password);
-	public boolean modifierCiviliteClient(Client client, String civilite);
-	public boolean modifierDateNaissanceClient(Client client, Date dateNaissance);
-	public boolean modifierAdresseClient(Client client, String adresse);
-	public boolean modifierStyleClient(Client client, Genre style);
+	public boolean modifierInformationsClient(Client client, String password, String civilite, String nom, String prenom, Date dateNaissance, String adresseFacturation, Genre styleMusiquePrefere);
 
 }

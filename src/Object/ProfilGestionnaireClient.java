@@ -14,8 +14,12 @@ public class ProfilGestionnaireClient extends Administrateur implements ProfilGe
 		super(mail,password);
 	}
 
+	/*
+	 * Fonction authentification vérifie l'existence du couple mail, password ayant les droits de GestionnaireClient
+	 * Renvoie l'objet ProfilGestionnaireClient correspondant s'il est trouvé, null sinon
+	 */
 	@Override
-	public boolean authentification(String mail, String password) {
+	public Administrateur authentification(String mail, String password) {
 		// RÃ©cupÃ©rer une connexion de type java.sql.Connection
 		Connection connexion = DBManager.getInstance().getConnection();
 		
@@ -32,15 +36,21 @@ public class ProfilGestionnaireClient extends Administrateur implements ProfilGe
 			ResultSet rs = preparedQuery.executeQuery();
 			
 			// Vrai si les identifiants correspondent Ã  un compte
-			return rs.next();
+			if(rs.next()) {
+				return new ProfilGestionnaireClient(mail, password);
+			};
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return false;
+		return null;
 	}
 	
+	/*
+	 * Fonction creerAdmin ajoute un administrateur ayant les droits de GestionnaireClient
+	 * Renvoie l'objet ProfilGestionnaireClient correspondant si l'insertion à la BDD réussit, null sinon
+	 */
 	@Override
 	public Administrateur creerAdmin(String mail, String password) {
 		
@@ -75,43 +85,8 @@ public class ProfilGestionnaireClient extends Administrateur implements ProfilGe
 	}
 
 	@Override
-	public boolean modifierNomClient(Client client, String nom) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean modifierPrenomClient(Client client, String prenom) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean modifierPasswordClient(Client client, String password) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean modifierCiviliteClient(Client client, String civilite) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean modifierDateNaissanceClient(Client client, Date dateNaissance) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean modifierAdresseClient(Client client, String adresse) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean modifierStyleClient(Client client, Genre style) {
+	public boolean modifierInformationsClient(Client client, String password, String civilite, String nom,
+			String prenom, Date dateNaissance, String adresseFacturation, Genre styleMusiquePrefere) {
 		// TODO Auto-generated method stub
 		return false;
 	}
