@@ -182,7 +182,7 @@ public class Client implements ClientInterface {
 
 	/*
 	 * Fonction modifierInformations, met à jour les informations du client dans la BD puis dans l'objet
-	 * Renvoie true si la modification peut avoir lieu, false sinon
+	 * Renvoie true si la modification a lieu, false sinon
 	 */
 	@Override
 	public boolean modifierInformations(String password, String civilite, String nom, String prenom,

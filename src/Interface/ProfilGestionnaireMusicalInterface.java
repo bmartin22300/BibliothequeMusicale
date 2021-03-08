@@ -17,17 +17,51 @@ public interface ProfilGestionnaireMusicalInterface extends AdministrateurInterf
 	// Valide	
 	
 	//A verifier - Tester
-	
-	//TODO
-	
 	// Interprete
 	public Interprete creerInterprete(String pseudo);
 	public Interprete creerInterprete(String pseudo, String prenom, String nom, Date dateNaissance);
-	public boolean modifierInterprete(String pseudo, String prenom, String nom, Date dateNaissance);
+	public boolean modifierInterprete(Interprete interprete, String prenom, String nom, Date dateNaissance);
 	public boolean supprimerInterprete(Interprete interprete);
 	
 	// TitreMusical
 	public TitreMusical creerTitre(String titre, Year anneeCreation, List<Interprete> interpretes, int duree, Genre genre);
+//	public boolean modifierTitre(TitreMusical titreMusical, String titre, Year anneeCreation, List<Interprete> interpretes, int duree, Genre genre);
+//	public boolean supprimerTitre(TitreMusical titreMusical);
+//	
+//	public void ajoutDiscographie(TitreMusical titre, Interprete interprete);
+//	
+//	// Album
+//	public Album creerAlbum(String nom, String anneeSortie, List<TitreMusical> titres);
+//	public boolean ajoutTitreAlbum(TitreMusical titre, Album album);
+//	public boolean suppressionTitreAlbum(TitreMusical titre, Album album);
+//	
+//	public void ajoutAlbumInterprete(Album album, Interprete interprete);
+//	
+//	// Radio
+//	public Radio creerRadio(String nom, Genre genreMusical);
+//	public boolean modifierRadio(Radio radio, String nom, Genre genreMusical);
+//	public boolean supprimerRadio(Radio radio);
+//	
+//	// Podcast
+//	public Podcast creerPodcast(String titre, int duree, String PseudoAuteur, String categorie);
+//	public boolean modifierPodcast(String titre, int duree, String PseudoAuteur, String categorie);
+//	public boolean supprimerPodcast(Podcast podcast);
+//
+//	
+//	public boolean recommander(ElementCatalogue elementCatalogue);
+	
+	
+	
+	//TODO
+	
+	// Interprete
+	//public Interprete creerInterprete(String pseudo);
+	//public Interprete creerInterprete(String pseudo, String prenom, String nom, Date dateNaissance);
+	//public boolean modifierInterprete(Interprete interprete, String prenom, String nom, Date dateNaissance);
+	//public boolean supprimerInterprete(Interprete interprete);
+	
+	// TitreMusical
+	//public TitreMusical creerTitre(String titre, Year anneeCreation, List<Interprete> interpretes, int duree, Genre genre);
 	public boolean modifierTitre(TitreMusical titreMusical, String titre, Year anneeCreation, List<Interprete> interpretes, int duree, Genre genre);
 	public boolean supprimerTitre(TitreMusical titreMusical);
 	

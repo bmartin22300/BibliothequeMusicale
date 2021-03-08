@@ -86,55 +86,23 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 		return null;
 	}
 
+	
+	
 	// Methodes specifiques a la classe
-	@Override
-	public TitreMusical creerTitre(String titre, Year anneeCreation, List<Interprete> interpretes, int duree, Genre genre) {
-		// Récupérer une connexion de type java.sql.Connection
-		Connection connexion = DBManager.getInstance().getConnection();
-		
-		try {
-			
-			// Exécuter la requête SQL et récupérer un java.sql.ResultSet
-			String request = "CALL nouveau_titre(?, ?, ?);";
-			
-			// Prepared statement 
-			PreparedStatement preparedQuery = connexion.prepareStatement(request);
-			preparedQuery.setString(1, titre);
-			preparedQuery.setString(2, anneeCreation.toString());
-			preparedQuery.setString(3, genre.toString()); //Marche probablement pas
-			
-			preparedQuery.executeUpdate();
-			
-			ResultSet rs = preparedQuery.getGeneratedKeys();
-            if(rs.next()) // Ajout des interpretes
-            {
-                int last_inserted_id = rs.getInt(1);
-                
-				for(Interprete interprete : interpretes){
-					//ajoutDiscographie(last_inserted_id, interprete.getPseudonyme());
-				}
-				
-				return new TitreMusical(last_inserted_id, titre, anneeCreation, duree, genre, interpretes);
-            }
-            else {
-            	return null;
-            }		
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-
+	
+	// Interprete
+	/*
+	 * Fonction creerInterprete, creation d'un nouveau Interprete dans la BDD
+	 * Renvoie l'objet Interprete si succ�s, null sinon
+	 */
 	@Override
 	public Interprete creerInterprete(String pseudo) {
-		// Récupérer une connexion de type java.sql.Connection
+		// On recupere une connexion de type java.sql.Connection
 		Connection connexion = DBManager.getInstance().getConnection();
 		
 		try {
 			
-			// Exécuter la requête SQL et récupérer un java.sql.ResultSet
+			// On execute la requete SQL et recupere un java.sql.ResultSet
 			String request = "CALL nouveau_interprete(?);";
 			
 			// Prepared statement 
@@ -156,14 +124,18 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 		return null;
 	}
 
+	/*
+	 * Fonction creerInterprete, creation d'un nouveau Interprete dans la BDD
+	 * Renvoie l'objet Interprete si succ�s, null sinon
+	 */
 	@Override
 	public Interprete creerInterprete(String pseudo, String prenom, String nom, Date dateNaissance) {
-		// Récupérer une connexion de type java.sql.Connection
+		// On recupere une connexion de type java.sql.Connection
 		Connection connexion = DBManager.getInstance().getConnection();
 		
 		try {
 			
-			// Exécuter la requête SQL et récupérer un java.sql.ResultSet
+			// On execute la requete SQL et recupere un java.sql.ResultSet
 			String request = "CALL nouveau_interprete_complet(?, ?, ?, ?);";
 			
 			// Prepared statement 
@@ -187,6 +159,139 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 		}
 		return null;
 	}
+	
+	/*
+	 * Fonction modifierInterprete, met � jour les informations de l'interprete dans la BD puis dans l'objet
+	 * Renvoie true si la modification a lieu, false sinon
+	 */
+	@Override
+	public boolean modifierInterprete(Interprete interprete, String prenom, String nom, Date dateNaissance) {
+		// Recuperer la connexion
+		Connection connexion = DBManager.getInstance().getConnection();
+		
+		try {
+			
+			// Maj BDD
+			String request = "CALL modifier_interprete(?, ?, ?, ?);";
+			
+			// Prepared statement 
+			PreparedStatement preparedQuery = connexion.prepareStatement(request);
+			preparedQuery.setString(1, interprete.getPseudonyme());
+			preparedQuery.setString(2, prenom);
+			preparedQuery.setString(3, nom);
+			preparedQuery.setDate(4, dateNaissance);
+			
+			// Execution
+			if(preparedQuery.executeUpdate()>0) { // Succes de la modification
+				
+				// Maj Objet
+				interprete.setPrenom(prenom);
+				interprete.setNom(nom);
+				interprete.setDateNaissance(dateNaissance);
+				
+				return true;
+			}
+			else{ // La mise a jour echoue
+				return false;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	/*
+	 * Fonction supprimerInterprete, retire l'interprete de la BD
+	 * Renvoie true si la suppression a lieu, false sinon
+	 */
+	@Override
+	public boolean supprimerInterprete(Interprete interprete) {
+		// Recuperer la connexion
+				Connection connexion = DBManager.getInstance().getConnection();
+				
+				try {
+					
+					// Maj BDD
+					String request = "CALL supprimer_interprete(?);";
+					
+					// Prepared statement 
+					PreparedStatement preparedQuery = connexion.prepareStatement(request);
+					preparedQuery.setString(1, interprete.getPseudonyme());
+					
+					// Execution
+					if(preparedQuery.executeUpdate()>0) { // Succes de la suppression
+						
+						return true;
+					}
+					else{ // La suppression echoue
+						return false;
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return false;
+	}
+	
+	
+	// TitreMusical
+	/*
+	 * Fonction creerTitreMusical, creation d'un nouveau TitreMusical dans la BDD
+	 * Renvoie l'objet TitreMusical si succ�s, null sinon
+	 */
+	@Override
+	public TitreMusical creerTitre(String titre, Year anneeCreation, List<Interprete> interpretes, int duree, Genre genre) {
+		// On recupere une connexion de type java.sql.Connection
+		Connection connexion = DBManager.getInstance().getConnection();
+		
+		try {
+			
+			// On execute la requete SQL et on recupere un java.sql.ResultSet
+			String request = "CALL nouveau_titre(?, ?, ? ?);";
+			
+			// Prepared statement ajout titre
+			PreparedStatement preparedQuery = connexion.prepareStatement(request);
+			preparedQuery.setString(1, titre);
+			preparedQuery.setString(2, anneeCreation.toString());
+			preparedQuery.setInt(3, duree);
+			preparedQuery.setString(4, genre.toString()); // Le genre doit exister dans la BDD
+			
+			preparedQuery.executeUpdate();
+			
+			ResultSet rs = preparedQuery.getGeneratedKeys();
+            if(rs.next()) // Ajout des interpretes
+            {
+                int last_inserted_id = rs.getInt(1); // Id du TitreMusical cree
+                
+                String requestInterprete = "CALL association_titre_interprete(?, ?);";
+                
+                // Prepared statement association interpretes
+    			PreparedStatement preparedQueryInterprete = connexion.prepareStatement(requestInterprete);
+    			preparedQueryInterprete.setInt(1, last_inserted_id);
+    			
+				for(Interprete interprete : interpretes){ // On associe chaque interprete au titre
+					
+					preparedQueryInterprete.setString(2, interprete.getPseudonyme());
+
+					preparedQueryInterprete.executeUpdate();
+				}
+				
+				return new TitreMusical(last_inserted_id, titre, anneeCreation, duree, genre, interpretes);
+            }
+            else {
+            	return null;
+            }		
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 
 	/*@Override
 	public void ajoutDiscographie(int idTitre, String pseudoInterprete) {
@@ -266,17 +371,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 	
 	//TODO -- En travaux
 
-	@Override
-	public boolean modifierInterprete(String pseudo, String prenom, String nom, Date dateNaissance) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
-	@Override
-	public boolean supprimerInterprete(Interprete interprete) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public Radio creerRadio(String nom, Genre genreMusical) {

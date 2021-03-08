@@ -19,24 +19,27 @@ SELECT * FROM Client;
 -- Création Interprète
 CALL nouveau_interprete_complet('Edith Piaf', 'Edith', 'Giovanna Gassion', '1915-12-19');
 CALL nouveau_interprete('Noir Désir');
+CALL modifier_interprete('Noir Désir', 'Groupe', 'Groupe', '1980-01-01');
+CALL nouveau_interprete_complet('Edith PiafeeTYPO', 'Edith', 'Giovanna Gassion', '1915-12-19');
+-- CALL supprimer_interprete('Edith PiafeeTYPO');
 
 SELECT * FROM Interprete;
 
 -- Création TitreMusical
-CALL nouveau_titre('La Vie en rose', '1946', 'Variete');
+CALL nouveau_titre('La Vie en rose', '1946', 185, 'Variete');
 SELECT retrouver_titre('La Vie en rose');
 CALL association_titre_interprete(1, 'Edith Piaf');
 
-CALL nouveau_titre('La Foule', '1957', 'Variete');
+CALL nouveau_titre('La Foule', '1957', 203, 'Variete');
 SELECT retrouver_titre('La Foule');
 CALL association_titre_interprete(2, 'Edith Piaf');
 
-CALL nouveau_titre('Non, je ne regrette rien', '1960', 'Variete');
+CALL nouveau_titre('Non, je ne regrette rien', '1960', 142, 'Variete');
 SELECT retrouver_titre('Non, je ne regrette rien');
 CALL association_titre_interprete(3, 'Edith Piaf');
 
-CALL nouveau_titre("L'enfant roi", '2001', 'Rock');CALL association_titre_interprete(4, 'Noir Désir');
-CALL nouveau_titre("Le grand incendie", '2001', 'Rock');CALL association_titre_interprete(5, 'Noir Désir');
+CALL nouveau_titre("L'enfant roi", '2001', 363, 'Rock');CALL association_titre_interprete(4, 'Noir Désir');
+CALL nouveau_titre("Le grand incendie", '2001', 276, 'Rock');CALL association_titre_interprete(5, 'Noir Désir');
 CALL nouveau_titre("Le vent nous portera", '2001', 'Rock');CALL association_titre_interprete(6, 'Noir Désir');
 CALL nouveau_titre("Des armes", '2001', 'Rock');CALL association_titre_interprete(7, 'Noir Désir');
 CALL nouveau_titre("L'appartement", '2001', 'Rock');CALL association_titre_interprete(8, 'Noir Désir');
@@ -64,11 +67,6 @@ CALL ajout_titre_album(13,16);
 CALL ajout_titre_album(14,16);
 CALL ajout_titre_album(15,16);
 
-SELECT * FROM AlbumInterprete;
-SELECT * FROM ElementCatalogue;
-SELECT * FROM TitreMusical;
-SELECT * FROM Discographie;
-
 CALL reset_Vues_Catalogue();
 SELECT * FROM ElementCatalogue;
 
@@ -82,3 +80,8 @@ CALL regarder(10);CALL regarder(10);CALL regarder(10);
 CALL recommander(6);
 
 SELECT * FROM ElementCatalogue;
+SELECT * FROM Interprete;
+SELECT * FROM AlbumInterprete;
+SELECT * FROM ElementCatalogue;
+SELECT * FROM TitreMusical;
+SELECT * FROM Discographie;

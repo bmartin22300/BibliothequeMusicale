@@ -22,14 +22,17 @@ public class Utilisateur implements UtilisateurInterface {
 	}
 	
 	
-	
+	/*
+	 * Fonction authentification vérifie l'existence du couple mail, password dans la table Client
+	 * Renvoie l'objet Client correspondant s'il est trouvé, null sinon
+	 */
 	@Override
 	public Client authentification(String mail, String password) {
-		// RÃ©cupÃ©rer une connexion de type java.sql.Connection
+		// On recupere une connexion de type java.sql.Connection
 		Connection connexion = DBManager.getInstance().getConnection();
 		
 		try {
-			// ExÃ©cuter la requÃªte SQL et rÃ©cupÃ©rer un java.sql.ResultSet
+			// On execute la requete et on recupere un java.sql.ResultSet
 			String request = "CALL authentification_client(?, ?);";
 			
 			// Prepared statement 
@@ -68,6 +71,11 @@ public class Utilisateur implements UtilisateurInterface {
 		return null;		
 	}
 	
+	
+	/*
+	 * Fonction creerCompte, creation d'un nouveau Client dans la BDD
+	 * Renvoie l'objet Client si succès, null sinon
+	 */
 	@Override
 	public Client creerCompte(String mail, String password) {
 		
@@ -98,6 +106,10 @@ public class Utilisateur implements UtilisateurInterface {
 		return null;		
 	}
 	
+	/*
+	 * Fonction creerCompte, creation d'un nouveau Client dans la BDD
+	 * Renvoie l'objet Client si succès, null sinon
+	 */
 	@Override
 	public Client creerCompte(String mail, String password, String civilite, String nom, String prenom,
 		Date dateNaissance, String adresseFacturation, Genre styleMusiquePrefere) {
