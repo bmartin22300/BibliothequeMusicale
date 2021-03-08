@@ -34,11 +34,15 @@ public interface ProfilGestionnaireMusicalInterface extends AdministrateurInterf
 	public boolean retirerDiscographie(TitreMusical titre, Interprete interprete);
 	
 	// Album
-//	public Album creerAlbum(String nom, String anneeSortie, List<TitreMusical> titres);
+	public Album creerAlbum(String nom, Year anneeSortie, List<TitreMusical> titres, List<Interprete> interpretes);
+	public boolean modifierAlbum(Album album, String nom, Year anneeSortie);
+	public boolean supprimerAlbum(Album album);
+	
+	public boolean ajouterDiscographie(Album album, Interprete interprete);
+	public boolean retirerDiscographie(Album album, Interprete interprete);
+
 //	public boolean ajoutTitreAlbum(TitreMusical titre, Album album);
 //	public boolean suppressionTitreAlbum(TitreMusical titre, Album album);
-//	
-//	public void ajoutAlbumInterprete(Album album, Interprete interprete);
 //	
 //	// Radio
 //	public Radio creerRadio(String nom, Genre genreMusical);
@@ -72,11 +76,15 @@ public interface ProfilGestionnaireMusicalInterface extends AdministrateurInterf
 	//public boolean retirerDiscographie(TitreMusical titre, Interprete interprete);
 	
 	// Album
-	public Album creerAlbum(String nom, String anneeSortie, List<TitreMusical> titres);
+	//public Album creerAlbum(String nom, Year anneeSortie, List<TitreMusical> titres, List<Interprete> interpretes);
+	//public boolean modifierAlbum(Album album, String nom, Year anneeSortie);
+	//public boolean supprimerAlbum(Album album);
+	
+	//public boolean ajouterDiscographie(Album album, Interprete interprete);
+	//public boolean retirerDiscographie(Album album, Interprete interprete);
+	
 	public boolean ajoutTitreAlbum(TitreMusical titre, Album album);
 	public boolean suppressionTitreAlbum(TitreMusical titre, Album album);
-	
-	public void ajoutAlbumInterprete(Album album, Interprete interprete);
 	
 	// Radio
 	public Radio creerRadio(String nom, Genre genreMusical);

@@ -73,11 +73,17 @@ CALL nouveau_titre("Mauvais", '1901', 135, 'Variete');
 -- CALL supprimer_titre(17);
 -- CALL association_titre_interprete(17, 'Noir Désir');
 -- CALL dissociation_titre_interprete(17, 'Noir Désir');
+-- CALL modifier_album(16, 'Des Visages des ures','2101');
+-- CALL supprimer_album(16);
+-- CALL association_album_interprete(16, 'Edith Piaf');
+-- CALL dissociation_album_interprete(16, 'Edith Piaf');
 
 CALL reset_Vues_Catalogue();
 SELECT * FROM ElementCatalogue;
 SELECT * FROM TitreMusical;
 SELECT * FROM Discographie;
+SELECT * FROM Album;
+SELECT * FROM AlbumInterprete;
 
 -- On regarde des éléments du catalogue
 CALL regarder(1);CALL regarder(1);

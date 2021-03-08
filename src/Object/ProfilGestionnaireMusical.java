@@ -223,6 +223,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 			// Execution
 			if(preparedQuery.executeUpdate()>0) { // Succes de la suppression
 				
+				interprete=null; // On supprime l'instance d'interprete
 				return true;
 			}
 			else{ // La suppression echoue
@@ -358,6 +359,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 			// Execution
 			if(preparedQuery.executeUpdate()>0) { // Succes de la suppression
 				
+				titreMusical=null; // On supprime l'instance du titre
 				return true;
 			}
 			else{ // La suppression echoue
@@ -434,35 +436,73 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 			e.printStackTrace();
 		}
 		return false;	
-		
 	}
-
 	
-	
-	
-	
-	
-	
-	
-	
-
+	// Album
+	/*
+	 * Fonction creerAlbum, creation d'un nouveau Album dans la BDD
+	 * Renvoie l'objet Album si succ�s, null sinon
+	 */
 	@Override
-	public Album creerAlbum(String nom, String anneeSortie, List<TitreMusical> titres) {
-		// Récupérer une connexion de type java.sql.Connection
+	public Album creerAlbum(String nom, Year anneeSortie, List<TitreMusical> titres, List<Interprete> interpretes) {
+		
+		// On recupere une connexion de type java.sql.Connection
 		Connection connexion = DBManager.getInstance().getConnection();
 		
 		try {
 			
-			// Exécuter la requête SQL et récupérer un java.sql.ResultSet
+			// On execute la requete SQL et on recupere un java.sql.ResultSet
 			String request = "CALL nouveau_album(?, ?);";
 			
-			// Prepared statement 
+			// Prepared statement ajout Album
 			PreparedStatement preparedQuery = connexion.prepareStatement(request);
 			preparedQuery.setString(1, nom);
-			preparedQuery.setString(2, anneeSortie);
+			preparedQuery.setString(2, anneeSortie.toString());
 			
-			// Execution
 			preparedQuery.executeUpdate();
+			
+			ResultSet rs = preparedQuery.getGeneratedKeys();
+            if(rs.next()) // Ajout des Titres
+            {
+                int last_inserted_id = rs.getInt(1); // Id de l'album cree
+                
+                // Association titres
+                int dureeAlbum = 0;
+                String requestTitre = "CALL ajout_titre_album(?, ?);";
+                
+                // Prepared statement 
+    			PreparedStatement preparedQueryTitres = connexion.prepareStatement(requestTitre);
+    			
+    			preparedQueryTitres.setInt(2, last_inserted_id); // Id de l'album
+    			
+				for(TitreMusical titre : titres){ // On associe chaque interprete au titre
+					
+					preparedQueryTitres.setInt(2, titre.getIdCatalogue());
+
+					preparedQueryTitres.executeUpdate();
+					
+					dureeAlbum+=titre.getDuree();
+				}
+				
+				// Association interpretes
+				String requestInterprete = "CALL association_album_interprete(?, ?);";
+                
+                // Prepared statement association interpretes
+    			PreparedStatement preparedQueryInterprete = connexion.prepareStatement(requestInterprete);
+    			preparedQueryInterprete.setInt(1, last_inserted_id);
+    			
+				for(Interprete interprete : interpretes){ // On associe chaque interprete � l'album
+					
+					preparedQueryInterprete.setString(2, interprete.getPseudonyme());
+
+					preparedQueryInterprete.executeUpdate();
+				}
+				
+				return new Album(last_inserted_id, nom, dureeAlbum, anneeSortie, interpretes, titres);
+            }
+            else {
+            	return null;
+            }		
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -470,7 +510,145 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 		}
 		return null;
 	}
+	
+	/*
+	 * Fonction modifierAlbum, met � jour les informations de l'Album dans la BD puis dans l'objet
+	 * Renvoie true si la modification a lieu, false sinon
+	 */
+	@Override
+	public boolean modifierAlbum(Album album, String nom, Year anneeSortie) {
+		// Recuperer la connexion
+		Connection connexion = DBManager.getInstance().getConnection();
+		
+		try {
+			
+			// Maj BDD
+			String request = "CALL modifier_album(?, ?, ?);";
+			
+			// Prepared statement 
+			PreparedStatement preparedQuery = connexion.prepareStatement(request);
+			preparedQuery.setInt(1, album.getIdCatalogue());
+			preparedQuery.setString(2, nom);
+			preparedQuery.setString(3, anneeSortie.toString()); // >1900			
+			
+			// Execution
+			if(preparedQuery.executeUpdate()>0) { // Succes de la modification
+				
+				// Maj Objet
+				album.setNom(nom);
+				album.setDateSortie(anneeSortie);
+				
+				return true;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
 
+	/*
+	 * Fonction supprimerAlbum, retire l'Album de la BD
+	 * Renvoie true si la suppression a lieu, false sinon
+	 */
+	@Override
+	public boolean supprimerAlbum(Album album) {
+		// Recuperer la connexion
+		Connection connexion = DBManager.getInstance().getConnection();
+		
+		try {
+			
+			// Maj BDD
+			String request = "CALL supprimer_album(?);";
+			
+			// Prepared statement 
+			PreparedStatement preparedQuery = connexion.prepareStatement(request);
+			preparedQuery.setInt(1, album.getIdCatalogue());
+			
+			// Execution
+			if(preparedQuery.executeUpdate()>0) { // Succes de la suppression
+				
+				album=null; // On supprime l'instance de l'album
+				return true;
+			}
+			else{ // La suppression echoue
+				return false;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	/*
+	 * Fonction ajouterDiscographie, associe l'interprete � l'album dans la BD
+	 * Renvoie true et associe l'instance album a l'instance interprete si l'ajout a lieu, false sinon
+	 */
+	@Override
+	public boolean ajouterDiscographie(Album album, Interprete interprete) {
+		// On recupere une connexion de type java.sql.Connection
+		Connection connexion = DBManager.getInstance().getConnection();
+		
+		try {
+			
+			// On execute la requete SQL et on recupere un java.sql.ResultSet
+			String request = "CALL association_album_interprete(?, ?);";
+			
+			// Prepared statement 
+			PreparedStatement preparedQuery = connexion.prepareStatement(request);
+			preparedQuery.setInt(1, album.getIdCatalogue());
+			preparedQuery.setString(2, interprete.getPseudonyme());
+
+			// Execution
+			if(preparedQuery.executeUpdate()>0) {
+				album.getInterprete().add(interprete); // On ajoute l'interprete
+				interprete.getAlbums().add(album); // On ajoute l'album
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;		
+	}
+
+	
+	/*
+	 * Fonction retirerDiscographie, dissocie l'interprete de l'album dans la BD
+	 * Renvoie true et dissocie l'instance album de l'instance interprete si la suppression a lieu, false sinon
+	 */
+	@Override
+	public boolean retirerDiscographie(Album album, Interprete interprete) {
+		// On recupere une connexion de type java.sql.Connection
+		Connection connexion = DBManager.getInstance().getConnection();
+		
+		try {
+			
+			// On execute la requete SQL et on recupere un java.sql.ResultSet
+			String request = "CALL dissociation_album_interprete(?, ?);";
+			
+			// Prepared statement 
+			PreparedStatement preparedQuery = connexion.prepareStatement(request);
+			preparedQuery.setInt(1, album.getIdCatalogue());
+			preparedQuery.setString(2, interprete.getPseudonyme());
+
+			// Execution
+			if(preparedQuery.executeUpdate()>0) {
+				album.getInterprete().remove(interprete); // On ajoute l'interprete
+				interprete.getAlbums().remove(album); // On ajoute l'album
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;	
+	}
+
+	
 	@Override
 	public boolean ajoutTitreAlbum(TitreMusical titre, Album album) {
 		// Récupérer une connexion de type java.sql.Connection
@@ -495,9 +673,6 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 		}
 		return false;	
 	}
-	
-	
-	
 	//TODO -- En travaux
 
 
@@ -539,12 +714,6 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 	}
 
 	@Override
-	public void ajoutAlbumInterprete(Album album, Interprete interprete) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public boolean modifierRadio(Radio radio, String nom, Genre genreMusical) {
 		// TODO Auto-generated method stub
 		return false;
@@ -567,6 +736,4 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-
 }

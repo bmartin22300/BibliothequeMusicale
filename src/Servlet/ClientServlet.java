@@ -1,11 +1,10 @@
 package Servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Date;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -126,12 +125,9 @@ public class ClientServlet extends HttpServlet {//clientServlet
 				}
 			}
 			Date dateDeNaissance = null;
-			try {
-				if(dateDeNaissanceString!=null && dateDeNaissanceString!="") {
-					dateDeNaissance = (Date) new SimpleDateFormat("dd/MM/yyyy").parse(dateDeNaissanceString);
-				}
-			} catch (ParseException e) {
-				e.printStackTrace();
+			if(dateDeNaissanceString!=null && dateDeNaissanceString!="") {
+				//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				dateDeNaissance = Date.valueOf(dateDeNaissanceString);
 			}  
 			String styleMusiquePrefereString = request.getParameter("styleMusiquePrefere");
 			Genre styleMusiquePrefere = Genre.valueOf("TECHNO");

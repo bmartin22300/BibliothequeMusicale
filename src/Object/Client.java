@@ -1,7 +1,7 @@
 package Object;
 
 import java.sql.Connection;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
@@ -209,7 +209,7 @@ public class Client implements ClientInterface {
 			preparedQuery.setString(3, civilite);
 			preparedQuery.setString(4, nom);
 			preparedQuery.setString(5, prenom);
-			preparedQuery.setDate(6, dateNaissance);
+			preparedQuery.setDate(6, (java.sql.Date) dateNaissance);
 			preparedQuery.setString(7, adresseFacturation);
 			preparedQuery.setString(8, styleMusiquePrefere.toString());
 			

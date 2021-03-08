@@ -12,11 +12,12 @@ public class Album extends ElementCatalogue{
 	private List<TitreMusical> titres;
 	
 	// Constructeur
-	public Album(int idCatalogue, String nom, Year anneeSortie, List<Interprete> interpretes,
+	public Album(int idCatalogue, String nom, int duree, Year anneeSortie, List<Interprete> interpretes,
 			List<TitreMusical> titres) {
 		super(idCatalogue);
 		this.nom = nom;
 		this.anneeSortie = anneeSortie;
+		this.duree = duree;
 		this.interpretes = interpretes;
 		this.titres = titres;
 	}
