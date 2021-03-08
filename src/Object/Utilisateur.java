@@ -45,8 +45,17 @@ public class Utilisateur implements UtilisateurInterface {
 				
 				List<Playlist> playlists = null; //TODO : récupérer les playlists du client à l'authentification
 				
+				// Création du Genre
+				Genre genre;
+				if(rs.getString("nomGenre") == null) {
+					genre = null;
+				}
+				else {
+					genre = Genre.valueOf(rs.getString("nomGenre"));
+				}
+				
 				return new Client(rs.getString("mail"), rs.getString("password"), rs.getString("civilite"), rs.getString("nom"), 
-						rs.getString("prenom"),rs.getDate("dateNaissance"), rs.getString("adresseFacturation"),rs.getInt("nbEcoute"), Genre.valueOf(rs.getString("nomGenre")), playlists);
+						rs.getString("prenom"),rs.getDate("dateNaissance"), rs.getString("adresseFacturation"),rs.getInt("nbEcoute"), genre , playlists);
 			}
 			else{
 				return null;
