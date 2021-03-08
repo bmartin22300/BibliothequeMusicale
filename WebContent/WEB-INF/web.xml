@@ -12,6 +12,7 @@
     <url-pattern>/MainServlet</url-pattern>
     <url-pattern>/UtilisateurServlet</url-pattern>
     <url-pattern>/Accueil</url-pattern>
+    <url-pattern>/</url-pattern>
   </servlet-mapping>
   
   <servlet>

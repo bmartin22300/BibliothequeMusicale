@@ -5,13 +5,15 @@ import java.util.List;
 
 import Interface.AdministrateurInterface;
 
-public abstract class Administrateur implements AdministrateurInterface {
+public class Administrateur implements AdministrateurInterface {
 	private String mail;
 	private String password;
 
 	// Constructeur
 	public Administrateur(String mail, String password) {
 		super();
+		this.mail = mail;
+		this.password = password;
 	}
 	
 	// Getters et Setters
@@ -29,7 +31,13 @@ public abstract class Administrateur implements AdministrateurInterface {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}	
+	}
+
+	@Override
+	public Administrateur creerAdmin(String mail, String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	// Méthodes de classe
 	public abstract Administrateur authentification(String mail, String password);

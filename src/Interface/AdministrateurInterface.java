@@ -31,7 +31,7 @@ public interface AdministrateurInterface {
 	public List<Client> rechercherParMailClient(String recherche);
 	public List<Client> rechercherParNomClient(String recherche);
 	public List<Client> rechercherParPrenomClient(String recherche);
-	// Autres critères de recherche useless? (GenrePréféré, adresse etc)
+	// Autres critï¿½res de recherche useless? (GenrePrï¿½fï¿½rï¿½, adresse etc)
 	
 	// Parcourir Catalogue
 	public List<ElementCatalogue> rechercherParNomCatalogue(String recherche);

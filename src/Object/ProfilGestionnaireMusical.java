@@ -18,8 +18,8 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 
 	// Methodes heritees d'Administrateur
 	/*
-	 * Fonction authentification vérifie l'existence du couple mail, password ayant les droits de GestionnaireMusical
-	 * Renvoie l'objet ProfilGestionnaireMusical correspondant s'il est trouvé, null sinon
+	 * Fonction authentification vï¿½rifie l'existence du couple mail, password ayant les droits de GestionnaireMusical
+	 * Renvoie l'objet ProfilGestionnaireMusical correspondant s'il est trouvï¿½, null sinon
 	 */
 	@Override
 	public Administrateur authentification(String mail, String password) {
@@ -52,7 +52,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 
 	/*
 	 * Fonction creerAdmin ajoute un administrateur ayant les droits de GestionnaireMusical
-	 * Renvoie l'objet ProfilGestionnaireMusical correspondant si l'insertion à la BDD reussit, null sinon
+	 * Renvoie l'objet ProfilGestionnaireMusical correspondant si l'insertion ï¿½ la BDD reussit, null sinon
 	 */
 	@Override
 	public Administrateur creerAdmin(String mail, String password) {

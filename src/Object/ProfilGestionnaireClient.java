@@ -15,8 +15,8 @@ public class ProfilGestionnaireClient extends Administrateur implements ProfilGe
 	}
 
 	/*
-	 * Fonction authentification vérifie l'existence du couple mail, password ayant les droits de GestionnaireClient
-	 * Renvoie l'objet ProfilGestionnaireClient correspondant s'il est trouvé, null sinon
+	 * Fonction authentification vï¿½rifie l'existence du couple mail, password ayant les droits de GestionnaireClient
+	 * Renvoie l'objet ProfilGestionnaireClient correspondant s'il est trouvï¿½, null sinon
 	 */
 	@Override
 	public Administrateur authentification(String mail, String password) {
@@ -49,7 +49,7 @@ public class ProfilGestionnaireClient extends Administrateur implements ProfilGe
 	
 	/*
 	 * Fonction creerAdmin ajoute un administrateur ayant les droits de GestionnaireClient
-	 * Renvoie l'objet ProfilGestionnaireClient correspondant si l'insertion à la BDD réussit, null sinon
+	 * Renvoie l'objet ProfilGestionnaireClient correspondant si l'insertion ï¿½ la BDD rï¿½ussit, null sinon
 	 */
 	@Override
 	public Administrateur creerAdmin(String mail, String password) {

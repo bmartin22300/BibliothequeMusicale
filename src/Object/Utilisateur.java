@@ -21,7 +21,39 @@ public class Utilisateur implements UtilisateurInterface {
 		super();
 	}
 	
-	
+	@Override
+	public Administrateur authentificationAdministrateur(String mail, String password) {
+		// Récupérer une connexion de type java.sql.Connection
+		Connection connexion = DBManager.getInstance().getConnection();
+		
+		try {
+			// Exécuter la requête SQL et récupérer un java.sql.ResultSet
+			String request = "CALL nouveau_admin(?,?,?,?); ;";
+			
+			// Prepared statement 
+			PreparedStatement preparedQuery = connexion.prepareStatement(request);
+			preparedQuery.setString(1, mail);
+			preparedQuery.setString(2, password);
+			preparedQuery.setBoolean(3, true);
+			preparedQuery.setBoolean(4, false);
+			
+			// Retour
+			ResultSet rs = preparedQuery.executeQuery();
+			
+			// Execution
+			if(rs.next()) {// Vrai si les identifiants correspondent � un compte
+				return new Administrateur(rs.getString("mail"), rs.getString("password"));
+			}
+			else{
+				return null;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;		
+	}
 	
 	@Override
 	public Client authentification(String mail, String password) {

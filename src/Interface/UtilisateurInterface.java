@@ -3,6 +3,7 @@ package Interface;
 import java.sql.Date;
 import java.util.List;
 
+import Object.Administrateur;
 import Object.Client;
 import Object.ElementCatalogue;
 import Object.Genre;
@@ -19,6 +20,7 @@ public interface UtilisateurInterface {
 
 	public Client authentification(String mail, String password);
 	
+	public Administrateur authentificationAdministrateur(String mail, String password);
 	
 	//TODO
 	

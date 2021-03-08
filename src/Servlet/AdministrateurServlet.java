@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Object.Administrateur;
-import Object.Administrateur;
 import Object.Utilisateur;
 
 public class AdministrateurServlet extends HttpServlet {
@@ -44,6 +43,7 @@ public class AdministrateurServlet extends HttpServlet {
 				vue = "/JSP/Utilisateur/InscriptionAdministrateur.jsp";
 			}else {
 				//section Administrateur
+				/*
 				if(administrateur==null) {//verification que l'Administrateur est connecté 
 					//affectation paramètres à la vue
 					request.setAttribute("isAdministrateur", false);
@@ -52,17 +52,20 @@ public class AdministrateurServlet extends HttpServlet {
 		    		
 		    		//affection vue
 		    		vue = "/JSP/Utilisateur/AuthentificationAdministrateur.jsp";
-		    	}else {
+		    	}else {*/
 		    		//affectation paramètres à la vue
 		    		request.setAttribute("isAdministrateur", true);
-		    		request.setAttribute("password", administrateur.getPassword());
-		    		request.setAttribute("email", administrateur.getMail());
+		    		//request.setAttribute("password", administrateur.getPassword());
+		    		//request.setAttribute("email", administrateur.getMail());
 		  
 		    		//affection vue
 		    		if(servletPath.equals("/AccueilAdministrateur")) {
 		            	vue = "/JSP/Administrateur/AccueilAdministrateur.jsp";
 		            }else {
 		            	if(servletPath.equals("/ProfilAdministrateur")) {
+		            		//affectation paramètres à la vue
+		        			request.setAttribute("email", "yukvb@gmail.com");
+		        			
 		                	vue = "/JSP/Administrateur/ProfilAdministrateur.jsp";
 		                }else {
 		                	if(servletPath.equals("/Statistiques")) {
@@ -78,7 +81,7 @@ public class AdministrateurServlet extends HttpServlet {
 		                    }
 		                }
 		            }
-		    	}
+		    	//}
 			}
 		}
 		
@@ -116,11 +119,12 @@ public class AdministrateurServlet extends HttpServlet {
 			vue = "/JSP/Administrateur/ProfilAdministrateur.jsp";
 		}else {
 			if(action.equals("AuthentificationAdministrateur")) {
+				//TODO authentification admin
 				
-			}else {
-				if(action.equals("InscriptionAdministrateur")) {
-					
-				}
+				administrateur = utilisateur.authentificationAdministrateur(mail, motDePasse);
+				//affectation paramètres à la vue
+				request.setAttribute("isAdministrateur", true);
+				vue = "/JSP/Administrateur/AccueilAdministrateur.jsp";
 			}
 		}
 		
