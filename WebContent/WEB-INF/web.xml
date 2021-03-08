@@ -26,7 +26,7 @@
     <url-pattern>/AccueilClient</url-pattern>
     <url-pattern>/GestionPlaylist</url-pattern>
     <url-pattern>/ProfilClient</url-pattern>
-	<url-pattern>/ModficationProfilClient</url-pattern>
+	<url-pattern>/ModificationProfilClient</url-pattern>
   </servlet-mapping>
   
   <servlet>

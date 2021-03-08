@@ -2,7 +2,11 @@ package Servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Object.Client;
+import Object.Genre;
 import Object.Utilisateur;
 
 public class ClientServlet extends HttpServlet {//clientServlet
@@ -71,9 +76,9 @@ public class ClientServlet extends HttpServlet {//clientServlet
 		                	if(servletPath.equals("/AccueilClient")) {
 		                    	vue = "/JSP/Client/AccueilClient.jsp";
 		                    }else {
-		                    	if(servletPath.equals("/ModficationProfilClient")) {                            		
-		                    		vue = "/JSP/Client/ModificationProfilClient.jsp";
-		                    	}
+		                    	if(servletPath.equals("/ModificationProfilClient")) {
+			                    	vue = "/JSP/Client/ModificationProfilClient.jsp";
+			                    }
 		                    }
 		                }
 		            }
@@ -107,21 +112,55 @@ public class ClientServlet extends HttpServlet {//clientServlet
 			String prénom = request.getParameter("prénom");
 			String nom = request.getParameter("nom");
 			String adresse = request.getParameter("adresse");
-			String dateDeNaissance = request.getParameter("dateDeNaissance");
+			String dateDeNaissanceString = request.getParameter("dateDeNaissance");
+			String civilité="";
+			if(request.getParameter("M").equals("on")) {
+				civilité="M";
+			}else {
+				if(request.getParameter("Mme").equals("on")) {
+					civilité="Mme";
+				}else {
+					if(request.getParameter("Autre").equals("on")) {
+						civilité="Autre";
+					}
+				}
+			}
+			Date dateDeNaissance = null;
+			try {
+				if(dateDeNaissanceString!=null && dateDeNaissanceString!="") {
+					dateDeNaissance = (Date) new SimpleDateFormat("dd/MM/yyyy").parse(dateDeNaissanceString);
+				}
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}  
+			String styleMusiquePrefereString = request.getParameter("styleMusiquePrefere");
+			Genre styleMusiquePrefere = Genre.valueOf("TECHNO");
 			
 			//affectation paramètres à la vue
 			request.setAttribute("isClient", true);
+			/*
             request.setAttribute("civilité", client.getCivilite());
     		request.setAttribute("nom", client.getNom());
     		request.setAttribute("prénom", client.getPrenom());
     		request.setAttribute("email", client.getMail());
     		request.setAttribute("adresse", client.getAdresseFacturation());
     		request.setAttribute("nbEcoutes", client.getNbEcoute());
-    		request.setAttribute("dateDeNaissance", client.getDateNaissance());
+    		request.setAttribute("dateDeNaissance", client.getDateNaissance());*/
+    		request.setAttribute("nom", "");
+    		request.setAttribute("prénom", "");
+    		request.setAttribute("email", "");
+    		request.setAttribute("adresse", "");
+    		request.setAttribute("nbEcoutes", 0);
+    		request.setAttribute("dateDeNaissance", "");
 			
 			//mise à jour BDD
-			//TODO implémenter la procédure SQL
-			
+			//TODO : ajouter un supprimerClient pour pouvoir modifier le mail
+    		Client clientModifié=client.modifierInformations(motDePasse, civilité, nom, prénom, dateDeNaissance, adresse, styleMusiquePrefere);
+    		if(clientModifié!=null) {
+    			this.client=clientModifié;
+    		}
+    		
+    		
     		//choix de la vue
 			vue = "/JSP/Client/ProfilClient.jsp";
 		}else {

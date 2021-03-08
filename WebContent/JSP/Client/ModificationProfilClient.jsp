@@ -79,6 +79,36 @@
 			</p>
 			
 			<p>
+		        <label><b>Civilité</b></label>
+			       <div class="profileModificationCheckbox">
+					  <input type="checkbox" id="scales" name="M" checked>
+					  <label for="scales">M</label>
+					</div>
+					
+					<div class="profileModificationCheckbox">
+					  <input type="checkbox" id="horns" name="Mme">
+					  <label for="horns">Mme</label>
+					</div>
+					
+					<div class="profileModificationCheckbox">
+					  <input type="checkbox" id="horns" name="Autre">
+					  <label for="horns">Autre</label>
+					</div>
+			</p>
+			
+			<p>
+				  <label for="cars">Genre favori</label>
+				  <select id="cars" name="styleMusiquePrefere">
+				    <option value="RAP">RAP</option>
+				    <option value="ROCK">ROCK</option>
+				    <option value="JAZZ">JAZZ</option>
+				    <option value="POP">POP</option>
+				    <option value="VARIETE">VARIETE</option>
+				    <option value="CLASSIQUE">CLASSIQUE</option>
+				    <option value="TECHNO">TECHNO</option>
+				  </select>
+			</p>
+			<p>
 	        	<input type="submit" id='submit' value='Enregistrer' >
 			</p>
 		  

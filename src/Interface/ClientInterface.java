@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 import Object.Album;
+import Object.Client;
 import Object.ElementCatalogue;
 import Object.Genre;
 import Object.Interprete;
@@ -16,7 +17,7 @@ public interface ClientInterface {
 	
 	
 	//A verifier - Tester
-	public boolean modifierInformations(String password, String civilite, String nom, String prenom, Date dateNaissance, String adresseFacturation, Genre styleMusiquePrefere); // null dans les champs où on veut pas donner ça devrait être fine
+	public Client modifierInformations(String password, String civilite, String nom, String prenom, Date dateNaissance, String adresseFacturation, Genre styleMusiquePrefere); // null dans les champs où on veut pas donner ça devrait être fine
 
 	
 	//TODO

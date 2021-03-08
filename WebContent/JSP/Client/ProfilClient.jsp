@@ -32,7 +32,7 @@
 	  <a href="#"><i class="fa fa-twitter"></i></a>
 	  <a href="#"><i class="fa fa-linkedin"></i></a>
 	  <a href="#"><i class="fa fa-facebook"></i></a>
-	  <p><a href="ModficationProfilClient" class="button">Modifier</a></p>
+	  <p><a href="ModificationProfilClient" class="button">Modifier</a></p>
 	</div>
 	
 </body>

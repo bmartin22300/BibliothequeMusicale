@@ -185,7 +185,7 @@ public class Client implements ClientInterface {
 	 * Renvoie true si la modification a lieu, false sinon
 	 */
 	@Override
-	public boolean modifierInformations(String password, String civilite, String nom, String prenom,
+	public Client modifierInformations(String password, String civilite, String nom, String prenom,
 			Date dateNaissance, String adresseFacturation, Genre styleMusiquePrefere) {
 		// Recuperer la connexion
 		Connection connexion = DBManager.getInstance().getConnection();
@@ -198,11 +198,26 @@ public class Client implements ClientInterface {
 			// Prepared statement 
 			PreparedStatement preparedQuery = connexion.prepareStatement(request);
 			preparedQuery.setString(1, this.getMail());
+			System.out.println(password);
+			System.out.println(civilite);
+			System.out.println(nom);
+			System.out.println(prenom);
+			System.out.println(dateNaissance);
+			System.out.println(adresseFacturation);
+			System.out.println(styleMusiquePrefere.toString());
 			preparedQuery.setString(2, password);
 			preparedQuery.setString(3, civilite);
 			preparedQuery.setString(4, nom);
 			preparedQuery.setString(5, prenom);
-			preparedQuery.setString(6, dateNaissance.toString());
+			if(dateNaissance!=null){
+				preparedQuery.setString(6, dateNaissance.toString());
+			}else {
+				if(this.getDateNaissance()!=null) {
+					preparedQuery.setString(6, this.getDateNaissance().toString());
+				}else {
+					preparedQuery.setString(6, "");
+				}
+			}
 			preparedQuery.setString(7, adresseFacturation);
 			preparedQuery.setString(8, styleMusiquePrefere.toString());
 			
@@ -218,17 +233,17 @@ public class Client implements ClientInterface {
 				this.setAdresseFacturation(adresseFacturation);
 				this.setStyleMusiquePrefere(styleMusiquePrefere);
 				
-				return true;
+				return this;
 			}
 			else{ // La mise a jour echoue
-				return false;
+				return null;
 			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return false;
+		return null;
 	}
 
 	@Override
