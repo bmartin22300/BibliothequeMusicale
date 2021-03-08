@@ -193,7 +193,7 @@ public class Client implements ClientInterface {
 		try {
 			
 			// Maj BDD
-			String request = "CALL modifier_client(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+			String request = "CALL modifier_client(?, ?, ?, ?, ?, ?, ?, ?);";
 			
 			// Prepared statement 
 			PreparedStatement preparedQuery = connexion.prepareStatement(request);
@@ -209,15 +209,7 @@ public class Client implements ClientInterface {
 			preparedQuery.setString(3, civilite);
 			preparedQuery.setString(4, nom);
 			preparedQuery.setString(5, prenom);
-			if(dateNaissance!=null){
-				preparedQuery.setString(6, dateNaissance.toString());
-			}else {
-				if(this.getDateNaissance()!=null) {
-					preparedQuery.setString(6, this.getDateNaissance().toString());
-				}else {
-					preparedQuery.setString(6, "");
-				}
-			}
+			preparedQuery.setDate(6, dateNaissance);
 			preparedQuery.setString(7, adresseFacturation);
 			preparedQuery.setString(8, styleMusiquePrefere.toString());
 			

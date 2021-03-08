@@ -18,7 +18,6 @@ public interface ClientInterface {
 	
 	//A verifier - Tester
 	public Client modifierInformations(String password, String civilite, String nom, String prenom, Date dateNaissance, String adresseFacturation, Genre styleMusiquePrefere); // null dans les champs où on veut pas donner ça devrait être fine
-
 	
 	//TODO
 	
