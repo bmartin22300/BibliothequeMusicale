@@ -29,7 +29,7 @@ public class ClientServlet extends HttpServlet {//clientServlet
         request.setAttribute("isAdministrateur", false);
 		
         //section utilisateur non connecté
-		if(servletPath.equals("/AuthentificationClient")) {	
+		if(servletPath.equals("/AuthentificationClient")) {
 			//affectation paramètres à la vue
 			request.setAttribute("isClient", false);
 			request.setAttribute("isErrorLogin", false);
@@ -37,54 +37,48 @@ public class ClientServlet extends HttpServlet {//clientServlet
 			
 			//affection vue
 			vue = "/JSP/Utilisateur/AuthentificationClient.jsp";
-		}else {
-			if(servletPath.equals("/InscriptionClient")) {
-				//affectation paramètres à la vue
-				request.setAttribute("isClient", false);
-				//affection vue
-				vue = "/JSP/Utilisateur/InscriptionClient.jsp";
-			}else {
-				//section client
-				if(client==null) {//verification que le client est connecté 
-					//affectation paramètres à la vue
-					request.setAttribute("isClient", false);
-		    		request.setAttribute("isErrorLogin", false);
-		    		request.setAttribute("notLogged", true);
-		    		
-		    		//affection vue
-		    		vue = "/JSP/Utilisateur/AuthentificationClient.jsp";
-		    	}else {
-		    		//affectation paramètres à la vue
-		    		request.setAttribute("isClient", true);
-		    		request.setAttribute("password", client.getPassword());
-		            request.setAttribute("civilité", client.getCivilite());
-		    		request.setAttribute("nom", client.getNom());
-		    		request.setAttribute("prénom", client.getPrenom());
-		    		request.setAttribute("email", client.getMail());
-		    		request.setAttribute("adresse", client.getAdresseFacturation());
-		    		request.setAttribute("nbEcoutes", client.getNbEcoute());
-		    		request.setAttribute("dateDeNaissance", client.getDateNaissance());
-		  
-		    		//affection vue
-		    		if(servletPath.equals("/GestionPlaylist")) {
-		            	vue = "/JSP/Client/GestionPlaylist.jsp";
-		            }else {
-		            	if(servletPath.equals("/ProfilClient")) {
-		                	vue = "/JSP/Client/ProfilClient.jsp";
-		                }else {
-		                	if(servletPath.equals("/AccueilClient")) {
-		                    	vue = "/JSP/Client/AccueilClient.jsp";
-		                    }else {
-		                    	if(servletPath.equals("/ModificationProfilClient")) {
-			                    	vue = "/JSP/Client/ModificationProfilClient.jsp";
-			                    }
-		                    }
-		                }
-		            }
-		    	}
-			}
-		}
+		}else if(servletPath.equals("/InscriptionClient")){
+			//affectation paramètres à la vue
+			request.setAttribute("isClient", false);
+			//affection vue
+			vue = "/JSP/Utilisateur/InscriptionClient.jsp";
+		}else if(client==null){ //verification que le client est connecté 
+			//section client
 		
+			//affectation paramètres à la vue
+			request.setAttribute("isClient", false);
+    		request.setAttribute("isErrorLogin", false);
+    		request.setAttribute("notLogged", true);
+    		
+    		//affection vue
+    		vue = "/JSP/Utilisateur/AuthentificationClient.jsp";
+    	}else {
+    		//affectation paramètres à la vue
+    		request.setAttribute("isClient", true);
+    		request.setAttribute("password", client.getPassword());
+            request.setAttribute("civilité", client.getCivilite());
+    		request.setAttribute("nom", client.getNom());
+    		request.setAttribute("prénom", client.getPrenom());
+    		request.setAttribute("email", client.getMail());
+    		request.setAttribute("adresse", client.getAdresseFacturation());
+    		request.setAttribute("nbEcoutes", client.getNbEcoute());
+    		request.setAttribute("dateDeNaissance", client.getDateNaissance());
+	  
+    		//affection vue
+    		if(servletPath.equals("/GestionPlaylist")) {
+            	vue = "/JSP/Client/GestionPlaylist.jsp";
+            }else if(servletPath.equals("/ProfilClient")){
+            	vue = "/JSP/Client/ProfilClient.jsp";
+            }else if(servletPath.equals("/AccueilClient")){
+            	vue = "/JSP/Client/AccueilClient.jsp";
+            }else if(servletPath.equals("/ModificationProfilClient")){
+                vue = "/JSP/Client/ModificationProfilClient.jsp";
+	        }else if(servletPath.equals("/Sandbox")) {	 
+    			vue = "/JSP/Client/Sandbox.jsp";
+    			// Main d'Erwan
+		
+    		}
+    	}	         
         //affichage vue	
         RequestDispatcher rd = getServletContext().getRequestDispatcher(vue);
         try {
@@ -126,7 +120,6 @@ public class ClientServlet extends HttpServlet {//clientServlet
 			}
 			Date dateDeNaissance = null;
 			if(dateDeNaissanceString!=null && dateDeNaissanceString!="") {
-				//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				dateDeNaissance = Date.valueOf(dateDeNaissanceString);
 			}  
 			String styleMusiquePrefereString = request.getParameter("styleMusiquePrefere");

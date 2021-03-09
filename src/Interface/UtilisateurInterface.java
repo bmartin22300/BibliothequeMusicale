@@ -11,7 +11,9 @@ public interface UtilisateurInterface {
 
 	// Valide
 	
-	//A verifier - Tester
+	// Teste
+	
+	//A verifier
 	
 	public Client creerCompte(String mail, String password, String civilite, String nom, String prenom, Date dateNaissance, String adresseFacturation, Genre styleMusiquePrefere);
 

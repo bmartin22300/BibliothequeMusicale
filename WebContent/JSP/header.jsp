@@ -9,6 +9,7 @@
 		<a href=GestionPlaylist>Gérer mes playlists</a>
 		<a href=ProfilClient>Modifier mon profil</a>
 		<a href=Accueil>Déconnexion</a>	
+		<a href=Sandbox>Sandbox</a>
 	<% }else{ %>
 		<!-- administrateur -->
 		<% if(isAdministrateur==true){ %>

@@ -77,6 +77,7 @@ CALL nouveau_titre("Mauvais", '1901', 135, 'Variete');
 -- CALL supprimer_album(16);
 -- CALL association_album_interprete(16, 'Edith Piaf');
 -- CALL dissociation_album_interprete(16, 'Edith Piaf');
+-- CALL dissociation_titre_album(14, 16);
 
 CALL reset_Vues_Catalogue();
 SELECT * FROM ElementCatalogue;

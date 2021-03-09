@@ -22,6 +22,14 @@ public class TitreMusical extends ElementCatalogue{
 		this.interpretes = interpretes;
 	}
 
+	public Album getAlbum() {
+		return album;
+	}
+
+	public void setAlbum(Album album) {
+		this.album = album;
+	}
+
 	// Getters et Setters
 	public String getTitre() {
 		return titre;

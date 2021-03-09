@@ -9,7 +9,9 @@ public interface ProfilGestionnaireClientInterface extends AdministrateurInterfa
 	
 	// Valide
 	
-	//A verifier - Tester
+	// Teste
+	
+	//A verifier
 	
 	//TODO
 	

@@ -27,6 +27,7 @@
     <url-pattern>/GestionPlaylist</url-pattern>
     <url-pattern>/ProfilClient</url-pattern>
 	<url-pattern>/ModificationProfilClient</url-pattern>
+    <url-pattern>/Sandbox</url-pattern>
   </servlet-mapping>
   
   <servlet>

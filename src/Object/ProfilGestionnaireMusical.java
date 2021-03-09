@@ -649,14 +649,18 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 	}
 
 	
+	/*
+	 * Fonction ajoutTitreAlbum, ajoute le titre � l'album dans la BD
+	 * Renvoie true et associe l'instance album a l'instance titre si l'ajout a lieu, false sinon
+	 */
 	@Override
 	public boolean ajoutTitreAlbum(TitreMusical titre, Album album) {
-		// Récupérer une connexion de type java.sql.Connection
+		// On recupere une connexion de type java.sql.Connection
 		Connection connexion = DBManager.getInstance().getConnection();
 		
 		try {
 			
-			// Exécuter la requête SQL et récupérer un java.sql.ResultSet
+			// On execute la requete SQL et on recupere un java.sql.ResultSet
 			String request = "CALL ajout_titre_album(?, ?);";
 			
 			// Prepared statement 
@@ -665,8 +669,45 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 			preparedQuery.setInt(2, album.getIdCatalogue());
 
 			// Execution
-			preparedQuery.executeUpdate();
+			if(preparedQuery.executeUpdate()>0) {
+				album.getTitres().add(titre); // On ajoute le titre
+				titre.setAlbum(album); // On ajoute l'album
+				album.setDuree(album.getDuree()+titre.getDuree()); // On ajoute la duree du titre a l'album
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;	
+	}
+	
+	/*
+	 * Fonction suppressionTitreAlbum, supprime le titre de l'album dans la BD
+	 * Renvoie true et dissocie l'instance album de l'instance titre si l'ajout a lieu, false sinon
+	 */
+	@Override
+	public boolean suppressionTitreAlbum(TitreMusical titre, Album album) {
+		// On recupere une connexion de type java.sql.Connection
+		Connection connexion = DBManager.getInstance().getConnection();
+		
+		try {
 			
+			// On execute la requete SQL et on recupere un java.sql.ResultSet
+			String request = "CALL dissociation_titre_album(?, ?);";
+			
+			// Prepared statement 
+			PreparedStatement preparedQuery = connexion.prepareStatement(request);
+			preparedQuery.setInt(1, titre.getIdCatalogue());
+			preparedQuery.setInt(2, album.getIdCatalogue());
+
+			// Execution
+			if(preparedQuery.executeUpdate()>0) {
+				album.getTitres().remove(titre); // On supprime le titre
+				titre.setAlbum(null); // On retire l'album
+				album.setDuree(album.getDuree()-titre.getDuree()); // On retire la duree du titre a l'album
+				return true;
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -705,12 +746,6 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 	public List<Client> topUtilisateursEcoutes() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public boolean suppressionTitreAlbum(TitreMusical titre, Album album) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	@Override
