@@ -9,16 +9,16 @@ import Object.Genre;
 
 public interface UtilisateurInterface {
 
-	// Valide
+	// VALIDE
 	
-	// Teste
+	// TESTE
 	public Client creerCompte(String mail, String password, String civilite, String nom, String prenom, Date dateNaissance, String adresseFacturation, Genre styleMusiquePrefere);
 
 	public Client creerCompte(String mail, String password);
 
 	public Client authentification(String mail, String password);
 	
-	//A verifier
+	//A VERIFIER
 	
 	
 	//TODO

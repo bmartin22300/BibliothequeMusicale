@@ -50,8 +50,8 @@ public class Utilisateur implements UtilisateurInterface {
 				
 				// Création du Genre
 				Genre genre;
-				if(rs.getString("nomGenre") == null) {
-					genre = null;
+				if(rs.getString("nomGenre")==null) {
+					genre = Genre.valueOf("INCONNU");
 				}
 				else {
 					genre = Genre.valueOf(rs.getString("nomGenre"));

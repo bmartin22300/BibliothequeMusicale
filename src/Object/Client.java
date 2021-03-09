@@ -348,9 +348,6 @@ public class Client implements ClientInterface {
 	
 	// Methodes de classe
 	/*
-	public boolean authentification(String email, String motDePasse) {
-		return true;
-	}
 	
 	public void playOrPause(ElementCatalogue elementCatalogue) {
 		

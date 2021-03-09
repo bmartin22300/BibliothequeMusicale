@@ -1,7 +1,5 @@
 package Object;
 
-import java.util.List;
-
 public class Radio extends ElementCatalogue{
 	private String nom;
 	private Genre genre;
