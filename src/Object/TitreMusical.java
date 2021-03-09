@@ -79,5 +79,12 @@ public class TitreMusical extends ElementCatalogue{
 	public void setGenre(Genre genre) {
 		this.genre = genre;
 	}
+	
+
+	@Override
+	public String toString() {
+		return "TitreMusical [titre=" + titre + ", anneeCreation=" + anneeCreation + ", duree=" + duree + ", genre="
+				+ genre + ", album=" + album + ", interpretes=" + interpretes + "]";
+	}
 
 }

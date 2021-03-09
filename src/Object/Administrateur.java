@@ -6,18 +6,23 @@ import java.util.List;
 import Interface.AdministrateurInterface;
 
 public abstract class Administrateur implements AdministrateurInterface {
+
 	private String mail;
 	private String password;
 
 	// Constructeur
 	public Administrateur(String mail, String password) {
 		super();
+		this.mail = mail;
+		this.password = password;
 	}
 	
 	// Getters et Setters
 	public String getMail() {
 		return mail;
 	}
+
+
 
 	public void setMail(String mail) {
 		this.mail = mail;
@@ -173,4 +178,10 @@ public abstract class Administrateur implements AdministrateurInterface {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public String toString() {
+		return "Administrateur [mail=" + mail + ", password=" + password + "]";
+	}
+
 }

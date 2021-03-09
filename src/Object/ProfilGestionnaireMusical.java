@@ -16,40 +16,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 		super(mail,password);
 	}
 
-	// Methodes heritees d'Administrateur
-	/*
-	 * Fonction authentification v�rifie l'existence du couple mail, password ayant les droits de GestionnaireMusical
-	 * Renvoie l'objet ProfilGestionnaireMusical correspondant s'il est trouv�, null sinon
-	 */
-	@Override
-	public Administrateur authentification(String mail, String password) {
-		// Récupérer une connexion de type java.sql.Connection
-		Connection connexion = DBManager.getInstance().getConnection();
-		
-		try {
-			// Exécuter la requête SQL et récupérer un java.sql.ResultSet
-			String request = "CALL authentification_adminMusique(?, ?);";
-			
-			// Prepared statement 
-			PreparedStatement preparedQuery = connexion.prepareStatement(request);
-			preparedQuery.setString(1, mail);
-			preparedQuery.setString(2, password);
-			
-			// Retour
-			ResultSet rs = preparedQuery.executeQuery();
-			
-			// Vrai si les identifiants correspondent à un compte
-			if(rs.next()) {
-				return new ProfilGestionnaireMusical(mail, password);
-			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-
+	
 	/*
 	 * Fonction creerAdmin ajoute un administrateur ayant les droits de GestionnaireMusical
 	 * Renvoie l'objet ProfilGestionnaireMusical correspondant si l'insertion � la BDD reussit, null sinon
@@ -70,7 +37,6 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 			preparedQuery.setString(2, password);
 			preparedQuery.setBoolean(3, false); // Profil gestion Client
 			preparedQuery.setBoolean(4, true); // Profil gestion Musique
-			
 			// Execution
 			if(preparedQuery.executeUpdate()>0) {
 				return new ProfilGestionnaireMusical(mail, password);
@@ -85,6 +51,39 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 		}
 		return null;
 	}
+
+	// Methodes heritees d'Administrateur
+		/*
+		 * Fonction authentification v�rifie l'existence du couple mail, password ayant les droits de GestionnaireMusical
+		 * Renvoie l'objet ProfilGestionnaireMusical correspondant s'il est trouv�, null sinon
+		 */
+		@Override
+		public Administrateur authentification(String mail, String password) {
+			// Récupérer une connexion de type java.sql.Connection
+			Connection connexion = DBManager.getInstance().getConnection();
+			
+			try {
+				// Exécuter la requête SQL et récupérer un java.sql.ResultSet
+				String request = "CALL authentification_adminMusique(?, ?);";
+				
+				// Prepared statement 
+				PreparedStatement preparedQuery = connexion.prepareStatement(request);
+				preparedQuery.setString(1, mail);
+				preparedQuery.setString(2, password);
+				
+				// Retour
+				ResultSet rs = preparedQuery.executeQuery();
+				// Vrai si les identifiants correspondent à un compte
+				if(rs.next()) {
+					return new ProfilGestionnaireMusical(mail, password);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+		}
 
 	
 	
@@ -222,8 +221,6 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 			
 			// Execution
 			if(preparedQuery.executeUpdate()>0) { // Succes de la suppression
-				
-				interprete=null; // On supprime l'instance d'interprete
 				return true;
 			}
 			else{ // La suppression echoue
@@ -358,8 +355,6 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 			
 			// Execution
 			if(preparedQuery.executeUpdate()>0) { // Succes de la suppression
-				
-				titreMusical=null; // On supprime l'instance du titre
 				return true;
 			}
 			else{ // La suppression echoue
@@ -568,8 +563,6 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 			
 			// Execution
 			if(preparedQuery.executeUpdate()>0) { // Succes de la suppression
-				
-				album=null; // On supprime l'instance de l'album
 				return true;
 			}
 			else{ // La suppression echoue

@@ -9,6 +9,13 @@ import java.util.List;
 import Interface.ClientInterface;
 
 public class Client implements ClientInterface {
+	@Override
+	public String toString() {
+		return "Client [mail=" + mail + ", password=" + password + ", civilite=" + civilite + ", nom=" + nom
+				+ ", prenom=" + prenom + ", dateNaissance=" + dateNaissance + ", adresseFacturation="
+				+ adresseFacturation + ", styleMusiquePrefere=" + styleMusiquePrefere + "]";
+	}
+
 	private String mail;
 	private String password;
 	private String civilite;
@@ -198,13 +205,6 @@ public class Client implements ClientInterface {
 			// Prepared statement 
 			PreparedStatement preparedQuery = connexion.prepareStatement(request);
 			preparedQuery.setString(1, this.getMail());
-			System.out.println(password);
-			System.out.println(civilite);
-			System.out.println(nom);
-			System.out.println(prenom);
-			System.out.println(dateNaissance);
-			System.out.println(adresseFacturation);
-			System.out.println(styleMusiquePrefere.toString());
 			preparedQuery.setString(2, password);
 			preparedQuery.setString(3, civilite);
 			preparedQuery.setString(4, nom);

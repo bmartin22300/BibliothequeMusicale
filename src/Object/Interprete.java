@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Interprete {
+
 	private String pseudonyme;
 	private String prenom;
 	private String nom;
@@ -76,4 +77,9 @@ public class Interprete {
 		this.titres = titres;
 	}
 	
+	@Override
+	public String toString() {
+		return "Interprete [pseudonyme=" + pseudonyme + ", prenom=" + prenom + ", nom=" + nom + ", dateNaissance="
+				+ dateNaissance + ", albums=" + albums + ", titres=" + titres + "]";
+	}
 }

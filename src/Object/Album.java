@@ -5,6 +5,7 @@ import java.time.Year;
 import java.util.List;
 
 public class Album extends ElementCatalogue{
+
 	private String nom;
 	private Year anneeSortie;
 	private int duree;
@@ -74,5 +75,9 @@ public class Album extends ElementCatalogue{
 		
 	}*/
 
-	
+	@Override
+	public String toString() {
+		return "Album [nom=" + nom + ", anneeSortie=" + anneeSortie + ", duree=" + duree + ", interpretes="
+				+ interpretes + ", titres=" + titres + "]";
+	}
 }

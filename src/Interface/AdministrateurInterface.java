@@ -16,11 +16,12 @@ public interface AdministrateurInterface {
 	// Valide
 	
 	// Teste
-	
-	//A verifier
 	public Administrateur authentification(String mail, String password);
 	
 	public Administrateur creerAdmin(String mail, String password);
+	
+	//A verifier
+
 	
 	//TODO
 	

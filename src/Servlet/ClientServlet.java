@@ -1,10 +1,10 @@
 package Servlet;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.sql.Date;
+import java.time.Year;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import Object.Client;
 import Object.Genre;
+import Object.Interprete;
+import Object.ProfilGestionnaireMusical;
+import Object.TitreMusical;
 import Object.Utilisateur;
 
 public class ClientServlet extends HttpServlet {//clientServlet
@@ -76,7 +79,65 @@ public class ClientServlet extends HttpServlet {//clientServlet
 	        }else if(servletPath.equals("/Sandbox")) {	 
     			vue = "/JSP/Client/Sandbox.jsp";
     			// Main d'Erwan
-		
+    			//DATA
+    			String mailSandbox = "sandbox";
+    			String passwordSandbox = "sandbox"; 
+    			String civiliteSandbox = "M";
+    			String nomSandbox = "Sandy";
+    			String prenomSandbox = "Boxy";
+    			String dateNaissanceStringSandbox = "1997-07-08"; Date dateNaissanceSandbox = Date.valueOf(dateNaissanceStringSandbox); //Conversion Date
+    			String adresseSandbox = "19 rue des echalottes, Paris, France";
+    			String styleMusiqueStringSandbox = "CLASSIQUE"; Genre styleMusiqueSandbox = Genre.valueOf(styleMusiqueStringSandbox); //Conversion Genre
+    			String mailAdminMusiqueSandbox = "adminMusique";
+    			String passwordAdminMusiqueSandbox = "adminMusique";
+    			
+    			// USER
+    			System.out.println("USER");
+    			Utilisateur userSandbox=new Utilisateur();
+    			Client clientSandbox = userSandbox.creerCompte(mailSandbox, passwordSandbox);
+    			System.out.println(clientSandbox);
+    			
+    			//Ne fait rien, existe déjà
+    			clientSandbox = userSandbox.creerCompte(mailSandbox, passwordSandbox, civiliteSandbox, nomSandbox, prenomSandbox, dateNaissanceSandbox, adresseSandbox, styleMusiqueSandbox);
+    			System.out.println(clientSandbox);
+    			
+    			//Authentifie le client existant
+    			clientSandbox = userSandbox.authentification(mailSandbox, passwordSandbox);
+    			System.out.println(clientSandbox);
+    			
+    			// CLIENT
+    			System.out.println("CLIENT");
+    			clientSandbox.modifierInformations( passwordSandbox, civiliteSandbox, nomSandbox, prenomSandbox, dateNaissanceSandbox, adresseSandbox, styleMusiqueSandbox);
+    			System.out.println(clientSandbox);
+    			clientSandbox.modifierInformations( passwordSandbox, null, null, null, null, null, styleMusiqueSandbox);
+    			System.out.println(clientSandbox);
+    			
+    			// ADMIN
+    			System.out.println("ADMIN");
+    			ProfilGestionnaireMusical adminSandbox = new ProfilGestionnaireMusical(mailAdminMusiqueSandbox,passwordAdminMusiqueSandbox);
+    			System.out.println(adminSandbox.creerAdmin(mailAdminMusiqueSandbox, passwordAdminMusiqueSandbox));
+    			System.out.println(adminSandbox.authentification(mailAdminMusiqueSandbox, passwordAdminMusiqueSandbox));
+    				
+    				//Interprete
+	    			List<Interprete> interpretesSandbox = new ArrayList<Interprete>();
+    				System.out.println("Interprete");
+    				interpretesSandbox.add(adminSandbox.creerInterprete("Noir Désir"));
+    				interpretesSandbox.add(adminSandbox.creerInterprete("La fatigue", "La", "Fatigue", Date.valueOf("1980-09-17")));
+    				System.out.println(interpretesSandbox);
+    				adminSandbox.modifierInterprete(interpretesSandbox.get(0), "Groupe", "Groupe", Date.valueOf("2001-01-01")); // Modification de "Noir Désir"
+    				System.out.println(interpretesSandbox);
+    				if(adminSandbox.supprimerInterprete(interpretesSandbox.get(0))){// Suppression de "Noir Désir")
+    					interpretesSandbox.remove(0);
+    				}
+    				System.out.println(interpretesSandbox.get(0));
+    				
+    				//TitreMusical
+	    			List<TitreMusical> titresSandbox = new ArrayList<TitreMusical>();
+    				System.out.println("TitreMusical");
+    				//A faire : Convertir le type "Year" en int partout parce que voilà quoi...
+    				//titresSandbox.add(adminSandbox.creerTitre("Il était une fois", "1980", interpretesSandbox, 360, Genre.JAZZ));
+    		
+    			
     		}
     	}	         
         //affichage vue	

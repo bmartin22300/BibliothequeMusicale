@@ -12,14 +12,13 @@ public interface UtilisateurInterface {
 	// Valide
 	
 	// Teste
-	
-	//A verifier
-	
 	public Client creerCompte(String mail, String password, String civilite, String nom, String prenom, Date dateNaissance, String adresseFacturation, Genre styleMusiquePrefere);
 
 	public Client creerCompte(String mail, String password);
 
 	public Client authentification(String mail, String password);
+	
+	//A verifier
 	
 	
 	//TODO
