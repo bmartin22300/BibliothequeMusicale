@@ -7,11 +7,11 @@ import Object.Genre;
 
 public interface ProfilGestionnaireClientInterface extends AdministrateurInterface {
 	
-	// Valide
+	// VALIDE
 	
-	// Teste
+	// TESTE
 	
-	//A verifier
+	//A VERIFIER
 	
 	//TODO
 	

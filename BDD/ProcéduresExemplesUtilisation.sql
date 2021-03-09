@@ -28,7 +28,7 @@ SELECT * FROM Interprete;
 
 -- Création TitreMusical
 CALL nouveau_titre('La Vie en rose', '1946', 185, 'Variete');
-SELECT retrouver_titre('La Vie en rose');
+-- SELECT retrouver_titre('La Vie en rose');
 CALL association_titre_interprete(1, 'Edith Piaf');
 
 CALL nouveau_titre('La Foule', '1957', 203, 'Variete');
@@ -101,3 +101,8 @@ SELECT * FROM AlbumInterprete;
 SELECT * FROM ElementCatalogue;
 SELECT * FROM TitreMusical;
 SELECT * FROM Discographie;
+
+
+CALL rechercherParPseudoInterprete('i');
+CALL rechercherParPrenomInterprete('i');
+CALL rechercherParNomInterprete('i');

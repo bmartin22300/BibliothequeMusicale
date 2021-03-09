@@ -1,19 +1,17 @@
 package Object;
 
-import java.sql.Date;
-import java.time.Year;
 import java.util.List;
 
 public class Album extends ElementCatalogue{
 
 	private String nom;
-	private Year anneeSortie;
+	private int anneeSortie;
 	private int duree;
 	private List<Interprete> interpretes;
 	private List<TitreMusical> titres;
 	
 	// Constructeur
-	public Album(int idCatalogue, String nom, int duree, Year anneeSortie, List<Interprete> interpretes,
+	public Album(int idCatalogue, String nom, int duree, int anneeSortie, List<Interprete> interpretes,
 			List<TitreMusical> titres) {
 		super(idCatalogue);
 		this.nom = nom;
@@ -41,11 +39,11 @@ public class Album extends ElementCatalogue{
 		this.interpretes = interpretes;
 	}
 
-	public Year getDateSortie() {
+	public int getDateSortie() {
 		return anneeSortie;
 	}
 
-	public void setDateSortie(Year anneeSortie) {
+	public void setDateSortie(int anneeSortie) {
 		this.anneeSortie = anneeSortie;
 	}
 

@@ -1,18 +1,17 @@
 package Object;
 
-import java.time.Year;
 import java.util.List;
 
 public class TitreMusical extends ElementCatalogue{
 	private String titre;
-	private Year anneeCreation;
+	private int anneeCreation;
 	private int duree;
 	private Genre genre;
 	private Album album;
 	private List<Interprete> interpretes;
 	
 	// Constructeur
-	public TitreMusical(int idCatalogue, String titre, Year anneeCreation, int duree, Genre genre,
+	public TitreMusical(int idCatalogue, String titre, int anneeCreation, int duree, Genre genre,
 			List<Interprete> interpretes) {
 		super(idCatalogue);
 		this.titre = titre;
@@ -56,11 +55,11 @@ public class TitreMusical extends ElementCatalogue{
 		this.interpretes = interpretes;
 	}
 
-	public Year getAnneeCreation() {
+	public int getAnneeCreation() {
 		return anneeCreation;
 	}
 
-	public void setAnneeCreation(Year anneeCreation) {
+	public void setAnneeCreation(int anneeCreation) {
 		this.anneeCreation = anneeCreation;
 	}
 

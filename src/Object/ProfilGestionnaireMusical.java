@@ -23,12 +23,12 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 	 */
 	@Override
 	public Administrateur creerAdmin(String mail, String password) {
-		// Récupérer une connexion de type java.sql.Connection
+		// On recupere une connexion de type java.sql.Connection
 		Connection connexion = DBManager.getInstance().getConnection();
 		
 		try {
 			
-			// Exécuter la requête SQL et récupérer un java.sql.ResultSet
+			// On execute la requete SQL et on recupere un java.sql.ResultSet
 			String request = "CALL nouveau_admin(?, ?, ?, ?);";
 			
 			// Prepared statement 
@@ -241,7 +241,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 	 * Renvoie l'objet TitreMusical si succ�s, null sinon
 	 */
 	@Override
-	public TitreMusical creerTitre(String titre, Year anneeCreation, List<Interprete> interpretes, int duree, Genre genre) {
+	public TitreMusical creerTitre(String titre, int anneeCreation, List<Interprete> interpretes, int duree, Genre genre) {
 		// On recupere une connexion de type java.sql.Connection
 		Connection connexion = DBManager.getInstance().getConnection();
 		
@@ -253,7 +253,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 			// Prepared statement ajout titre
 			PreparedStatement preparedQuery = connexion.prepareStatement(request);
 			preparedQuery.setString(1, titre);
-			preparedQuery.setString(2, anneeCreation.toString());
+			preparedQuery.setInt(2, anneeCreation);
 			preparedQuery.setInt(3, duree);
 			preparedQuery.setString(4, genre.toString()); // Le genre doit exister dans la BDD
 			
@@ -295,7 +295,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 	 * Renvoie true si la modification a lieu, false sinon
 	 */
 	@Override
-	public boolean modifierTitre(TitreMusical titreMusical, String titre, Year anneeCreation, int duree, Genre genre) {
+	public boolean modifierTitre(TitreMusical titreMusical, String titre, int anneeCreation, int duree, Genre genre) {
 		// Recuperer la connexion
 		Connection connexion = DBManager.getInstance().getConnection();
 		
@@ -308,7 +308,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 			PreparedStatement preparedQuery = connexion.prepareStatement(request);
 			preparedQuery.setInt(1, titreMusical.getIdCatalogue());
 			preparedQuery.setString(2, titre);
-			preparedQuery.setString(3, anneeCreation.toString()); // >1900
+			preparedQuery.setInt(3, anneeCreation);
 			preparedQuery.setInt(4, duree);
 			preparedQuery.setString(5, genre.toString());
 			
@@ -439,7 +439,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 	 * Renvoie l'objet Album si succ�s, null sinon
 	 */
 	@Override
-	public Album creerAlbum(String nom, Year anneeSortie, List<TitreMusical> titres, List<Interprete> interpretes) {
+	public Album creerAlbum(String nom, int anneeSortie, List<TitreMusical> titres, List<Interprete> interpretes) {
 		
 		// On recupere une connexion de type java.sql.Connection
 		Connection connexion = DBManager.getInstance().getConnection();
@@ -452,7 +452,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 			// Prepared statement ajout Album
 			PreparedStatement preparedQuery = connexion.prepareStatement(request);
 			preparedQuery.setString(1, nom);
-			preparedQuery.setString(2, anneeSortie.toString());
+			preparedQuery.setInt(2, anneeSortie);
 			
 			preparedQuery.executeUpdate();
 			
@@ -511,7 +511,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 	 * Renvoie true si la modification a lieu, false sinon
 	 */
 	@Override
-	public boolean modifierAlbum(Album album, String nom, Year anneeSortie) {
+	public boolean modifierAlbum(Album album, String nom, int anneeSortie) {
 		// Recuperer la connexion
 		Connection connexion = DBManager.getInstance().getConnection();
 		
@@ -524,7 +524,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 			PreparedStatement preparedQuery = connexion.prepareStatement(request);
 			preparedQuery.setInt(1, album.getIdCatalogue());
 			preparedQuery.setString(2, nom);
-			preparedQuery.setString(3, anneeSortie.toString()); // >1900			
+			preparedQuery.setInt(3, anneeSortie); // >1900			
 			
 			// Execution
 			if(preparedQuery.executeUpdate()>0) { // Succes de la modification

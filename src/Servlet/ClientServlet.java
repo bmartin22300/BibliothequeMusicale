@@ -2,7 +2,6 @@ package Servlet;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -130,6 +129,11 @@ public class ClientServlet extends HttpServlet {//clientServlet
     					interpretesSandbox.remove(0);
     				}
     				System.out.println(interpretesSandbox.get(0));
+    				
+    				// Recherche Interprete
+    				System.out.println(adminSandbox.rechercherParPseudoInterprete("i"));
+    				System.out.println(adminSandbox.rechercherParPrenomInterprete(""));
+    				System.out.println(adminSandbox.rechercherParNomInterprete("Fatigue"));
     				
     				//TitreMusical
 	    			List<TitreMusical> titresSandbox = new ArrayList<TitreMusical>();

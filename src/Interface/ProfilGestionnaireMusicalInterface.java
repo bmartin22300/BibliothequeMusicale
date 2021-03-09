@@ -1,7 +1,6 @@
 package Interface;
 
 import java.sql.Date;
-import java.time.Year;
 import java.util.List;
 
 import Object.Album;
@@ -14,28 +13,30 @@ import Object.TitreMusical;
 
 public interface ProfilGestionnaireMusicalInterface extends AdministrateurInterface {
 
-	// Valide	
+	// VALIDE	
 	
-	// Teste
+	// TESTE
 	
 	// Interprete
 	public Interprete creerInterprete(String pseudo);
 	public Interprete creerInterprete(String pseudo, String prenom, String nom, Date dateNaissance);
 	public boolean modifierInterprete(Interprete interprete, String prenom, String nom, Date dateNaissance);
 	public boolean supprimerInterprete(Interprete interprete);
-	//A verifier 
+	
+	
+	//A VERIFIER 
 
 	// TitreMusical
-	public TitreMusical creerTitre(String titre, Year anneeCreation, List<Interprete> interpretes, int duree, Genre genre);
-	public boolean modifierTitre(TitreMusical titreMusical, String titre, Year anneeCreation, int duree, Genre genre);
+	public TitreMusical creerTitre(String titre, int anneeCreation, List<Interprete> interpretes, int duree, Genre genre);
+	public boolean modifierTitre(TitreMusical titreMusical, String titre, int anneeCreation, int duree, Genre genre);
 	public boolean supprimerTitre(TitreMusical titreMusical);
 	
 	public boolean ajouterDiscographie(TitreMusical titre, Interprete interprete);
 	public boolean retirerDiscographie(TitreMusical titre, Interprete interprete);
 	
 	// Album
-	public Album creerAlbum(String nom, Year anneeSortie, List<TitreMusical> titres, List<Interprete> interpretes);
-	public boolean modifierAlbum(Album album, String nom, Year anneeSortie);
+	public Album creerAlbum(String nom, int anneeSortie, List<TitreMusical> titres, List<Interprete> interpretes);
+	public boolean modifierAlbum(Album album, String nom, int anneeSortie);
 	public boolean supprimerAlbum(Album album);
 	
 	public boolean ajouterDiscographie(Album album, Interprete interprete);

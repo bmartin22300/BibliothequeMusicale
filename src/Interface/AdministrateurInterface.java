@@ -13,14 +13,22 @@ import Object.TitreMusical;
 
 public interface AdministrateurInterface {
 
-	// Valide
+	// VALIDE
 	
-	// Teste
+	
+	// TESTE
 	public Administrateur authentification(String mail, String password);
 	
 	public Administrateur creerAdmin(String mail, String password);
 	
-	//A verifier
+	// Parcourir Interpretes
+	public List<Interprete> rechercherParPseudoInterprete(String recherche);
+	public List<Interprete> rechercherParPrenomInterprete(String recherche);
+	public List<Interprete> rechercherParNomInterprete(String recherche);
+	
+	
+	//A VERIFIER
+
 
 	
 	//TODO
@@ -55,10 +63,4 @@ public interface AdministrateurInterface {
 	public List<Album> rechercherParGenreAlbum(Genre genre);
 	public List<Album> rechercherParDateSortieAlbum(Date date);
 	public List<Album> parcourirCatalogueAlbum();
-	
-	// Parcourir Interpretes
-	public List<Interprete> rechercherParPseudoInterprete(String recherche);
-	public List<Interprete> rechercherParPrenomInterprete(String recherche);
-	public List<Interprete> rechercherParNomInterprete(String recherche);
-
 }

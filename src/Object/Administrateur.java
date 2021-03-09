@@ -1,6 +1,11 @@
 package Object;
 
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import Interface.AdministrateurInterface;
@@ -161,21 +166,129 @@ public abstract class Administrateur implements AdministrateurInterface {
 		return null;
 	}
 
+	/*
+	 * Fonction rechercherParPseudoInterprete renvoie la List<Interprete> correspondant a la recherche en parametre
+	 */
 	@Override
 	public List<Interprete> rechercherParPseudoInterprete(String recherche) {
-		// TODO Auto-generated method stub
+		// On recupere une connexion de type java.sql.Connection
+		Connection connexion = DBManager.getInstance().getConnection();
+		
+		try {
+			// On execute la requete SQL et on recupere un java.sql.ResultSet
+			String request = "CALL rechercherParPseudoInterprete(?);";
+			
+			// Prepared statement 
+			PreparedStatement preparedQuery = connexion.prepareStatement(request);
+			preparedQuery.setString(1, recherche);
+			
+			// Retour
+			ResultSet rs = preparedQuery.executeQuery();
+			
+			// Creation de la liste
+			List<Interprete> interpretes = new ArrayList<Interprete>();
+			// Vrai tant qu'il reste des lignes
+			while(rs.next()) {
+				// Creation de l'interprete
+				String pseudo = rs.getString("pseudonyme");
+				String prenom = rs.getString("prenom"); 
+				String nom = rs.getString("nom");
+				Date dateNaissance = rs.getDate("dateNaissance");
+				
+				// Ajout a la liste retournee
+				interpretes.add(new Interprete(pseudo, prenom, nom, dateNaissance));
+			}
+			
+			return interpretes;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 
+	/*
+	 * Fonction rechercherParPrenomInterprete renvoie la List<Interprete> correspondant a la recherche en parametre
+	 */
 	@Override
 	public List<Interprete> rechercherParPrenomInterprete(String recherche) {
-		// TODO Auto-generated method stub
+		// On recupere une connexion de type java.sql.Connection
+		Connection connexion = DBManager.getInstance().getConnection();
+		
+		try {
+			// On execute la requete SQL et on recupere un java.sql.ResultSet
+			String request = "CALL rechercherParPrenomInterprete(?);";
+			
+			// Prepared statement 
+			PreparedStatement preparedQuery = connexion.prepareStatement(request);
+			preparedQuery.setString(1, recherche);
+			
+			// Retour
+			ResultSet rs = preparedQuery.executeQuery();
+			
+			// Creation de la liste
+			List<Interprete> interpretes = new ArrayList<Interprete>();
+			// Vrai tant qu'il reste des lignes
+			while(rs.next()) {
+				// Creation de l'interprete
+				String pseudo = rs.getString("pseudonyme");
+				String prenom = rs.getString("prenom"); 
+				String nom = rs.getString("nom");
+				Date dateNaissance = rs.getDate("dateNaissance");
+				
+				// Ajout a la liste retournee
+				interpretes.add(new Interprete(pseudo, prenom, nom, dateNaissance));
+			}
+			
+			return interpretes;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 
+	/*
+	 * Fonction rechercherParNomInterprete renvoie la List<Interprete> correspondant a la recherche en parametre
+	 */
 	@Override
 	public List<Interprete> rechercherParNomInterprete(String recherche) {
-		// TODO Auto-generated method stub
+		// On recupere une connexion de type java.sql.Connection
+		Connection connexion = DBManager.getInstance().getConnection();
+		
+		try {
+			// On execute la requete SQL et on recupere un java.sql.ResultSet
+			String request = "CALL rechercherParNomInterprete(?);";
+			
+			// Prepared statement 
+			PreparedStatement preparedQuery = connexion.prepareStatement(request);
+			preparedQuery.setString(1, recherche);
+			
+			// Retour
+			ResultSet rs = preparedQuery.executeQuery();
+			
+			// Creation de la liste
+			List<Interprete> interpretes = new ArrayList<Interprete>();
+			// Vrai tant qu'il reste des lignes
+			while(rs.next()) {
+				// Creation de l'interprete
+				String pseudo = rs.getString("pseudonyme");
+				String prenom = rs.getString("prenom"); 
+				String nom = rs.getString("nom");
+				Date dateNaissance = rs.getDate("dateNaissance");
+				
+				// Ajout a la liste retournee
+				interpretes.add(new Interprete(pseudo, prenom, nom, dateNaissance));
+			}
+			
+			return interpretes;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 	

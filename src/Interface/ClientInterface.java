@@ -13,12 +13,12 @@ import Object.TitreMusical;
 
 public interface ClientInterface {
 
-	// Valide
+	// VALIDE
 	
-	// Teste
+	// TESTE
 	public Client modifierInformations(String password, String civilite, String nom, String prenom, Date dateNaissance, String adresseFacturation, Genre styleMusiquePrefere);
 	
-	//A verifier
+	//A VERIFIER
 
 	
 	//TODO
