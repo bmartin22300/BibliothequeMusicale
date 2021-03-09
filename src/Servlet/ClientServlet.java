@@ -134,12 +134,14 @@ public class ClientServlet extends HttpServlet {//clientServlet
     				System.out.println(adminSandbox.rechercherParPseudoInterprete("i"));
     				System.out.println(adminSandbox.rechercherParPrenomInterprete(""));
     				System.out.println(adminSandbox.rechercherParNomInterprete("Fatigue"));
-    				
     				//TitreMusical
 	    			List<TitreMusical> titresSandbox = new ArrayList<TitreMusical>();
     				System.out.println("TitreMusical");
-    				//A faire : Convertir le type "Year" en int partout parce que voilà quoi...
-    				//titresSandbox.add(adminSandbox.creerTitre("Il était une fois", "1980", interpretesSandbox, 360, Genre.JAZZ));
+    				titresSandbox.add(adminSandbox.creerTitre("Il était une fois", 1980, interpretesSandbox, 360, Genre.valueOf("TECHNO")));
+    				titresSandbox.add(adminSandbox.creerTitre("Une liste de titres", 1981, interpretesSandbox, 200, Genre.valueOf("TECHNO")));
+    				titresSandbox.add(adminSandbox.creerTitre("Qui n'avait aucun sens", 1982, interpretesSandbox, 503, Genre.valueOf("TECHNO")));
+    				titresSandbox.add(adminSandbox.creerTitre("Mais au moins c'est des titres", 1983, interpretesSandbox, 345, Genre.valueOf("TECHNO")));
+    				System.out.println(titresSandbox);
     		
     			
     		}

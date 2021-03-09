@@ -13,7 +13,9 @@
 	<% String nom = (String)request.getAttribute("nom"); %>
 	<% String prénom = (String)request.getAttribute("prénom"); %>
 	<% String adresse = (String)request.getAttribute("adresse"); %>
-	<% String dateDeNaissance = (String)request.getAttribute("dateDeNaissance"); %>
+	<!-- String dateDeNaissance = request.getAttribute("dateDeNaissance").toString(); -->
+	<%java.text.DateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd"); %>
+	<% String dateDeNaissance = df.format(new java.util.Date()); %>
 	<% int nbEcoutes = (int)request.getAttribute("nbEcoutes"); %>
 	
 	<form method="POST">

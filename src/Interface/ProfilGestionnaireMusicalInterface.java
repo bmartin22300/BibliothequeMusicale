@@ -23,11 +23,12 @@ public interface ProfilGestionnaireMusicalInterface extends AdministrateurInterf
 	public boolean modifierInterprete(Interprete interprete, String prenom, String nom, Date dateNaissance);
 	public boolean supprimerInterprete(Interprete interprete);
 	
+	// TitreMusical
+	public TitreMusical creerTitre(String titre, int anneeCreation, List<Interprete> interpretes, int duree, Genre genre);
 	
 	//A VERIFIER 
 
 	// TitreMusical
-	public TitreMusical creerTitre(String titre, int anneeCreation, List<Interprete> interpretes, int duree, Genre genre);
 	public boolean modifierTitre(TitreMusical titreMusical, String titre, int anneeCreation, int duree, Genre genre);
 	public boolean supprimerTitre(TitreMusical titreMusical);
 	

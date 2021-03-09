@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.Year;
+import java.sql.Statement;
 import java.util.List;
 
 import Interface.ProfilGestionnaireMusicalInterface;
@@ -248,18 +248,17 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 		try {
 			
 			// On execute la requete SQL et on recupere un java.sql.ResultSet
-			String request = "CALL nouveau_titre(?, ?, ? ?);";
+			String request = "SELECT nouveau_titre(?, ?, ?, ?);";
 			
 			// Prepared statement ajout titre
-			PreparedStatement preparedQuery = connexion.prepareStatement(request);
+			PreparedStatement preparedQuery = connexion.prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
 			preparedQuery.setString(1, titre);
 			preparedQuery.setInt(2, anneeCreation);
 			preparedQuery.setInt(3, duree);
 			preparedQuery.setString(4, genre.toString()); // Le genre doit exister dans la BDD
 			
-			preparedQuery.executeUpdate();
+			ResultSet rs = preparedQuery.executeQuery();
 			
-			ResultSet rs = preparedQuery.getGeneratedKeys();
             if(rs.next()) // Ajout des interpretes
             {
                 int last_inserted_id = rs.getInt(1); // Id du TitreMusical cree
@@ -280,6 +279,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 				return new TitreMusical(last_inserted_id, titre, anneeCreation, duree, genre, interpretes);
             }
             else {
+            	System.out.println(rs+ " RS");
             	return null;
             }		
 			
