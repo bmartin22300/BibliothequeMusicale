@@ -23,14 +23,16 @@ public class ClientServlet extends HttpServlet {//clientServlet
 	public String vue;
 	Client client;
 	Utilisateur utilisateur=new Utilisateur();
+	private String mail;
+	private String motDePasse;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String servletPath = request.getServletPath();//récupération URL
+        String servletPath = request.getServletPath();//recuperation URL
         
         //affectation paramètres à la vue
         request.setAttribute("isAdministrateur", false);
 		
-        //section utilisateur non connecté
+        //section utilisateur non connecte
 		if(servletPath.equals("/AuthentificationClient")) {
 			//affectation paramètres à la vue
 			request.setAttribute("isClient", false);
@@ -44,7 +46,7 @@ public class ClientServlet extends HttpServlet {//clientServlet
 			request.setAttribute("isClient", false);
 			//affection vue
 			vue = "/JSP/Utilisateur/InscriptionClient.jsp";
-		}else if(client==null){ //verification que le client est connecté 
+		}else if(client==null){ //verification que le client est connecte 
 			//section client
 		
 			//affectation paramètres à la vue
@@ -58,9 +60,9 @@ public class ClientServlet extends HttpServlet {//clientServlet
     		//affectation paramètres à la vue
     		request.setAttribute("isClient", true);
     		request.setAttribute("password", client.getPassword());
-            request.setAttribute("civilité", client.getCivilite());
+            request.setAttribute("civilite", client.getCivilite());
     		request.setAttribute("nom", client.getNom());
-    		request.setAttribute("prénom", client.getPrenom());
+    		request.setAttribute("prenom", client.getPrenom());
     		request.setAttribute("email", client.getMail());
     		request.setAttribute("adresse", client.getAdresseFacturation());
     		request.setAttribute("nbEcoutes", client.getNbEcoute());
@@ -96,7 +98,7 @@ public class ClientServlet extends HttpServlet {//clientServlet
     			Client clientSandbox = userSandbox.creerCompte(mailSandbox, passwordSandbox);
     			System.out.println(clientSandbox);
     			
-    			//Ne fait rien, existe déjà
+    			//Ne fait rien, existe dejà
     			clientSandbox = userSandbox.creerCompte(mailSandbox, passwordSandbox, civiliteSandbox, nomSandbox, prenomSandbox, dateNaissanceSandbox, adresseSandbox, styleMusiqueSandbox);
     			System.out.println(clientSandbox);
     			
@@ -120,12 +122,12 @@ public class ClientServlet extends HttpServlet {//clientServlet
     				//Interprete
 	    			List<Interprete> interpretesSandbox = new ArrayList<Interprete>();
     				System.out.println("Interprete");
-    				interpretesSandbox.add(adminSandbox.creerInterprete("Noir Désir"));
+    				interpretesSandbox.add(adminSandbox.creerInterprete("Noir Desir"));
     				interpretesSandbox.add(adminSandbox.creerInterprete("La fatigue", "La", "Fatigue", Date.valueOf("1980-09-17")));
     				System.out.println(interpretesSandbox);
-    				adminSandbox.modifierInterprete(interpretesSandbox.get(0), "Groupe", "Groupe", Date.valueOf("2001-01-01")); // Modification de "Noir Désir"
+    				adminSandbox.modifierInterprete(interpretesSandbox.get(0), "Groupe", "Groupe", Date.valueOf("2001-01-01")); // Modification de "Noir Desir"
     				System.out.println(interpretesSandbox);
-    				if(adminSandbox.supprimerInterprete(interpretesSandbox.get(0))){// Suppression de "Noir Désir")
+    				if(adminSandbox.supprimerInterprete(interpretesSandbox.get(0))){// Suppression de "Noir Desir")
     					interpretesSandbox.remove(0);
     				}
     				System.out.println(interpretesSandbox.get(0));
@@ -137,7 +139,7 @@ public class ClientServlet extends HttpServlet {//clientServlet
     				//TitreMusical
 	    			List<TitreMusical> titresSandbox = new ArrayList<TitreMusical>();
     				System.out.println("TitreMusical");
-    				titresSandbox.add(adminSandbox.creerTitre("Il était une fois", 1980, interpretesSandbox, 360, Genre.valueOf("TECHNO")));
+    				titresSandbox.add(adminSandbox.creerTitre("Il etait une fois", 1980, interpretesSandbox, 360, Genre.valueOf("TECHNO")));
     				titresSandbox.add(adminSandbox.creerTitre("Une liste de titres", 1981, interpretesSandbox, 200, Genre.valueOf("TECHNO")));
     				titresSandbox.add(adminSandbox.creerTitre("Qui n'avait aucun sens", 1982, interpretesSandbox, 503, Genre.valueOf("TECHNO")));
     				titresSandbox.add(adminSandbox.creerTitre("Mais au moins c'est des titres", 1983, interpretesSandbox, 345, Genre.valueOf("TECHNO")));
@@ -169,25 +171,26 @@ public class ClientServlet extends HttpServlet {//clientServlet
 		//affectation paramètres à la vue
 		request.setAttribute("isAdministrateur", false);
 		
-		//récupération des paramètres du form
+		//recuperation des paramètres du form
 		String mail = request.getParameter("mail");
 		String motDePasse = request.getParameter("password");
+		System.out.println(motDePasse);
 		
 		if(action.equals("ModificationProfilClient")) {
-			//récupération paramètres
-			String prénom = request.getParameter("prénom");
+			//recuperation paramètres
+			String prenom = request.getParameter("prenom");	
 			String nom = request.getParameter("nom");
 			String adresse = request.getParameter("adresse");
 			String dateDeNaissanceString = request.getParameter("dateDeNaissance");
-			String civilité="";
-			if(request.getParameter("M").equals("on")) {
-				civilité="M";
+			String civilite="";
+			if(request.getParameter("civilite").equals("M")) {
+				civilite="M";
 			}else {
-				if(request.getParameter("Mme").equals("on")) {
-					civilité="Mme";
+				if(request.getParameter("civilite").equals("Mme")) {
+					civilite="Mme";
 				}else {
-					if(request.getParameter("Autre").equals("on")) {
-						civilité="Autre";
+					if(request.getParameter("civilite").equals("Autre")) {
+						civilite="Autre";
 					}
 				}
 			}
@@ -196,20 +199,21 @@ public class ClientServlet extends HttpServlet {//clientServlet
 				dateDeNaissance = Date.valueOf(dateDeNaissanceString);
 			}  
 			String styleMusiquePrefereString = request.getParameter("styleMusiquePrefere");
-			Genre styleMusiquePrefere = Genre.valueOf("TECHNO");
+			Genre styleMusiquePrefere = Genre.valueOf(styleMusiquePrefereString);
 			
 			//affectation paramètres à la vue
 			request.setAttribute("isClient", true);
+			//le client est inaccessible depuis doPost ?!
 			/*
-            request.setAttribute("civilité", client.getCivilite());
+            request.setAttribute("civilite", client.getCivilite());
     		request.setAttribute("nom", client.getNom());
-    		request.setAttribute("prénom", client.getPrenom());
+    		request.setAttribute("prenom", client.getPrenom());
     		request.setAttribute("email", client.getMail());
     		request.setAttribute("adresse", client.getAdresseFacturation());
     		request.setAttribute("nbEcoutes", client.getNbEcoute());
     		request.setAttribute("dateDeNaissance", client.getDateNaissance());*/
     		request.setAttribute("nom", "");
-    		request.setAttribute("prénom", "");
+    		request.setAttribute("prenom", "");
     		request.setAttribute("email", "");
     		request.setAttribute("adresse", "");
     		request.setAttribute("nbEcoutes", 0);
@@ -217,14 +221,13 @@ public class ClientServlet extends HttpServlet {//clientServlet
 			
 			//mise à jour BDD
 			//TODO : ajouter un supprimerClient pour pouvoir modifier le mail
-    		Client clientModifié=client.modifierInformations(motDePasse, civilité, nom, prénom, dateDeNaissance, adresse, styleMusiquePrefere);
-    		if(clientModifié!=null) {
-    			this.client=clientModifié;
+    		Client clientModifie=client.modifierInformations(motDePasse, civilite, nom, prenom, dateDeNaissance, adresse, styleMusiquePrefere);
+    		if(clientModifie!=null) {
+    			this.client=clientModifie;
     		}
     		
-    		
     		//choix de la vue
-			vue = "/JSP/Client/ProfilClient.jsp";
+			vue = "/JSP/Client/ProfilClient.jsp";//todo fix refresh page nécessaire
 		}else {
 			if(action.equals("AuthentificationClient")) {
 				//requête à la BDD
@@ -236,7 +239,7 @@ public class ClientServlet extends HttpServlet {//clientServlet
 					
 					//choix de la vue
 					vue = "/JSP/Client/AccueilClient.jsp";
-				}else {//échec
+				}else {//echec
 					//affectation paramètres à la vue
 					request.setAttribute("isClient", false);
 					request.setAttribute("isErrorLogin", true);
@@ -256,7 +259,7 @@ public class ClientServlet extends HttpServlet {//clientServlet
 						
 						//choix de la vue
 						vue = "/JSP/Client/AccueilClient.jsp";
-					}else {//échec
+					}else {//echec
 						//affectation paramètres à la vue
 						request.setAttribute("isClient", false);
 						request.setAttribute("isErrorLogin", false);

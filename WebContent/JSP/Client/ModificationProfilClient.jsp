@@ -9,9 +9,9 @@
 	<%@include file="../header.jsp" %>
 	<% String email = (String)request.getAttribute("email"); %>
 	<% String password = (String)request.getAttribute("password"); %>
-	<% String civilité = (String)request.getAttribute("civilité"); %>
+	<% String civilite = (String)request.getAttribute("civilite"); %>
 	<% String nom = (String)request.getAttribute("nom"); %>
-	<% String prénom = (String)request.getAttribute("prénom"); %>
+	<% String prenom = (String)request.getAttribute("prenom"); %>
 	<% String adresse = (String)request.getAttribute("adresse"); %>
 	<!-- String dateDeNaissance = request.getAttribute("dateDeNaissance").toString(); -->
 	<%java.text.DateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd"); %>
@@ -28,73 +28,78 @@
         
 	        <p>
 		        <label><b>Mail</b></label>
-		        <input type="text" value=<%= email %> name="mail" required>
+		        <input type="text" value=<%= email %> name="mail">
 	        </p>
 	        
 			<p>
 		        <label><b>Mot de passe</b></label>
-		        <input type="password" value=<%= password %> name="password" required>
+		        <input type="password" value=<%= password %> name="password">
 			</p>
 			
 			<p class="title">
-		        <label><b>Prénom</b></label>
-		        <input type="prénom" placeholder=
-		         	<% if(prénom==null){ %>
-				  		"Entrez le prénom"
+		        <label><b>Prenom</b></label>
+		        <input type="prenom" 
+		        	<% boolean noPrenom= (prenom==null || prenom.equals("")); %>
+		         	<% if(noPrenom){ %>
+		         		placeholder="Entrez le prenom"
 				 	<% } else {%>
-				 		%= prénom %>
+				 		value= <%= prenom	%>
 				 	<% } %>
-		        name="prénom">
+		        name="prenom">
 			</p>
-			
+
 			<p class="title">
 		        <label><b>Nom</b></label>
-		        <input type="nom" placeholder=
-		         	<% if(nom==null){ %>
-				  		"Entrez le nom"
+		        <input type="nom" 
+		        	<% boolean noNom = (nom==null || nom.equals("")); %>
+		         	<% if(noNom){ %>
+		         		placeholder="Entrez le nom"
 				 	<% } else {%>
-				 		%= nom %>
+				 		value= <%= nom	%>
 				 	<% } %>
 		        name="nom">
 			</p>
 			
 			<p>
 		        <label><b>Adresse</b></label>
-		        <input type="adresse" placeholder=
-		         	<% if(prénom==null){ %>
-				  		"Entrez l'adresse"
+		        <input type="adresse" 
+		        	<% boolean noAdresse = (adresse==null || adresse.equals("")); %>
+		         	<% if(noAdresse){ %>
+		         		placeholder="Entrez l'adresse"
 				 	<% } else {%>
-				 		%= adresse %>
+				 		value= <%= adresse	%>
 				 	<% } %>
 		        name="adresse">
 			</p>
 			
 			<p>
 		        <label><b>Date de naissance</b></label>
-		        <input type="password" placeholder=
-		         	<% if(dateDeNaissance==null){ %>
-				  		"yyyy-mm-dd"	
+		        <input type="dateDeNaissance" 
+		        	<% boolean noDate = (dateDeNaissance==null || dateDeNaissance.equals("")); %>
+		         	<% if(noDate){ %>
+		         		placeholder="YYYY-MM-DD"
 				 	<% } else {%>
-				 		%= dateDeNaissance %>
+				 		value= <%= dateDeNaissance %>
 				 	<% } %>
 		        name="dateDeNaissance">
 			</p>
 			
 			<p>
-		        <label><b>Civilité</b></label>
-			       <div class="profileModificationCheckbox">
-					  <input type="checkbox" id="scales" name="M" checked>
-					  <label for="scales">M</label>
+		        <label><b>Civilite</b></label>
+					<div>
+					  <input type="radio" id="M" name="civilite" value="M"
+					         checked>
+					  <label for="huey">M</label>
 					</div>
 					
-					<div class="profileModificationCheckbox">
-					  <input type="checkbox" id="horns" name="Mme">
-					  <label for="horns">Mme</label>
+					<div>
+					  <input type="radio" id="Mme" name="civilite" value="Mme">
+					  <label for="dewey">Mme</label>
 					</div>
 					
-					<div class="profileModificationCheckbox">
-					  <input type="checkbox" id="horns" name="Autre">
-					  <label for="horns">Autre</label>
+					<div>
+					  <input type="radio" id="Autre" name="civilite" value="Autre">
+					  <label for="louie">Autre</label>
 					</div>
 			</p>
 			
