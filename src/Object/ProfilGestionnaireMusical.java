@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import Interface.ProfilGestionnaireMusicalInterface;
@@ -269,14 +270,20 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
     			PreparedStatement preparedQueryInterprete = connexion.prepareStatement(requestInterprete);
     			preparedQueryInterprete.setInt(1, last_inserted_id);
     			
+    			TitreMusical nouveauTitre = new TitreMusical(last_inserted_id, titre, anneeCreation, duree, genre, interpretes); // Creation du titre
 				for(Interprete interprete : interpretes){ // On associe chaque interprete au titre
+					
+					/*List<TitreMusical> list = new ArrayList<TitreMusical>();
+					list.addAll(interprete.getTitres());
+					list.add(nouveauTitre);*/
+					interprete.addTitre(nouveauTitre);
 					
 					preparedQueryInterprete.setString(2, interprete.getPseudonyme());
 
 					preparedQueryInterprete.executeUpdate();
 				}
 				
-				return new TitreMusical(last_inserted_id, titre, anneeCreation, duree, genre, interpretes);
+				return nouveauTitre;
             }
             else {
             	System.out.println(rs+ " RS");
@@ -355,6 +362,12 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 			
 			// Execution
 			if(preparedQuery.executeUpdate()>0) { // Succes de la suppression
+				for(Interprete interprete : titreMusical.getInterpretes()) {
+					interprete.getTitres().remove(titreMusical);
+				}
+				if(titreMusical.getAlbum()!=null) {
+					titreMusical.getAlbum().getTitres().remove(titreMusical);
+				}
 				return true;
 			}
 			else{ // La suppression echoue

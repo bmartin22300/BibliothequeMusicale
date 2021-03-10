@@ -19,7 +19,7 @@ public interface UtilisateurInterface {
 	public Client authentification(String mail, String password);
 	
 	//A VERIFIER
-	
+
 	
 	//TODO
 	

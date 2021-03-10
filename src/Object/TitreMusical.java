@@ -68,6 +68,9 @@ public class TitreMusical extends ElementCatalogue{
 	}
 
 	public void setDuree(int duree) {
+		if(this.album!=null) {
+			this.album.setDuree(this.album.getDuree()+duree-this.duree);
+		}
 		this.duree = duree;
 	}
 
@@ -83,7 +86,7 @@ public class TitreMusical extends ElementCatalogue{
 	@Override
 	public String toString() {
 		return "TitreMusical [titre=" + titre + ", anneeCreation=" + anneeCreation + ", duree=" + duree + ", genre="
-				+ genre + ", album=" + album + ", interpretes=" + interpretes + "]";
+				+ genre + "]";
 	}
 
 }

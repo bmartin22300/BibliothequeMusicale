@@ -1,5 +1,6 @@
 package Object;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +20,8 @@ public class Interprete {
 		this.prenom = prenom;
 		this.nom = nom;
 		this.dateNaissance = dateNaissance;
+		this.albums = new ArrayList<Album>();
+		this.titres = new ArrayList<TitreMusical>();
 	}
 	
 	public Interprete(String pseudo) {
@@ -77,9 +80,13 @@ public class Interprete {
 		this.titres = titres;
 	}
 	
+	public void addTitre(TitreMusical titre) {
+		this.titres.add(titre);
+	}
+	
 	@Override
 	public String toString() {
 		return "Interprete [pseudonyme=" + pseudonyme + ", prenom=" + prenom + ", nom=" + nom + ", dateNaissance="
-				+ dateNaissance + ", albums=" + albums + ", titres=" + titres + "]";
+				+ dateNaissance + "]";
 	}
 }

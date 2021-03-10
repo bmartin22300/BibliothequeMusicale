@@ -9,12 +9,6 @@ import java.util.List;
 import Interface.ClientInterface;
 
 public class Client implements ClientInterface {
-	@Override
-	public String toString() {
-		return "Client [mail=" + mail + ", password=" + password + ", civilite=" + civilite + ", nom=" + nom
-				+ ", prenom=" + prenom + ", dateNaissance=" + dateNaissance + ", adresseFacturation="
-				+ adresseFacturation + ", styleMusiquePrefere=" + styleMusiquePrefere + "]";
-	}
 
 	private String mail;
 	private String password;
@@ -384,5 +378,12 @@ public class Client implements ClientInterface {
 	public void selection(ElementCatalogue nomElementCatalogue) {
 		
 	}*/
+	
+	@Override
+	public String toString() {
+		return "Client [mail=" + mail + ", civilite=" + civilite + ", nom=" + nom
+				+ ", prenom=" + prenom + ", dateNaissance=" + dateNaissance + ", adresseFacturation="
+				+ adresseFacturation + ", styleMusiquePrefere=" + styleMusiquePrefere + "]";
+	}
 
 }

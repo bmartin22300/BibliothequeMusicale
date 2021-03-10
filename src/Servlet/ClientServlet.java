@@ -142,7 +142,13 @@ public class ClientServlet extends HttpServlet {//clientServlet
     				titresSandbox.add(adminSandbox.creerTitre("Qui n'avait aucun sens", 1982, interpretesSandbox, 503, Genre.valueOf("TECHNO")));
     				titresSandbox.add(adminSandbox.creerTitre("Mais au moins c'est des titres", 1983, interpretesSandbox, 345, Genre.valueOf("TECHNO")));
     				System.out.println(titresSandbox);
-    		
+    				
+    				adminSandbox.modifierTitre(titresSandbox.get(0), "Nouveau titre", 1500, 10, Genre.valueOf("VARIETE"));
+    				System.out.println(titresSandbox);
+    				if(adminSandbox.supprimerTitre(titresSandbox.get(0))){// Suppression de "Nouveau titre")
+    					titresSandbox.remove(0);
+    				}
+    				System.out.println(titresSandbox);
     			
     		}
     	}	         

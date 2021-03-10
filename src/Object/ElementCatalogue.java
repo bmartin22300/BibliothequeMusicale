@@ -1,5 +1,6 @@
 package Object;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class ElementCatalogue {
@@ -16,6 +17,7 @@ public abstract class ElementCatalogue {
 		this.recommande = false;
 		this.nbEcoute = 0;
 		this.nbEcouteMois = 0;
+		this.playlists = new ArrayList<Playlist>();
 	}
 
 	// Getters et Setters	

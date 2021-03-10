@@ -1,5 +1,6 @@
 package Object;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Album extends ElementCatalogue{
@@ -75,7 +76,6 @@ public class Album extends ElementCatalogue{
 
 	@Override
 	public String toString() {
-		return "Album [nom=" + nom + ", anneeSortie=" + anneeSortie + ", duree=" + duree + ", interpretes="
-				+ interpretes + ", titres=" + titres + "]";
+		return "Album [nom=" + nom + ", anneeSortie=" + anneeSortie + ", duree=" + duree + "]";
 	}
 }
