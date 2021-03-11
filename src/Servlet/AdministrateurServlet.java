@@ -27,14 +27,14 @@ public class AdministrateurServlet extends HttpServlet {
 	Utilisateur utilisateur=new Utilisateur();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String servletPath = request.getServletPath();//récupération URL
+		String servletPath = request.getServletPath();//rï¿½cupï¿½ration URL
 		
-        //affectation paramètres à la vue
+        //affectation paramï¿½tres ï¿½ la vue
         request.setAttribute("isClient", false);
 		
-        //section administrateur non connecté
+        //section administrateur non connectï¿½
 		if(servletPath.equals("/AuthentificationAdministrateur")) {	
-			//affectation paramètres à la vue
+			//affectation paramï¿½tres ï¿½ la vue
 			request.setAttribute("isAdministrateur", false);
 			request.setAttribute("isErrorLogin", false);
 			request.setAttribute("notLogged", false);
@@ -43,14 +43,14 @@ public class AdministrateurServlet extends HttpServlet {
 			vue = "/JSP/Utilisateur/AuthentificationAdministrateur.jsp";
 		}else {
 			if(servletPath.equals("/InscriptionAdministrateur")) {
-				//affectation paramètres à la vue
+				//affectation paramï¿½tres ï¿½ la vue
 				request.setAttribute("isAdministrateur", false);
 				//affection vue
 				vue = "/JSP/Utilisateur/InscriptionAdministrateur.jsp";
 			}else {
 				//section Administrateur
-				if(administrateur==null) {//verification que l'Administrateur est connecté 
-					//affectation paramètres à la vue
+				if(administrateur==null) {//verification que l'Administrateur est connectï¿½ 
+					//affectation paramï¿½tres ï¿½ la vue
 					request.setAttribute("isAdministrateur", false);
 		    		request.setAttribute("isErrorLogin", false);
 		    		request.setAttribute("notLogged", true);
@@ -58,7 +58,7 @@ public class AdministrateurServlet extends HttpServlet {
 		    		//affection vue
 		    		vue = "/JSP/Utilisateur/AuthentificationAdministrateur.jsp";
 		    	}else {
-		    		//affectation paramètres à la vue
+		    		//affectation paramï¿½tres ï¿½ la vue
 		    		request.setAttribute("isAdministrateur", true);
 		    		request.setAttribute("isAdministrateurMusical", administrateur instanceof ProfilGestionnaireMusical);
 		    		request.setAttribute("password", administrateur.getPassword());
@@ -66,7 +66,7 @@ public class AdministrateurServlet extends HttpServlet {
 		  
 		    		//affection vue
 		    		if(servletPath.equals("/AccueilAdministrateur")) {
-		    			//affectation paramètres à la vue
+		    			//affectation paramï¿½tres ï¿½ la vue
 		    			List<TitreMusical> titresMusicaux = new ArrayList<TitreMusical>();
 						List<Interprete> interpretes = new ArrayList<Interprete>();
 						TitreMusical titreMusical = new TitreMusical(0, "Ma musique 1", 2000, 210, Genre.RAP, interpretes);
@@ -78,7 +78,7 @@ public class AdministrateurServlet extends HttpServlet {
 						titresMusicaux.add(titreMusical3);
 						titresMusicaux.add(titreMusical4);
 						
-						//affectation paramètres à la vue
+						//affectation paramï¿½tres ï¿½ la vue
 			    		request.setAttribute("titresMusicaux", titresMusicaux);
 			    		request.setAttribute("interpretes", 2);
 			    		request.setAttribute("albums", 3);
@@ -100,9 +100,9 @@ public class AdministrateurServlet extends HttpServlet {
 		                    		}else {
 		                    			if(servletPath.equals("/ModificationTitre")) {
 		                    				//section Administrateur musical
-		                    				//todo vérif identité
+		                    				//todo vï¿½rif identitï¿½
 		                    				
-		                    				//récupération de paramètre de la vue
+		                    				//rï¿½cupï¿½ration de paramï¿½tre de la vue
 		                    				String titre = request.getParameter("titre");
 		                    				
 		                    				//envoie de parametres a la vue
@@ -111,7 +111,7 @@ public class AdministrateurServlet extends HttpServlet {
 			                    			vue = "/JSP/Administrateur/ModificationCatalogue.jsp";
 			                    		}else {
 			                    			if(servletPath.equals("/AjoutCatalogue")) {
-			                    				//récupération de paramètre de la vue
+			                    				//rï¿½cupï¿½ration de paramï¿½tre de la vue
 			                    				String TypeElement = request.getParameter("TypeElement");
 			                    				
 			                    				vue = "/JSP/Administrateur/AjoutCatalogue.jsp";
@@ -140,28 +140,28 @@ public class AdministrateurServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");//de quel form je viens ?
 		
-		//affectation paramètres à la vue
+		//affectation paramï¿½tres ï¿½ la vue
 		request.setAttribute("isClient", false);
 		
-		//récupération des paramètres du form
+		//rï¿½cupï¿½ration des paramï¿½tres du form
 		String mail = request.getParameter("mail");
 		String motDePasse = request.getParameter("password");
 		String typeAdmin = request.getParameter("typeAdmin");
 		
 		if(action.equals("ModificationProfilAdministrateur")) {
-			//récupération paramètres
+			//rï¿½cupï¿½ration paramï¿½tres
 			
-			//affectation paramètres à la vue
+			//affectation paramï¿½tres ï¿½ la vue
 			request.setAttribute("isAdministrateur", true);
 			
-			//mise à jour BDD
-			//TODO implémenter la procédure SQL
+			//mise ï¿½ jour BDD
+			//TODO implï¿½menter la procï¿½dure SQL
 			
     		//choix de la vue
 			vue = "/JSP/Administrateur/ProfilAdministrateur.jsp";
 		}else {
 			if(action.equals("AuthentificationAdministrateur")) {
-				//requête à la BDD TODO
+				//requï¿½te ï¿½ la BDD TODO
 				if(typeAdmin.equals("GestionnaireClient")) {
 					administrateur = new ProfilGestionnaireClient((int) (Math.random()*1000),mail, motDePasse);
 				}else {
@@ -180,7 +180,7 @@ public class AdministrateurServlet extends HttpServlet {
 					titresMusicaux.add(titreMusical3);
 					titresMusicaux.add(titreMusical4);
 					
-					//affectation paramètres à la vue
+					//affectation paramï¿½tres ï¿½ la vue
 					request.setAttribute("isAdministrateur", true);
 					request.setAttribute("isAdministrateurMusical", administrateur instanceof ProfilGestionnaireMusical);
 		    		request.setAttribute("titresMusicaux", titresMusicaux);
@@ -190,7 +190,7 @@ public class AdministrateurServlet extends HttpServlet {
 					//choix de la vue
 					vue = "/JSP/Administrateur/AccueilAdministrateur.jsp";
 				}else {//echec
-					//affectation paramètres à la vue
+					//affectation paramï¿½tres ï¿½ la vue
 					request.setAttribute("isAdministrateur", false);
 					request.setAttribute("isErrorLogin", true);
 					request.setAttribute("notLogged", false);
@@ -200,18 +200,18 @@ public class AdministrateurServlet extends HttpServlet {
 				}
 			}else {
 				//partie administrateur musical connecte
-				//affectation paramètres à la vue
+				//affectation paramï¿½tres ï¿½ la vue
 				request.setAttribute("isAdministrateur", true);
 				request.setAttribute("isAdministrateurMusical", true);
 				
 				//todo verifier connexion admin
 				
 				if(action.equals("RechercheTitre")) {
-					//récup param vue
+					//rï¿½cup param vue
 					String typeElement = request.getParameter("TypeElement");
 					String titre = request.getParameter("titre");
 					
-					//todo implémenter requête SQL
+					//todo implï¿½menter requï¿½te SQL
 					List<TitreMusical> titresMusicaux = new ArrayList<TitreMusical>();
 					//List<Interprete> interpretes = new ArrayList<Interprete>();
 					TitreMusical titreMusical = new TitreMusical(0, "Ma musique 1", 2000, 210, Genre.RAP, null);
@@ -245,14 +245,14 @@ public class AdministrateurServlet extends HttpServlet {
 					}*/
 				}else {
 					if(action.equals("AjouterElement")) {
-						//récup param vue
+						//rï¿½cup param vue
 						String typeElement = request.getParameter("TypeElement");
 						
 						if(typeElement.equals("Titre musical")) {
 							
 						}else {
 							if(typeElement.equals("Interprete")) {
-								//récup param vue
+								//rï¿½cup param vue
 								String Pseudo = request.getParameter("Pseudo");
 								String Prenom = request.getParameter("Prenom");
 								String Nom = request.getParameter("Nom");

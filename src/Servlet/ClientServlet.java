@@ -29,12 +29,12 @@ public class ClientServlet extends HttpServlet {//clientServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String servletPath = request.getServletPath();//recuperation URL
         
-        //affectation paramètres à la vue
+        //affectation paramï¿½tres ï¿½ la vue
         request.setAttribute("isAdministrateur", false);
 		
         //section utilisateur non connecte
 		if(servletPath.equals("/AuthentificationClient")) {
-			//affectation paramètres à la vue
+			//affectation paramï¿½tres ï¿½ la vue
 			request.setAttribute("isClient", false);
 			request.setAttribute("isErrorLogin", false);
 			request.setAttribute("notLogged", false);
@@ -42,7 +42,7 @@ public class ClientServlet extends HttpServlet {//clientServlet
 			//affection vue
 			vue = "/JSP/Utilisateur/AuthentificationClient.jsp";
 		}else if(servletPath.equals("/InscriptionClient")){
-			//affectation paramètres à la vue
+			//affectation paramï¿½tres ï¿½ la vue
 			request.setAttribute("isClient", false);
 			request.setAttribute("isErrorLogin", false);
 			
@@ -51,7 +51,7 @@ public class ClientServlet extends HttpServlet {//clientServlet
 		}else if(client==null){ //verification que le client est connecte 
 			//section client
 		
-			//affectation paramètres à la vue
+			//affectation paramï¿½tres ï¿½ la vue
 			request.setAttribute("isClient", false);
     		request.setAttribute("isErrorLogin", false);
     		request.setAttribute("notLogged", true);
@@ -59,7 +59,7 @@ public class ClientServlet extends HttpServlet {//clientServlet
     		//affection vue
     		vue = "/JSP/Utilisateur/AuthentificationClient.jsp";
     	}else {
-    		//affectation paramètres à la vue
+    		//affectation paramï¿½tres ï¿½ la vue
     		request.setAttribute("isClient", true);
     		request.setAttribute("password", client.getPassword());
             request.setAttribute("civilite", client.getCivilite());
@@ -100,7 +100,7 @@ public class ClientServlet extends HttpServlet {//clientServlet
     			Client clientSandbox = userSandbox.creerCompte(mailSandbox, passwordSandbox);
     			System.out.println(clientSandbox);
     			
-    			//Ne fait rien, existe dejà
+    			//Ne fait rien, existe dejï¿½
     			clientSandbox = userSandbox.creerCompte(mailSandbox, passwordSandbox, civiliteSandbox, nomSandbox, prenomSandbox, dateNaissanceSandbox, adresseSandbox, styleMusiqueSandbox);
     			System.out.println(clientSandbox);
     			
@@ -119,7 +119,7 @@ public class ClientServlet extends HttpServlet {//clientServlet
     			System.out.println("ADMIN");
     			ProfilGestionnaireMusical adminSandbox = new ProfilGestionnaireMusical((int) (Math.random()*1000), mailAdminMusiqueSandbox,passwordAdminMusiqueSandbox);
     			System.out.println(adminSandbox.creerAdmin(mailAdminMusiqueSandbox, passwordAdminMusiqueSandbox));
-    			System.out.println(adminSandbox.authentification(mailAdminMusiqueSandbox, passwordAdminMusiqueSandbox));
+    			System.out.println(userSandbox.authentification(mailAdminMusiqueSandbox, passwordAdminMusiqueSandbox));
     				
     				//Interprete
 	    			List<Interprete> interpretesSandbox = new ArrayList<Interprete>();
@@ -170,15 +170,15 @@ public class ClientServlet extends HttpServlet {//clientServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");//de quel form je viens ?
 		
-		//affectation paramètres à la vue
+		//affectation paramï¿½tres ï¿½ la vue
 		request.setAttribute("isAdministrateur", false);
 		
-		//recuperation des paramètres du form
+		//recuperation des paramï¿½tres du form
 		String mail = request.getParameter("mail");
 		String motDePasse = request.getParameter("password");
 		
 		if(action.equals("ModificationProfilClient")) {
-			//recuperation paramètres
+			//recuperation paramï¿½tres
 			String prenom = request.getParameter("prenom");	
 			String nom = request.getParameter("nom");
 			String adresse = request.getParameter("adresse");
@@ -202,7 +202,7 @@ public class ClientServlet extends HttpServlet {//clientServlet
 			String styleMusiquePrefereString = request.getParameter("styleMusiquePrefere");
 			Genre styleMusiquePrefere = Genre.valueOf(styleMusiquePrefereString);
 			
-			//affectation paramètres à la vue
+			//affectation paramï¿½tres ï¿½ la vue
 			request.setAttribute("isClient", true);
 			//le client est inaccessible depuis doPost ?!
 			/*
@@ -220,7 +220,7 @@ public class ClientServlet extends HttpServlet {//clientServlet
     		request.setAttribute("nbEcoutes", 0);
     		request.setAttribute("dateDeNaissance", "");
 			
-			//mise à jour BDD
+			//mise ï¿½ jour BDD
 			//TODO : ajouter un supprimerClient pour pouvoir modifier le mail
     		Client clientModifie=client.modifierInformations(mail, motDePasse, civilite, nom, prenom, dateDeNaissance, adresse, styleMusiquePrefere);
     		System.out.println(clientModifie);
@@ -229,20 +229,20 @@ public class ClientServlet extends HttpServlet {//clientServlet
     		}
     		
     		//choix de la vue
-			vue = "/JSP/Client/ProfilClient.jsp";//todo fix refresh page nécessaire
+			vue = "/JSP/Client/ProfilClient.jsp";//todo fix refresh page nï¿½cessaire
 		}else {
 			if(action.equals("AuthentificationClient")) {
-				//requête à la BDD
+				//requï¿½te ï¿½ la BDD
 				client = utilisateur.authentification(mail, motDePasse);
 				
 				if(client!=null) {
-					//affectation paramètres à la vue
+					//affectation paramï¿½tres ï¿½ la vue
 					request.setAttribute("isClient", true);
 					
 					//choix de la vue
 					vue = "/JSP/Client/AccueilClient.jsp";
 				}else {//echec
-					//affectation paramètres à la vue
+					//affectation paramï¿½tres ï¿½ la vue
 					request.setAttribute("isClient", false);
 					request.setAttribute("isErrorLogin", true);
 					request.setAttribute("notLogged", false);
@@ -252,17 +252,17 @@ public class ClientServlet extends HttpServlet {//clientServlet
 				}
 			}else {
 				if(action.equals("InscriptionClient")) {
-					//requête à la BDD
+					//requï¿½te ï¿½ la BDD
 					client = utilisateur.creerCompte(mail, motDePasse);
 					
 					if(client!=null) {
-						//affectation paramètres à la vue
+						//affectation paramï¿½tres ï¿½ la vue
 						request.setAttribute("isClient", true);
 						
 						//choix de la vue
 						vue = "/JSP/Client/AccueilClient.jsp";
 					}else {//echec
-						//affectation paramètres à la vue
+						//affectation paramï¿½tres ï¿½ la vue
 						request.setAttribute("isClient", false);
 						request.setAttribute("isErrorLogin", true);
 						request.setAttribute("notLogged", false);

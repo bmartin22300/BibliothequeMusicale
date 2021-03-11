@@ -1,8 +1,12 @@
 USE info_team08_schema;
 
 -- Création compte administrateur
-CALL nouveau_admin('adminclient@gmail.com', 'admin', true, false); 
-CALL nouveau_admin('adminmusique@gmail.com', 'admin', false, true); 
+SELECT nouveau_admin('adminclient@gmail.com', 'admin', true, false); 
+SELECT nouveau_admin('adminmusique@gmail.com', 'admin', false, true); 
+CALL existe_adminClient('adminclient@gmail.com');
+CALL existe_adminClient('adminmusique@gmail.com');
+CALL existe_adminMusique('adminclient@gmail.com');
+CALL existe_adminMusique('adminmusique@gmail.com');
 
 SELECT * FROM Administrateur;
 

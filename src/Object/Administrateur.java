@@ -49,9 +49,7 @@ public abstract class Administrateur implements AdministrateurInterface {
 		this.password = password;
 	}	
 	
-	// Méthodes de classe
-	public abstract Administrateur authentification(String mail, String password);
-	
+	// Méthodes de classe	
 	public abstract Administrateur creerAdmin(String mail, String password);
 
 	@Override

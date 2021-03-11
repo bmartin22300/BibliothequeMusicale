@@ -16,8 +16,8 @@ public class ProfilGestionnaireClient extends Administrateur implements ProfilGe
 	
 	
 	/*
-	 * Fonction authentification vérifie l'existence du couple mail, password ayant les droits de GestionnaireClient
-	 * Renvoie l'objet ProfilGestionnaireClient correspondant s'il est trouvé, null sinon
+	 * Fonction authentification vï¿½rifie l'existence du couple mail, password ayant les droits de GestionnaireClient
+	 * Renvoie l'objet ProfilGestionnaireClient correspondant s'il est trouvï¿½, null sinon
 	 */
 	@Override
 	public Administrateur authentification(String mail, String password) {
@@ -50,12 +50,11 @@ public class ProfilGestionnaireClient extends Administrateur implements ProfilGe
 	
 	/*
 	 * Fonction creerAdmin ajoute un administrateur ayant les droits de GestionnaireClient
-	 * Renvoie l'objet ProfilGestionnaireClient correspondant si l'insertion à la BDD réussit, null sinon
+	 * Renvoie l'objet ProfilGestionnaireClient correspondant si l'insertion ï¿½ la BDD rï¿½ussit, null sinon
 	 */
 	@Override
 	public Administrateur creerAdmin(String mail, String password) {
-		
-		// RÃ©cupÃ©rer une connexion de type java.sql.Connection
+		// On recupere une connexion de type java.sql.Connection
 		Connection connexion = DBManager.getInstance().getConnection();
 		
 		try {
@@ -77,14 +76,39 @@ public class ProfilGestionnaireClient extends Administrateur implements ProfilGe
 			else{
 				return null;
 			}
-			
+			else { // On cree je compte
+				
+				
+				// On execute la requete SQL et on recupere un java.sql.ResultSet
+				String request = "SELECT nouveau_admin(?, ?, ?, ?);";
+				
+				// Prepared statement 
+				PreparedStatement preparedQuery = connexion.prepareStatement(request);
+				preparedQuery.setString(1, mail);
+				preparedQuery.setString(2, password);
+				preparedQuery.setBoolean(3, true); // Profil gestion Client
+				preparedQuery.setBoolean(4, false); // Profil gestion Musique
+				
+				ResultSet rs = preparedQuery.executeQuery();
+
+				if(rs.next()) // Creation de l'Admin
+	            {
+	                int last_inserted_id = rs.getInt(1); // Id de l'Admin cree
+	                
+	                return new ProfilGestionnaireClient(last_inserted_id, mail, password);
+	            }
+				else {
+					return null;
+				}
+			}
+	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;		
+		return null;
 	}
-
+	
 	@Override
 	public boolean modifierInformationsClient(Client client, String password, String civilite, String nom,
 			String prenom, Date dateNaissance, String adresseFacturation, Genre styleMusiquePrefere) {

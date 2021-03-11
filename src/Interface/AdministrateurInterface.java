@@ -16,9 +16,7 @@ public interface AdministrateurInterface {
 	// VALIDE
 	
 	
-	// TESTE
-	public Administrateur authentification(String mail, String password);
-	
+	// TESTE	
 	public Administrateur creerAdmin(String mail, String password);
 	
 	// Parcourir Interpretes

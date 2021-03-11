@@ -3,6 +3,7 @@ package Interface;
 import java.sql.Date;
 import java.util.List;
 
+import Object.Administrateur;
 import Object.Client;
 import Object.ElementCatalogue;
 import Object.Genre;
@@ -20,6 +21,7 @@ public interface UtilisateurInterface {
 	
 	//A VERIFIER
 
+	public Administrateur authentificationAdmin(String mail, String password);
 	
 	//TODO
 	
