@@ -114,7 +114,12 @@ public abstract class Administrateur implements AdministrateurInterface {
 					int dateCreationTitre = rsTitres.getInt("dateCreation"); 
 					int dureeTitre = rsTitres.getInt("duree");
 					Genre nomGenre = Genre.valueOf(rsTitres.getString("nomGenre").toUpperCase());
-					Album albumTitre = new Album(rsTitres.getInt("Album_idCatalogue"));
+					Album albumTitre;
+					if((rsTitres.getInt("Album_idCatalogue"))==0) {
+                        albumTitre=null;
+                    }else {
+                        albumTitre = new Album(rsTitres.getInt("Album_idCatalogue"));
+                    }
 					
 					titres.add(new TitreMusical(idTitre, titreTitre, dateCreationTitre, dureeTitre, nomGenre, albumTitre, null));
 				}
@@ -264,7 +269,7 @@ public abstract class Administrateur implements AdministrateurInterface {
 		return null;
 	}
 	
-	// Interprete
+	// TitreMusical
 	/*
 	 * Fonction rechercherParNomTitre renvoie la List<TitreMusical> correspondant a la recherche en parametre
 	 */
@@ -275,7 +280,7 @@ public abstract class Administrateur implements AdministrateurInterface {
 				
 				try {
 					// On execute la requete SQL et on recupere un java.sql.ResultSet
-					String request = "CALL rechercherParTitre(?);";
+					String request = "CALL rechercherParTitreTitre(?);";
 					
 					// Prepared statement 
 					PreparedStatement preparedQuery = connexion.prepareStatement(request);
@@ -295,7 +300,12 @@ public abstract class Administrateur implements AdministrateurInterface {
 						int dateCreationTitre = rs.getInt("dateCreation"); 
 						int dureeTitre = rs.getInt("duree");
 						Genre nomGenre = Genre.valueOf(rs.getString("nomGenre").toUpperCase());
-						Album albumTitre = new Album(rs.getInt("Album_idCatalogue"));
+						Album albumTitre;
+						if((rs.getInt("Album_idCatalogue"))==0) {
+                            albumTitre=null;
+                        }else {
+                            albumTitre = new Album(rs.getInt("Album_idCatalogue"));
+                        }
 						
 						// On recherche les titres de l'interprete
 						String requestInterpretes = "CALL rechercherParIdCatalogueInterpretes(?);";
@@ -331,12 +341,7 @@ public abstract class Administrateur implements AdministrateurInterface {
 				return null;
 	}
 
-	@Override
-	public List<TitreMusical> rechercherParInterpreteTitre(String recherche) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	// TitreMusical
 	@Override
 	public List<TitreMusical> rechercherParGenreTitre(Genre genre) {
 		// TODO Auto-generated method stub
@@ -354,9 +359,6 @@ public abstract class Administrateur implements AdministrateurInterface {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
-
 
 	@Override
 	public List<Client> rechercherParMailClient(String recherche) {

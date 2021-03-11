@@ -392,7 +392,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 			// Prepared statement 
 			PreparedStatement preparedQuery = connexion.prepareStatement(request);
 			preparedQuery.setInt(1, titre.getIdCatalogue());
-			preparedQuery.setString(2, interprete.getPseudonyme());
+			preparedQuery.setInt(2, interprete.getId());
 
 			// Execution
 			if(preparedQuery.executeUpdate()>0) {
@@ -424,7 +424,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 			// Prepared statement 
 			PreparedStatement preparedQuery = connexion.prepareStatement(request);
 			preparedQuery.setInt(1, titre.getIdCatalogue());
-			preparedQuery.setString(2, interprete.getPseudonyme());
+			preparedQuery.setInt(2, interprete.getId());
 
 			// Execution
 			if(preparedQuery.executeUpdate()>0) {
@@ -583,7 +583,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 	}
 	
 	/*
-	 * Fonction ajouterDiscographie, associe l'interprete � l'album dans la BD
+	 * Fonction ajouterDiscographie, associe l'interprete a l'album dans la BD
 	 * Renvoie true et associe l'instance album a l'instance interprete si l'ajout a lieu, false sinon
 	 */
 	@Override

@@ -118,4 +118,4 @@ Select @@global.event_scheduler;
 
 CALL rechercherParIdInterpreteTitres(2);
 CALL rechercherParIdCatalogueInterpretes(2);
-CALL rechercherParTitre("");
+CALL rechercherParTitreTitre("");

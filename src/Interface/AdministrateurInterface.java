@@ -29,7 +29,6 @@ public interface AdministrateurInterface {
 	
 	// Parcourir TitreMusical
 	public List<TitreMusical> rechercherParNomTitre(String recherche);
-	public List<TitreMusical> rechercherParInterpreteTitre(String recherche);
 	public List<TitreMusical> rechercherParGenreTitre(Genre genre);
 	public List<TitreMusical> rechercherParDateSortieTitre(Date date);
 	public List<TitreMusical> parcourirCatalogueTitre();

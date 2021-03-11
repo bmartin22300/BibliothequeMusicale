@@ -153,8 +153,19 @@ public class ClientServlet extends HttpServlet {//clientServlet
     					titresSandbox.remove(0);
     				}
     				System.out.println(titresSandbox);
-    				System.out.println(adminSandbox.rechercherParNomTitre(""));
+    				System.out.println("Recherche : "+adminSandbox.rechercherParNomTitre(""));
     				System.out.println(adminSandbox.rechercherParPseudoInterprete(""));
+    				
+    				// Ajouter/Supprimer discographie
+    				Interprete interSandbox = adminSandbox.creerInterprete("Nouveau Random");
+    				System.out.println("Avant : " + titresSandbox);
+    				System.out.println(interSandbox);
+    				adminSandbox.ajouterDiscographie(titresSandbox.get(0), interSandbox);
+    				System.out.println("Après : " + titresSandbox);
+    				System.out.println(interSandbox);
+    				adminSandbox.retirerDiscographie(titresSandbox.get(0), interSandbox);
+    				System.out.println("Aprèsv2 : " + titresSandbox);
+    				System.out.println(interSandbox);
     			
     		}
     	}	         
