@@ -7,12 +7,12 @@ CALL nouveau_admin('adminmusique@gmail.com', 'admin', false, true);
 SELECT * FROM Administrateur;
 
 -- Création compte client
-CALL nouveau_client_complet('client@gmail.com', 'client', 'Homme', 'clientNom', 'clientPrenom', '1999-01-23', '18 rue des cerisiers, 92120, Montrouge', 'Variete');
-CALL nouveau_client_complet('natalieriviera@free.fr', 'ordinateur', 'Femme', 'Riviera', 'Natalie', '1950-2-10', '2 place de la rouille, 22300, Lannion', 'Rock');
-CALL nouveau_client('jaimelavie@free.fr', 'maispastouslesjours');
+SELECT nouveau_client_complet('client@gmail.com', 'client', 'Homme', 'clientNom', 'clientPrenom', '1999-01-23', '18 rue des cerisiers, 92120, Montrouge', 'Variete');
+SELECT nouveau_client_complet('natalieriviera@free.fr', 'ordinateur', 'Femme', 'Riviera', 'Natalie', '1950-2-10', '2 place de la rouille, 22300, Lannion', 'Rock');
+SELECT nouveau_client('jaimelavie@free.fr', 'maispastouslesjours');
 
 -- TODO : ajouter un supprimerClient pour pouvoir modifier le mail
-CALL modifier_client('jaimelavie@free.fr', 'maispastouslesjours', 'Femme', 'Lavie', 'James', '1980-6-17', '5 rue du desespoir, 650, Nowhere', 'TECHNO');
+CALL modifier_client(3, 'jaimelavie@free.fr', 'maispastouslesjours', 'Femme', 'Lavie', 'James', '1980-6-17', '5 rue du desespoir, 650, Nowhere', 'TECHNO');
 
 CALL authentification_client('natalieriviera@free.fr', 'ordinateur');
 SELECT * FROM Client;
@@ -20,9 +20,9 @@ SELECT * FROM Client;
 -- Création Interprète
 CALL nouveau_interprete_complet('Edith Piaf', 'Edith', 'Giovanna Gassion', '1915-12-19');
 CALL nouveau_interprete('Noir Désir');
-CALL modifier_interprete('Noir Désir', 'Groupe', 'Groupe', '1980-01-01');
+CALL modifier_interprete(2, 'Noir Désir', 'Groupe', 'Groupe', '1980-01-01');
 CALL nouveau_interprete_complet('Edith PiafeeTYPO', 'Edith', 'Giovanna Gassion', '1915-12-19');
--- CALL supprimer_interprete('Edith PiafeeTYPO');
+CALL supprimer_interprete(3);
 
 SELECT * FROM Interprete;
 SELECT * FROM TitreMusical;
@@ -30,32 +30,32 @@ SELECT * FROM TitreMusical;
 -- Création TitreMusical
 SELECT nouveau_titre('La Vie en rose', '1946', 185, 'Variete');
 -- SELECT retrouver_titre('La Vie en rose');
-CALL association_titre_interprete(1, 'Edith Piaf');
+CALL association_titre_interprete(1, 1);
 
 SELECT nouveau_titre('La Foule', '1957', 203, 'Variete');
 SELECT retrouver_titre('La Foule');
-CALL association_titre_interprete(2, 'Edith Piaf');
+CALL association_titre_interprete(2, 1);
 
 SELECT nouveau_titre('Non, je ne regrette rien', '1960', 142, 'Variete');
 SELECT retrouver_titre('Non, je ne regrette rien');
-CALL association_titre_interprete(3, 'Edith Piaf');
+CALL association_titre_interprete(3, 1);
 
-SELECT nouveau_titre("L'enfant roi", 2001, 363, 'Rock');CALL association_titre_interprete(4, 'Noir Désir');
-SELECT nouveau_titre("Le grand incendie", 2001, 276, 'Rock');CALL association_titre_interprete(5, 'Noir Désir');
-SELECT nouveau_titre("Le vent nous portera", 2001, 288, 'Rock');CALL association_titre_interprete(6, 'Noir Désir');
-SELECT nouveau_titre("Des armes", 2001, 168, 'Rock');CALL association_titre_interprete(7, 'Noir Désir');
-SELECT nouveau_titre("L'appartement", 2001, 251, 'Rock');CALL association_titre_interprete(8, 'Noir Désir');
-SELECT nouveau_titre("Des visages des figures", 2001, 314, 'Rock');CALL association_titre_interprete(9, 'Noir Désir');
-SELECT nouveau_titre("Son style 1", 2001, 126, 'Rock');CALL association_titre_interprete(10, 'Noir Désir');
-SELECT nouveau_titre("Son style 2", 2001, 151, 'Rock');CALL association_titre_interprete(11, 'Noir Désir');
-SELECT nouveau_titre("À l'envers à l'endroit", 2001, 247, 'Rock');CALL association_titre_interprete(12, 'Noir Désir');
-SELECT nouveau_titre("Lost", 2001, 203, 'Rock');CALL association_titre_interprete(13, 'Noir Désir');
-SELECT nouveau_titre("Bouquet de nerfs", 2001, 313, 'Rock');CALL association_titre_interprete(14, 'Noir Désir');
-SELECT nouveau_titre("L'Europe", 2001, 1424, 'Rock');CALL association_titre_interprete(15, 'Noir Désir');
+SELECT nouveau_titre("L'enfant roi", 2001, 363, 'Rock');CALL association_titre_interprete(4, 2);
+SELECT nouveau_titre("Le grand incendie", 2001, 276, 'Rock');CALL association_titre_interprete(5, 2);
+SELECT nouveau_titre("Le vent nous portera", 2001, 288, 'Rock');CALL association_titre_interprete(6, 2);
+SELECT nouveau_titre("Des armes", 2001, 168, 'Rock');CALL association_titre_interprete(7, 2);
+SELECT nouveau_titre("L'appartement", 2001, 251, 'Rock');CALL association_titre_interprete(8, 2);
+SELECT nouveau_titre("Des visages des figures", 2001, 314, 'Rock');CALL association_titre_interprete(9, 2);
+SELECT nouveau_titre("Son style 1", 2001, 126, 'Rock');CALL association_titre_interprete(10, 2);
+SELECT nouveau_titre("Son style 2", 2001, 151, 'Rock');CALL association_titre_interprete(11, 2);
+SELECT nouveau_titre("À l'envers à l'endroit", 2001, 247, 'Rock');CALL association_titre_interprete(12, 2);
+SELECT nouveau_titre("Lost", 2001, 203, 'Rock');CALL association_titre_interprete(13, 2);
+SELECT nouveau_titre("Bouquet de nerfs", 2001, 313, 'Rock');CALL association_titre_interprete(14, 2);
+SELECT nouveau_titre("L'Europe", 2001, 1424, 'Rock');CALL association_titre_interprete(15, 2);
 
 -- Création Album
 CALL nouveau_album('Des Visages des Figures','2001'); -- idAlbum = 16
-CALL association_album_interprete(16, 'Noir Désir'); -- Remplissage table AlbumInterprete
+CALL association_album_interprete(16, 2); -- Remplissage table AlbumInterprete
 CALL ajout_titre_album(4,16); -- Ajout de titre 4 à l'album 16
 CALL ajout_titre_album(5,16);
 CALL ajout_titre_album(6,16);
@@ -70,15 +70,15 @@ CALL ajout_titre_album(14,16);
 CALL ajout_titre_album(15,16);
 
 SELECT nouveau_titre("Mauvais", '1901', 135, 'Variete');
--- CALL modifier_titre(17, "PasSiMauvais", '1960', 190, 'Rock');
+CALL modifier_titre(17, "PasSiMauvais", '1960', 190, 'Rock');
 -- CALL supprimer_titre(17);
--- CALL association_titre_interprete(17, 'Noir Désir');
--- CALL dissociation_titre_interprete(17, 'Noir Désir');
--- CALL modifier_album(16, 'Des Visages des ures','2101');
+CALL association_titre_interprete(17, 2);
+CALL dissociation_titre_interprete(17, 2);
+CALL modifier_album(16, 'Des Visages des ures','2101');
 -- CALL supprimer_album(16);
--- CALL association_album_interprete(16, 'Edith Piaf');
--- CALL dissociation_album_interprete(16, 'Edith Piaf');
--- CALL dissociation_titre_album(14, 16);
+CALL association_album_interprete(16, 1);
+CALL dissociation_album_interprete(16, 1);
+CALL dissociation_titre_album(14, 16);
 
 CALL reset_Vues_Catalogue();
 SELECT * FROM ElementCatalogue;

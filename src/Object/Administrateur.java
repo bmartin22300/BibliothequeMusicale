@@ -12,22 +12,30 @@ import Interface.AdministrateurInterface;
 
 public abstract class Administrateur implements AdministrateurInterface {
 
+	private int id;
 	private String mail;
 	private String password;
 
 	// Constructeur
-	public Administrateur(String mail, String password) {
+	public Administrateur(int id, String mail, String password) {
 		super();
+		this.id = id;
 		this.mail = mail;
 		this.password = password;
 	}
 	
 	// Getters et Setters
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public String getMail() {
 		return mail;
 	}
-
-
 
 	public void setMail(String mail) {
 		this.mail = mail;

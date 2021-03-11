@@ -16,7 +16,7 @@ public interface ClientInterface {
 	// VALIDE
 	
 	// TESTE
-	public Client modifierInformations(String password, String civilite, String nom, String prenom, Date dateNaissance, String adresseFacturation, Genre styleMusiquePrefere);
+	public Client modifierInformations(String mail, String password, String civilite, String nom, String prenom, Date dateNaissance, String adresseFacturation, Genre styleMusiquePrefere);
 	
 	//A VERIFIER
 

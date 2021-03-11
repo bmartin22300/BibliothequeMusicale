@@ -108,9 +108,9 @@ public class ClientServlet extends HttpServlet {//clientServlet
     			
     			// CLIENT
     			System.out.println("CLIENT");
-    			clientSandbox.modifierInformations( passwordSandbox, civiliteSandbox, nomSandbox, prenomSandbox, dateNaissanceSandbox, adresseSandbox, styleMusiqueSandbox);
+    			clientSandbox.modifierInformations(mailSandbox, passwordSandbox, civiliteSandbox, nomSandbox, prenomSandbox, dateNaissanceSandbox, adresseSandbox, styleMusiqueSandbox);
     			System.out.println(clientSandbox);
-    			clientSandbox.modifierInformations( passwordSandbox, null, null, null, null, null, styleMusiqueSandbox);
+    			clientSandbox.modifierInformations(mailSandbox, passwordSandbox, null, null, null, null, null, styleMusiqueSandbox);
     			System.out.println(clientSandbox);
     			
     			// ADMIN
@@ -220,7 +220,7 @@ public class ClientServlet extends HttpServlet {//clientServlet
 			
 			//mise à jour BDD
 			//TODO : ajouter un supprimerClient pour pouvoir modifier le mail
-    		Client clientModifie=client.modifierInformations(motDePasse, civilite, nom, prenom, dateDeNaissance, adresse, styleMusiquePrefere);
+    		Client clientModifie=client.modifierInformations(mail, motDePasse, civilite, nom, prenom, dateDeNaissance, adresse, styleMusiquePrefere);
     		if(clientModifie!=null) {
     			this.client=clientModifie;
     		}

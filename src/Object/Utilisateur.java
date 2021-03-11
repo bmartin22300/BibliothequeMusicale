@@ -84,17 +84,21 @@ public class Utilisateur implements UtilisateurInterface {
 		
 		try {
 			// Exécuter la requête SQL et récupérer un java.sql.ResultSet
-			String request = "CALL nouveau_client(?, ?);";
+			String request = "SELECT nouveau_client(?, ?);";
 			
 			// Prepared statement 
 			PreparedStatement preparedQuery = connexion.prepareStatement(request);
 			preparedQuery.setString(1, mail);
 			preparedQuery.setString(2, password);
 			
-			// Execution
-			if(preparedQuery.executeUpdate()>0) {
-				return new Client(mail, password);
-			}
+			ResultSet rs = preparedQuery.executeQuery();
+			
+            if(rs.next()) // Creation du Client
+            {
+                int last_inserted_id = rs.getInt(1); // Id du Client cree
+                
+                return new Client(last_inserted_id, mail, password);
+            }
 			else{
 				return null;
 			}
@@ -120,7 +124,7 @@ public class Utilisateur implements UtilisateurInterface {
 		try {
 			
 			// Exécuter la requête SQL et récupérer un java.sql.ResultSet
-			String request = "CALL nouveau_client_complet(?, ?, ?, ?, ?, ?, ?, ?);";
+			String request = "SELECT nouveau_client_complet(?, ?, ?, ?, ?, ?, ?, ?);";
 			
 			// Prepared statement 
 			PreparedStatement preparedQuery = connexion.prepareStatement(request);
@@ -133,9 +137,12 @@ public class Utilisateur implements UtilisateurInterface {
 			preparedQuery.setString(7, adresseFacturation);
 			preparedQuery.setString(8, styleMusiquePrefere.toString());
 			
-			// Execution
-			if(preparedQuery.executeUpdate()>0) {
-				return new Client(mail, password, civilite, nom, prenom, dateNaissance, adresseFacturation, styleMusiquePrefere);
+			ResultSet rs = preparedQuery.executeQuery();
+			
+            if(rs.next()) // Creation du Client
+            {
+                int last_inserted_id = rs.getInt(1); // Id du Client cree
+				return new Client(last_inserted_id, mail, password, civilite, nom, prenom, dateNaissance, adresseFacturation, styleMusiquePrefere);
 			}
 			else{
 				return null;

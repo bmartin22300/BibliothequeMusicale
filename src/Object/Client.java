@@ -10,6 +10,7 @@ import Interface.ClientInterface;
 
 public class Client implements ClientInterface {
 
+	private int id;
 	private String mail;
 	private String password;
 	private String civilite;
@@ -23,9 +24,10 @@ public class Client implements ClientInterface {
 	
 	
 	// Constructeurs
-	public Client(String mail, String password, String civilite, String nom, String prenom, Date dateNaissance,
+	public Client(int id, String mail, String password, String civilite, String nom, String prenom, Date dateNaissance,
 			String adresseFacturation, Genre styleMusiquePrefere) {
 		super();
+		this.id = id;
 		this.mail = mail;
 		this.password = password;
 		this.civilite = civilite;
@@ -37,8 +39,9 @@ public class Client implements ClientInterface {
 		this.styleMusiquePrefere = styleMusiquePrefere;
 	}
 
-	public Client(String mail, String password) {
+	public Client(int id, String mail, String password) {
 		super();
+		this.id = id;
 		this.mail = mail;
 		this.password = password;
 	}
@@ -59,6 +62,14 @@ public class Client implements ClientInterface {
 	}
 
 	// Getters et Setters
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getMail() {
 		return mail;
 	}
@@ -186,7 +197,7 @@ public class Client implements ClientInterface {
 	 * Renvoie true si la modification a lieu, false sinon
 	 */
 	@Override
-	public Client modifierInformations(String password, String civilite, String nom, String prenom,
+	public Client modifierInformations(String mail, String password, String civilite, String nom, String prenom,
 			Date dateNaissance, String adresseFacturation, Genre styleMusiquePrefere) {
 		// Recuperer la connexion
 		Connection connexion = DBManager.getInstance().getConnection();
@@ -194,18 +205,19 @@ public class Client implements ClientInterface {
 		try {
 			
 			// Maj BDD
-			String request = "CALL modifier_client(?, ?, ?, ?, ?, ?, ?, ?);";
+			String request = "CALL modifier_client(?, ?, ?, ?, ?, ?, ?, ?, ?);";
 			
 			// Prepared statement 
 			PreparedStatement preparedQuery = connexion.prepareStatement(request);
-			preparedQuery.setString(1, this.getMail());
-			preparedQuery.setString(2, password);
-			preparedQuery.setString(3, civilite);
-			preparedQuery.setString(4, nom);
-			preparedQuery.setString(5, prenom);
-			preparedQuery.setDate(6, (java.sql.Date) dateNaissance);
-			preparedQuery.setString(7, adresseFacturation);
-			preparedQuery.setString(8, styleMusiquePrefere.toString());
+			preparedQuery.setInt(1, this.getId());
+			preparedQuery.setString(2, mail);
+			preparedQuery.setString(3, password);
+			preparedQuery.setString(4, civilite);
+			preparedQuery.setString(5, nom);
+			preparedQuery.setString(6, prenom);
+			preparedQuery.setDate(7, (java.sql.Date) dateNaissance);
+			preparedQuery.setString(8, adresseFacturation);
+			preparedQuery.setString(9, styleMusiquePrefere.toString());
 			
 			// Execution
 			if(preparedQuery.executeUpdate()>0) { // Succes de la modification
