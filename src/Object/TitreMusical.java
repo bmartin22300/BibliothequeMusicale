@@ -21,6 +21,17 @@ public class TitreMusical extends ElementCatalogue{
 		this.interpretes = interpretes;
 	}
 
+	public TitreMusical(int idCatalogue, String titre, int anneeCreation, int duree, Genre genre, Album album,
+			List<Interprete> interpretes) {
+		super(idCatalogue);
+		this.titre = titre;
+		this.anneeCreation = anneeCreation;
+		this.duree = duree;
+		this.genre = genre;
+		this.album = album;
+		this.interpretes = interpretes;
+	}
+
 	public Album getAlbum() {
 		return album;
 	}

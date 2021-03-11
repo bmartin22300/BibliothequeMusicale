@@ -149,7 +149,7 @@ public class ClientServlet extends HttpServlet {//clientServlet
     				
     				adminSandbox.modifierTitre(titresSandbox.get(0), "Nouveau titre", 1500, 10, Genre.valueOf("VARIETE"));
     				System.out.println(titresSandbox);
-    				if(adminSandbox.supprimerTitre(titresSandbox.get(0))){// Suppression de "Nouveau titre")
+    				if(adminSandbox.supprimerTitre(titresSandbox.get(0))){ // Suppression de "Nouveau titre")
     					titresSandbox.remove(0);
     				}
     				System.out.println(titresSandbox);

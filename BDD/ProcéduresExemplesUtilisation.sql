@@ -115,3 +115,5 @@ CALL rechercherParNomInterprete('i');
 
 SELECT nouveau_titre("Mais au moins c'est des titres", 1983, 345, 'TECHNO');
 Select @@global.event_scheduler;
+
+CALL rechercherParIdInterpreteTitres(1);

@@ -21,6 +21,11 @@ public class Album extends ElementCatalogue{
 		this.interpretes = interpretes;
 		this.titres = titres;
 	}
+	
+	public Album(int idCatalogue) {
+		super(idCatalogue);
+	}
+
 
 	
 	// Getters et Setters

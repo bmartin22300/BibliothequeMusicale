@@ -26,7 +26,13 @@ public interface AdministrateurInterface {
 	
 	
 	//A VERIFIER
-
+	
+	// Parcourir TitreMusical
+	public List<TitreMusical> rechercherParNomTitre(String recherche);
+	public List<TitreMusical> rechercherParInterpreteTitre(String recherche);
+	public List<TitreMusical> rechercherParGenreTitre(Genre genre);
+	public List<TitreMusical> rechercherParDateSortieTitre(Date date);
+	public List<TitreMusical> parcourirCatalogueTitre();
 
 	
 	//TODO
@@ -47,13 +53,6 @@ public interface AdministrateurInterface {
 	public List<ElementCatalogue> rechercherParGenreCatalogue(Genre genre);
 	public List<ElementCatalogue> rechercherParDateSortieCatalogue(Date date);
 	public List<ElementCatalogue> parcourirCatalogueCatalogue();
-	
-	// Parcourir TitreMusical
-	public List<TitreMusical> rechercherParNomTitre(String recherche);
-	public List<TitreMusical> rechercherParInterpreteTitre(String recherche);
-	public List<TitreMusical> rechercherParGenreTitre(Genre genre);
-	public List<TitreMusical> rechercherParDateSortieTitre(Date date);
-	public List<TitreMusical> parcourirCatalogueTitre();
 	
 	// Parcourir Album
 	public List<Album> rechercherParNomAlbum(String recherche);

@@ -32,6 +32,18 @@ public class Interprete {
 		this.albums = new ArrayList<Album>();
 		this.titres = new ArrayList<TitreMusical>();
 	}
+	
+	// Constructeur
+		public Interprete(int id, String pseudonyme, String prenom, String nom, Date dateNaissance, List<TitreMusical> titres) {
+			super();
+			this.id = id;
+			this.pseudonyme = pseudonyme;
+			this.prenom = prenom;
+			this.nom = nom;
+			this.dateNaissance = dateNaissance;
+			this.albums = new ArrayList<Album>();
+			this.titres = titres;
+		}
 
 	// Getters et Setters
 	public int getId() {

@@ -49,7 +49,7 @@ public abstract class Administrateur implements AdministrateurInterface {
 		this.password = password;
 	}	
 	
-	// Méthodes de classe	
+	// Methodes de classe	
 	public abstract Administrateur creerAdmin(String mail, String password);
 
 	@Override
@@ -63,115 +63,8 @@ public abstract class Administrateur implements AdministrateurInterface {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public List<Client> rechercherParMailClient(String recherche) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Client> rechercherParNomClient(String recherche) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Client> rechercherParPrenomClient(String recherche) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ElementCatalogue> rechercherParNomCatalogue(String recherche) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ElementCatalogue> rechercherParInterpreteCatalogue(String recherche) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ElementCatalogue> rechercherParGenreCatalogue(Genre genre) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ElementCatalogue> rechercherParDateSortieCatalogue(Date date) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ElementCatalogue> parcourirCatalogueCatalogue() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<TitreMusical> rechercherParNomTitre(String recherche) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<TitreMusical> rechercherParInterpreteTitre(String recherche) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<TitreMusical> rechercherParGenreTitre(Genre genre) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<TitreMusical> rechercherParDateSortieTitre(Date date) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<TitreMusical> parcourirCatalogueTitre() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Album> rechercherParNomAlbum(String recherche) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Album> rechercherParInterpreteAlbum(String recherche) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Album> rechercherParGenreAlbum(Genre genre) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Album> rechercherParDateSortieAlbum(Date date) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Album> parcourirCatalogueAlbum() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
+	// Interprete
 	/*
 	 * Fonction rechercherParPseudoInterprete renvoie la List<Interprete> correspondant a la recherche en parametre
 	 */
@@ -202,8 +95,32 @@ public abstract class Administrateur implements AdministrateurInterface {
 				String nom = rs.getString("nom");
 				Date dateNaissance = rs.getDate("dateNaissance");
 				
+				// On recherche les titres de l'interprete
+				String requestTitres = "CALL rechercherParIdInterpreteTitres(?);";
+				
+				// Prepared statement 
+				PreparedStatement preparedQueryTitres = connexion.prepareStatement(requestTitres);
+				preparedQueryTitres.setInt(1, id);
+				
+				// Retour
+				ResultSet rsTitres = preparedQueryTitres.executeQuery();
+				//Creation de la liste des titres
+				List<TitreMusical> titres = new ArrayList<TitreMusical>();
+				
+				while(rsTitres.next()) {
+					// Creation du titre
+					int idTitre = rsTitres.getInt("idCatalogue");
+					String titreTitre = rsTitres.getString("titre");
+					int dateCreationTitre = rsTitres.getInt("dateCreation"); 
+					int dureeTitre = rsTitres.getInt("duree");
+					Genre nomGenre = Genre.valueOf(rsTitres.getString("nomGenre").toUpperCase());
+					Album albumTitre = new Album(rsTitres.getInt("Album_idCatalogue"));
+					
+					titres.add(new TitreMusical(idTitre, titreTitre, dateCreationTitre, dureeTitre, nomGenre, albumTitre, null));
+				}
+				
 				// Ajout a la liste retournee
-				interpretes.add(new Interprete(id, pseudo, prenom, nom, dateNaissance));
+				interpretes.add(new Interprete(id, pseudo, prenom, nom, dateNaissance, titres));
 			}
 			
 			return interpretes;
@@ -291,13 +208,126 @@ public abstract class Administrateur implements AdministrateurInterface {
 				// Ajout a la liste retournee
 				interpretes.add(new Interprete(id, pseudo, prenom, nom, dateNaissance));
 			}
-			
 			return interpretes;
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
+	}
+	
+	// Interprete
+	/*
+	 * Fonction rechercherParNomTitre renvoie la List<TitreMusical> correspondant a la recherche en parametre
+	 */
+	@Override
+	public List<TitreMusical> rechercherParNomTitre(String recherche) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<TitreMusical> rechercherParInterpreteTitre(String recherche) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<TitreMusical> rechercherParGenreTitre(Genre genre) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<TitreMusical> rechercherParDateSortieTitre(Date date) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<TitreMusical> parcourirCatalogueTitre() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+
+
+	@Override
+	public List<Client> rechercherParMailClient(String recherche) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Client> rechercherParNomClient(String recherche) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Client> rechercherParPrenomClient(String recherche) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ElementCatalogue> rechercherParNomCatalogue(String recherche) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ElementCatalogue> rechercherParInterpreteCatalogue(String recherche) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ElementCatalogue> rechercherParGenreCatalogue(Genre genre) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ElementCatalogue> rechercherParDateSortieCatalogue(Date date) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ElementCatalogue> parcourirCatalogueCatalogue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Album> rechercherParNomAlbum(String recherche) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Album> rechercherParInterpreteAlbum(String recherche) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Album> rechercherParGenreAlbum(Genre genre) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Album> rechercherParDateSortieAlbum(Date date) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Album> parcourirCatalogueAlbum() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 	
