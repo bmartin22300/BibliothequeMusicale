@@ -220,7 +220,9 @@ public class ClientServlet extends HttpServlet {//clientServlet
 			
 			//mise à jour BDD
 			//TODO : ajouter un supprimerClient pour pouvoir modifier le mail
+    		System.out.println(client);
     		Client clientModifie=client.modifierInformations(mail, motDePasse, civilite, nom, prenom, dateDeNaissance, adresse, styleMusiquePrefere);
+    		System.out.println(clientModifie);
     		if(clientModifie!=null) {
     			this.client=clientModifie;
     		}

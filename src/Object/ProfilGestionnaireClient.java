@@ -10,8 +10,8 @@ import Interface.ProfilGestionnaireClientInterface;
 
 public class ProfilGestionnaireClient extends Administrateur implements ProfilGestionnaireClientInterface{
 
-	public ProfilGestionnaireClient(String mail, String password) {
-		super(mail,password);
+	public ProfilGestionnaireClient(int id, String mail, String password) {
+		super(id, mail,password);
 	}
 
 	/*
@@ -37,7 +37,7 @@ public class ProfilGestionnaireClient extends Administrateur implements ProfilGe
 			
 			// Vrai si les identifiants correspondent à un compte
 			if(rs.next()) {
-				return new ProfilGestionnaireClient(mail, password);
+				return new ProfilGestionnaireClient(id, mail, password);
 			};
 			
 		} catch (SQLException e) {

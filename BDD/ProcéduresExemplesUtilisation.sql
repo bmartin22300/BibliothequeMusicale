@@ -10,6 +10,7 @@ SELECT * FROM Administrateur;
 SELECT nouveau_client_complet('client@gmail.com', 'client', 'Homme', 'clientNom', 'clientPrenom', '1999-01-23', '18 rue des cerisiers, 92120, Montrouge', 'Variete');
 SELECT nouveau_client_complet('natalieriviera@free.fr', 'ordinateur', 'Femme', 'Riviera', 'Natalie', '1950-2-10', '2 place de la rouille, 22300, Lannion', 'Rock');
 SELECT nouveau_client('jaimelavie@free.fr', 'maispastouslesjours');
+CALL existe_client('jaimelavie@free.fr');
 
 -- TODO : ajouter un supprimerClient pour pouvoir modifier le mail
 CALL modifier_client(3, 'jaimelavie@free.fr', 'maispastouslesjours', 'Femme', 'Lavie', 'James', '1980-6-17', '5 rue du desespoir, 650, Nowhere', 'TECHNO');

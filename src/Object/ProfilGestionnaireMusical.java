@@ -13,8 +13,8 @@ import Interface.ProfilGestionnaireMusicalInterface;
 
 public class ProfilGestionnaireMusical extends Administrateur implements ProfilGestionnaireMusicalInterface{
 
-	public ProfilGestionnaireMusical(String mail, String password) {
-		super(mail,password);
+	public ProfilGestionnaireMusical(int id, String mail, String password) {
+		super(id, mail,password);
 	}
 
 	
@@ -286,7 +286,6 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 				return nouveauTitre;
             }
             else {
-            	System.out.println(rs+ " RS");
             	return null;
             }		
 			
