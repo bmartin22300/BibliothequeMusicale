@@ -73,6 +73,54 @@ public class Utilisateur implements UtilisateurInterface {
 	
 	
 	/*
+	 * Fonction authentification vérifie l'existence du couple mail, password ayant des droits Administrateur
+	 * Renvoie l'objet Administrateur correspondant s'il est trouvé, null sinon
+	 */
+	@Override
+	public Administrateur authentificationAdmin(String mail, String password) {
+		// Recuperer une connexion de type java.sql.Connection
+		Connection connexion = DBManager.getInstance().getConnection();
+		
+		try {
+			// Executer la requete SQL et recuperer un java.sql.ResultSet
+			String request = "CALL authentification_admin(?, ?);";
+			
+			// Prepared statement 
+			PreparedStatement preparedQuery = connexion.prepareStatement(request);
+			preparedQuery.setString(1, mail);
+			preparedQuery.setString(2, password);
+			
+			// Retour
+			ResultSet rs = preparedQuery.executeQuery();
+			
+			// Vrai si les identifiants correspondent a  un compte
+			if(rs.next()) {
+				int id = rs.getInt("idAdmin"); // Id de l'administrateur trouve
+				String mailRS = rs.getString("mail"); // mail de l'administrateur trouve
+				String passwordRS = rs.getString("password"); // password de l'administrateur trouve
+				boolean profilGestionClientRS = rs.getBoolean("profilGestionClient"); // true si AdminClient
+				boolean profilGestionMusiqueRS = rs.getBoolean("profilGestionMusique"); // true si AdminMusique
+				
+				if(profilGestionClientRS) {
+					return new ProfilGestionnaireClient(id, mailRS, passwordRS);
+				}
+				else if(profilGestionMusiqueRS) {
+					return new ProfilGestionnaireMusical(id, mailRS, passwordRS);
+				}
+				else {
+					return null;
+				}
+				
+			};
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/*
 	 * Fonction creerCompte, creation d'un nouveau Client dans la BDD
 	 * Renvoie l'objet Client si succès, null sinon
 	 */

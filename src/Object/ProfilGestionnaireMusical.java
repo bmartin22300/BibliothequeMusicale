@@ -68,41 +68,6 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 		return null;
 	}
 
-	// Methodes heritees d'Administrateur
-		/*
-		 * Fonction authentification v�rifie l'existence du couple mail, password ayant les droits de GestionnaireMusical
-		 * Renvoie l'objet ProfilGestionnaireMusical correspondant s'il est trouv�, null sinon
-		 */
-		@Override
-		public Administrateur authentification(String mail, String password) {
-			// Récupérer une connexion de type java.sql.Connection
-			Connection connexion = DBManager.getInstance().getConnection();
-			
-			try {
-				// Exécuter la requête SQL et récupérer un java.sql.ResultSet
-				String request = "CALL authentification_adminMusique(?, ?);";
-				
-				// Prepared statement 
-				PreparedStatement preparedQuery = connexion.prepareStatement(request);
-				preparedQuery.setString(1, mail);
-				preparedQuery.setString(2, password);
-				
-				// Retour
-				ResultSet rs = preparedQuery.executeQuery();
-				// Vrai si les identifiants correspondent à un compte
-				if(rs.next()) {
-					return new ProfilGestionnaireMusical(mail, password);
-				}
-				
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return null;
-		}
-
-	
-	
 	// Methodes specifiques a la classe
 	
 	// Interprete

@@ -15,38 +15,6 @@ public class ProfilGestionnaireClient extends Administrateur implements ProfilGe
 	}
 	
 	
-	/*
-	 * Fonction authentification v�rifie l'existence du couple mail, password ayant les droits de GestionnaireClient
-	 * Renvoie l'objet ProfilGestionnaireClient correspondant s'il est trouv�, null sinon
-	 */
-	@Override
-	public Administrateur authentification(String mail, String password) {
-		// Récupérer une connexion de type java.sql.Connection
-		Connection connexion = DBManager.getInstance().getConnection();
-		
-		try {
-			// Exécuter la requête SQL et récupérer un java.sql.ResultSet
-			String request = "CALL authentification_adminClient(?, ?);";
-			
-			// Prepared statement 
-			PreparedStatement preparedQuery = connexion.prepareStatement(request);
-			preparedQuery.setString(1, mail);
-			preparedQuery.setString(2, password);
-			
-			// Retour
-			ResultSet rs = preparedQuery.executeQuery();
-			
-			// Vrai si les identifiants correspondent à un compte
-			if(rs.next()) {
-				return new ProfilGestionnaireClient(id, mail, password);
-			};
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
 	
 	/*
 	 * Fonction creerAdmin ajoute un administrateur ayant les droits de GestionnaireClient
