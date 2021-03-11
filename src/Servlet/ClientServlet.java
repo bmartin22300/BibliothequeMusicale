@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Object.Album;
 import Object.Client;
 import Object.Genre;
 import Object.Interprete;
@@ -167,6 +168,12 @@ public class ClientServlet extends HttpServlet {//clientServlet
     				System.out.println("Aprèsv2 : " + titresSandbox);
     				System.out.println(interSandbox);
     			
+    				// Album
+    				System.out.println("ALBUM");
+    				Album albumSandbox = adminSandbox.creerAlbum("Mon Album", 2000, titresSandbox, interpretesSandbox);
+    				System.out.println(albumSandbox);
+    				Album albumSandboxVide = adminSandbox.creerAlbum("Mon Album", 2000, null, null);
+    				System.out.println(albumSandboxVide);
     		}
     	}	         
         //affichage vue	

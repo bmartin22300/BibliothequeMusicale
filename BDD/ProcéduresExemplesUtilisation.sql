@@ -59,7 +59,7 @@ SELECT nouveau_titre("Bouquet de nerfs", 2001, 313, 'Rock');CALL association_tit
 SELECT nouveau_titre("L'Europe", 2001, 1424, 'Rock');CALL association_titre_interprete(15, 2);
 
 -- Création Album
-CALL nouveau_album('Des Visages des Figures','2001'); -- idAlbum = 16
+SELECT nouveau_album('Des Visages des Figures','2001'); -- idAlbum = 16
 CALL association_album_interprete(16, 2); -- Remplissage table AlbumInterprete
 CALL ajout_titre_album(4,16); -- Ajout de titre 4 à l'album 16
 CALL ajout_titre_album(5,16);

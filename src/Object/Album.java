@@ -81,6 +81,7 @@ public class Album extends ElementCatalogue{
 
 	@Override
 	public String toString() {
-		return "Album [nom=" + nom + ", anneeSortie=" + anneeSortie + ", duree=" + duree + "]";
+		return "Album [nom=" + nom + ", anneeSortie=" + anneeSortie + ", duree=" + duree + ", interpretes="
+				+ interpretes + ", titres=" + titres + "]";
 	}
 }

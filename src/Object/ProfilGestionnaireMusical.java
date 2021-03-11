@@ -265,17 +265,17 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
     			preparedQueryInterprete.setInt(1, last_inserted_id);
     			
     			TitreMusical nouveauTitre = new TitreMusical(last_inserted_id, titre, anneeCreation, duree, genre, interpretes); // Creation du titre
-				for(Interprete interprete : interpretes){ // On associe chaque interprete au titre
-					
-					/*List<TitreMusical> list = new ArrayList<TitreMusical>();
-					list.addAll(interprete.getTitres());
-					list.add(nouveauTitre);*/
-					interprete.addTitre(nouveauTitre);
-					
-					preparedQueryInterprete.setInt(2, interprete.getId());
+    			if(interpretes!=null) {
+    				for(Interprete interprete : interpretes){ // On associe chaque interprete au titre
+    					
+    					interprete.addTitre(nouveauTitre);
+    					
+    					preparedQueryInterprete.setInt(2, interprete.getId());
 
-					preparedQueryInterprete.executeUpdate();
-				}
+    					preparedQueryInterprete.executeUpdate();
+    				}
+    			}
+				
 				
 				return nouveauTitre;
             }
@@ -442,7 +442,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 	// Album
 	/*
 	 * Fonction creerAlbum, creation d'un nouveau Album dans la BDD
-	 * Renvoie l'objet Album si succ�s, null sinon
+	 * Renvoie l'objet Album si succes, null sinon
 	 */
 	@Override
 	public Album creerAlbum(String nom, int anneeSortie, List<TitreMusical> titres, List<Interprete> interpretes) {
@@ -453,16 +453,15 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 		try {
 			
 			// On execute la requete SQL et on recupere un java.sql.ResultSet
-			String request = "CALL nouveau_album(?, ?);";
+			String request = "SELECT nouveau_album(?, ?);";
 			
 			// Prepared statement ajout Album
 			PreparedStatement preparedQuery = connexion.prepareStatement(request);
 			preparedQuery.setString(1, nom);
 			preparedQuery.setInt(2, anneeSortie);
 			
-			preparedQuery.executeUpdate();
+			ResultSet rs = preparedQuery.executeQuery();
 			
-			ResultSet rs = preparedQuery.getGeneratedKeys();
             if(rs.next()) // Ajout des Titres
             {
                 int last_inserted_id = rs.getInt(1); // Id de l'album cree
@@ -474,17 +473,19 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
                 // Prepared statement 
     			PreparedStatement preparedQueryTitres = connexion.prepareStatement(requestTitre);
     			
-    			preparedQueryTitres.setInt(2, last_inserted_id); // Id de l'album
+    			preparedQueryTitres.setInt(1, last_inserted_id); // Id de l'album
     			
-				for(TitreMusical titre : titres){ // On associe chaque interprete au titre
-					
-					preparedQueryTitres.setInt(2, titre.getIdCatalogue());
+    			if(titres!=null) {
+    				for(TitreMusical titre : titres){ // On associe chaque interprete au titre
+    					
+    					preparedQueryTitres.setInt(2, titre.getIdCatalogue());
 
-					preparedQueryTitres.executeUpdate();
-					
-					dureeAlbum+=titre.getDuree();
-				}
-				
+    					preparedQueryTitres.executeUpdate();
+    					
+    					dureeAlbum+=titre.getDuree();
+    				}
+    			}
+								
 				// Association interpretes
 				String requestInterprete = "CALL association_album_interprete(?, ?);";
                 
@@ -492,12 +493,15 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
     			PreparedStatement preparedQueryInterprete = connexion.prepareStatement(requestInterprete);
     			preparedQueryInterprete.setInt(1, last_inserted_id);
     			
-				for(Interprete interprete : interpretes){ // On associe chaque interprete � l'album
-					
-					preparedQueryInterprete.setString(2, interprete.getPseudonyme());
+    			if(interpretes!=null) {
+    				for(Interprete interprete : interpretes){ // On associe chaque interprete � l'album
+    					
+    					preparedQueryInterprete.setInt(2, interprete.getId());
 
-					preparedQueryInterprete.executeUpdate();
-				}
+    					preparedQueryInterprete.executeUpdate();
+    				}
+    			}
+				
 				
 				return new Album(last_inserted_id, nom, dureeAlbum, anneeSortie, interpretes, titres);
             }
