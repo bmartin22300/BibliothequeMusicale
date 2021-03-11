@@ -174,7 +174,6 @@ public class ClientServlet extends HttpServlet {//clientServlet
 		//recuperation des paramètres du form
 		String mail = request.getParameter("mail");
 		String motDePasse = request.getParameter("password");
-		System.out.println(motDePasse);
 		
 		if(action.equals("ModificationProfilClient")) {
 			//recuperation paramètres

@@ -9,6 +9,15 @@
 	<%@include file="../header.jsp" %>
 	
 	<!--  ExternalRessource/Catalogue -->
+	<div style="margin:10px;">
+		<!-- select box -->
+		<label for="pet-select">Element à rechercher</label>
+		<select name="pets" id="pet-select">
+		    <option value="">Titres musicaux</option>
+		    <option value="dog">Interpretes</option>
+		    <option value="cat">Albums</option>
+		</select>
+	</div>
 	<div class="wrapper">
 		<!-- ExternalRessource/Catalogue element -->
 		<div class="card">

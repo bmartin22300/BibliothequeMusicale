@@ -13,9 +13,13 @@
 	<% }else{ %>
 		<!-- administrateur -->
 		<% if(isAdministrateur==true){ %>
+			<% boolean isAdministrateurMusical = (boolean)request.getAttribute("isAdministrateurMusical"); %>
 			<a class="active" href=AccueilAdministrateur>Accueil</a>
-			<a href=ModificationCatalogue>Modifier le catalogue</a>
-			<a href=ModificationProfil>Modifier un profil client</a>
+			<% if(isAdministrateurMusical==true){ %>
+				<a href=ModificationCatalogue>Modifier le catalogue</a>
+			<% } else { %>
+				<a href=ModificationProfil>Modifier un profil client</a>
+			<% } %>			
 			<a href=Statistiques>Consulter les statistiques</a>
 			<a href=ProfilAdministrateur>Modifier mon profil</a>
 			<a href=Accueil>Déconnexion</a>	

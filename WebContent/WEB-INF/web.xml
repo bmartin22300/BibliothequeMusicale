@@ -38,12 +38,15 @@
   <servlet-mapping>
     <servlet-name>AdministrateurServlet</servlet-name>
     <url-pattern>/AuthentificationAdministrateur</url-pattern>
-    <url-pattern>/InscriptionAdministrateur</url-pattern>
     <url-pattern>/AccueilAdministrateur</url-pattern>
     <url-pattern>/ProfilAdministrateur</url-pattern>
     <url-pattern>/Statistiques</url-pattern>
     <url-pattern>/ModificationProfil</url-pattern>
+    <url-pattern>/ModificationProfilAdministrateur</url-pattern>
     <url-pattern>/ModificationCatalogue</url-pattern>
+    <url-pattern>/CreationTitre</url-pattern>
+    <url-pattern>/ModificationTitre</url-pattern>
+    <url-pattern>/SuppressionTitre</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>

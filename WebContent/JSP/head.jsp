@@ -3,6 +3,7 @@
 <!-- js files -->
 <script src="JS/script.js"></script>
 <script src="JS/audioPlayerProgression.js"></script>
+<script src="JS/ajoutResultatRecherche.js"></script>
 
 <!-- css files -->
 <link rel="stylesheet" href="CSS/style.css">

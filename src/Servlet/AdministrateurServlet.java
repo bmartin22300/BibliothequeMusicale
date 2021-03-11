@@ -1,6 +1,8 @@
 package Servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Object.Administrateur;
+import Object.ElementCatalogue;
+import Object.Genre;
+import Object.Interprete;
+import Object.ProfilGestionnaireClient;
+import Object.ProfilGestionnaireMusical;
+import Object.TitreMusical;
 import Object.Utilisateur;
 
 public class AdministrateurServlet extends HttpServlet {
@@ -19,7 +27,7 @@ public class AdministrateurServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String servletPath = request.getServletPath();//récupération URL
-        
+		
         //affectation paramètres à la vue
         request.setAttribute("isClient", false);
 		
@@ -51,6 +59,7 @@ public class AdministrateurServlet extends HttpServlet {
 		    	}else {
 		    		//affectation paramètres à la vue
 		    		request.setAttribute("isAdministrateur", true);
+		    		request.setAttribute("isAdministrateurMusical", administrateur instanceof ProfilGestionnaireMusical);
 		    		request.setAttribute("password", administrateur.getPassword());
 		    		request.setAttribute("email", administrateur.getMail());
 		  
@@ -64,11 +73,25 @@ public class AdministrateurServlet extends HttpServlet {
 		                	if(servletPath.equals("/Statistiques")) {
 		                    	vue = "/JSP/Administrateur/Statistiques.jsp";
 		                    }else {
-		                    	if(servletPath.equals("/ModificationProfil")) {                            		
+		                    	if(servletPath.equals("/ModificationProfil")) {  
 		                    		vue = "/JSP/Administrateur/ModificationProfil.jsp";
 		                    	}else {
 		                    		if(servletPath.equals("/ModificationCatalogue")) {
+		                    			request.setAttribute("titresMusicaux",null);
 		                    			vue = "/JSP/Administrateur/ModificationCatalogue.jsp";
+		                    		}else {
+		                    			if(servletPath.equals("/ModificationTitre")) {
+		                    				//section Administrateur musical
+		                    				//todo vérif identité
+		                    				
+		                    				//récupération de paramètre de la vue
+		                    				String titre = request.getParameter("titre");
+		                    				
+		                    				//envoie de parametres a la vue
+		                    				request.setAttribute("titre", titre);
+		                    				
+			                    			vue = "/JSP/Administrateur/ModificationCatalogue.jsp";
+			                    		}
 		                    		}
 		                    	}
 		                    }
@@ -98,6 +121,7 @@ public class AdministrateurServlet extends HttpServlet {
 		//récupération des paramètres du form
 		String mail = request.getParameter("mail");
 		String motDePasse = request.getParameter("password");
+		String typeAdmin = request.getParameter("typeAdmin");
 		
 		if(action.equals("ModificationProfilAdministrateur")) {
 			//récupération paramètres
@@ -112,10 +136,62 @@ public class AdministrateurServlet extends HttpServlet {
 			vue = "/JSP/Administrateur/ProfilAdministrateur.jsp";
 		}else {
 			if(action.equals("AuthentificationAdministrateur")) {
+				//requête à la BDD TODO
+				if(typeAdmin.equals("GestionnaireClient")) {
+					administrateur = new ProfilGestionnaireClient(mail, motDePasse);
+				}else {
+					administrateur = new ProfilGestionnaireMusical(mail, motDePasse);
+				}
 				
-			}else {
-				if(action.equals("InscriptionAdministrateur")) {
+				if(administrateur!=null) {
+					//affectation paramètres à la vue
+					request.setAttribute("isAdministrateur", true);
+					request.setAttribute("isAdministrateurMusical", administrateur instanceof ProfilGestionnaireMusical);
 					
+					//choix de la vue
+					vue = "/JSP/Administrateur/AccueilAdministrateur.jsp";
+				}else {//echec
+					//affectation paramètres à la vue
+					request.setAttribute("isAdministrateur", false);
+					request.setAttribute("isErrorLogin", true);
+					request.setAttribute("notLogged", false);
+					
+					//choix de la vue
+					vue = "/JSP/Utilisateur/AuthentificationAdministrateur.jsp";
+				}
+			}else {
+				if(action.equals("RechercheTitre")) {
+					//récup param vue
+					String typeElement = request.getParameter("TypeElement");
+					String titre = request.getParameter("titre");
+					
+					//todo implémenter requête SQL
+					List<TitreMusical> titresMusicaux = new ArrayList<TitreMusical>();
+					List<Interprete> interpretes = new ArrayList<Interprete>();
+					TitreMusical titreMusical = new TitreMusical(0, "Ma musique 1", 2000, 210, Genre.RAP, interpretes);
+					TitreMusical titreMusical2 = new TitreMusical(1, "Ma musique 2", 1999, 210, Genre.RAP, interpretes);
+					titresMusicaux.add(titreMusical);
+					titresMusicaux.add(titreMusical2);
+					
+					//envoi param vue
+					request.setAttribute("titresMusicaux", titresMusicaux);
+					request.setAttribute("isAdministrateur", true);
+					request.setAttribute("isAdministrateurMusical", true);
+					
+					//attribution vue
+					vue = "/JSP/Administrateur/ModificationCatalogue.jsp";
+					/*
+					if(typeElement.equals("Titres musicaux")){
+						
+					}else {
+						if(typeElement.equals("Interpretes")){
+							
+						}else {
+							if(typeElement.equals("Albums")){
+								
+							}
+						}
+					}*/
 				}
 			}
 		}

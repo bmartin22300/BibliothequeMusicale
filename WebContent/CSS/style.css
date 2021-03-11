@@ -135,3 +135,16 @@ button:hover, a:hover {
 
 
 
+/* tableau resultat de recherche */
+table,
+td {
+    border: 1px solid #333;
+}
+
+thead,
+tfoot {
+    background-color: #333;
+    color: #fff;
+}
+
+
