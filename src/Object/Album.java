@@ -59,6 +59,21 @@ public class Album extends ElementCatalogue{
 		this.titres = titres;
 	}
 	
+	public void ajouterTitre(TitreMusical titre) {
+		if(this.titres==null) {
+			this.titres = new ArrayList<TitreMusical>();
+			this.titres.add(titre);
+		}
+		else {
+			this.titres.add(titre);
+		}
+	}
+	
+	public void retirerTitre(TitreMusical titre) {
+		if(this.titres!=null) {
+			this.titres.remove(titre);
+		}
+	}
 	// Méthodes de classe
 	/*
 	public void ajouterTitre(ElementCatalogue elementMusical) {

@@ -176,7 +176,13 @@ public class ClientServlet extends HttpServlet {//clientServlet
     				System.out.println(albumSandboxVide);
     				adminSandbox.modifierAlbum(albumSandbox, "Nouveau titre", 1999);
     				System.out.println(albumSandbox);
-    				adminSandbox.supprimerAlbum(albumSandboxVide);
+    				//adminSandbox.supprimerAlbum(albumSandboxVide);
+    				System.out.println(albumSandboxVide);
+    				adminSandbox.ajoutTitreAlbum(titresSandbox.get(0),albumSandboxVide);
+    				System.out.println(titresSandbox.get(0));
+    				System.out.println(albumSandboxVide);
+    				adminSandbox.suppressionTitreAlbum(titresSandbox.get(0), albumSandboxVide);
+    				System.out.println(albumSandboxVide);
     		}
     	}	         
         //affichage vue	

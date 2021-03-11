@@ -618,7 +618,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 
 			// Execution
 			if(preparedQuery.executeUpdate()>0) {
-				album.getTitres().add(titre); // On ajoute le titre
+				album.ajouterTitre(titre);  // On ajoute le titre
 				titre.setAlbum(album); // On ajoute l'album
 				album.setDuree(album.getDuree()+titre.getDuree()); // On ajoute la duree du titre a l'album
 				return true;
@@ -651,7 +651,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 
 			// Execution
 			if(preparedQuery.executeUpdate()>0) {
-				album.getTitres().remove(titre); // On supprime le titre
+				album.retirerTitre(titre); // On supprime le titre
 				titre.setAlbum(null); // On retire l'album
 				album.setDuree(album.getDuree()-titre.getDuree()); // On retire la duree du titre a l'album
 				return true;
