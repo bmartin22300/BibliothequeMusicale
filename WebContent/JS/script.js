@@ -72,3 +72,4 @@ function changerTypeElementsAffichesModification(){
 	     console.log("default case");
 	}
 }
+

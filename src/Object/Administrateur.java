@@ -115,11 +115,11 @@ public abstract class Administrateur implements AdministrateurInterface {
 					int dureeTitre = rsTitres.getInt("duree");
 					Genre nomGenre = Genre.valueOf(rsTitres.getString("nomGenre").toUpperCase());
 					Album albumTitre;
-					if((rsTitres.getInt("Album_idCatalogue"))==0) {
-                        albumTitre=null;
-                    }else {
-                        albumTitre = new Album(rsTitres.getInt("Album_idCatalogue"));
-                    }
+					if((rs.getInt("Album_idCatalogue"))==0) {
+						albumTitre=null;
+					}else {
+						albumTitre = new Album(rs.getInt("Album_idCatalogue"));
+					}
 					
 					titres.add(new TitreMusical(idTitre, titreTitre, dateCreationTitre, dureeTitre, nomGenre, albumTitre, null));
 				}
@@ -300,12 +300,7 @@ public abstract class Administrateur implements AdministrateurInterface {
 						int dateCreationTitre = rs.getInt("dateCreation"); 
 						int dureeTitre = rs.getInt("duree");
 						Genre nomGenre = Genre.valueOf(rs.getString("nomGenre").toUpperCase());
-						Album albumTitre;
-						if((rs.getInt("Album_idCatalogue"))==0) {
-                            albumTitre=null;
-                        }else {
-                            albumTitre = new Album(rs.getInt("Album_idCatalogue"));
-                        }
+						Album albumTitre = new Album(rs.getInt("Album_idCatalogue"));
 						
 						// On recherche les titres de l'interprete
 						String requestInterpretes = "CALL rechercherParIdCatalogueInterpretes(?);";

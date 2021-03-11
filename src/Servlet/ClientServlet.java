@@ -70,6 +70,7 @@ public class ClientServlet extends HttpServlet {//clientServlet
     		request.setAttribute("adresse", client.getAdresseFacturation());
     		request.setAttribute("nbEcoutes", client.getNbEcoute());
     		request.setAttribute("dateDeNaissance", client.getDateNaissance());
+    		request.setAttribute("genre", client.getStyleMusiquePrefere());
 	  
     		//affection vue
     		if(servletPath.equals("/GestionPlaylist")) {
@@ -212,6 +213,7 @@ public class ClientServlet extends HttpServlet {//clientServlet
 			String nom = request.getParameter("nom");
 			String adresse = request.getParameter("adresse");
 			String dateDeNaissanceString = request.getParameter("dateDeNaissance");
+			System.out.println(request.getParameter("civilite"));
 			String civilite="";
 			if(request.getParameter("civilite").equals("M")) {
 				civilite="M";
@@ -247,7 +249,7 @@ public class ClientServlet extends HttpServlet {//clientServlet
     		request.setAttribute("email", "");
     		request.setAttribute("adresse", "");
     		request.setAttribute("nbEcoutes", 0);
-    		request.setAttribute("dateDeNaissance", "");
+    		request.setAttribute("dateDeNaissance", new Date(System.currentTimeMillis()));
 			
 			//mise � jour BDD
 			//TODO : ajouter un supprimerClient pour pouvoir modifier le mail

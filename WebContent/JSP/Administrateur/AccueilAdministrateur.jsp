@@ -5,10 +5,12 @@
 <head>
 	<%@include file="../head.jsp" %>	 
 </head>
-<body onload="changerTypeElementsAffiches()">
+<body onload="changerTypeElementsAffichesRecherche()">
 	<%@include file="../header.jsp" %>
 	<%@ page import="java.util.List" %>
 	<%@ page import="Object.TitreMusical" %>
+	<%@ page import="Object.Interprete" %>
+	<%@ page import="Object.Album" %>
 	
 	<!--  ExternalRessource/Catalogue -->
 	<div style="margin:10px;">
@@ -22,145 +24,49 @@
 	</div>
 	
 	<% List<TitreMusical> titresMusicaux = (List<TitreMusical>)request.getAttribute("titresMusicaux"); %>
-	<% int interpretes = (int)request.getAttribute("interpretes"); %>
-	<% int albums = (int)request.getAttribute("albums"); %>
+	<% List<Interprete> interpretes = (List<Interprete>)request.getAttribute("interpretes"); %>
+	<% List<Album> albums = (List<Album>)request.getAttribute("albums"); %>
 	
-		
-	<% if (titresMusicaux!=null) {%>
-		<div class="wrapper" id="catalogueTitresMusicaux" style="display:grid;">
+	<!--  Catalogue -->
+	
+	<!--  titresMusicaux -->
+	<div class="wrapper" id="catalogueTitresMusicaux" style="display:grid;">	
+		<% if (titresMusicaux!=null) {%>
        		<% for( TitreMusical elem : titresMusicaux ) {%>
-				<div class="card catalogueTitreMusical">	
-					<!-- ExternalRessource/Catalogue element -->
-					<img src="ExternalRessource/Catalogue/Image/TitreMusical/titreMusical.png" alt="Denim Jeans" style="width:100%">
+				<div class="card">	
+					<img src="ExternalRessource/Catalogue/Image/titreMusical.png" alt="Denim Jeans" style="width:100%">
 					<audio id="player" controls preload tabindex="0">
 						<source type="audio/mp3"/>
 						Your browser does not support HTML5 audio.
 					</audio>
-				  <h1>Ce monde est cruel</h1>
-				  <p class="price">Vald</p>
-				  <p><button>Ce monde est cruel</button></p>
-					<!-- connexion client -->
-				    <p><a href="ModificationTitre?titre=cmec">Modifier</a></p>
-					<!-- connexion client -->
-				    <p><a href="SupprimerTitre">Supprimer</a></p>
+				  <%if(elem.getTitre()!=null){ %><h1><%= elem.getTitre() %></h1><%} %>
+				  <%if(elem.getInterpretes()!=null){ %><p><%= elem.getInterpretes() %></p><%} %>
+				  <%if(elem.getGenre()!=null){ %><p class="price"><%= elem.getGenre() %></p><%} %>
+				  <%if(elem.getAlbum()!=null){ %><p><button><%= elem.getAlbum() %></button></p><%} %>
 				</div>
 			<% } %>
-		</div>
-	<% } %>
-	
-	<div id="catalogueInterpretes">	
-		<%= interpretes %>
+		<% } %>
 	</div>
+	
+	<!--  interpretes -->
+	<div class="wrapper" id="catalogueInterpretes">	
+		<% if (interpretes!=null) {%>
+       		<% for( Interprete elem : interpretes ) {%>
+				<div class="card">	
+					<!-- ExternalRessource/Catalogue element -->
+					<img src="ExternalRessource/Catalogue/Image/interprete3.png" alt="Denim Jeans" style="width:100%">
+				  <%if(elem.getPseudonyme()!=null){ %><h1><%= elem.getPseudonyme() %></h1><%} %>
+				  <%if(elem.getPrenom()!=null){ %><p class="price"><%= elem.getPrenom() %></p><%} %>
+				  <%if(elem.getNom()!=null){ %><p class="price"><%= elem.getNom() %></p><%} %>
+				  <%if(elem.getDateNaissance()!=null){ %><p><button><%= elem.getDateNaissance() %></button></p><%} %>
+				</div>
+			<% } %>
+		<% } %>
+	</div>
+	
+	<!--  albums -->
 	<div id="catalogueAlbums">	
 		<%= albums %>
-	</div>
-	
-	<div class="wrapper">	
-		<!-- ExternalRessource/Catalogue element -->
-		<div class="card">
-			<img src="ExternalRessource/Catalogue/Image/TitreMusical/ce_monde_est_cruel.jpg" alt="Denim Jeans" style="width:100%">
-			<audio id="player" controls preload tabindex="0">
-				<source type="audio/mp3" src="ExternalRessource/Catalogue/Musique/magma_isha.mp3"/>
-				Your browser does not support HTML5 audio.
-			</audio>
-		  <h1>Ce monde est cruel</h1>
-		  <p class="price">Vald</p>
-		  <p><button>Ce monde est cruel</button></p>
-			<!-- connexion client -->
-		    <p><a href="ModificationTitre?titre=cmec">Modifier</a></p>
-			<!-- connexion client -->
-		    <p><a href="SupprimerTitre">Supprimer</a></p>
-		</div>
-		<div class="card">
-			<img src="ExternalRessource/Catalogue/Image/TitreMusical/astroworl.jpg" alt="Denim Jeans" style="width:100%;">
-			<audio id="player" controls preload tabindex="0">
-				<source type="audio/mp3" src="ExternalRessource/Catalogue/Musique/magma_isha.mp3"/>
-				Your browser does not support HTML5 audio.
-			</audio>
-		  <h1>Stargazing</h1>
-		  <p class="price">Travis scott</p>
-		  <p><button>Astroworld</button></p>
-		</div>
-		<div class="card">
-			<img src="ExternalRessource/Catalogue/Image/TitreMusical/post_malone.jpeg" alt="Denim Jeans" style="width:100%">
-			<audio id="player" controls preload tabindex="0">
-				<source type="audio/mp3" src="ExternalRessource/Catalogue/Musique/magma_isha.mp3"/>
-				Your browser does not support HTML5 audio.
-			</audio>
-		  <h1>Flex</h1>
-		  <p class="price">Post malone</p>
-		  <p><button>Beer pong and bentleys</button></p>
-		</div>
-		<div class="card">
-			<img src="ExternalRessource/Catalogue/Image/TitreMusical/isha.jpg" alt="Denim Jeans" style="width:100%">
-			<audio id="player" controls preload tabindex="0">
-				<source type="audio/mp3" src="ExternalRessource/Catalogue/Musique/magma_isha.mp3"/>
-				Your browser does not support HTML5 audio.
-			</audio>
-		  <h1>Durag</h1>
-		  <p class="price">Isha</p>
-		  <p><button>La vie augmente, Vol 3</button></p>
-		</div>
-		<div class="card">
-		  <img src="ExternalRessource/Catalogue/Image/TitreMusical/isha.jpg" alt="Denim Jeans" style="width:100%">
-		  <audio id="player" controls preload tabindex="0">
-				<source type="audio/mp3" src="ExternalRessource/Catalogue/Musique/magma_isha.mp3"/>
-				Your browser does not support HTML5 audio.
-			</audio>
-		  <h1>Bad boy</h1>
-		  <p class="price">Isha</p>
-		  <p><button>La vie augmente, Vol 3</button></p>
-		</div>
-		<div class="card">
-		  <img src="ExternalRessource/Catalogue/Image/TitreMusical/isha.jpg" alt="Denim Jeans" style="width:100%">
-		  <audio id="player" controls preload tabindex="0">
-				<source type="audio/mp3" src="ExternalRessource/Catalogue/Musique/magma_isha.mp3"/>
-				Your browser does not support HTML5 audio.
-			</audio>
-		  <h1>Tradition</h1>
-		  <p class="price">Isha</p>
-		  <p><button>La vie augmente, Vol 3</button></p>
-		</div>
-		<div class="card">
-		  <img src="ExternalRessource/Catalogue/Image/TitreMusical/isha.jpg" alt="Denim Jeans" style="width:100%">
-		  <audio id="player" controls preload tabindex="0">
-				<source type="audio/mp3" src="ExternalRessource/Catalogue/Musique/magma_isha.mp3"/>
-				Your browser does not support HTML5 audio.
-			</audio>
-		  <h1>Les magiciens</h1>
-		  <p class="price">Isha</p>
-		  <p><button>La vie augmente, Vol 3</button></p>
-		</div>
-		<div class="card">
-		  <img src="ExternalRessource/Catalogue/Image/TitreMusical/isha.jpg" alt="Denim Jeans" style="width:100%">
-		  <audio id="player" controls preload tabindex="0">
-				<source type="audio/mp3" src="ExternalRessource/Catalogue/Musique/magma_isha.mp3"/>
-				Your browser does not support HTML5 audio.
-			</audio>
-		  <h1>Magma</h1>
-		  <p class="price">Isha</p>
-		  <p><button>La vie augmente, Vol 3</button></p>
-		</div>
-		<div class="card">
-		  <img src="ExternalRessource/Catalogue/Image/TitreMusical/isha.jpg" alt="Denim Jeans" style="width:100%">
-		  <audio id="player" controls preload tabindex="0">
-				<source type="audio/mp3" src="ExternalRessource/Catalogue/Musique/magma_isha.mp3"/>
-				Your browser does not support HTML5 audio.
-			</audio>
-		  <h1>Chaud devant</h1>
-		  <p class="price">Isha</p>
-		  <p><button>La vie augmente, Vol 3</button></p>
-		</div>
-		<div class="card">
-		  <img src="ExternalRessource/Catalogue/Image/TitreMusical/isha.jpg" alt="Denim Jeans" style="width:100%">
-		  <audio id="player" controls preload tabindex="0">
-				<source type="audio/mp3" src="ExternalRessource/Catalogue/Musique/magma_isha.mp3"/>
-				Your browser does not support HTML5 audio.
-			</audio>
-		  <h1>Idole</h1>
-		  <p class="price">Isha</p>
-		  <p><button>La vie augmente, Vol 3</button></p>
-		</div>
 	</div>
 	
 </body>

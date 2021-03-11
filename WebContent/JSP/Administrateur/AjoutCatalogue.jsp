@@ -39,13 +39,21 @@
 				</h1>
 		        
 		        <p>
-		        	<label><b>Genre</b></label>
-		        	<input id="titre" type="text" placeholder="Entrer le genre" name="Genre">
-		        </p>
+				  <label for="cars">Genre</label>
+				  <select id="cars" name="Genre">
+				    <option value="RAP">RAP</option>
+				    <option value="ROCK">ROCK</option>
+				    <option value="JAZZ">JAZZ</option>
+				    <option value="POP">POP</option>
+				    <option value="VARIETE">VARIETE</option>
+				    <option value="CLASSIQUE">CLASSIQUE</option>
+				    <option value="TECHNO">TECHNO</option>
+				  </select>
+				</p>
 		        
 		        <p>
 		        	<label><b>Annee de creation</b></label>
-		        	<input id="titre" type="text" placeholder="YYYY-MM-DD" name="Annee de creation">
+		        	<input id="titre" type="text" placeholder="Entrer l'annee de creation" name="Annee de creation">
 		        </p>
 		        
 		        <p>

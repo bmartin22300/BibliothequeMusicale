@@ -7,14 +7,17 @@
 </head>
 <body>
 	<%@include file="../header.jsp" %>
+	<%@ page import="java.util.Date" %>
+	
 	<% String email = (String)request.getAttribute("email"); %>
 	<% String civilite = (String)request.getAttribute("civilite"); %>
 	<% String nom = (String)request.getAttribute("nom"); %>
 	<% String prenom = (String)request.getAttribute("prenom"); %>
 	<% String adresse = (String)request.getAttribute("adresse"); %>
-	<!-- String dateDeNaissance = request.getAttribute("dateDeNaissance").toString(); -->
-	<%java.text.DateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd"); %>
-	<% String dateDeNaissance = df.format(new java.util.Date()); %>
+	<% Date dateDeNaissance = (Date)request.getAttribute("dateDeNaissance"); %>
+	<% if(dateDeNaissance!=null){ %>
+		<% dateDeNaissance.toString(); %>
+	<%} %>
 	<% int nbEcoutes = (int)request.getAttribute("nbEcoutes"); %>
 	
 	<div class="cardProfile">

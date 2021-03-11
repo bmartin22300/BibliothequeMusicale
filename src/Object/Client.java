@@ -23,7 +23,6 @@ public class Client implements ClientInterface {
 	private Genre styleMusiquePrefere;
 	private List<Playlist> playlists;
 	
-	
 	// Constructeurs
 	public Client(int id, String mail, String password, String civilite, String nom, String prenom, Date dateNaissance,
 			String adresseFacturation, Genre styleMusiquePrefere) {

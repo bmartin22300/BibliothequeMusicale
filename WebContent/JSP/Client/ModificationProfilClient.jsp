@@ -7,15 +7,17 @@
 </head>
 <body>
 	<%@include file="../header.jsp" %>
+	<%@ page import="java.util.Date" %>
+	<%@ page import="Object.Genre" %>
+	
 	<% String email = (String)request.getAttribute("email"); %>
 	<% String password = (String)request.getAttribute("password"); %>
 	<% String civilite = (String)request.getAttribute("civilite"); %>
 	<% String nom = (String)request.getAttribute("nom"); %>
 	<% String prenom = (String)request.getAttribute("prenom"); %>
 	<% String adresse = (String)request.getAttribute("adresse"); %>
-	<!-- String dateDeNaissance = request.getAttribute("dateDeNaissance").toString(); -->
-	<%java.text.DateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd"); %>
-	<% String dateDeNaissance = df.format(new java.util.Date()); %>
+	<% Date dateDeNaissance = (Date)request.getAttribute("dateDeNaissance"); %>
+	<% Genre genre = (Genre)request.getAttribute("genre"); %>
 	<% int nbEcoutes = (int)request.getAttribute("nbEcoutes"); %>
 	
 	<form method="POST">
@@ -88,6 +90,9 @@
 		        <label><b>Civilite</b></label>
 					<div>
 					  <input type="radio" id="M" name="civilite" value="M"
+					  <% if(civilite!="M" && civilite!="Mme" && civilite!="Autre"){ %>
+					  	checked
+					  <% } %>
 					  <% if(civilite=="M"){ %>
 		         		checked
 				 	  <% } %>>
@@ -115,12 +120,36 @@
 				  <label for="cars">Genre favori</label>
 				  <select id="cars" name="styleMusiquePrefere">
 				    <option value="RAP">RAP</option>
-				    <option value="ROCK">ROCK</option>
-				    <option value="JAZZ">JAZZ</option>
-				    <option value="POP">POP</option>
-				    <option value="VARIETE">VARIETE</option>
-				    <option value="CLASSIQUE">CLASSIQUE</option>
-				    <option value="TECHNO">TECHNO</option>
+				    <option value="ROCK"
+				    	<%if(Genre.valueOf("ROCK")==genre){ %>
+				    		selected="selected"
+				    	<%} %>
+				    >ROCK</option>
+				    <option value="JAZZ"
+				    	<%if(Genre.valueOf("JAZZ")==genre){ %>
+				    		selected="selected"
+				    	<%} %>
+				    >JAZZ</option>
+				    <option value="POP"
+				    	<%if(Genre.valueOf("POP")==genre){ %>
+				    		selected="selected"
+				    	<%} %>
+				    >POP</option>
+				    <option value="VARIETE"
+				    	<%if(Genre.valueOf("VARIETE")==genre){ %>
+				    		selected="selected"
+				    	<%} %>
+				    >VARIETE</option>
+				    <option value="CLASSIQUE"
+				    	<%if(Genre.valueOf("CLASSIQUE")==genre){ %>
+				    		selected="selected"
+				    	<%} %>
+				    >CLASSIQUE</option>
+				    <option value="TECHNO"
+				    	<%if(Genre.valueOf("TECHNO")==genre){ %>
+				    		selected="selected"
+				    	<%} %>
+				    >TECHNO</option>
 				  </select>
 			</p>
 			<p>
