@@ -1,6 +1,7 @@
 package Servlet;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -162,9 +163,9 @@ public class AdministrateurServlet extends HttpServlet {
 			if(action.equals("AuthentificationAdministrateur")) {
 				//requête à la BDD TODO
 				if(typeAdmin.equals("GestionnaireClient")) {
-					administrateur = new ProfilGestionnaireClient(mail, motDePasse);
+					administrateur = new ProfilGestionnaireClient((int) (Math.random()*1000),mail, motDePasse);
 				}else {
-					administrateur = new ProfilGestionnaireMusical(mail, motDePasse);
+					administrateur = new ProfilGestionnaireMusical((int) (Math.random()*1000),mail, motDePasse);
 				}
 				
 				if(administrateur!=null) {
@@ -198,6 +199,13 @@ public class AdministrateurServlet extends HttpServlet {
 					vue = "/JSP/Utilisateur/AuthentificationAdministrateur.jsp";
 				}
 			}else {
+				//partie administrateur musical connecte
+				//affectation paramètres à la vue
+				request.setAttribute("isAdministrateur", true);
+				request.setAttribute("isAdministrateurMusical", true);
+				
+				//todo verifier connexion admin
+				
 				if(action.equals("RechercheTitre")) {
 					//récup param vue
 					String typeElement = request.getParameter("TypeElement");
@@ -205,14 +213,19 @@ public class AdministrateurServlet extends HttpServlet {
 					
 					//todo implémenter requête SQL
 					List<TitreMusical> titresMusicaux = new ArrayList<TitreMusical>();
-					List<Interprete> interpretes = new ArrayList<Interprete>();
-					TitreMusical titreMusical = new TitreMusical(0, "Ma musique 1", 2000, 210, Genre.RAP, interpretes);
-					TitreMusical titreMusical2 = new TitreMusical(1, "Ma musique 2", 1999, 210, Genre.RAP, interpretes);
+					//List<Interprete> interpretes = new ArrayList<Interprete>();
+					TitreMusical titreMusical = new TitreMusical(0, "Ma musique 1", 2000, 210, Genre.RAP, null);
+					TitreMusical titreMusical2 = new TitreMusical(1, "Ma musique 2", 1999, 210, Genre.RAP, null);
 					titresMusicaux.add(titreMusical);
 					titresMusicaux.add(titreMusical2);
 					
+					List<Interprete> interpretes = administrateur.rechercherParPseudoInterprete(titre);
+					
 					//envoi param vue
 					request.setAttribute("titresMusicaux", titresMusicaux);
+					request.setAttribute("interpretes", interpretes);
+					request.setAttribute("albums", null);
+					request.setAttribute("TypeElement", typeElement);
 					request.setAttribute("isAdministrateur", true);
 					request.setAttribute("isAdministrateurMusical", true);
 					
@@ -230,6 +243,38 @@ public class AdministrateurServlet extends HttpServlet {
 							}
 						}
 					}*/
+				}else {
+					if(action.equals("AjouterElement")) {
+						//récup param vue
+						String typeElement = request.getParameter("TypeElement");
+						
+						if(typeElement.equals("Titre musical")) {
+							
+						}else {
+							if(typeElement.equals("Interprete")) {
+								//récup param vue
+								String Pseudo = request.getParameter("Pseudo");
+								String Prenom = request.getParameter("Prenom");
+								String Nom = request.getParameter("Nom");
+								String DateNaissanceString = request.getParameter("Date de naissance");
+								Date dateNaissance=null;
+								if(DateNaissanceString.equals(null) && DateNaissanceString!="") {
+									dateNaissance = Date.valueOf(DateNaissanceString); //Conversion Date
+								}
+								
+								//requete BDD
+								Interprete interprete = ((ProfilGestionnaireMusical) administrateur).creerInterprete(Pseudo,Nom,Prenom,dateNaissance);
+								System.out.println(interprete);
+								
+								//attribution vue
+								vue = "/JSP/Administrateur/AjoutCatalogue.jsp";
+							}else {
+								if(typeElement.equals("Album")) {
+									
+								}
+							}
+						}
+					}
 				}
 			}
 		}

@@ -19,12 +19,14 @@
 	        <!-- choix du type d'élément -->
 	        <div style="margin:10px;">
 				<!-- select box -->
-				<select name="pets" id="TypeElement" onChange="changerTypeElementsAffichesAjout()">
+				<p>
+				  <label for="cars">Type d'élément</label>
+				  <select id="TypeElement" onChange="changerTypeElementsAffichesAjout()" name="TypeElement">
 				    <option value="Titre musical">Titre musical</option>
 				    <option value="Interprete">Interprete</option>
 				    <option value="Album">Album</option>
-				</select>
-				<input type="submit" id='submit' value='OK'>
+				  </select>
+				</p>				
 			</div>       
     	
 	    	<!-- insertion de donnee -->
@@ -58,9 +60,24 @@
 	    	<!-- Interprete -->
 			<div id="formInterprete">
 				<h1>
-					<label><b>Titre</b></label>
-					<input id="titre" type="text" placeholder="Entrer le titre" name="Titre">
+					<label><b>Pseudo</b></label>
+					<input id="titre" type="text" placeholder="Entrer le pseudo" name="Pseudo">
 				</h1>
+				
+				<p>
+					<label><b>Prenom</b></label>
+					<input id="titre" type="text" placeholder="Entrer le prenom" name="Prenom">
+				</p>
+				
+				<p>
+					<label><b>Nom</b></label>
+					<input id="titre" type="text" placeholder="Entrer le nom" name="Nom">
+				</p>
+				
+				<p>
+					<label><b>Date de naissance</b></label>
+					<input id="titre" type="text" placeholder="YYYY-MM-DD" name="Date de naissance">
+				</p>
 		        
 		        <p style="padding-bottom:20px;"><input type="submit" id='submit' value='Ajouter'></p>
 			</div>

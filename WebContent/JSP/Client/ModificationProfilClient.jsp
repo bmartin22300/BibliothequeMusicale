@@ -83,7 +83,7 @@
 				 	<% } %>
 		        name="dateDeNaissance">
 			</p>
-			civilite
+
 			<p>
 		        <label><b>Civilite</b></label>
 					<div>

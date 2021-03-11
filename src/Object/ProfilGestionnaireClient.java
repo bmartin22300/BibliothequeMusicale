@@ -38,7 +38,7 @@ public class ProfilGestionnaireClient extends Administrateur implements ProfilGe
 			
 			// Vrai si les identifiants correspondent à un compte
 			if(rs.next()) {
-				return new ProfilGestionnaireClient(id, mail, password);
+				return new ProfilGestionnaireClient((int) (Math.random()*1000), mail, password);
 			};
 			
 		} catch (SQLException e) {
@@ -72,7 +72,7 @@ public class ProfilGestionnaireClient extends Administrateur implements ProfilGe
 			
 			// Execution
 			if(preparedQuery.executeUpdate()>0) {
-				return new ProfilGestionnaireClient(mail, password);
+				return new ProfilGestionnaireClient((int) (Math.random()*1000),mail, password);
 			}
 			else{
 				return null;

@@ -17,6 +17,10 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 	public ProfilGestionnaireMusical(int id, String mail, String password) {
 		super(id, mail,password);
 	}
+	
+	public ProfilGestionnaireMusical(String mail, String password) {
+		super((int) (Math.random()*1000),mail,password);
+	}
 
 	
 	/*
@@ -144,7 +148,11 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 			preparedQuery.setString(1, pseudo);
 			preparedQuery.setString(2, prenom);
 			preparedQuery.setString(3, nom);
-			preparedQuery.setString(4, dateNaissance.toString());
+			if(dateNaissance!=null) {
+				preparedQuery.setString(4, dateNaissance.toString());
+			}else {
+				preparedQuery.setString(4, null);
+			}
 			
 			// Execution
 			if(preparedQuery.executeUpdate()>0) {

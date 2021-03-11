@@ -48,3 +48,27 @@ function changerTypeElementsAffichesAjout(){
 	     console.log("default case");
 	}
 }
+
+function changerTypeElementsAffichesModification(){
+	TypeElement = document.getElementById("TypeElement").value;
+
+	switch (TypeElement) {
+	  case 'Titres musicaux':
+	 	document.getElementById("tableTitresMusicaux").style.display = "block";
+	 	document.getElementById("tableInterpretes").style.display = "none";
+	    document.getElementById("tableAlbums").style.display = "none";
+	    break;
+	  case 'Interpretes':
+	   	document.getElementById("tableTitresMusicaux").style.display = "none";
+	 	document.getElementById("tableInterpretes").style.display = "block";
+	    document.getElementById("tableAlbums").style.display = "none";
+	  	break;
+	  case 'Albums':
+	    document.getElementById("tableTitresMusicaux").style.display = "none";
+	 	document.getElementById("tableInterpretes").style.display = "none";
+	    document.getElementById("tableAlbums").style.display = "block";
+	    break;
+	  default:
+	     console.log("default case");
+	}
+}

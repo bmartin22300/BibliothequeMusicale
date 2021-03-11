@@ -44,6 +44,8 @@ public class ClientServlet extends HttpServlet {//clientServlet
 		}else if(servletPath.equals("/InscriptionClient")){
 			//affectation paramètres à la vue
 			request.setAttribute("isClient", false);
+			request.setAttribute("isErrorLogin", false);
+			
 			//affection vue
 			vue = "/JSP/Utilisateur/InscriptionClient.jsp";
 		}else if(client==null){ //verification que le client est connecte 
@@ -115,7 +117,7 @@ public class ClientServlet extends HttpServlet {//clientServlet
     			
     			// ADMIN
     			System.out.println("ADMIN");
-    			ProfilGestionnaireMusical adminSandbox = new ProfilGestionnaireMusical(mailAdminMusiqueSandbox,passwordAdminMusiqueSandbox);
+    			ProfilGestionnaireMusical adminSandbox = new ProfilGestionnaireMusical((int) (Math.random()*1000), mailAdminMusiqueSandbox,passwordAdminMusiqueSandbox);
     			System.out.println(adminSandbox.creerAdmin(mailAdminMusiqueSandbox, passwordAdminMusiqueSandbox));
     			System.out.println(adminSandbox.authentification(mailAdminMusiqueSandbox, passwordAdminMusiqueSandbox));
     				
@@ -220,7 +222,6 @@ public class ClientServlet extends HttpServlet {//clientServlet
 			
 			//mise à jour BDD
 			//TODO : ajouter un supprimerClient pour pouvoir modifier le mail
-    		System.out.println(client);
     		Client clientModifie=client.modifierInformations(mail, motDePasse, civilite, nom, prenom, dateDeNaissance, adresse, styleMusiquePrefere);
     		System.out.println(clientModifie);
     		if(clientModifie!=null) {
