@@ -14,7 +14,11 @@ import Interface.ProfilGestionnaireMusicalInterface;
 public class ProfilGestionnaireMusical extends Administrateur implements ProfilGestionnaireMusicalInterface{
 
 	public ProfilGestionnaireMusical(String mail, String password) {
-		super(mail,password);
+		super((int)Math.random()*10000,mail,password);
+	}
+	
+	public ProfilGestionnaireMusical(int id, String mail, String password) {
+		super(id, mail,password);
 	}
 
 	

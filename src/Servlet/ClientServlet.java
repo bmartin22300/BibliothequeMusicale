@@ -261,11 +261,11 @@ public class ClientServlet extends HttpServlet {//clientServlet
 					}else {//echec
 						//affectation paramètres à la vue
 						request.setAttribute("isClient", false);
-						request.setAttribute("isErrorLogin", false);
+						request.setAttribute("isErrorLogin", true);
 						request.setAttribute("notLogged", false);
 						
 						//choix de la vue
-						vue = "/JSP/Utilisateur/AuthentificationClient.jsp";
+						vue = "/JSP/Utilisateur/InscriptionClient.jsp";
 					}
 				}
 			}

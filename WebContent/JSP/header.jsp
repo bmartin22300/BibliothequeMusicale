@@ -17,6 +17,7 @@
 			<a class="active" href=AccueilAdministrateur>Accueil</a>
 			<% if(isAdministrateurMusical==true){ %>
 				<a href=ModificationCatalogue>Modifier le catalogue</a>
+				<a href=AjoutCatalogue>Ajouter un élément au catalogue</a>
 			<% } else { %>
 				<a href=ModificationProfil>Modifier un profil client</a>
 			<% } %>			

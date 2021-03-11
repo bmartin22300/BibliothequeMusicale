@@ -10,10 +10,14 @@ import Interface.ProfilGestionnaireClientInterface;
 
 public class ProfilGestionnaireClient extends Administrateur implements ProfilGestionnaireClientInterface{
 
-	public ProfilGestionnaireClient(String mail, String password) {
-		super(mail,password);
+	public ProfilGestionnaireClient(int id, String mail, String password) {
+		super(id, mail,password);
 	}
-
+	
+	public ProfilGestionnaireClient(String mail, String password) {
+		super((int)Math.random()*10000,mail,password);
+	}
+	
 	/*
 	 * Fonction authentification vérifie l'existence du couple mail, password ayant les droits de GestionnaireClient
 	 * Renvoie l'objet ProfilGestionnaireClient correspondant s'il est trouvé, null sinon

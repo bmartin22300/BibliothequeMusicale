@@ -30,10 +30,6 @@
 	   	<p><%= dateDeNaissance %></p>
 	   <% } %>
 	  <p>Nombre d'ecoutes : <%= nbEcoutes %></p>
-	  <a href="#"><i class="fa fa-dribbble"></i></a>
-	  <a href="#"><i class="fa fa-twitter"></i></a>
-	  <a href="#"><i class="fa fa-linkedin"></i></a>
-	  <a href="#"><i class="fa fa-facebook"></i></a>
 	  <p><a href="ModificationProfilClient" class="button">Modifier</a></p>
 	</div>
 	
