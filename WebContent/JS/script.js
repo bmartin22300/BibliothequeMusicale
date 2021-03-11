@@ -1,7 +1,7 @@
 function init(){
 }
 
-function changerTypeElementsAffichesModification(){	
+function changerTypeElementsAffichesRecherche(){	
 	TypeElement = document.getElementById("TypeElement").value;
 	
 	switch (TypeElement) {

@@ -161,12 +161,8 @@ public class AdministrateurServlet extends HttpServlet {
 			vue = "/JSP/Administrateur/ProfilAdministrateur.jsp";
 		}else {
 			if(action.equals("AuthentificationAdministrateur")) {
-				//requ�te � la BDD TODO
-				if(typeAdmin.equals("GestionnaireClient")) {
-					administrateur = new ProfilGestionnaireClient((int) (Math.random()*1000),mail, motDePasse);
-				}else {
-					administrateur = new ProfilGestionnaireMusical((int) (Math.random()*1000),mail, motDePasse);
-				}
+				//requ�te � la BDD 
+				administrateur = utilisateur.authentificationAdmin(mail, motDePasse);
 				
 				if(administrateur!=null) {
 					List<TitreMusical> titresMusicaux = new ArrayList<TitreMusical>();
@@ -184,7 +180,9 @@ public class AdministrateurServlet extends HttpServlet {
 					request.setAttribute("isAdministrateur", true);
 					request.setAttribute("isAdministrateurMusical", administrateur instanceof ProfilGestionnaireMusical);
 		    		request.setAttribute("titresMusicaux", titresMusicaux);
-		    		request.setAttribute("interpretes", 2);
+		    		//request.setAttribute("interpretes", administrateur.rechercherParInterprete());
+		    		request.setAttribute("interpretes", 3);
+		    		System.out.println(administrateur.rechercherParPseudoInterprete(""));
 		    		request.setAttribute("albums", 3);
 					
 					//choix de la vue
@@ -257,10 +255,13 @@ public class AdministrateurServlet extends HttpServlet {
 								String Prenom = request.getParameter("Prenom");
 								String Nom = request.getParameter("Nom");
 								String DateNaissanceString = request.getParameter("Date de naissance");
+								System.out.println(DateNaissanceString);
 								Date dateNaissance=null;
-								if(DateNaissanceString.equals(null) && DateNaissanceString!="") {
+								if(DateNaissanceString!="") {
 									dateNaissance = Date.valueOf(DateNaissanceString); //Conversion Date
 								}
+								System.out.println("ntm");
+								System.out.println(dateNaissance);
 								
 								//requete BDD
 								Interprete interprete = ((ProfilGestionnaireMusical) administrateur).creerInterprete(Pseudo,Nom,Prenom,dateNaissance);

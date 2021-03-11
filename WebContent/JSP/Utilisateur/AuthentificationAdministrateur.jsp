@@ -22,21 +22,6 @@
         <input type="password" placeholder="Entrer le mot de passe" name="password" required>
 
         <input type="submit" id='submit' value='LOGIN' >
-        
-        <!-- Radio buttons -->
-        <p>
-	        <label><b>Type d'administrateur :</b></label>
-				<div>
-				  <input type="radio" name="typeAdmin" value="GestionnaireMusical" checked>
-				  <label>Gestionnaire musical</label>
-				</div>
-				
-				<div>
-				  <input type="radio" name="typeAdmin" value="GestionnaireClient">
-				  <label>Gestionnaire client</label>
-				</div>
-		</p>
-			
     </form>
     
     <!-- erreur de login -->

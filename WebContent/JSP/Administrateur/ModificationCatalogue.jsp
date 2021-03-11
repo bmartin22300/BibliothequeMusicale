@@ -23,17 +23,24 @@
         <div style="margin:10px;">
 			<!-- select box -->
 			<p>
-				<% String TypeElement = (String)request.getAttribute("TypeElement"); %>
-				<% if (TypeElement!=null) {%>
-					<% if(TypeElement=="Titres musicaux") {%>
-					<%} %>
-				<%} %>
-				
+			<% String TypeElement = (String)request.getAttribute("TypeElement"); %>
 			  <label for="cars">Type d'element</label>
 			  <select id="TypeElement" onChange="changerTypeElementsAffichesModification()" name="TypeElement">
-			    <option value="Titres musicaux">Titres musicaux</option>
-			    <option value="Interpretes">Interpretes</option>
-			    <option value="Albums">Albums</option>
+			    <option value="Titres musicaux"
+			    	<% if ((TypeElement!=null) && TypeElement.equals("Titres musicaux")) {%>
+			    		selected="selected"
+			    	<%} %>
+			    >Titres musicaux</option>
+			    <option value="Interpretes" 
+			    	<% if ((TypeElement!=null) && TypeElement.equals("Interpretes")) {%>
+			    		selected="selected"
+			    	<%} %>
+			    >Interpretes</option>
+			    <option value="Albums"
+			    	<% if ((TypeElement!=null) && TypeElement.equals("Albums")) {%>
+			    		selected="selected"
+			    	<%} %>
+			    >Albums</option>
 			  </select>
 			</p>				
 		</div>   

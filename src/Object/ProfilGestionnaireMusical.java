@@ -24,7 +24,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 	
 	/*
 	 * Fonction creerAdmin ajoute un administrateur ayant les droits de GestionnaireMusical
-	 * Renvoie l'objet ProfilGestionnaireMusical correspondant si l'insertion à la BDD reussit, null sinon
+	 * Renvoie l'objet ProfilGestionnaireMusical correspondant si l'insertion ï¿½ la BDD reussit, null sinon
 	 */
 	@Override
 	public Administrateur creerAdmin(String mail, String password) {
@@ -76,7 +76,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 	// Interprete
 	/*
 	 * Fonction creerInterprete, creation d'un nouveau Interprete dans la BDD
-	 * Renvoie l'objet Interprete si succès, null sinon
+	 * Renvoie l'objet Interprete si succï¿½s, null sinon
 	 */
 	@Override
 	public Interprete creerInterprete(String pseudo) {
@@ -114,7 +114,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 
 	/*
 	 * Fonction creerInterprete, creation d'un nouveau Interprete dans la BDD
-	 * Renvoie l'objet Interprete si succès, null sinon
+	 * Renvoie l'objet Interprete si succï¿½s, null sinon
 	 */
 	@Override
 	public Interprete creerInterprete(String pseudo, String prenom, String nom, Date dateNaissance) {
@@ -153,7 +153,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 	}
 	
 	/*
-	 * Fonction modifierInterprete, met à jour les informations de l'interprete dans la BD puis dans l'objet
+	 * Fonction modifierInterprete, met ï¿½ jour les informations de l'interprete dans la BD puis dans l'objet
 	 * Renvoie true si la modification a lieu, false sinon
 	 */
 	@Override
@@ -233,7 +233,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 	// TitreMusical
 	/*
 	 * Fonction creerTitreMusical, creation d'un nouveau TitreMusical dans la BDD
-	 * Renvoie l'objet TitreMusical si succès, null sinon
+	 * Renvoie l'objet TitreMusical si succï¿½s, null sinon
 	 */
 	@Override
 	public TitreMusical creerTitre(String titre, int anneeCreation, List<Interprete> interpretes, int duree, Genre genre) {
@@ -291,7 +291,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 	}
 	
 	/*
-	 * Fonction modifierTitre, met à jour les informations du Titre dans la BD puis dans l'objet
+	 * Fonction modifierTitre, met ï¿½ jour les informations du Titre dans la BD puis dans l'objet
 	 * Renvoie true si la modification a lieu, false sinon
 	 */
 	@Override
@@ -442,7 +442,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 	// Album
 	/*
 	 * Fonction creerAlbum, creation d'un nouveau Album dans la BDD
-	 * Renvoie l'objet Album si succès, null sinon
+	 * Renvoie l'objet Album si succï¿½s, null sinon
 	 */
 	@Override
 	public Album creerAlbum(String nom, int anneeSortie, List<TitreMusical> titres, List<Interprete> interpretes) {
@@ -492,7 +492,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
     			PreparedStatement preparedQueryInterprete = connexion.prepareStatement(requestInterprete);
     			preparedQueryInterprete.setInt(1, last_inserted_id);
     			
-				for(Interprete interprete : interpretes){ // On associe chaque interprete à l'album
+				for(Interprete interprete : interpretes){ // On associe chaque interprete ï¿½ l'album
 					
 					preparedQueryInterprete.setString(2, interprete.getPseudonyme());
 
@@ -513,7 +513,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 	}
 	
 	/*
-	 * Fonction modifierAlbum, met à jour les informations de l'Album dans la BD puis dans l'objet
+	 * Fonction modifierAlbum, met ï¿½ jour les informations de l'Album dans la BD puis dans l'objet
 	 * Renvoie true si la modification a lieu, false sinon
 	 */
 	@Override
@@ -583,7 +583,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 	}
 	
 	/*
-	 * Fonction ajouterDiscographie, associe l'interprete à l'album dans la BD
+	 * Fonction ajouterDiscographie, associe l'interprete ï¿½ l'album dans la BD
 	 * Renvoie true et associe l'instance album a l'instance interprete si l'ajout a lieu, false sinon
 	 */
 	@Override
@@ -649,7 +649,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 
 	
 	/*
-	 * Fonction ajoutTitreAlbum, ajoute le titre à l'album dans la BD
+	 * Fonction ajoutTitreAlbum, ajoute le titre ï¿½ l'album dans la BD
 	 * Renvoie true et associe l'instance album a l'instance titre si l'ajout a lieu, false sinon
 	 */
 	@Override
