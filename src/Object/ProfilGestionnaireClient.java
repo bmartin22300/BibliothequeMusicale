@@ -14,40 +14,6 @@ public class ProfilGestionnaireClient extends Administrateur implements ProfilGe
 		super(id, mail,password);
 	}
 	
-	
-	/*
-	 * Fonction authentification v�rifie l'existence du couple mail, password ayant les droits de GestionnaireClient
-	 * Renvoie l'objet ProfilGestionnaireClient correspondant s'il est trouv�, null sinon
-	 */
-	@Override
-	public Administrateur authentification(String mail, String password) {
-		// Récupérer une connexion de type java.sql.Connection
-		Connection connexion = DBManager.getInstance().getConnection();
-		
-		try {
-			// Exécuter la requête SQL et récupérer un java.sql.ResultSet
-			String request = "CALL authentification_adminClient(?, ?);";
-			
-			// Prepared statement 
-			PreparedStatement preparedQuery = connexion.prepareStatement(request);
-			preparedQuery.setString(1, mail);
-			preparedQuery.setString(2, password);
-			
-			// Retour
-			ResultSet rs = preparedQuery.executeQuery();
-			
-			// Vrai si les identifiants correspondent à un compte
-			if(rs.next()) {
-				return new ProfilGestionnaireClient((int) (Math.random()*1000), mail, password);
-			};
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
 	/*
 	 * Fonction creerAdmin ajoute un administrateur ayant les droits de GestionnaireClient
 	 * Renvoie l'objet ProfilGestionnaireClient correspondant si l'insertion � la BDD r�ussit, null sinon
@@ -59,26 +25,14 @@ public class ProfilGestionnaireClient extends Administrateur implements ProfilGe
 		
 		try {
 			
-			// Exécuter la requête SQL et récupérer un java.sql.ResultSet
-			String request = "CALL nouveau_admin(?, ?, ?, ?);";
-			
-			// Prepared statement 
-			PreparedStatement preparedQuery = connexion.prepareStatement(request);
-			preparedQuery.setString(1, mail);
-			preparedQuery.setString(2, password);
-			preparedQuery.setBoolean(3, true); // Profil gestion Client
-			preparedQuery.setBoolean(4, false); // Profil gestion Musique
-			
-			// Execution
-			if(preparedQuery.executeUpdate()>0) {
-				return new ProfilGestionnaireClient((int) (Math.random()*1000),mail, password);
-			}
-			else{
+			String requestVerification = "CALL existe_adminClient(?);";
+			PreparedStatement preparedVerification = connexion.prepareStatement(requestVerification);
+			preparedVerification.setString(1, mail);
+			ResultSet rsVerif = preparedVerification.executeQuery();
+			if(rsVerif.next()) { // Le compte existe deja
 				return null;
 			}
 			else { // On cree je compte
-				
-				
 				// On execute la requete SQL et on recupere un java.sql.ResultSet
 				String request = "SELECT nouveau_admin(?, ?, ?, ?);";
 				
@@ -91,9 +45,9 @@ public class ProfilGestionnaireClient extends Administrateur implements ProfilGe
 				
 				ResultSet rs = preparedQuery.executeQuery();
 
-				if(rs.next()) // Creation de l'Admin
+				if(rs.next()) // Creation du Client
 	            {
-	                int last_inserted_id = rs.getInt(1); // Id de l'Admin cree
+	                int last_inserted_id = rs.getInt(1); // Id du Client cree
 	                
 	                return new ProfilGestionnaireClient(last_inserted_id, mail, password);
 	            }

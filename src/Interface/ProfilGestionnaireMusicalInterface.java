@@ -20,7 +20,7 @@ public interface ProfilGestionnaireMusicalInterface extends AdministrateurInterf
 	// Interprete
 	public Interprete creerInterprete(String pseudo);
 	public Interprete creerInterprete(String pseudo, String prenom, String nom, Date dateNaissance);
-	public boolean modifierInterprete(Interprete interprete, String prenom, String nom, Date dateNaissance);
+	public boolean modifierInterprete(Interprete interprete, String pseudonyme, String prenom, String nom, Date dateNaissance);
 	public boolean supprimerInterprete(Interprete interprete);
 	
 	// TitreMusical

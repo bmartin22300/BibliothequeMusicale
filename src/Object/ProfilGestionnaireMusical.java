@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
 import Interface.ProfilGestionnaireMusicalInterface;
@@ -87,15 +86,20 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 		try {
 			
 			// On execute la requete SQL et recupere un java.sql.ResultSet
-			String request = "CALL nouveau_interprete(?);";
+			String request = "SELECT nouveau_interprete(?);";
 			
 			// Prepared statement 
 			PreparedStatement preparedQuery = connexion.prepareStatement(request);
 			preparedQuery.setString(1, pseudo);
 			
 			// Execution
-			if(preparedQuery.executeUpdate()>0) {
-				return new Interprete(pseudo);
+			ResultSet rs = preparedQuery.executeQuery();
+			
+            if(rs.next()) // Ajout des interpretes
+            {
+                int last_inserted_id = rs.getInt(1); // Id de l'interprete cree
+                return new Interprete(last_inserted_id, pseudo);
+				
 			}
 			else{
 				return null;
@@ -120,22 +124,22 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 		try {
 			
 			// On execute la requete SQL et recupere un java.sql.ResultSet
-			String request = "CALL nouveau_interprete_complet(?, ?, ?, ?);";
+			String request = "SELECT nouveau_interprete_complet(?, ?, ?, ?);";
 			
 			// Prepared statement 
 			PreparedStatement preparedQuery = connexion.prepareStatement(request);
 			preparedQuery.setString(1, pseudo);
 			preparedQuery.setString(2, prenom);
 			preparedQuery.setString(3, nom);
-			if(dateNaissance!=null) {
-				preparedQuery.setString(4, dateNaissance.toString());
-			}else {
-				preparedQuery.setString(4, null);
-			}
+			preparedQuery.setDate(4, (java.sql.Date) dateNaissance);
 			
 			// Execution
-			if(preparedQuery.executeUpdate()>0) {
-				return new Interprete(pseudo, prenom, nom, dateNaissance);
+			ResultSet rs = preparedQuery.executeQuery();
+			
+            if(rs.next()) // Ajout des interpretes
+            {
+                int last_inserted_id = rs.getInt(1); // Id de l'interprete cree
+				return new Interprete(last_inserted_id, pseudo, prenom, nom, dateNaissance);
 			}
 			else{
 				return null;
@@ -153,26 +157,28 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 	 * Renvoie true si la modification a lieu, false sinon
 	 */
 	@Override
-	public boolean modifierInterprete(Interprete interprete, String prenom, String nom, Date dateNaissance) {
+	public boolean modifierInterprete(Interprete interprete, String pseudonyme, String prenom, String nom, Date dateNaissance) {
 		// Recuperer la connexion
 		Connection connexion = DBManager.getInstance().getConnection();
 		
 		try {
 			
 			// Maj BDD
-			String request = "CALL modifier_interprete(?, ?, ?, ?);";
+			String request = "CALL modifier_interprete(?, ?, ?, ?, ?);";
 			
 			// Prepared statement 
 			PreparedStatement preparedQuery = connexion.prepareStatement(request);
-			preparedQuery.setString(1, interprete.getPseudonyme());
-			preparedQuery.setString(2, prenom);
-			preparedQuery.setString(3, nom);
-			preparedQuery.setDate(4, dateNaissance);
+			preparedQuery.setInt(1, interprete.getId());
+			preparedQuery.setString(2, pseudonyme);
+			preparedQuery.setString(3, prenom);
+			preparedQuery.setString(4, nom);
+			preparedQuery.setDate(5, dateNaissance);
 			
 			// Execution
 			if(preparedQuery.executeUpdate()>0) { // Succes de la modification
 				
 				// Maj Objet
+				interprete.setPseudonyme(pseudonyme);
 				interprete.setPrenom(prenom);
 				interprete.setNom(nom);
 				interprete.setDateNaissance(dateNaissance);
@@ -206,7 +212,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 			
 			// Prepared statement 
 			PreparedStatement preparedQuery = connexion.prepareStatement(request);
-			preparedQuery.setString(1, interprete.getPseudonyme());
+			preparedQuery.setInt(1, interprete.getId());
 			
 			// Execution
 			if(preparedQuery.executeUpdate()>0) { // Succes de la suppression
@@ -266,7 +272,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 					list.add(nouveauTitre);*/
 					interprete.addTitre(nouveauTitre);
 					
-					preparedQueryInterprete.setString(2, interprete.getPseudonyme());
+					preparedQueryInterprete.setInt(2, interprete.getId());
 
 					preparedQueryInterprete.executeUpdate();
 				}

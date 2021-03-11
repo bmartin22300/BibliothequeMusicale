@@ -196,13 +196,14 @@ public abstract class Administrateur implements AdministrateurInterface {
 			// Vrai tant qu'il reste des lignes
 			while(rs.next()) {
 				// Creation de l'interprete
+				int id = rs.getInt("idInterprete");
 				String pseudo = rs.getString("pseudonyme");
 				String prenom = rs.getString("prenom"); 
 				String nom = rs.getString("nom");
 				Date dateNaissance = rs.getDate("dateNaissance");
 				
 				// Ajout a la liste retournee
-				interpretes.add(new Interprete(pseudo, prenom, nom, dateNaissance));
+				interpretes.add(new Interprete(id, pseudo, prenom, nom, dateNaissance));
 			}
 			
 			return interpretes;
@@ -238,13 +239,14 @@ public abstract class Administrateur implements AdministrateurInterface {
 			// Vrai tant qu'il reste des lignes
 			while(rs.next()) {
 				// Creation de l'interprete
+				int id = rs.getInt("idInterprete");
 				String pseudo = rs.getString("pseudonyme");
 				String prenom = rs.getString("prenom"); 
 				String nom = rs.getString("nom");
 				Date dateNaissance = rs.getDate("dateNaissance");
 				
 				// Ajout a la liste retournee
-				interpretes.add(new Interprete(pseudo, prenom, nom, dateNaissance));
+				interpretes.add(new Interprete(id, pseudo, prenom, nom, dateNaissance));
 			}
 			
 			return interpretes;
@@ -280,13 +282,14 @@ public abstract class Administrateur implements AdministrateurInterface {
 			// Vrai tant qu'il reste des lignes
 			while(rs.next()) {
 				// Creation de l'interprete
+				int id = rs.getInt("idInterprete");
 				String pseudo = rs.getString("pseudonyme");
 				String prenom = rs.getString("prenom"); 
 				String nom = rs.getString("nom");
 				Date dateNaissance = rs.getDate("dateNaissance");
 				
 				// Ajout a la liste retournee
-				interpretes.add(new Interprete(pseudo, prenom, nom, dateNaissance));
+				interpretes.add(new Interprete(id, pseudo, prenom, nom, dateNaissance));
 			}
 			
 			return interpretes;

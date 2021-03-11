@@ -127,7 +127,7 @@ public class ClientServlet extends HttpServlet {//clientServlet
     				interpretesSandbox.add(adminSandbox.creerInterprete("Noir Desir"));
     				interpretesSandbox.add(adminSandbox.creerInterprete("La fatigue", "La", "Fatigue", Date.valueOf("1980-09-17")));
     				System.out.println(interpretesSandbox);
-    				adminSandbox.modifierInterprete(interpretesSandbox.get(0), "Groupe", "Groupe", Date.valueOf("2001-01-01")); // Modification de "Noir Desir"
+    				adminSandbox.modifierInterprete(interpretesSandbox.get(0), "Noir Désir","Groupe", "Groupe", Date.valueOf("2001-01-01")); // Modification de "Noir Desir"
     				System.out.println(interpretesSandbox);
     				if(adminSandbox.supprimerInterprete(interpretesSandbox.get(0))){// Suppression de "Noir Desir")
     					interpretesSandbox.remove(0);

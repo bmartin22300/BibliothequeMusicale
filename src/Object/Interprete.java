@@ -15,8 +15,9 @@ public class Interprete {
 	private List<TitreMusical> titres;
 
 	// Constructeur
-	public Interprete(String pseudonyme, String prenom, String nom, Date dateNaissance) {
+	public Interprete(int id, String pseudonyme, String prenom, String nom, Date dateNaissance) {
 		super();
+		this.id = id;
 		this.pseudonyme = pseudonyme;
 		this.prenom = prenom;
 		this.nom = nom;
@@ -25,8 +26,11 @@ public class Interprete {
 		this.titres = new ArrayList<TitreMusical>();
 	}
 	
-	public Interprete(String pseudo) {
+	public Interprete(int id, String pseudo) {
+		this.id = id;
 		this.pseudonyme=pseudo;
+		this.albums = new ArrayList<Album>();
+		this.titres = new ArrayList<TitreMusical>();
 	}
 
 	// Getters et Setters

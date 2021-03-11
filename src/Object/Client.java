@@ -1,9 +1,10 @@
 package Object;
 
 import java.sql.Connection;
-import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import Interface.ClientInterface;
@@ -37,6 +38,7 @@ public class Client implements ClientInterface {
 		this.adresseFacturation = adresseFacturation;
 		this.nbEcoute = 0;
 		this.styleMusiquePrefere = styleMusiquePrefere;
+		this.playlists = new ArrayList<Playlist>();
 	}
 
 	public Client(int id, String mail, String password) {
@@ -44,6 +46,7 @@ public class Client implements ClientInterface {
 		this.id = id;
 		this.mail = mail;
 		this.password = password;
+		this.playlists = new ArrayList<Playlist>();
 	}
 
 	public Client(String mail, String password, String civilite, String nom, String prenom, Date dateNaissance,

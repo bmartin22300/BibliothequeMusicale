@@ -23,10 +23,10 @@ CALL authentification_client('natalieriviera@free.fr', 'ordinateur');
 SELECT * FROM Client;
 
 -- Création Interprète
-CALL nouveau_interprete_complet('Edith Piaf', 'Edith', 'Giovanna Gassion', '1915-12-19');
-CALL nouveau_interprete('Noir Désir');
+SELECT nouveau_interprete_complet('Edith Piaf', 'Edith', 'Giovanna Gassion', '1915-12-19');
+SELECT nouveau_interprete('Noir Désir');
 CALL modifier_interprete(2, 'Noir Désir', 'Groupe', 'Groupe', '1980-01-01');
-CALL nouveau_interprete_complet('Edith PiafeeTYPO', 'Edith', 'Giovanna Gassion', '1915-12-19');
+SELECT nouveau_interprete_complet('Edith PiafeeTYPO', 'Edith', 'Giovanna Gassion', '1915-12-19');
 CALL supprimer_interprete(3);
 
 SELECT * FROM Interprete;
