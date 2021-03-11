@@ -35,7 +35,6 @@ SELECT * FROM TitreMusical;
 -- Création TitreMusical
 SELECT nouveau_titre('La Vie en rose', '1946', 185, 'Variete');
 -- SELECT retrouver_titre('La Vie en rose');
-CALL association_titre_interprete(1, 1);
 
 SELECT nouveau_titre('La Foule', '1957', 203, 'Variete');
 SELECT retrouver_titre('La Foule');
@@ -60,7 +59,6 @@ SELECT nouveau_titre("L'Europe", 2001, 1424, 'Rock');CALL association_titre_inte
 
 -- Création Album
 SELECT nouveau_album('Des Visages des Figures','2001'); -- idAlbum = 16
-CALL association_album_interprete(16, 2); -- Remplissage table AlbumInterprete
 CALL ajout_titre_album(4,16); -- Ajout de titre 4 à l'album 16
 CALL ajout_titre_album(5,16);
 CALL ajout_titre_album(6,16);
@@ -81,8 +79,6 @@ CALL association_titre_interprete(17, 2);
 CALL dissociation_titre_interprete(17, 2);
 CALL modifier_album(16, 'Des Visages des ures','2101');
 -- CALL supprimer_album(16);
-CALL association_album_interprete(16, 1);
-CALL dissociation_album_interprete(16, 1);
 CALL dissociation_titre_album(14, 16);
 
 CALL reset_Vues_Catalogue();
@@ -90,7 +86,6 @@ SELECT * FROM ElementCatalogue;
 SELECT * FROM TitreMusical;
 SELECT * FROM Discographie;
 SELECT * FROM Album;
-SELECT * FROM AlbumInterprete;
 
 -- On regarde des éléments du catalogue
 CALL regarder(1);CALL regarder(1);
@@ -103,7 +98,6 @@ CALL recommander(6);
 
 SELECT * FROM ElementCatalogue;
 SELECT * FROM Interprete;
-SELECT * FROM AlbumInterprete;
 SELECT * FROM ElementCatalogue;
 SELECT * FROM TitreMusical;
 SELECT * FROM Discographie;

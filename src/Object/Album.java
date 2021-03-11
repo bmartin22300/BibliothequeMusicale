@@ -8,7 +8,6 @@ public class Album extends ElementCatalogue{
 	private String nom;
 	private int anneeSortie;
 	private int duree;
-	private List<Interprete> interpretes;
 	private List<TitreMusical> titres;
 	
 	// Constructeur
@@ -18,7 +17,6 @@ public class Album extends ElementCatalogue{
 		this.nom = nom;
 		this.anneeSortie = anneeSortie;
 		this.duree = duree;
-		this.interpretes = interpretes;
 		this.titres = titres;
 	}
 	
@@ -35,14 +33,6 @@ public class Album extends ElementCatalogue{
 
 	public void setNom(String nom) {
 		this.nom = nom;
-	}
-
-	public List<Interprete> getInterprete() {
-		return interpretes;
-	}
-
-	public void setInterprete(List<Interprete> interpretes) {
-		this.interpretes = interpretes;
 	}
 
 	public int getDateSortie() {
@@ -82,6 +72,6 @@ public class Album extends ElementCatalogue{
 	@Override
 	public String toString() {
 		return "Album [nom=" + nom + ", anneeSortie=" + anneeSortie + ", duree=" + duree + ", interpretes="
-				+ interpretes + ", titres=" + titres + "]";
+				+ ", titres=" + titres + "]";
 	}
 }

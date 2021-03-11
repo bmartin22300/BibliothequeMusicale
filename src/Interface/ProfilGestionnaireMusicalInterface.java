@@ -31,17 +31,14 @@ public interface ProfilGestionnaireMusicalInterface extends AdministrateurInterf
 	public boolean ajouterDiscographie(TitreMusical titre, Interprete interprete);
 	public boolean retirerDiscographie(TitreMusical titre, Interprete interprete);
 	
-	//A VERIFIER 
-
-
-	
-	// Album
-	public Album creerAlbum(String nom, int anneeSortie, List<TitreMusical> titres, List<Interprete> interpretes);
+	//Album 
+	public Album creerAlbum(String nom, int anneeSortie, List<TitreMusical> titres);
 	public boolean modifierAlbum(Album album, String nom, int anneeSortie);
 	public boolean supprimerAlbum(Album album);
 	
-	public boolean ajouterDiscographie(Album album, Interprete interprete);
-	public boolean retirerDiscographie(Album album, Interprete interprete);
+	//A VERIFIER 
+
+	// Album
 
 	public boolean ajoutTitreAlbum(TitreMusical titre, Album album);
 	public boolean suppressionTitreAlbum(TitreMusical titre, Album album);

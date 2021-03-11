@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import Interface.ProfilGestionnaireMusicalInterface;
@@ -445,7 +446,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 	 * Renvoie l'objet Album si succes, null sinon
 	 */
 	@Override
-	public Album creerAlbum(String nom, int anneeSortie, List<TitreMusical> titres, List<Interprete> interpretes) {
+	public Album creerAlbum(String nom, int anneeSortie, List<TitreMusical> titres) {
 		
 		// On recupere une connexion de type java.sql.Connection
 		Connection connexion = DBManager.getInstance().getConnection();
@@ -475,6 +476,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
     			
     			preparedQueryTitres.setInt(1, last_inserted_id); // Id de l'album
     			
+    			List<Interprete> interpretes = new ArrayList<Interprete>();
     			if(titres!=null) {
     				for(TitreMusical titre : titres){ // On associe chaque interprete au titre
     					
@@ -501,8 +503,17 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
     					preparedQueryInterprete.executeUpdate();
     				}
     			}
-				
-				
+    			
+    			// On execute la requete SQL et on recupere un java.sql.ResultSet
+    			String requestMajDuree = "CALL majDureeAlbum(?, ?);";
+    			
+    			// Prepared statement ajout Album
+    			PreparedStatement preparedMajDuree = connexion.prepareStatement(requestMajDuree);
+    			preparedMajDuree.setInt(1, last_inserted_id);
+    			preparedMajDuree.setInt(2, dureeAlbum);
+    			
+    			preparedMajDuree.executeUpdate();
+    			
 				return new Album(last_inserted_id, nom, dureeAlbum, anneeSortie, interpretes, titres);
             }
             else {
@@ -521,7 +532,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 	 * Renvoie true si la modification a lieu, false sinon
 	 */
 	@Override
-	public boolean modifierAlbum(Album album, String nom, int anneeSortie) {
+	public boolean modifierAlbum(Album album, String nom, int anneeSortie) {					
 		// Recuperer la connexion
 		Connection connexion = DBManager.getInstance().getConnection();
 		
@@ -534,7 +545,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 			PreparedStatement preparedQuery = connexion.prepareStatement(request);
 			preparedQuery.setInt(1, album.getIdCatalogue());
 			preparedQuery.setString(2, nom);
-			preparedQuery.setInt(3, anneeSortie); // >1900			
+			preparedQuery.setInt(3, anneeSortie); 		
 			
 			// Execution
 			if(preparedQuery.executeUpdate()>0) { // Succes de la modification
@@ -585,72 +596,6 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 		}
 		return false;
 	}
-	
-	/*
-	 * Fonction ajouterDiscographie, associe l'interprete a l'album dans la BD
-	 * Renvoie true et associe l'instance album a l'instance interprete si l'ajout a lieu, false sinon
-	 */
-	@Override
-	public boolean ajouterDiscographie(Album album, Interprete interprete) {
-		// On recupere une connexion de type java.sql.Connection
-		Connection connexion = DBManager.getInstance().getConnection();
-		
-		try {
-			
-			// On execute la requete SQL et on recupere un java.sql.ResultSet
-			String request = "CALL association_album_interprete(?, ?);";
-			
-			// Prepared statement 
-			PreparedStatement preparedQuery = connexion.prepareStatement(request);
-			preparedQuery.setInt(1, album.getIdCatalogue());
-			preparedQuery.setString(2, interprete.getPseudonyme());
-
-			// Execution
-			if(preparedQuery.executeUpdate()>0) {
-				album.getInterprete().add(interprete); // On ajoute l'interprete
-				interprete.getAlbums().add(album); // On ajoute l'album
-				return true;
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;		
-	}
-
-	
-	/*
-	 * Fonction retirerDiscographie, dissocie l'interprete de l'album dans la BD
-	 * Renvoie true et dissocie l'instance album de l'instance interprete si la suppression a lieu, false sinon
-	 */
-	@Override
-	public boolean retirerDiscographie(Album album, Interprete interprete) {
-		// On recupere une connexion de type java.sql.Connection
-		Connection connexion = DBManager.getInstance().getConnection();
-		
-		try {
-			
-			// On execute la requete SQL et on recupere un java.sql.ResultSet
-			String request = "CALL dissociation_album_interprete(?, ?);";
-			
-			// Prepared statement 
-			PreparedStatement preparedQuery = connexion.prepareStatement(request);
-			preparedQuery.setInt(1, album.getIdCatalogue());
-			preparedQuery.setString(2, interprete.getPseudonyme());
-
-			// Execution
-			if(preparedQuery.executeUpdate()>0) {
-				album.getInterprete().remove(interprete); // On ajoute l'interprete
-				interprete.getAlbums().remove(album); // On ajoute l'album
-				return true;
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;	
-	}
-
 	
 	/*
 	 * Fonction ajoutTitreAlbum, ajoute le titre � l'album dans la BD
