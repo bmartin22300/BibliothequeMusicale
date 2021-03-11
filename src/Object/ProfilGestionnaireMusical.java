@@ -30,23 +30,37 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 		
 		try {
 			
-			// On execute la requete SQL et on recupere un java.sql.ResultSet
-			String request = "CALL nouveau_admin(?, ?, ?, ?);";
-			
-			// Prepared statement 
-			PreparedStatement preparedQuery = connexion.prepareStatement(request);
-			preparedQuery.setString(1, mail);
-			preparedQuery.setString(2, password);
-			preparedQuery.setBoolean(3, false); // Profil gestion Client
-			preparedQuery.setBoolean(4, true); // Profil gestion Musique
-			// Execution
-			if(preparedQuery.executeUpdate()>0) {
-				return new ProfilGestionnaireMusical(mail, password);
-			}
-			else{
+			String requestVerification = "CALL existe_adminMusique(?);";
+			PreparedStatement preparedVerification = connexion.prepareStatement(requestVerification);
+			preparedVerification.setString(1, mail);
+			ResultSet rsVerif = preparedVerification.executeQuery();
+			if(rsVerif.next()) { // Le compte existe deja
 				return null;
 			}
-			
+			else { // On cree je compte
+				// On execute la requete SQL et on recupere un java.sql.ResultSet
+				String request = "SELECT nouveau_admin(?, ?, ?, ?);";
+				
+				// Prepared statement 
+				PreparedStatement preparedQuery = connexion.prepareStatement(request);
+				preparedQuery.setString(1, mail);
+				preparedQuery.setString(2, password);
+				preparedQuery.setBoolean(3, false); // Profil gestion Client
+				preparedQuery.setBoolean(4, true); // Profil gestion Musique
+				
+				ResultSet rs = preparedQuery.executeQuery();
+
+				if(rs.next()) // Creation du Client
+	            {
+	                int last_inserted_id = rs.getInt(1); // Id du Client cree
+	                
+	                return new ProfilGestionnaireMusical(last_inserted_id, mail, password);
+	            }
+				else {
+					return null;
+				}
+			}
+	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

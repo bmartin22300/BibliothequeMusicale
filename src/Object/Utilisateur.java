@@ -78,7 +78,6 @@ public class Utilisateur implements UtilisateurInterface {
 	 */
 	@Override
 	public Client creerCompte(String mail, String password) {
-		
 		// Récupérer une connexion de type java.sql.Connection
 		Connection connexion = DBManager.getInstance().getConnection();
 		
