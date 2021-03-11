@@ -10,7 +10,7 @@
 	<%@ page import="java.util.List" %>
 	<%@ page import="Object.TitreMusical" %>
 	
-	<!-- formulaire de connexion -->
+	<!-- formulaire -->
 	<form method="POST">
 		<input name="action" type="hidden" value="RechercheTitre">
 	

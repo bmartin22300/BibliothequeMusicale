@@ -8,4 +8,4 @@
 <!-- css files -->
 <link rel="stylesheet" href="CSS/style.css">
 
-<title>Bibliotheque musicale - Accueil</title>
+<title>Bibliotheque musicale</title>

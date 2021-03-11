@@ -65,6 +65,23 @@ public class AdministrateurServlet extends HttpServlet {
 		  
 		    		//affection vue
 		    		if(servletPath.equals("/AccueilAdministrateur")) {
+		    			//affectation paramètres à la vue
+		    			List<TitreMusical> titresMusicaux = new ArrayList<TitreMusical>();
+						List<Interprete> interpretes = new ArrayList<Interprete>();
+						TitreMusical titreMusical = new TitreMusical(0, "Ma musique 1", 2000, 210, Genre.RAP, interpretes);
+						TitreMusical titreMusical2 = new TitreMusical(1, "Ma musique 2", 1999, 210, Genre.RAP, interpretes);
+						TitreMusical titreMusical3 = new TitreMusical(1, "Ma musique 3", 1999, 210, Genre.RAP, interpretes);
+						TitreMusical titreMusical4 = new TitreMusical(1, "Ma musique 4", 1999, 210, Genre.RAP, interpretes);
+						titresMusicaux.add(titreMusical);
+						titresMusicaux.add(titreMusical2);
+						titresMusicaux.add(titreMusical3);
+						titresMusicaux.add(titreMusical4);
+						
+						//affectation paramètres à la vue
+			    		request.setAttribute("titresMusicaux", titresMusicaux);
+			    		request.setAttribute("interpretes", 2);
+			    		request.setAttribute("albums", 3);
+			    		
 		            	vue = "/JSP/Administrateur/AccueilAdministrateur.jsp";
 		            }else {
 		            	if(servletPath.equals("/ProfilAdministrateur")) {
@@ -91,6 +108,13 @@ public class AdministrateurServlet extends HttpServlet {
 		                    				request.setAttribute("titre", titre);
 		                    				
 			                    			vue = "/JSP/Administrateur/ModificationCatalogue.jsp";
+			                    		}else {
+			                    			if(servletPath.equals("/AjoutCatalogue")) {
+			                    				//récupération de paramètre de la vue
+			                    				String TypeElement = request.getParameter("TypeElement");
+			                    				
+			                    				vue = "/JSP/Administrateur/AjoutCatalogue.jsp";
+			                    			}
 			                    		}
 		                    		}
 		                    	}
@@ -144,9 +168,23 @@ public class AdministrateurServlet extends HttpServlet {
 				}
 				
 				if(administrateur!=null) {
+					List<TitreMusical> titresMusicaux = new ArrayList<TitreMusical>();
+					List<Interprete> interpretes = new ArrayList<Interprete>();
+					TitreMusical titreMusical = new TitreMusical(0, "Ma musique 1", 2000, 210, Genre.RAP, interpretes);
+					TitreMusical titreMusical2 = new TitreMusical(1, "Ma musique 2", 1999, 210, Genre.RAP, interpretes);
+					TitreMusical titreMusical3 = new TitreMusical(1, "Ma musique 3", 1999, 210, Genre.RAP, interpretes);
+					TitreMusical titreMusical4 = new TitreMusical(1, "Ma musique 4", 1999, 210, Genre.RAP, interpretes);
+					titresMusicaux.add(titreMusical);
+					titresMusicaux.add(titreMusical2);
+					titresMusicaux.add(titreMusical3);
+					titresMusicaux.add(titreMusical4);
+					
 					//affectation paramètres à la vue
 					request.setAttribute("isAdministrateur", true);
 					request.setAttribute("isAdministrateurMusical", administrateur instanceof ProfilGestionnaireMusical);
+		    		request.setAttribute("titresMusicaux", titresMusicaux);
+		    		request.setAttribute("interpretes", 2);
+		    		request.setAttribute("albums", 3);
 					
 					//choix de la vue
 					vue = "/JSP/Administrateur/AccueilAdministrateur.jsp";

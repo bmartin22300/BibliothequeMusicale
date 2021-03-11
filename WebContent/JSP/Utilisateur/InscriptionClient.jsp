@@ -24,6 +24,13 @@
         <input type="submit" id='submit' value='LOGIN' >
     </form>
     
+    <!-- erreur de login -->
+    <% boolean isErrorLogin = (boolean)request.getAttribute("isErrorLogin"); %>
+    <% if(isErrorLogin==true){ %>
+    	<a>Erreur : mail deja utilise</a>
+    	<br>
+    <% } %>
+    
     
     <!-- connexion client -->
     <a href="AuthentificationClient">Se connecter</a>	

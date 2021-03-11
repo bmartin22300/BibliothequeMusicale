@@ -13,6 +13,7 @@ import Interface.ProfilGestionnaireMusicalInterface;
 
 public class ProfilGestionnaireMusical extends Administrateur implements ProfilGestionnaireMusicalInterface{
 
+
 	public ProfilGestionnaireMusical(int id, String mail, String password) {
 		super(id, mail,password);
 	}

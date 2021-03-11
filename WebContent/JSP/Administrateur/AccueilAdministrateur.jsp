@@ -5,20 +5,56 @@
 <head>
 	<%@include file="../head.jsp" %>	 
 </head>
-<body>
+<body onload="changerTypeElementsAffiches()">
 	<%@include file="../header.jsp" %>
-
+	<%@ page import="java.util.List" %>
+	<%@ page import="Object.TitreMusical" %>
 	
 	<!--  ExternalRessource/Catalogue -->
 	<div style="margin:10px;">
 		<!-- select box -->
 		<label for="pet-select">Element a rechercher</label>
-		<select name="pets" id="pet-select">
-		    <option value="">Titres musicaux</option>
-		    <option value="dog">Interpretes</option>
-		    <option value="cat">Albums</option>
+		<select name="pets" id="TypeElement" onChange="changerTypeElementsAffichesRecherche()">
+	    	<option value="Titres musicaux">Titres musicaux</option>
+		    <option value="Interpretes">Interpretes</option>
+		    <option value="Albums">Albums</option>
 		</select>
 	</div>
+	
+	<% List<TitreMusical> titresMusicaux = (List<TitreMusical>)request.getAttribute("titresMusicaux"); %>
+	<% int interpretes = (int)request.getAttribute("interpretes"); %>
+	<% int albums = (int)request.getAttribute("albums"); %>
+	
+		
+	<% if (titresMusicaux!=null) {%>
+		<div class="wrapper" id="catalogueTitresMusicaux" style="display:grid;">
+       		<% for( TitreMusical elem : titresMusicaux ) {%>
+				<div class="card catalogueTitreMusical">	
+					<!-- ExternalRessource/Catalogue element -->
+					<img src="ExternalRessource/Catalogue/Image/TitreMusical/titreMusical.png" alt="Denim Jeans" style="width:100%">
+					<audio id="player" controls preload tabindex="0">
+						<source type="audio/mp3"/>
+						Your browser does not support HTML5 audio.
+					</audio>
+				  <h1>Ce monde est cruel</h1>
+				  <p class="price">Vald</p>
+				  <p><button>Ce monde est cruel</button></p>
+					<!-- connexion client -->
+				    <p><a href="ModificationTitre?titre=cmec">Modifier</a></p>
+					<!-- connexion client -->
+				    <p><a href="SupprimerTitre">Supprimer</a></p>
+				</div>
+			<% } %>
+		</div>
+	<% } %>
+	
+	<div id="catalogueInterpretes">	
+		<%= interpretes %>
+	</div>
+	<div id="catalogueAlbums">	
+		<%= albums %>
+	</div>
+	
 	<div class="wrapper">	
 		<!-- ExternalRessource/Catalogue element -->
 		<div class="card">
