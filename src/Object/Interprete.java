@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Interprete {
 
+	private int id;
 	private String pseudonyme;
 	private String prenom;
 	private String nom;
@@ -29,6 +30,14 @@ public class Interprete {
 	}
 
 	// Getters et Setters
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public String getPseudonyme() {
 		return pseudonyme;
 	}
