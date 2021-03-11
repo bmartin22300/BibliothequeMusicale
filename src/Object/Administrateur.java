@@ -89,7 +89,7 @@ public abstract class Administrateur implements AdministrateurInterface {
 			// Vrai tant qu'il reste des lignes
 			while(rs.next()) {
 				// Creation de l'interprete
-				int id = rs.getInt("idInterprete");
+				int idInterprete = rs.getInt("idInterprete");
 				String pseudo = rs.getString("pseudonyme");
 				String prenom = rs.getString("prenom"); 
 				String nom = rs.getString("nom");
@@ -100,7 +100,7 @@ public abstract class Administrateur implements AdministrateurInterface {
 				
 				// Prepared statement 
 				PreparedStatement preparedQueryTitres = connexion.prepareStatement(requestTitres);
-				preparedQueryTitres.setInt(1, id);
+				preparedQueryTitres.setInt(1, idInterprete);
 				
 				// Retour
 				ResultSet rsTitres = preparedQueryTitres.executeQuery();
@@ -120,7 +120,7 @@ public abstract class Administrateur implements AdministrateurInterface {
 				}
 				
 				// Ajout a la liste retournee
-				interpretes.add(new Interprete(id, pseudo, prenom, nom, dateNaissance, titres));
+				interpretes.add(new Interprete(idInterprete, pseudo, prenom, nom, dateNaissance, titres));
 			}
 			
 			return interpretes;
@@ -156,14 +156,38 @@ public abstract class Administrateur implements AdministrateurInterface {
 			// Vrai tant qu'il reste des lignes
 			while(rs.next()) {
 				// Creation de l'interprete
-				int id = rs.getInt("idInterprete");
+				int idInterprete = rs.getInt("idInterprete");
 				String pseudo = rs.getString("pseudonyme");
 				String prenom = rs.getString("prenom"); 
 				String nom = rs.getString("nom");
 				Date dateNaissance = rs.getDate("dateNaissance");
 				
+				// On recherche les titres de l'interprete
+				String requestTitres = "CALL rechercherParIdInterpreteTitres(?);";
+				
+				// Prepared statement 
+				PreparedStatement preparedQueryTitres = connexion.prepareStatement(requestTitres);
+				preparedQueryTitres.setInt(1, idInterprete);
+				
+				// Retour
+				ResultSet rsTitres = preparedQueryTitres.executeQuery();
+				//Creation de la liste des titres
+				List<TitreMusical> titres = new ArrayList<TitreMusical>();
+				
+				while(rsTitres.next()) {
+					// Creation du titre
+					int idTitre = rsTitres.getInt("idCatalogue");
+					String titreTitre = rsTitres.getString("titre");
+					int dateCreationTitre = rsTitres.getInt("dateCreation"); 
+					int dureeTitre = rsTitres.getInt("duree");
+					Genre nomGenre = Genre.valueOf(rsTitres.getString("nomGenre").toUpperCase());
+					Album albumTitre = new Album(rsTitres.getInt("Album_idCatalogue"));
+					
+					titres.add(new TitreMusical(idTitre, titreTitre, dateCreationTitre, dureeTitre, nomGenre, albumTitre, null));
+				}
+				
 				// Ajout a la liste retournee
-				interpretes.add(new Interprete(id, pseudo, prenom, nom, dateNaissance));
+				interpretes.add(new Interprete(idInterprete, pseudo, prenom, nom, dateNaissance));
 			}
 			
 			return interpretes;
@@ -199,14 +223,38 @@ public abstract class Administrateur implements AdministrateurInterface {
 			// Vrai tant qu'il reste des lignes
 			while(rs.next()) {
 				// Creation de l'interprete
-				int id = rs.getInt("idInterprete");
+				int idInterprete = rs.getInt("idInterprete");
 				String pseudo = rs.getString("pseudonyme");
 				String prenom = rs.getString("prenom"); 
 				String nom = rs.getString("nom");
 				Date dateNaissance = rs.getDate("dateNaissance");
 				
+				// On recherche les titres de l'interprete
+				String requestTitres = "CALL rechercherParIdInterpreteTitres(?);";
+				
+				// Prepared statement 
+				PreparedStatement preparedQueryTitres = connexion.prepareStatement(requestTitres);
+				preparedQueryTitres.setInt(1, idInterprete);
+				
+				// Retour
+				ResultSet rsTitres = preparedQueryTitres.executeQuery();
+				//Creation de la liste des titres
+				List<TitreMusical> titres = new ArrayList<TitreMusical>();
+				
+				while(rsTitres.next()) {
+					// Creation du titre
+					int idTitre = rsTitres.getInt("idCatalogue");
+					String titreTitre = rsTitres.getString("titre");
+					int dateCreationTitre = rsTitres.getInt("dateCreation"); 
+					int dureeTitre = rsTitres.getInt("duree");
+					Genre nomGenre = Genre.valueOf(rsTitres.getString("nomGenre").toUpperCase());
+					Album albumTitre = new Album(rsTitres.getInt("Album_idCatalogue"));
+					
+					titres.add(new TitreMusical(idTitre, titreTitre, dateCreationTitre, dureeTitre, nomGenre, albumTitre, null));
+				}
+				
 				// Ajout a la liste retournee
-				interpretes.add(new Interprete(id, pseudo, prenom, nom, dateNaissance));
+				interpretes.add(new Interprete(idInterprete, pseudo, prenom, nom, dateNaissance));
 			}
 			return interpretes;
 		} catch (SQLException e) {
@@ -222,8 +270,65 @@ public abstract class Administrateur implements AdministrateurInterface {
 	 */
 	@Override
 	public List<TitreMusical> rechercherParNomTitre(String recherche) {
-		// TODO Auto-generated method stub
-		return null;
+		// On recupere une connexion de type java.sql.Connection
+				Connection connexion = DBManager.getInstance().getConnection();
+				
+				try {
+					// On execute la requete SQL et on recupere un java.sql.ResultSet
+					String request = "CALL rechercherParTitre(?);";
+					
+					// Prepared statement 
+					PreparedStatement preparedQuery = connexion.prepareStatement(request);
+					preparedQuery.setString(1, recherche);
+					
+					// Retour
+					ResultSet rs = preparedQuery.executeQuery();
+					
+					// Creation de la liste
+					List<TitreMusical> titres = new ArrayList<TitreMusical>();
+					// Vrai tant qu'il reste des lignes
+					while(rs.next()) {
+						
+						// Creation du titre
+						int idTitre = rs.getInt("idCatalogue");
+						String titreTitre = rs.getString("titre");
+						int dateCreationTitre = rs.getInt("dateCreation"); 
+						int dureeTitre = rs.getInt("duree");
+						Genre nomGenre = Genre.valueOf(rs.getString("nomGenre").toUpperCase());
+						Album albumTitre = new Album(rs.getInt("Album_idCatalogue"));
+						
+						// On recherche les titres de l'interprete
+						String requestInterpretes = "CALL rechercherParIdCatalogueInterpretes(?);";
+						
+						// Prepared statement 
+						PreparedStatement preparedQueryInterpretes = connexion.prepareStatement(requestInterpretes);
+						preparedQueryInterpretes.setInt(1, idTitre);
+						
+						// Retour
+						ResultSet rsInterpretes = preparedQueryInterpretes.executeQuery();
+						//Creation de la liste des interpretes
+						List<Interprete> interpretes = new ArrayList<Interprete>();
+						
+						while(rsInterpretes.next()) {
+							// Creation de l'interprete
+							int idInterprete = rsInterpretes.getInt("idInterprete");
+							String pseudo = rsInterpretes.getString("pseudonyme");
+							String prenom = rsInterpretes.getString("prenom"); 
+							String nom = rsInterpretes.getString("nom");
+							Date dateNaissance = rsInterpretes.getDate("dateNaissance");
+							
+							interpretes.add(new Interprete(idInterprete, pseudo, prenom, nom, dateNaissance));
+						}
+						
+						// Ajout a la liste retournee
+						titres.add(new TitreMusical(idTitre, titreTitre, dateCreationTitre, dureeTitre, nomGenre, albumTitre, null));						
+					}
+					return titres;
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return null;
 	}
 
 	@Override

@@ -153,6 +153,8 @@ public class ClientServlet extends HttpServlet {//clientServlet
     					titresSandbox.remove(0);
     				}
     				System.out.println(titresSandbox);
+    				System.out.println(adminSandbox.rechercherParNomTitre(""));
+    				System.out.println(adminSandbox.rechercherParPseudoInterprete(""));
     			
     		}
     	}	         
