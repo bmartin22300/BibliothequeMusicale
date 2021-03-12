@@ -36,13 +36,15 @@ public interface ProfilGestionnaireMusicalInterface extends AdministrateurInterf
 	public boolean modifierAlbum(Album album, String nom, int anneeSortie);
 	public boolean supprimerAlbum(Album album);
 	
+	public boolean ajoutTitreAlbum(TitreMusical titre, Album album);
+	public boolean suppressionTitreAlbum(TitreMusical titre, Album album);
+	
+	
 	//A VERIFIER 
 
 	// Album
 
-	public boolean ajoutTitreAlbum(TitreMusical titre, Album album);
-	public boolean suppressionTitreAlbum(TitreMusical titre, Album album);
-	
+
 	
 	//TODO
 	

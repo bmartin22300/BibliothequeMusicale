@@ -11,7 +11,7 @@ public class Album extends ElementCatalogue{
 	private List<TitreMusical> titres;
 	
 	// Constructeur
-	public Album(int idCatalogue, String nom, int duree, int anneeSortie, List<Interprete> interpretes,
+	public Album(int idCatalogue, String nom, int duree, int anneeSortie,
 			List<TitreMusical> titres) {
 		super(idCatalogue);
 		this.nom = nom;

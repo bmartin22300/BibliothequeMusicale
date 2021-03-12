@@ -488,22 +488,6 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
     				}
     			}
 								
-				// Association interpretes
-				String requestInterprete = "CALL association_album_interprete(?, ?);";
-                
-                // Prepared statement association interpretes
-    			PreparedStatement preparedQueryInterprete = connexion.prepareStatement(requestInterprete);
-    			preparedQueryInterprete.setInt(1, last_inserted_id);
-    			
-    			if(interpretes!=null) {
-    				for(Interprete interprete : interpretes){ // On associe chaque interprete � l'album
-    					
-    					preparedQueryInterprete.setInt(2, interprete.getId());
-
-    					preparedQueryInterprete.executeUpdate();
-    				}
-    			}
-    			
     			// On execute la requete SQL et on recupere un java.sql.ResultSet
     			String requestMajDuree = "CALL majDureeAlbum(?, ?);";
     			
@@ -513,8 +497,7 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
     			preparedMajDuree.setInt(2, dureeAlbum);
     			
     			preparedMajDuree.executeUpdate();
-    			
-				return new Album(last_inserted_id, nom, dureeAlbum, anneeSortie, interpretes, titres);
+				return new Album(last_inserted_id, nom, dureeAlbum, anneeSortie, titres);
             }
             else {
             	return null;

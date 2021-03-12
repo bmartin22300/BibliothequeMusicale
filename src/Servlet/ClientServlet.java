@@ -184,6 +184,8 @@ public class ClientServlet extends HttpServlet {//clientServlet
     				System.out.println(albumSandboxVide);
     				adminSandbox.suppressionTitreAlbum(titresSandbox.get(0), albumSandboxVide);
     				System.out.println(albumSandboxVide);
+    				
+    				System.out.println(adminSandbox.rechercherParNomAlbum(""));
     		}
     	}	         
         //affichage vue	

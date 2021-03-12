@@ -24,11 +24,16 @@ public interface AdministrateurInterface {
 	public List<Interprete> rechercherParPrenomInterprete(String recherche);
 	public List<Interprete> rechercherParNomInterprete(String recherche);
 	
+	// Parcourir TitreMusical
+	public List<TitreMusical> rechercherParNomTitre(String recherche);
+	
+	// Parcourir Album
+	public List<Album> rechercherParNomAlbum(String recherche);
+	
 	
 	//A VERIFIER
 	
 	// Parcourir TitreMusical
-	public List<TitreMusical> rechercherParNomTitre(String recherche);
 	public List<TitreMusical> rechercherParGenreTitre(Genre genre);
 	public List<TitreMusical> rechercherParDateSortieTitre(Date date);
 	public List<TitreMusical> parcourirCatalogueTitre();
@@ -54,7 +59,6 @@ public interface AdministrateurInterface {
 	public List<ElementCatalogue> parcourirCatalogueCatalogue();
 	
 	// Parcourir Album
-	public List<Album> rechercherParNomAlbum(String recherche);
 	public List<Album> rechercherParInterpreteAlbum(String recherche);
 	public List<Album> rechercherParGenreAlbum(Genre genre);
 	public List<Album> rechercherParDateSortieAlbum(Date date);

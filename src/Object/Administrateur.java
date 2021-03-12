@@ -115,10 +115,10 @@ public abstract class Administrateur implements AdministrateurInterface {
 					int dureeTitre = rsTitres.getInt("duree");
 					Genre nomGenre = Genre.valueOf(rsTitres.getString("nomGenre").toUpperCase());
 					Album albumTitre;
-					if((rs.getInt("Album_idCatalogue"))==0) {
+					if((rsTitres.getInt("Album_idCatalogue"))==0) {
 						albumTitre=null;
 					}else {
-						albumTitre = new Album(rs.getInt("Album_idCatalogue"));
+						albumTitre = new Album(rsTitres.getInt("Album_idCatalogue"));
 					}
 					
 					titres.add(new TitreMusical(idTitre, titreTitre, dateCreationTitre, dureeTitre, nomGenre, albumTitre, null));
@@ -186,6 +186,7 @@ public abstract class Administrateur implements AdministrateurInterface {
 					int dateCreationTitre = rsTitres.getInt("dateCreation"); 
 					int dureeTitre = rsTitres.getInt("duree");
 					Genre nomGenre = Genre.valueOf(rsTitres.getString("nomGenre").toUpperCase());
+					
 					Album albumTitre = new Album(rsTitres.getInt("Album_idCatalogue"));
 					
 					titres.add(new TitreMusical(idTitre, titreTitre, dateCreationTitre, dureeTitre, nomGenre, albumTitre, null));
@@ -405,7 +406,67 @@ public abstract class Administrateur implements AdministrateurInterface {
 
 	@Override
 	public List<Album> rechercherParNomAlbum(String recherche) {
-		// TODO Auto-generated method stub
+		// On recupere une connexion de type java.sql.Connection
+		Connection connexion = DBManager.getInstance().getConnection();
+		
+		try {
+			// On execute la requete SQL et on recupere un java.sql.ResultSet
+			String request = "CALL rechercherParNomAlbum(?);";
+			
+			// Prepared statement 
+			PreparedStatement preparedQuery = connexion.prepareStatement(request);
+			preparedQuery.setString(1, recherche);
+			
+			// Retour
+			ResultSet rs = preparedQuery.executeQuery();
+			
+			// Creation de la liste
+			List<Album> albums = new ArrayList<Album>();
+			// Vrai tant qu'il reste des lignes
+			while(rs.next()) {
+				// Creation du titre
+				int idAlbum = rs.getInt("idCatalogue");
+				String nomAlbum = rs.getString("nom");
+				int dateSortieAlbum = rs.getInt("dateSortie"); 
+				int dureeAlbum = rs.getInt("duree");
+				
+				// On recherche les titres de l'album
+				String requestTitres = "CALL rechercherParIdAlbumTitres(?);";
+				
+				// Prepared statement 
+				PreparedStatement preparedQueryTitres = connexion.prepareStatement(requestTitres);
+				preparedQueryTitres.setInt(1, idAlbum);
+				
+				// Retour
+				ResultSet rsTitres = preparedQueryTitres.executeQuery();
+				//Creation de la liste des interpretes
+				List<TitreMusical> titres = new ArrayList<TitreMusical>();
+				
+				while(rsTitres.next()) {
+					// Creation de l'interprete
+					int idTitre = rsTitres.getInt("idCatalogue");
+					String titreTitre = rsTitres.getString("titre");
+					int dateCreationTitre = rsTitres.getInt("dateCreation"); 
+					int dureeTitre = rsTitres.getInt("duree");
+					Genre nomGenreTitre = Genre.valueOf(rsTitres.getString("nomGenre").toUpperCase());
+					Album albumTitre;
+					if((rs.getInt("Album_idCatalogue"))==0) {
+						albumTitre=null;
+					}else {
+						albumTitre = new Album(rs.getInt("Album_idCatalogue"));
+					}
+					
+					titres.add(new TitreMusical(idTitre, titreTitre, dateCreationTitre, dureeTitre, nomGenreTitre, albumTitre, null));
+				}
+				
+				// Ajout a la liste retournee
+				albums.add(new Album(idAlbum, nomAlbum, dureeAlbum, dateSortieAlbum, titres));						
+			}
+			return albums;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 
