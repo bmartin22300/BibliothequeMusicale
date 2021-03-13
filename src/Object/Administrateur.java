@@ -707,6 +707,7 @@ public abstract class Administrateur implements AdministrateurInterface {
 		return null;
 	}
 
+	// Album
 	/*
 	 * Fonction rechercherParNomAlbum renvoie la List<Album> correspondant a la recherche en parametre
 	 */
@@ -843,11 +844,11 @@ public abstract class Administrateur implements AdministrateurInterface {
 				
 				// Retour
 				ResultSet rsTitres = preparedQueryTitres.executeQuery();
-				//Creation de la liste des interpretes
+				//Creation de la liste de Titres
 				List<TitreMusical> titres = new ArrayList<TitreMusical>();
 				
 				while(rsTitres.next()) {
-					// Creation de l'interprete
+					// Creation du Titre
 					int idTitre = rsTitres.getInt("idCatalogue");
 					String titreTitre = rsTitres.getString("titre");
 					int dateCreationTitre = rsTitres.getInt("dateCreation"); 

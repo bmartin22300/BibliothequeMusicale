@@ -47,8 +47,6 @@ public interface ProfilGestionnaireMusicalInterface extends AdministrateurInterf
 
 	// Album
 
-
-	
 	//TODO
 	
 	

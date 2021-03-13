@@ -15,7 +15,6 @@ public interface AdministrateurInterface {
 
 	// VALIDE
 	
-	
 	// TESTE	
 	public Administrateur creerAdmin(String mail, String password);
 	
@@ -59,7 +58,6 @@ public interface AdministrateurInterface {
 	public List<Client> rechercherParNomClient(String recherche);
 	public List<Client> rechercherParPrenomClient(String recherche);
 	// Autres critères de recherche useless? (GenrePréféré, adresse etc)
-	
 	
 	// Parcourir Album
 	public List<Album> rechercherParInterpreteAlbum(String recherche);

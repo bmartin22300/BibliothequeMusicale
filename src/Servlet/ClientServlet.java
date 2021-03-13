@@ -16,6 +16,7 @@ import Object.Client;
 import Object.Genre;
 import Object.Interprete;
 import Object.Playlist;
+import Object.ProfilGestionnaireClient;
 import Object.ProfilGestionnaireMusical;
 import Object.TitreMusical;
 import Object.Utilisateur;
@@ -218,6 +219,7 @@ public class ClientServlet extends HttpServlet {//clientServlet
     				System.out.println(clientSandbox.creerPlaylist("Ma Playlist", titresSandbox));
     				System.out.println(clientSandbox.creerPlaylist("Ma Playlist2.0", titresSandbox));
     				System.out.println(clientSandbox.supprimerPlaylist(clientSandbox.getPlaylists().get(1)));
+    				System.out.println(clientSandbox.getPlaylists());
     				System.out.println(playlistSandbox);
     				clientSandbox.changerNomPlaylist(playlistSandbox, "Pour jouer mais avec un nouveau nom");
     				System.out.println(playlistSandbox);
@@ -230,7 +232,14 @@ public class ClientServlet extends HttpServlet {//clientServlet
     				System.out.println("RECHERCHE CLIENT");
     				System.out.println(adminSandbox.rechercherParMailClient(""));
     				System.out.println(adminSandbox.getClient(1));
-    		}
+    				
+    				// Modifier Information Client
+    				System.out.println("MODIFIER CLIENT DEPUIS ADMIN");
+    				ProfilGestionnaireClient adminSandboxClient = new ProfilGestionnaireClient((int) (Math.random()*1000), "MailAdminClient","PasswordAdminClient");
+    				System.out.println(clientSandbox);
+    				adminSandboxClient.modifierInformationsClient(clientSandbox, "Un nouveau mail pour la forme", "Un nouveau pass pour la forme", "Mister", "Le", "Plus", dateNaissanceSandbox, "Adressé", styleMusiqueSandbox);
+    				System.out.println(clientSandbox);
+	        }
     	}	         
         //affichage vue	
         RequestDispatcher rd = getServletContext().getRequestDispatcher(vue);

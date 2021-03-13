@@ -6,15 +6,7 @@ import Object.Client;
 import Object.Genre;
 
 public interface ProfilGestionnaireClientInterface extends AdministrateurInterface {
-	
-	// VALIDE
-	
-	// TESTE
-	
-	//A VERIFIER
-	
-	//TODO
-	
-	public boolean modifierInformationsClient(Client client, String password, String civilite, String nom, String prenom, Date dateNaissance, String adresseFacturation, Genre styleMusiquePrefere);
+
+	public boolean modifierInformationsClient(Client client, String mail, String password, String civilite, String nom, String prenom, Date dateNaissance, String adresseFacturation, Genre styleMusiquePrefere);
 
 }

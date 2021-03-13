@@ -136,3 +136,4 @@ CALL modifier_playlist(1, "Cette Playlist");
 
 CALL rechercherParMailClient("i");
 CALL rechercherParIdClientPlaylists(2);
+CALL rechercherParIdPlaylistTitres(2);

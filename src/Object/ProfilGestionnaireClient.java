@@ -63,10 +63,55 @@ public class ProfilGestionnaireClient extends Administrateur implements ProfilGe
 		return null;
 	}
 	
+	/*
+	 * Fonction modifierInformationsClient, met à jour les informations du client dans la BD puis dans l'objet
+	 * Renvoie true si la modification a lieu, false sinon
+	 */
 	@Override
-	public boolean modifierInformationsClient(Client client, String password, String civilite, String nom,
-			String prenom, Date dateNaissance, String adresseFacturation, Genre styleMusiquePrefere) {
-		// TODO Auto-generated method stub
+	public boolean modifierInformationsClient(Client client,String mail, String password, String civilite, String nom, String prenom,
+		Date dateNaissance, String adresseFacturation, Genre styleMusiquePrefere){
+		// Recuperer la connexion
+		Connection connexion = DBManager.getInstance().getConnection();
+		
+		try {
+			
+			// Maj BDD
+			String request = "CALL modifier_client(?, ?, ?, ?, ?, ?, ?, ?, ?);";
+			
+			// Prepared statement 
+			PreparedStatement preparedQuery = connexion.prepareStatement(request);
+			preparedQuery.setInt(1, client.getId());
+			preparedQuery.setString(2, mail);
+			preparedQuery.setString(3, password);
+			preparedQuery.setString(4, civilite);
+			preparedQuery.setString(5, nom);
+			preparedQuery.setString(6, prenom);
+			preparedQuery.setDate(7, (java.sql.Date) dateNaissance);
+			preparedQuery.setString(8, adresseFacturation);
+			preparedQuery.setString(9, styleMusiquePrefere.toString());
+			
+			// Execution
+			if(preparedQuery.executeUpdate()>0) { // Succes de la modification
+				// Maj Objet
+				client.setPassword(mail);
+				client.setPassword(password);
+				client.setCivilite(civilite);
+				client.setNom(nom);
+				client.setPrenom(prenom);
+				client.setDateNaissance(dateNaissance);
+				client.setAdresseFacturation(adresseFacturation);
+				client.setStyleMusiquePrefere(styleMusiquePrefere);
+				
+				return true;
+			}
+			else{ // La mise a jour echoue
+				return false;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return false;
 	}
 }
