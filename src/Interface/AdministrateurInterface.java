@@ -33,6 +33,10 @@ public interface AdministrateurInterface {
 	public List<Album> rechercherParNomAlbum(String recherche);
 	public Album getAlbum(int id);
 	
+	// Parcourir Clients
+	public List<Client> rechercherParMailClient(String recherche);
+	public Client getClient(int id);
+	
 	// Regarder
 	public boolean regarder(ElementCatalogue elementCatalogue);
 	
@@ -52,17 +56,10 @@ public interface AdministrateurInterface {
 	public List<Client> topUtilisateursEcoutes();
 	
 	// Parcourir Clients
-	public List<Client> rechercherParMailClient(String recherche);
 	public List<Client> rechercherParNomClient(String recherche);
 	public List<Client> rechercherParPrenomClient(String recherche);
 	// Autres critères de recherche useless? (GenrePréféré, adresse etc)
 	
-	// Parcourir Catalogue
-	public List<ElementCatalogue> rechercherParNomCatalogue(String recherche);
-	public List<ElementCatalogue> rechercherParInterpreteCatalogue(String recherche);
-	public List<ElementCatalogue> rechercherParGenreCatalogue(Genre genre);
-	public List<ElementCatalogue> rechercherParDateSortieCatalogue(Date date);
-	public List<ElementCatalogue> parcourirCatalogueCatalogue();
 	
 	// Parcourir Album
 	public List<Album> rechercherParInterpreteAlbum(String recherche);

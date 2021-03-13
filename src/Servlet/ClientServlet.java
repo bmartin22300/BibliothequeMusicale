@@ -226,6 +226,10 @@ public class ClientServlet extends HttpServlet {//clientServlet
     				clientSandbox.retirerTitrePlaylist(playlistSandbox.getTitresMusicaux().get(0), playlistSandbox);
     				System.out.println(playlistSandbox);
     				
+    				// Recherche Client
+    				System.out.println("RECHERCHE CLIENT");
+    				System.out.println(adminSandbox.rechercherParMailClient(""));
+    				System.out.println(adminSandbox.getClient(1));
     		}
     	}	         
         //affichage vue	

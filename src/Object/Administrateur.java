@@ -113,7 +113,14 @@ public abstract class Administrateur implements AdministrateurInterface {
 					String titreTitre = rsTitres.getString("titre");
 					int dateCreationTitre = rsTitres.getInt("dateCreation"); 
 					int dureeTitre = rsTitres.getInt("duree");
-					Genre nomGenre = Genre.valueOf(rsTitres.getString("nomGenre").toUpperCase());
+					String stringGenre = rsTitres.getString("nomGenre");
+					Genre nomGenre;
+					if(stringGenre==null) {
+						nomGenre = Genre.INCONNU;
+					}
+					else {
+						nomGenre = Genre.valueOf(rsTitres.getString("nomGenre").toUpperCase());
+					}
 					Album albumTitre;
 					if((rsTitres.getInt("Album_idCatalogue"))==0) {
 						albumTitre=null;
@@ -185,8 +192,14 @@ public abstract class Administrateur implements AdministrateurInterface {
 					String titreTitre = rsTitres.getString("titre");
 					int dateCreationTitre = rsTitres.getInt("dateCreation"); 
 					int dureeTitre = rsTitres.getInt("duree");
-					Genre nomGenre = Genre.valueOf(rsTitres.getString("nomGenre").toUpperCase());
-					
+					String stringGenre = rsTitres.getString("nomGenre");
+					Genre nomGenre;
+					if(stringGenre==null) {
+						nomGenre = Genre.INCONNU;
+					}
+					else {
+						nomGenre = Genre.valueOf(rsTitres.getString("nomGenre").toUpperCase());
+					}
 					Album albumTitre = new Album(rsTitres.getInt("Album_idCatalogue"));
 					
 					titres.add(new TitreMusical(idTitre, titreTitre, dateCreationTitre, dureeTitre, nomGenre, albumTitre, null));
@@ -253,7 +266,14 @@ public abstract class Administrateur implements AdministrateurInterface {
 					String titreTitre = rsTitres.getString("titre");
 					int dateCreationTitre = rsTitres.getInt("dateCreation"); 
 					int dureeTitre = rsTitres.getInt("duree");
-					Genre nomGenre = Genre.valueOf(rsTitres.getString("nomGenre").toUpperCase());
+					String stringGenre = rsTitres.getString("nomGenre");
+					Genre nomGenre;
+					if(stringGenre==null) {
+						nomGenre = Genre.INCONNU;
+					}
+					else {
+						nomGenre = Genre.valueOf(rsTitres.getString("nomGenre").toUpperCase());
+					}
 					Album albumTitre;
 					if((rsTitres.getInt("Album_idCatalogue"))==0) {
 						albumTitre=null;
@@ -321,7 +341,14 @@ public abstract class Administrateur implements AdministrateurInterface {
 					String titreTitre = rsTitres.getString("titre");
 					int dateCreationTitre = rsTitres.getInt("dateCreation"); 
 					int dureeTitre = rsTitres.getInt("duree");
-					Genre nomGenre = Genre.valueOf(rsTitres.getString("nomGenre").toUpperCase());
+					String stringGenre = rsTitres.getString("nomGenre");
+					Genre nomGenre;
+					if(stringGenre==null) {
+						nomGenre = Genre.INCONNU;
+					}
+					else {
+						nomGenre = Genre.valueOf(rsTitres.getString("nomGenre").toUpperCase());
+					}
 					Album albumTitre;
 					if((rsTitres.getInt("Album_idCatalogue"))==0) {
 						albumTitre=null;
@@ -375,7 +402,14 @@ public abstract class Administrateur implements AdministrateurInterface {
 						String titreTitre = rs.getString("titre");
 						int dateCreationTitre = rs.getInt("dateCreation"); 
 						int dureeTitre = rs.getInt("duree");
-						Genre nomGenre = Genre.valueOf(rs.getString("nomGenre").toUpperCase());
+						String stringGenre = rs.getString("nomGenre");
+						Genre nomGenre;
+						if(stringGenre==null) {
+							nomGenre = Genre.INCONNU;
+						}
+						else {
+							nomGenre = Genre.valueOf(rs.getString("nomGenre").toUpperCase());
+						}
 						Album albumTitre;
 						if((rs.getInt("Album_idCatalogue"))==0) {
 							albumTitre=null;
@@ -421,7 +455,7 @@ public abstract class Administrateur implements AdministrateurInterface {
 	 * Fonction getTitreMusical renvoie le TitreMusical associé à l'id en parametre
 	 */
 	@Override
-	public TitreMusical getTitreMusical(int id) {
+	public TitreMusical getTitreMusical(int idTitreMusical) {
 		// On recupere une connexion de type java.sql.Connection
 		Connection connexion = DBManager.getInstance().getConnection();
 		
@@ -431,7 +465,7 @@ public abstract class Administrateur implements AdministrateurInterface {
 			
 			// Prepared statement 
 			PreparedStatement preparedQuery = connexion.prepareStatement(request);
-			preparedQuery.setInt(1, id);
+			preparedQuery.setInt(1, idTitreMusical);
 			
 			// Retour
 			ResultSet rs = preparedQuery.executeQuery();
@@ -443,7 +477,14 @@ public abstract class Administrateur implements AdministrateurInterface {
 				String titreTitre = rs.getString("titre");
 				int dateCreationTitre = rs.getInt("dateCreation"); 
 				int dureeTitre = rs.getInt("duree");
-				Genre nomGenre = Genre.valueOf(rs.getString("nomGenre").toUpperCase());
+				String stringGenre = rs.getString("nomGenre");
+				Genre nomGenre;
+				if(stringGenre==null) {
+					nomGenre = Genre.INCONNU;
+				}
+				else {
+					nomGenre = Genre.valueOf(rs.getString("nomGenre").toUpperCase());
+				}
 				Album albumTitre;
 				if((rs.getInt("Album_idCatalogue"))==0) {
 					albumTitre=null;
@@ -487,7 +528,6 @@ public abstract class Administrateur implements AdministrateurInterface {
 		return null;
 	}
 
-	// TitreMusical
 	@Override
 	public List<TitreMusical> rechercherParGenreTitre(Genre genre) {
 		// TODO Auto-generated method stub
@@ -506,9 +546,152 @@ public abstract class Administrateur implements AdministrateurInterface {
 		return null;
 	}
 
+	// Client
+	/*
+	 * Fonction rechercherParMailClient renvoie la List<Client> correspondant a la recherche en parametre
+	 */
 	@Override
 	public List<Client> rechercherParMailClient(String recherche) {
-		// TODO Auto-generated method stub
+		// On recupere une connexion de type java.sql.Connection
+		Connection connexion = DBManager.getInstance().getConnection();
+		
+		try {
+			// On execute la requete SQL et on recupere un java.sql.ResultSet
+			String request = "CALL rechercherParMailClient(?);";
+			
+			// Prepared statement 
+			PreparedStatement preparedQuery = connexion.prepareStatement(request);
+			preparedQuery.setString(1, recherche);
+			
+			// Retour
+			ResultSet rs = preparedQuery.executeQuery();
+			
+			// Creation de la liste
+			List<Client> clients = new ArrayList<Client>();
+			// Vrai tant qu'il reste des lignes
+			while(rs.next()) {
+				// Creation du Client
+				int idClient = rs.getInt("idClient");
+				String mailClient = rs.getString("mail");
+				String passwordClient = rs.getString("password");
+				String civiliteClient = rs.getString("civilite"); 
+				String nomClient = rs.getString("nom"); 
+				String prenomClient = rs.getString("prenom");
+				Date dateNaissanceClient = rs.getDate("dateNaissance");
+				String adresseFacturationClient = rs.getString("adresseFacturation");
+				int nbEcouteClient = rs.getInt("nbEcoute");
+				String stringGenre = rs.getString("nomGenre");
+				Genre nomGenreClient;
+				if(stringGenre==null) {
+					nomGenreClient = Genre.INCONNU;
+				}
+				else {
+					nomGenreClient = Genre.valueOf(rs.getString("nomGenre").toUpperCase());
+				}
+				
+				// On recherche les playlists du Client
+				String requestPlaylists = "CALL rechercherParIdClientPlaylists(?);";
+				
+				// Prepared statement 
+				PreparedStatement preparedQueryPlaylists = connexion.prepareStatement(requestPlaylists);
+				preparedQueryPlaylists.setInt(1, idClient);
+				
+				// Retour
+				ResultSet rsPlaylists = preparedQueryPlaylists.executeQuery();
+				//Creation de la liste des playlists
+				List<Playlist> playlists = new ArrayList<Playlist>();
+				
+				while(rsPlaylists.next()) {
+					// Creation de la playlist
+					int idPlaylistPlaylist = rsPlaylists.getInt("idPlaylist");
+					String nomPlaylistPlaylist = rsPlaylists.getString("nomPlaylist");
+					//int idClientPlaylist = rsPlaylists.getInt("idClient"); 
+					
+					playlists.add(new Playlist(idPlaylistPlaylist, nomPlaylistPlaylist, null, null));
+				}
+				
+				// Ajout a la liste retournee
+				clients.add(new Client(idClient, mailClient, passwordClient, civiliteClient, nomClient, prenomClient, dateNaissanceClient, adresseFacturationClient, nbEcouteClient, nomGenreClient, playlists));
+			}
+			return clients;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/*
+	 * Fonction getClient renvoie le Client associé à l'id en parametre
+	 */
+	@Override
+	public Client getClient(int id) {
+		// On recupere une connexion de type java.sql.Connection
+		Connection connexion = DBManager.getInstance().getConnection();
+		
+		try {
+			// On execute la requete SQL et on recupere un java.sql.ResultSet
+			String request = "CALL getClient(?);";
+			
+			// Prepared statement 
+			PreparedStatement preparedQuery = connexion.prepareStatement(request);
+			preparedQuery.setInt(1, id);
+			
+			// Retour
+			ResultSet rs = preparedQuery.executeQuery();
+			
+			// Vrai si on a un resultat
+			if(rs.next()) {					
+				// Creation du Client
+				int idClient = rs.getInt("idClient");
+				String mailClient = rs.getString("mail");
+				String passwordClient = rs.getString("password");
+				String civiliteClient = rs.getString("civilite"); 
+				String nomClient = rs.getString("nom"); 
+				String prenomClient = rs.getString("prenom");
+				Date dateNaissanceClient = rs.getDate("dateNaissance");
+				String adresseFacturationClient = rs.getString("adresseFacturation");
+				int nbEcouteClient = rs.getInt("nbEcoute");
+				String stringGenre = rs.getString("nomGenre");
+				Genre nomGenreClient;
+				if(stringGenre==null) {
+					nomGenreClient = Genre.INCONNU;
+				}
+				else {
+					nomGenreClient = Genre.valueOf(rs.getString("nomGenre").toUpperCase());
+				}
+				
+				// On recherche les playlists du Client
+				String requestPlaylists = "CALL rechercherParIdClientPlaylists(?);";
+				
+				// Prepared statement 
+				PreparedStatement preparedQueryPlaylists = connexion.prepareStatement(requestPlaylists);
+				preparedQueryPlaylists.setInt(1, idClient);
+				
+				// Retour
+				ResultSet rsPlaylists = preparedQueryPlaylists.executeQuery();
+				//Creation de la liste des playlists
+				List<Playlist> playlists = new ArrayList<Playlist>();
+				
+				while(rsPlaylists.next()) {
+					// Creation de la playlist
+					int idPlaylistPlaylist = rsPlaylists.getInt("idPlaylist");
+					String nomPlaylistPlaylist = rsPlaylists.getString("nomPlaylist");
+					//int idClientPlaylist = rsPlaylists.getInt("idClient"); 
+					
+					playlists.add(new Playlist(idPlaylistPlaylist, nomPlaylistPlaylist, null, null));
+				}
+				
+				// On retourne le Client
+				return new Client(idClient, mailClient, passwordClient, civiliteClient, nomClient, prenomClient, dateNaissanceClient, adresseFacturationClient, nbEcouteClient, nomGenreClient, playlists);			
+			}
+			else {
+				return null;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 
@@ -524,36 +707,9 @@ public abstract class Administrateur implements AdministrateurInterface {
 		return null;
 	}
 
-	@Override
-	public List<ElementCatalogue> rechercherParNomCatalogue(String recherche) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ElementCatalogue> rechercherParInterpreteCatalogue(String recherche) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ElementCatalogue> rechercherParGenreCatalogue(Genre genre) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ElementCatalogue> rechercherParDateSortieCatalogue(Date date) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ElementCatalogue> parcourirCatalogueCatalogue() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	/*
+	 * Fonction rechercherParNomAlbum renvoie la List<Album> correspondant a la recherche en parametre
+	 */
 	@Override
 	public List<Album> rechercherParNomAlbum(String recherche) {
 		// On recupere une connexion de type java.sql.Connection
@@ -598,7 +754,14 @@ public abstract class Administrateur implements AdministrateurInterface {
 					String titreTitre = rsTitres.getString("titre");
 					int dateCreationTitre = rsTitres.getInt("dateCreation"); 
 					int dureeTitre = rsTitres.getInt("duree");
-					Genre nomGenreTitre = Genre.valueOf(rsTitres.getString("nomGenre").toUpperCase());
+					String stringGenre = rsTitres.getString("nomGenre");
+					Genre nomGenreTitre;
+					if(stringGenre==null) {
+						nomGenreTitre = Genre.INCONNU;
+					}
+					else {
+						nomGenreTitre = Genre.valueOf(rsTitres.getString("nomGenre").toUpperCase());
+					}
 					Album albumTitre;
 					if((rsTitres.getInt("Album_idCatalogue"))==0) {
 						albumTitre=null;
@@ -689,7 +852,14 @@ public abstract class Administrateur implements AdministrateurInterface {
 					String titreTitre = rsTitres.getString("titre");
 					int dateCreationTitre = rsTitres.getInt("dateCreation"); 
 					int dureeTitre = rsTitres.getInt("duree");
-					Genre nomGenreTitre = Genre.valueOf(rsTitres.getString("nomGenre").toUpperCase());
+					String stringGenre = rsTitres.getString("nomGenre");
+					Genre nomGenreTitre;
+					if(stringGenre==null) {
+						nomGenreTitre = Genre.INCONNU;
+					}
+					else {
+						nomGenreTitre = Genre.valueOf(rsTitres.getString("nomGenre").toUpperCase());
+					}
 					Album albumTitre;
 					if((rsTitres.getInt("Album_idCatalogue"))==0) {
 						albumTitre=null;

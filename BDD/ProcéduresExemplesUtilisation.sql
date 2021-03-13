@@ -133,3 +133,6 @@ CALL association_playlist_elementsPlaylist(2, 1);
 CALL modifier_playlist(1, "Cette Playlist");
 -- CALL supprimer_playlist(2);
 -- CALL dissociation_titre_playlist(1, 1);
+
+CALL rechercherParMailClient("i");
+CALL rechercherParIdClientPlaylists(2);
