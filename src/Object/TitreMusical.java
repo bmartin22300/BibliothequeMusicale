@@ -1,5 +1,6 @@
 package Object;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TitreMusical extends ElementCatalogue{
@@ -9,6 +10,7 @@ public class TitreMusical extends ElementCatalogue{
 	private Genre genre;
 	private Album album;
 	private List<Interprete> interpretes;
+	private List<Playlist> playlists;
 	
 	// Constructeur
 	public TitreMusical(int idCatalogue, String titre, int anneeCreation, int duree, Genre genre,
@@ -93,11 +95,28 @@ public class TitreMusical extends ElementCatalogue{
 		this.genre = genre;
 	}
 	
+	public void retirerPlaylist(Playlist playlist) {
+		if(this.playlists!=null) {
+			this.playlists.remove(titre);
+		}
+	}
+	
+	public void ajouterPlaylist(Playlist playlist) {
+		if(this.playlists!=null) {
+			this.playlists.add(playlist);
+		}
+		else {
+			this.playlists = new ArrayList<Playlist>();
+			this.playlists.add(playlist);
+		}
+		
+	}
+
+	
 
 	@Override
 	public String toString() {
 		return "TitreMusical [titre=" + titre + ", anneeCreation=" + anneeCreation + ", duree=" + duree + ", genre="
 				+ genre + "]";
 	}
-
 }

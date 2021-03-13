@@ -126,3 +126,10 @@ SELECT * FROM TitreMusical;
 SELECT * FROM vue_morceaux_populaires;
 
 CALL regarder(3,2);
+
+SELECT nouvelle_playlist(2, "Une playlist");
+CALL association_playlist_elementsPlaylist(1, 1);
+CALL association_playlist_elementsPlaylist(2, 1);
+CALL modifier_playlist(1, "Cette Playlist");
+-- CALL supprimer_playlist(2);
+-- CALL dissociation_titre_playlist(1, 1);

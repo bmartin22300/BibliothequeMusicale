@@ -15,6 +15,7 @@ import Object.Album;
 import Object.Client;
 import Object.Genre;
 import Object.Interprete;
+import Object.Playlist;
 import Object.ProfilGestionnaireMusical;
 import Object.TitreMusical;
 import Object.Utilisateur;
@@ -210,6 +211,21 @@ public class ClientServlet extends HttpServlet {//clientServlet
     				adminSandbox.regarder(albumSandboxVide);
     				userSandbox.regarder(titresSandbox.get(1));
     				clientSandbox.regarder(titresSandbox.get(1));
+    				
+    				// PLAYLIST
+    				System.out.println("PLAYLIST");
+    				Playlist playlistSandbox = clientSandbox.creerPlaylist("Pour jouer", titresSandbox);
+    				System.out.println(clientSandbox.creerPlaylist("Ma Playlist", titresSandbox));
+    				System.out.println(clientSandbox.creerPlaylist("Ma Playlist2.0", titresSandbox));
+    				System.out.println(clientSandbox.supprimerPlaylist(clientSandbox.getPlaylists().get(1)));
+    				System.out.println(playlistSandbox);
+    				clientSandbox.changerNomPlaylist(playlistSandbox, "Pour jouer mais avec un nouveau nom");
+    				System.out.println(playlistSandbox);
+    				clientSandbox.ajouterTitrePlaylist(adminSandbox.creerTitre("Un autre titre pour la forme", 2000, null, 20, Genre.CLASSIQUE), playlistSandbox);
+    				System.out.println(playlistSandbox);
+    				clientSandbox.retirerTitrePlaylist(playlistSandbox.getTitresMusicaux().get(0), playlistSandbox);
+    				System.out.println(playlistSandbox);
+    				
     		}
     	}	         
         //affichage vue	

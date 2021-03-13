@@ -2,6 +2,7 @@ package Object;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -188,41 +189,201 @@ public class Client implements ClientInterface {
 		return false;
 	}
 
+	// Playlist
+	/*
+	 * Fonction creerPlaylist, creation d'une nouvelle Playlist dans la BDD
+	 * Renvoie l'objet Playlist si succes, null sinon
+	 */
 	@Override
-	public boolean creerPlaylist(String nomPlaylist, List<ElementCatalogue> elementsCatalogue) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	public Playlist creerPlaylist(String nomPlaylist, List<TitreMusical> titresMusicaux) {
+		// On recupere une connexion de type java.sql.Connection
+		Connection connexion = DBManager.getInstance().getConnection();
+		
+		try {
+			
+			// On execute la requete SQL et recupere un java.sql.ResultSet
+			String request = "SELECT nouvelle_playlist(?, ?);";
+			
+			// Prepared statement 
+			PreparedStatement preparedQuery = connexion.prepareStatement(request);
+			preparedQuery.setInt(1, this.getId());
+			preparedQuery.setString(2, nomPlaylist);
+			
+			// Execution
+			ResultSet rs = preparedQuery.executeQuery();
+			
+	        if(rs.next()) // Ajout des elementsCatalogue
+	        {
+	            int last_inserted_id = rs.getInt(1); // Id de la playlist creee
+                
+                // Association elementsCatalogue
+                String requestAssociation = "CALL association_playlist_elementsPlaylist(?, ?);";
+                
+                // Prepared statement 
+    			PreparedStatement preparedQueryAssociation = connexion.prepareStatement(requestAssociation);
+    			
+    			preparedQueryAssociation.setInt(2, last_inserted_id); // Id de la playlist
+    			
+    			if(titresMusicaux!=null) {
+    				for(ElementCatalogue titreMusical : titresMusicaux){ // On associe chaque elementCatalogue a la playlist
+    					
+    					preparedQueryAssociation.setInt(1, titreMusical.getIdCatalogue());
 
+    					preparedQueryAssociation.executeUpdate();
+    				}
+    			}
+    			Playlist playlist = new Playlist(last_inserted_id, nomPlaylist, this, titresMusicaux);
+    			if(this.playlists!=null) {
+    				this.playlists.add(playlist);
+    			}
+    			else {
+    				this.playlists = new ArrayList<Playlist>();
+    				this.playlists.add(playlist);
+    			}
+    			return playlist;				
+			}
+			else{
+				return null;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/*
+	 * Fonction supprimerPlaylist, retire la Playlist de la BD
+	 * Renvoie true si la suppression a lieu, false sinon
+	 */
 	@Override
 	public boolean supprimerPlaylist(Playlist playlist) {
-		// TODO Auto-generated method stub
+		// Recuperer la connexion
+		Connection connexion = DBManager.getInstance().getConnection();
+		
+		try {
+			
+			// Maj BDD
+			String request = "CALL supprimer_playlist(?);";
+			
+			// Prepared statement 
+			PreparedStatement preparedQuery = connexion.prepareStatement(request);
+			preparedQuery.setInt(1, playlist.getIdPlaylist());
+			
+			// Execution
+			if(preparedQuery.executeUpdate()>0) { // Succes de la suppression
+				return true;
+			}
+			else{ // La suppression echoue
+				return false;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return false;
 	}
 
-	@Override
-	public boolean modifierPlaylist(Playlist playlist, List<ElementCatalogue> elementsCatalogue) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	/*
+	 * Fonction changerNomPlaylist, met a jour les informations de la Playlist dans la BD puis dans l'objet
+	 * Renvoie true si la modification a lieu, false sinon
+	 */
 	@Override
 	public boolean changerNomPlaylist(Playlist playlist, String nom) {
-		// TODO Auto-generated method stub
+		// Recuperer la connexion
+		Connection connexion = DBManager.getInstance().getConnection();
+		
+		try {
+			
+			// Maj BDD
+			String request = "CALL modifier_playlist(?, ?);";
+			
+			// Prepared statement 
+			PreparedStatement preparedQuery = connexion.prepareStatement(request);
+			preparedQuery.setInt(1, playlist.getIdPlaylist());
+			preparedQuery.setString(2, nom);
+			
+			// Execution
+			if(preparedQuery.executeUpdate()>0) { // Succes de la modification
+				
+				// Maj Objet
+				playlist.setNomPlaylist(nom);				
+				return true;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return false;
 	}
 
+	/*
+	 * Fonction ajouterTitrePlaylist, ajoute le titre a la Playlist dans la BD
+	 * Renvoie true et associe l'instance titreMusical a l'instance playlist si l'ajout a lieu, false sinon
+	 */
 	@Override
-	public boolean retirerDePlaylist(ElementCatalogue elementCatalogue, Playlist playlist) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean ajouterTitrePlaylist(TitreMusical titreMusical, Playlist playlist) {
+		// On recupere une connexion de type java.sql.Connection
+		Connection connexion = DBManager.getInstance().getConnection();
+		
+		try {
+			
+			// On execute la requete SQL et on recupere un java.sql.ResultSet
+			String request = "CALL association_playlist_elementsPlaylist(?, ?);";
+			
+			// Prepared statement 
+			PreparedStatement preparedQuery = connexion.prepareStatement(request);
+			preparedQuery.setInt(1, titreMusical.getIdCatalogue());
+			preparedQuery.setInt(2, playlist.getIdPlaylist());
+
+			// Execution
+			if(preparedQuery.executeUpdate()>0) {
+				titreMusical.ajouterPlaylist(playlist); // On ajoute la Playlist
+				playlist.ajouterTitre(titreMusical); // On ajoute le titre
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;	
+	}
+	
+	/*
+	 * Fonction retirerTitrePlaylist, retire le titre de la Playlist dans la BD
+	 * Renvoie true et dissocie l'instance titreMusical d l'instance playlist si la suppression a lieu, false sinon
+	 */
+	@Override
+	public boolean retirerTitrePlaylist(TitreMusical titreMusical, Playlist playlist) {
+		// On recupere une connexion de type java.sql.Connection
+		Connection connexion = DBManager.getInstance().getConnection();
+		
+		try {
+			
+			// On execute la requete SQL et on recupere un java.sql.ResultSet
+			String request = "CALL dissociation_titre_playlist(?, ?);";
+			
+			// Prepared statement 
+			PreparedStatement preparedQuery = connexion.prepareStatement(request);
+			preparedQuery.setInt(1, titreMusical.getIdCatalogue());
+			preparedQuery.setInt(2, playlist.getIdPlaylist());
+
+			// Execution
+			if(preparedQuery.executeUpdate()>0) {
+				playlist.retirerTitre(titreMusical); // On supprime le titre
+				titreMusical.retirerPlaylist(playlist); // On retire la Playlist
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;	
 	}
 
-	@Override
-	public boolean ajouterAPlaylist(ElementCatalogue elementCatalogue, Playlist playlist) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	/*
 	 * Fonction modifierInformations, met à jour les informations du client dans la BD puis dans l'objet

@@ -74,15 +74,6 @@ public class Album extends ElementCatalogue{
 			this.titres.remove(titre);
 		}
 	}
-	// Méthodes de classe
-	/*
-	public void ajouterTitre(ElementCatalogue elementMusical) {
-		
-	}
-	
-	public void supprimerTitre(ElementCatalogue elementMusical) {
-		
-	}*/
 
 	@Override
 	public String toString() {

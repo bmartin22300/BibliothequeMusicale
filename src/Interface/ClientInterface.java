@@ -20,10 +20,16 @@ public interface ClientInterface {
 	
 	public boolean regarder(ElementCatalogue elementCatalogue);
 	
+	// Playlist
+	public Playlist creerPlaylist(String nomPlaylist, List<TitreMusical> titresMusicaux);
+	public boolean changerNomPlaylist(Playlist playlist, String nom);
+	public boolean supprimerPlaylist(Playlist playlist);
+	
+	public boolean ajouterTitrePlaylist(TitreMusical titreMusical, Playlist playlist);
+	public boolean retirerTitrePlaylist(TitreMusical titreMusical, Playlist playlist);
+	
 	
 	//A VERIFIER
-
-
 	
 	//TODO
 	
@@ -54,18 +60,5 @@ public interface ClientInterface {
 	public List<Interprete> rechercherParPseudoInterprete(String recherche);
 	public List<Interprete> rechercherParPrenomInterprete(String recherche);
 	public List<Interprete> rechercherParNomInterprete(String recherche);
-	//***************************************
-	
-	
-	public boolean creerPlaylist(String nomPlaylist, List<ElementCatalogue> elementsCatalogue); // Se récupère dans Client.playlists, mais on peut mettre en retour aussi
-	//Optionnel ***
-	public boolean supprimerPlaylist(Playlist playlist);
-	public boolean changerNomPlaylist(Playlist playlist, String nom);
-	//*************
-	
-	public boolean modifierPlaylist(Playlist playlist, List<ElementCatalogue> elementsCatalogue); // Vide playlist puis rempli playlist avec nouveaux titres
-	public boolean retirerDePlaylist(ElementCatalogue elementCatalogue, Playlist playlist);
-	public boolean ajouterAPlaylist(ElementCatalogue elementCatalogue, Playlist playlist);
-	
-	
+	//***************************************	
 }

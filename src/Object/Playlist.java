@@ -1,24 +1,24 @@
 package Object;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Playlist {
 	private int idPlaylist;
 	private String nomPlaylist;
 	private Client createur;
-	private List<ElementCatalogue> elementsCatalogue;
+	private List<TitreMusical> titresMusicaux;
 	
 	// Constructeurs
-	public Playlist(int idPlaylist, String nomPlaylist, Client createur, List<ElementCatalogue> elementsCatalogue) {
+	public Playlist(int idPlaylist, String nomPlaylist, Client createur, List<TitreMusical> titresMusicaux) {
 		super();
 		this.idPlaylist = idPlaylist;
 		this.nomPlaylist = nomPlaylist;
 		this.createur = createur;
-		this.elementsCatalogue = elementsCatalogue;
+		this.titresMusicaux = titresMusicaux;
 	}
 	
 	// Getters et Setters
-
 	public int getIdPlaylist() {
 		return idPlaylist;
 	}
@@ -43,14 +43,34 @@ public class Playlist {
 		this.createur = createur;
 	}
 
-	public List<ElementCatalogue> getElementsCatalogue() {
-		return elementsCatalogue;
+	public List<TitreMusical> getTitresMusicaux() {
+		return titresMusicaux;
 	}
 
-	public void setElementsCatalogue(List<ElementCatalogue> elementsCatalogue) {
-		this.elementsCatalogue = elementsCatalogue;
+	public void setTitresMusicaux(List<TitreMusical> titresMusicaux) {
+		this.titresMusicaux = titresMusicaux;
+	}
+	
+	public void ajouterTitre(TitreMusical titre) {
+		if(this.titresMusicaux!=null) {
+			this.titresMusicaux.add(titre);
+		}
+		else {
+			this.titresMusicaux = new ArrayList<TitreMusical>();
+			this.titresMusicaux.add(titre);
+		}
 	}
 
+	public void retirerTitre(TitreMusical titre) {
+		if(this.titresMusicaux!=null) {
+			this.titresMusicaux.remove(titre);
+		}
+	}
 
+	@Override
+	public String toString() {
+		return "Playlist [idPlaylist=" + idPlaylist + ", nomPlaylist=" + nomPlaylist + ", createur=" + createur
+				+ ", titresMusicaux=" + titresMusicaux + "]";
+	}
 	
 }

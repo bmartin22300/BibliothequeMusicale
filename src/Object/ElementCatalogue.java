@@ -66,15 +66,4 @@ public abstract class ElementCatalogue {
 		this.nbEcouteMois+=1;
 	}
 	
-	
-	
-/*
-	public void modifierElement() {
-		
-	}
-
-	public boolean isRecommand�() {
-		return recommand�;
-	}*/
-	
 }
