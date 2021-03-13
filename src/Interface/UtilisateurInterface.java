@@ -19,13 +19,16 @@ public interface UtilisateurInterface {
 
 	public Client authentification(String mail, String password);
 	
-	//A VERIFIER
-
 	public Administrateur authentificationAdmin(String mail, String password);
+	
+	public boolean regarder(ElementCatalogue elementCatalogue);
+	
+	//A VERIFIER	
+
 	
 	//TODO
 	
-	public void regarderElementCatalogue(ElementCatalogue elementCatalogue);
+
 	
 	public List<ElementCatalogue> morceauxPopulaires();
 	

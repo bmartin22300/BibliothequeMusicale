@@ -61,6 +61,11 @@ public abstract class ElementCatalogue {
 		this.idCatalogue = idCatalogue;
 	}
 	
+	public void regarder() {
+		this.nbEcoute+=1;
+		this.nbEcouteMois+=1;
+	}
+	
 	
 	
 /*

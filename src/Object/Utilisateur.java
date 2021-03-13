@@ -57,7 +57,7 @@ public class Utilisateur implements UtilisateurInterface {
 					genre = Genre.valueOf(rs.getString("nomGenre"));
 				}
 				
-				return new Client(rs.getString("mail"), rs.getString("password"), rs.getString("civilite"), rs.getString("nom"), 
+				return new Client(rs.getInt("idClient"),rs.getString("mail"), rs.getString("password"), rs.getString("civilite"), rs.getString("nom"), 
 						rs.getString("prenom"),rs.getDate("dateNaissance"), rs.getString("adresseFacturation"),rs.getInt("nbEcoute"), genre , playlists);
 			}
 			else{
@@ -221,11 +221,38 @@ public class Utilisateur implements UtilisateurInterface {
 		return null;
 	}
 
+	/*
+	 * Fonction regarder ajoute 1 au nombres de vues de l'Element
+	 * et false en cas d'erreur
+	 */
 	@Override
-	public void regarderElementCatalogue(ElementCatalogue elementCatalogue) {
-	
-		//TODO : pour utiliser "CALL regarder(idCatalogue_ INT)", besoin de connaître l'identifiant de l'élément du catalogue, ajout attribut que je donne à la création?
+	public boolean regarder(ElementCatalogue elementCatalogue) {
+		// On recupere une connexion de type java.sql.Connection
+		Connection connexion = DBManager.getInstance().getConnection();
 		
+		try {
+			
+			// On execute la requete SQL et recupere un java.sql.ResultSet
+			String request = "CALL regarder(?, ?);";
+			
+			// Prepared statement 
+			PreparedStatement preparedQuery = connexion.prepareStatement(request);
+			preparedQuery.setInt(1, 1);
+			preparedQuery.setInt(2, elementCatalogue.getIdCatalogue());
+
+            if(preparedQuery.executeUpdate()>0) // Recommandation effectuee
+            {
+            	elementCatalogue.regarder();
+                return true;
+			}
+			else{
+				return false;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 

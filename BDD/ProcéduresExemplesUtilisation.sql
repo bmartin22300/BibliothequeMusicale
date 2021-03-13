@@ -88,10 +88,10 @@ SELECT * FROM Discographie;
 SELECT * FROM Album;
 
 -- On regarde des éléments du catalogue
-CALL regarder(1);CALL regarder(1);
-CALL regarder(2);
-CALL regarder(5);CALL regarder(5);CALL regarder(5);CALL regarder(5);
-CALL regarder(10);CALL regarder(10);CALL regarder(10);
+CALL regarder(1, 2);CALL regarder(1, 2);
+CALL regarder(2, 3);
+CALL regarder(5, 3);CALL regarder(5, 3);CALL regarder(5, 3);CALL regarder(5, 3);
+CALL regarder(10, 3);CALL regarder(10, 3);CALL regarder(10, 3);
 
 -- On recommande un élément du catalogue
 CALL recommander(6);
@@ -113,3 +113,16 @@ Select @@global.event_scheduler;
 CALL rechercherParIdInterpreteTitres(2);
 CALL rechercherParIdCatalogueInterpretes(2);
 CALL rechercherParTitreTitre("");
+
+CALL getClient(1);
+CALL getInterprete(1);
+CALL getAlbum(16);
+CALL getTitreMusical(1);
+
+SELECT * FROM vue_recommandations;
+SELECT * FROM ElementCatalogue;
+SELECT * FROM Album;
+SELECT * FROM TitreMusical;
+SELECT * FROM vue_morceaux_populaires;
+
+CALL regarder(3,2);

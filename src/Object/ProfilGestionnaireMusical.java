@@ -474,13 +474,12 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
                 // Prepared statement 
     			PreparedStatement preparedQueryTitres = connexion.prepareStatement(requestTitre);
     			
-    			preparedQueryTitres.setInt(1, last_inserted_id); // Id de l'album
+    			preparedQueryTitres.setInt(2, last_inserted_id); // Id de l'album
     			
-    			List<Interprete> interpretes = new ArrayList<Interprete>();
     			if(titres!=null) {
     				for(TitreMusical titre : titres){ // On associe chaque interprete au titre
     					
-    					preparedQueryTitres.setInt(2, titre.getIdCatalogue());
+    					preparedQueryTitres.setInt(1, titre.getIdCatalogue());
 
     					preparedQueryTitres.executeUpdate();
     					
@@ -661,9 +660,69 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 		return null;
 	}
 
+	/*
+	 * Fonction recommander renvoie true si l'elementCatalogue est mis en recommande,
+	 * et false en cas d'echec
+	 */
 	@Override
 	public boolean recommander(ElementCatalogue elementCatalogue) {
-		// TODO Auto-generated method stub
+		// On recupere une connexion de type java.sql.Connection
+		Connection connexion = DBManager.getInstance().getConnection();
+		
+		try {
+			
+			// On execute la requete SQL et recupere un java.sql.ResultSet
+			String request = "CALL recommander(?);";
+			
+			// Prepared statement 
+			PreparedStatement preparedQuery = connexion.prepareStatement(request);
+			preparedQuery.setInt(1, elementCatalogue.getIdCatalogue());
+
+            if(preparedQuery.executeUpdate()>0) // Recommandation effectuee
+            {
+            	elementCatalogue.setRecommande(true);
+                return true;
+			}
+			else{
+				return false;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	/*
+	 * Fonction recommander_annuler renvoie true si l'elementCatalogue est bien retire des recommandes,
+	 * et false en cas d'echec
+	 */
+	@Override
+	public boolean recommander_annuler(ElementCatalogue elementCatalogue) {
+		// On recupere une connexion de type java.sql.Connection
+		Connection connexion = DBManager.getInstance().getConnection();
+		
+		try {
+			
+			// On execute la requete SQL et recupere un java.sql.ResultSet
+			String request = "CALL recommander_annuler(?);";
+			
+			// Prepared statement 
+			PreparedStatement preparedQuery = connexion.prepareStatement(request);
+			preparedQuery.setInt(1, elementCatalogue.getIdCatalogue());
+
+            if(preparedQuery.executeUpdate()>0) // Recommandation effectuee
+            {
+            	elementCatalogue.setRecommande(false);
+                return true;
+			}
+			else{
+				return false;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return false;
 	}
 

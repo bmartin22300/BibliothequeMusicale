@@ -18,15 +18,16 @@ public interface ClientInterface {
 	// TESTE
 	public Client modifierInformations(String mail, String password, String civilite, String nom, String prenom, Date dateNaissance, String adresseFacturation, Genre styleMusiquePrefere);
 	
+	public boolean regarder(ElementCatalogue elementCatalogue);
+	
+	
 	//A VERIFIER
+
 
 	
 	//TODO
 	
 	//PARTIE PLAYLIST / CATALOGUE
-	//public void deconnexion();?=> Supprime l'objet client?
-	public void regarderElementCatalogue(ElementCatalogue elementCatalogue);
-	
 	
 	// Parcourir Catalogue -- Comme Admin **
 	public List<ElementCatalogue> rechercherParNomCatalogue(String recherche);

@@ -48,9 +48,10 @@ public class Client implements ClientInterface {
 		this.playlists = new ArrayList<Playlist>();
 	}
 
-	public Client(String mail, String password, String civilite, String nom, String prenom, Date dateNaissance,
+	public Client(int id, String mail, String password, String civilite, String nom, String prenom, Date dateNaissance,
 			String adresseFacturation, int nbEcoute, Genre styleMusiquePrefere, List<Playlist> playlists) {
 		super();
+		this.id=id;
 		this.mail = mail;
 		this.password = password;
 		this.civilite = civilite;
@@ -152,10 +153,39 @@ public class Client implements ClientInterface {
 		this.styleMusiquePrefere = styleMusiquePrefere;
 	}
 
+	/*
+	 * Fonction regarder ajoute 1 au nombres de vues de l'Element
+	 * et false en cas d'erreur
+	 */
 	@Override
-	public void regarderElementCatalogue(ElementCatalogue elementCatalogue) {
-		// TODO Auto-generated method stub
+	public boolean regarder(ElementCatalogue elementCatalogue) {
+		// On recupere une connexion de type java.sql.Connection
+		Connection connexion = DBManager.getInstance().getConnection();
 		
+		try {
+			
+			// On execute la requete SQL et recupere un java.sql.ResultSet
+			String request = "CALL regarder(?, ?);";
+			
+			// Prepared statement 
+			PreparedStatement preparedQuery = connexion.prepareStatement(request);
+			preparedQuery.setInt(1, this.getId());
+			preparedQuery.setInt(2, elementCatalogue.getIdCatalogue());
+
+            if(preparedQuery.executeUpdate()>0) // Recommandation effectuee
+            {
+            	this.setNbEcoute(this.getNbEcoute()+1);
+            	elementCatalogue.regarder();
+                return true;
+			}
+			else{
+				return false;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	@Override

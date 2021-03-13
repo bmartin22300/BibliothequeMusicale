@@ -186,6 +186,30 @@ public class ClientServlet extends HttpServlet {//clientServlet
     				System.out.println(albumSandboxVide);
     				
     				System.out.println(adminSandbox.rechercherParNomAlbum(""));
+    				
+    				// GETTERS
+    				System.out.println("GETTERS");
+    				System.out.println(adminSandbox.getInterprete(2));
+    				System.out.println(adminSandbox.getTitreMusical(2));
+    				System.out.println(adminSandbox.getAlbum(5));
+    				
+    				// RECOMMANDATIONS
+    				System.out.println("RECOMMANDATIONS");
+    				adminSandbox.recommander(titresSandbox.get(1));
+    				adminSandbox.recommander(titresSandbox.get(2));
+    				adminSandbox.recommander_annuler(titresSandbox.get(2));
+    				
+	    			// AUTHENTIFICATION ADMIN
+    				System.out.println("AUTHENTIFICATION ADMIN");
+    				System.out.println(userSandbox.authentificationAdmin(mailAdminMusiqueSandbox, passwordAdminMusiqueSandbox));
+    				System.out.println(userSandbox.authentificationAdmin("AZERTYFAUX", passwordAdminMusiqueSandbox));
+    				
+    				// REGARDER
+    				adminSandbox.regarder(titresSandbox.get(1));
+    				adminSandbox.regarder(titresSandbox.get(1));
+    				adminSandbox.regarder(albumSandboxVide);
+    				userSandbox.regarder(titresSandbox.get(1));
+    				clientSandbox.regarder(titresSandbox.get(1));
     		}
     	}	         
         //affichage vue	

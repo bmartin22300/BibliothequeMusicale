@@ -39,6 +39,9 @@ public interface ProfilGestionnaireMusicalInterface extends AdministrateurInterf
 	public boolean ajoutTitreAlbum(TitreMusical titre, Album album);
 	public boolean suppressionTitreAlbum(TitreMusical titre, Album album);
 	
+	// Recommandations
+	public boolean recommander(ElementCatalogue elementCatalogue);
+	public boolean recommander_annuler(ElementCatalogue elementCatalogue);
 	
 	//A VERIFIER 
 
@@ -60,6 +63,6 @@ public interface ProfilGestionnaireMusicalInterface extends AdministrateurInterf
 	public boolean supprimerPodcast(Podcast podcast);
 
 	
-	public boolean recommander(ElementCatalogue elementCatalogue);
+
 
 }

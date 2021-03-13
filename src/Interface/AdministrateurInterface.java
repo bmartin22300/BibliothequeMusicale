@@ -23,12 +23,18 @@ public interface AdministrateurInterface {
 	public List<Interprete> rechercherParPseudoInterprete(String recherche);
 	public List<Interprete> rechercherParPrenomInterprete(String recherche);
 	public List<Interprete> rechercherParNomInterprete(String recherche);
+	public Interprete getInterprete(int id);
 	
 	// Parcourir TitreMusical
 	public List<TitreMusical> rechercherParNomTitre(String recherche);
+	public TitreMusical getTitreMusical(int id);
 	
 	// Parcourir Album
 	public List<Album> rechercherParNomAlbum(String recherche);
+	public Album getAlbum(int id);
+	
+	// Regarder
+	public boolean regarder(ElementCatalogue elementCatalogue);
 	
 	
 	//A VERIFIER
