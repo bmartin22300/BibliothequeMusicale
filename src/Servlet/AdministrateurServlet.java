@@ -322,6 +322,4 @@ public class AdministrateurServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-
-}
 }
