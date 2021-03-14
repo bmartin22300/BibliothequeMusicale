@@ -1156,31 +1156,19 @@ public abstract class Administrateur implements AdministrateurInterface {
 		
 		try {
 			// Maj BDD
-			String request = "CALL modifier_client(?, ?);";
+			String request = "CALL modifier_admin(?, ?, ?);";
 			
 			// Prepared statement 
 			PreparedStatement preparedQuery = connexion.prepareStatement(request);
 			preparedQuery.setInt(1, this.getId());
 			preparedQuery.setString(2, mail);
 			preparedQuery.setString(3, password);
-			preparedQuery.setString(4, civilite);
-			preparedQuery.setString(5, nom);
-			preparedQuery.setString(6, prenom);
-			preparedQuery.setDate(7, (java.sql.Date) dateNaissance);
-			preparedQuery.setString(8, adresseFacturation);
-			preparedQuery.setString(9, styleMusiquePrefere.toString());
 			
 			// Execution
 			if(preparedQuery.executeUpdate()>0) { // Succes de la modification
 				// Maj Objet
 				this.setPassword(mail);
 				this.setPassword(password);
-				this.setCivilite(civilite);
-				this.setNom(nom);
-				this.setPrenom(prenom);
-				this.setDateNaissance(dateNaissance);
-				this.setAdresseFacturation(adresseFacturation);
-				this.setStyleMusiquePrefere(styleMusiquePrefere);
 				
 				return this;
 			}

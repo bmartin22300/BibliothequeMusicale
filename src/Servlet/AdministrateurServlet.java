@@ -13,12 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import Object.Administrateur;
 import Object.Album;
 import Object.Client;
-<<<<<<< Updated upstream
-=======
-import Object.ElementCatalogue;
->>>>>>> Stashed changes
 import Object.Genre;
 import Object.Interprete;
+import Object.ProfilGestionnaireClient;
 import Object.ProfilGestionnaireMusical;
 import Object.TitreMusical;
 import Object.Utilisateur;
@@ -45,144 +42,73 @@ public class AdministrateurServlet extends HttpServlet {
 
 			// affection vue
 			vue = "/JSP/Utilisateur/AuthentificationAdministrateur.jsp";
+		} else if (servletPath.equals("/InscriptionAdministrateur")) {
+			// affectation param�tres � la vue
+			request.setAttribute("isAdministrateur", false);
+			// affection vue
+			vue = "/JSP/Utilisateur/InscriptionAdministrateur.jsp";
+		}
+		// section Administrateur
+		else if (administrateur == null) {// verification que l'Administrateur est connect�
+			// affectation param�tres � la vue
+			request.setAttribute("isAdministrateur", false);
+			request.setAttribute("isErrorLogin", false);
+			request.setAttribute("notLogged", true);
+
+			// affection vue
+			vue = "/JSP/Utilisateur/AuthentificationAdministrateur.jsp";
 		} else {
-			if (servletPath.equals("/InscriptionAdministrateur")) {
-				// affectation param�tres � la vue
-				request.setAttribute("isAdministrateur", false);
-				// affection vue
-				vue = "/JSP/Utilisateur/InscriptionAdministrateur.jsp";
-			} else {
-				// section Administrateur
-				if (administrateur == null) {// verification que l'Administrateur est connect�
-					// affectation param�tres � la vue
-					request.setAttribute("isAdministrateur", false);
-<<<<<<< Updated upstream
-		    		request.setAttribute("isErrorLogin", false);
-		    		request.setAttribute("notLogged", true);
-		    		
-		    		//affection vue
-		    		vue = "/JSP/Utilisateur/AuthentificationAdministrateur.jsp";
-		    	}else {
-		    		//affectation param�tres � la vue
-		    		request.setAttribute("isAdministrateur", true);
-		    		request.setAttribute("isAdministrateurMusical", administrateur instanceof ProfilGestionnaireMusical);
-		    		request.setAttribute("password", administrateur.getPassword());
-		    		request.setAttribute("email", administrateur.getMail());
-		  
-		    		//requeteBDD
-        			List<TitreMusical> titresMusicaux = administrateur.rechercherParNomTitre("");
-        			List<Interprete> interpretes = administrateur.rechercherParPseudoInterprete("");
-        			List<Album> albums = administrateur.rechercherParNomAlbum("");
-        			
-        			//envoie de parametres a la vue
-        			request.setAttribute("titresMusicaux",titresMusicaux);
-        			request.setAttribute("interpretes",interpretes);
-        			request.setAttribute("albums",albums);
-        			
-		    		if(servletPath.equals("/AccueilAdministrateur")) {			    		
-		            	vue = "/JSP/Administrateur/AccueilAdministrateur.jsp";
-		            }else {
-		            	if(servletPath.equals("/ProfilAdministrateur")) {
-		                	vue = "/JSP/Administrateur/ProfilAdministrateur.jsp";
-		                }else {
-		                	if(servletPath.equals("/Statistiques")) {
-        						List<Client> clients = administrateur.topUtilisateursEcoutes();
-        						request.setAttribute("clients", clients);
+			// affectation param�tres � la vue
+			request.setAttribute("isAdministrateur", true);
+			request.setAttribute("isAdministrateurMusical", administrateur instanceof ProfilGestionnaireMusical);
+			request.setAttribute("isAdministrateurClient", administrateur instanceof ProfilGestionnaireClient);
+			request.setAttribute("password", administrateur.getPassword());
+			request.setAttribute("email", administrateur.getMail());
 
-        						List<TitreMusical> titres = administrateur.topTitresEcoutes();
-        						request.setAttribute("titres", titres);        					
-		                    	vue = "/JSP/Administrateur/Statistiques.jsp";
-		                    }else {
-		                    	if(servletPath.equals("/ModificationProfil")) {  
-		                    		vue = "/JSP/Administrateur/ModificationProfil.jsp";
-		                    	}else {
-		                    		if(servletPath.equals("/ModificationCatalogue")) {
-		                    			vue = "/JSP/Administrateur/ModificationCatalogue.jsp";
-		                    		}else {
-		                    			if(servletPath.equals("/ModificationTitre")) {
-		                    				//section Administrateur musical
-		                    				//todo v�rif identit�
-		                    				
-		                    				//r�cup�ration de param�tre de la vue
-		                    				String titre = request.getParameter("titre");
-		                    				
-		                    				//envoie de parametres a la vue
-		                    				request.setAttribute("titre", titre);
-		                    				
-			                    			vue = "/JSP/Administrateur/ModificationCatalogue.jsp";
-			                    		}else {
-			                    			if(servletPath.equals("/AjoutCatalogue")) {
-			                    				//r�cup�ration de param�tre de la vue
-			                    				String TypeElement = request.getParameter("TypeElement");
-			                    				
-			                    				vue = "/JSP/Administrateur/AjoutCatalogue.jsp";
-			                    				
-		                    				}
-			                    		}
-		                    		}
-		                    	}
-		                    }
-		                }
-		            }
-		    	}
-=======
-					request.setAttribute("isErrorLogin", false);
-					request.setAttribute("notLogged", true);
+			// requeteBDD
+			List<TitreMusical> titresMusicaux = administrateur.rechercherParNomTitre("");
+			List<Interprete> interpretes = administrateur.rechercherParPseudoInterprete("");
+			List<Album> albums = administrateur.rechercherParNomAlbum("");
 
-					// affection vue
-					vue = "/JSP/Utilisateur/AuthentificationAdministrateur.jsp";
-				} else {
-					// affectation param�tres � la vue
-					request.setAttribute("isAdministrateur", true);
-					request.setAttribute("isAdministrateurMusical",
-							administrateur instanceof ProfilGestionnaireMusical);
-					request.setAttribute("isAdministrateurClient", administrateur instanceof ProfilGestionnaireClient);
-					request.setAttribute("password", administrateur.getPassword());
-					request.setAttribute("email", administrateur.getMail());
+			// envoie de parametres a la vue
+			request.setAttribute("titresMusicaux", titresMusicaux);
+			request.setAttribute("interpretes", interpretes);
+			request.setAttribute("albums", albums);
 
-					// requeteBDD
-					List<TitreMusical> titresMusicaux = administrateur.rechercherParNomTitre("");
-					List<Interprete> interpretes = administrateur.rechercherParPseudoInterprete("");
-					List<Album> albums = administrateur.rechercherParNomAlbum("");
+			if (servletPath.equals("/AccueilAdministrateur")) {
+				vue = "/JSP/Administrateur/AccueilAdministrateur.jsp";
+			} else if (servletPath.equals("/ProfilAdministrateur")) {
+				vue = "/JSP/Administrateur/ProfilAdministrateur.jsp";
+			} else if (servletPath.equals("/Statistiques")) {
+				List<Client> clients = administrateur.topUtilisateursEcoutes();
+				request.setAttribute("clients", clients);
 
-					// envoie de parametres a la vue
-					request.setAttribute("titresMusicaux", titresMusicaux);
-					request.setAttribute("interpretes", interpretes);
-					request.setAttribute("albums", albums);
+				List<TitreMusical> titres = administrateur.topTitresEcoutes();
+				request.setAttribute("titres", titres);
+				vue = "/JSP/Administrateur/Statistiques.jsp";
+			} else if (servletPath.equals("/ModificationProfil")) {
+				vue = "/JSP/Administrateur/ModificationProfil.jsp";
+			} else if (servletPath.equals("/ModificationCatalogue")) {
+				vue = "/JSP/Administrateur/ModificationCatalogue.jsp";
+			} else if (servletPath.equals("/ModificationTitre")) {
+				// section Administrateur musical
+				// todo v�rif identit�
 
-					if (servletPath.equals("/AccueilAdministrateur")) {
-						vue = "/JSP/Administrateur/AccueilAdministrateur.jsp";
-					} else if (servletPath.equals("/ProfilAdministrateur")) {
-						vue = "/JSP/Administrateur/ProfilAdministrateur.jsp";
-					} else if (servletPath.equals("/Statistiques")) {
-						vue = "/JSP/Administrateur/Statistiques.jsp";
-					} else if (servletPath.equals("/ModificationProfil")) {
-						vue = "/JSP/Administrateur/ModificationProfil.jsp";
-					} else if (servletPath.equals("/ModificationCatalogue")) {
-						vue = "/JSP/Administrateur/ModificationCatalogue.jsp";
-					} else if (servletPath.equals("/ModificationTitre")) {
-						// section Administrateur musical
-						// todo v�rif identit�
+				// r�cup�ration de param�tre de la vue
+				String titre = request.getParameter("titre");
 
-						// r�cup�ration de param�tre de la vue
-						String titre = request.getParameter("titre");
+				// envoie de parametres a la vue
+				request.setAttribute("titre", titre);
 
-						// envoie de parametres a la vue
-						request.setAttribute("titre", titre);
+				vue = "/JSP/Administrateur/ModificationCatalogue.jsp";
+			} else if (servletPath.equals("/AjoutCatalogue")) {
+				// r�cup�ration de param�tre de la vue
+				String TypeElement = request.getParameter("TypeElement");
 
-						vue = "/JSP/Administrateur/ModificationCatalogue.jsp";
-					} else if (servletPath.equals("/AjoutCatalogue")) {
-						// r�cup�ration de param�tre de la vue
-						String TypeElement = request.getParameter("TypeElement");
-
-						vue = "/JSP/Administrateur/AjoutCatalogue.jsp";
-					} else if (servletPath.equals("/ModificationProfilAdministrateur")) {
-						vue = "/JSP/Administrateur/ModificationProfilAdministrateur.jsp";
-					}
-
-				}
->>>>>>> Stashed changes
-			}
+				vue = "/JSP/Administrateur/AjoutCatalogue.jsp";
+			} else if(servletPath.equals("/ModificationProfilAdministrateur")){
+                vue = "/JSP/Administrateur/ModificationProfilAdministrateur.jsp";
+	        }
 		}
 
 		// affichage vue
@@ -206,19 +132,22 @@ public class AdministrateurServlet extends HttpServlet {
 		// r�cup�ration des param�tres du form
 		String mail = request.getParameter("mail");
 		String motDePasse = request.getParameter("password");
+		String typeAdmin = request.getParameter("typeAdmin");
+		
 
 		if (action.equals("ModificationProfilAdministrateur")) {
+			// r�cup�ration param�tres
+			request.setAttribute("password", administrateur.getPassword());
+			request.setAttribute("email", administrateur.getMail());
+
 			// affectation param�tres � la vue
 			request.setAttribute("isAdministrateur", true);
-			request.setAttribute("email", "");
-			request.setAttribute("password", "");
 
 			// mise � jour BDD
-			Administrateur administrateurModifie = administrateur.modifierInformations(mail, motDePasse, civilite, nom, prenom, dateDeNaissance, adresse, styleMusiquePrefere);
-    		System.out.println(administrateurModifie);
-    		if(administrateurModifie!=null) {
-    			this.administrateur=administrateurModifie;
-    		}
+			Administrateur administrateurModifie = administrateur.modifierInformations(mail, motDePasse);
+			if (administrateurModifie != null) {
+				this.administrateur = administrateurModifie;
+			}
 
 			// choix de la vue
 			vue = "/JSP/Administrateur/ProfilAdministrateur.jsp";
@@ -240,7 +169,6 @@ public class AdministrateurServlet extends HttpServlet {
 					request.setAttribute("isAdministrateur", true);
 					request.setAttribute("isAdministrateurMusical",
 							administrateur instanceof ProfilGestionnaireMusical);
-					request.setAttribute("isAdministrateurClient", administrateur instanceof ProfilGestionnaireClient);
 
 					// choix de la vue
 					vue = "/JSP/Administrateur/AccueilAdministrateur.jsp";
@@ -396,4 +324,5 @@ public class AdministrateurServlet extends HttpServlet {
 		}
 	}
 
+}
 }

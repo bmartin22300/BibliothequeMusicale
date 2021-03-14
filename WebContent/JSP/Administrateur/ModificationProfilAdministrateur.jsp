@@ -12,7 +12,7 @@
 	
 	<form method="POST">
 		<div class="cardProfile">
-			<input name="action" type="hidden" value="ModificationProfilClient">
+			<input name="action" type="hidden" value="ModificationProfilAdministrateur">
 			
 			<h1>Modifier mes informations</h1>
 			
@@ -36,7 +36,7 @@
 		  <a href="#"><i class="fa fa-twitter"></i></a>
 		  <a href="#"><i class="fa fa-linkedin"></i></a>
 		  <a href="#"><i class="fa fa-facebook"></i></a>
-		  <p><a href="ProfilClient" class="button">Retour</a></p>
+		  <p><a href="ProfilAdministrateur" class="button">Retour</a></p>
 		</div>
 	</form>
 	
