@@ -15,7 +15,7 @@ public interface AdministrateurInterface {
 
 	// VALIDE
 	
-	// TESTE	
+	// TESTE
 	public Administrateur creerAdmin(String mail, String password);
 	
 	// Parcourir Interpretes
@@ -45,6 +45,9 @@ public interface AdministrateurInterface {
 	public List<TitreMusical> recommandationsDuMoment();
 	
 	//A VERIFIER
+	
+	// Modification des données de l'administrateur sur la BD
+	public Administrateur modifierInformations(String mail, String password);
 	
 	// Parcourir TitreMusical
 	public List<TitreMusical> rechercherParGenreTitre(Genre genre);
