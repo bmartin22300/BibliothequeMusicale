@@ -7,6 +7,7 @@ import Object.Administrateur;
 import Object.Client;
 import Object.ElementCatalogue;
 import Object.Genre;
+import Object.TitreMusical;
 
 public interface UtilisateurInterface {
 
@@ -23,6 +24,9 @@ public interface UtilisateurInterface {
 	
 	public boolean regarder(ElementCatalogue elementCatalogue);
 	
+	public List<TitreMusical> topTitresEcoutes();
+	
+	public List<TitreMusical> recommandationsDuMoment();
 	//A VERIFIER	
 
 	
@@ -30,8 +34,8 @@ public interface UtilisateurInterface {
 	
 
 	
-	public List<ElementCatalogue> morceauxPopulaires();
+
 	
-	public List<ElementCatalogue> recommandationsDuMoment();
+
 	
 }

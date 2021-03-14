@@ -124,6 +124,7 @@ SELECT * FROM ElementCatalogue;
 SELECT * FROM Album;
 SELECT * FROM TitreMusical;
 SELECT * FROM vue_morceaux_populaires;
+SELECT * FROM vue_top_utilisateurs_ecoutes;
 
 CALL regarder(3,2);
 
@@ -137,3 +138,4 @@ CALL modifier_playlist(1, "Cette Playlist");
 CALL rechercherParMailClient("i");
 CALL rechercherParIdClientPlaylists(2);
 CALL rechercherParIdPlaylistTitres(2);
+

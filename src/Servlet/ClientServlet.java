@@ -239,6 +239,18 @@ public class ClientServlet extends HttpServlet {//clientServlet
     				System.out.println(clientSandbox);
     				adminSandboxClient.modifierInformationsClient(clientSandbox, "Un nouveau mail pour la forme", "Un nouveau pass pour la forme", "Mister", "Le", "Plus", dateNaissanceSandbox, "Adressé", styleMusiqueSandbox);
     				System.out.println(clientSandbox);
+    				
+    				// Stats
+    				System.out.println("STATS");
+    				System.out.println(adminSandbox.topTitresEcoutes());
+    				System.out.println(clientSandbox.topTitresEcoutes());
+    				System.out.println(userSandbox.topTitresEcoutes());
+    				
+    				System.out.println(adminSandbox.recommandationsDuMoment());
+    				System.out.println(clientSandbox.recommandationsDuMoment());
+    				System.out.println(userSandbox.recommandationsDuMoment());
+    				
+    				System.out.println(adminSandbox.topUtilisateursEcoutes());
 	        }
     	}	         
         //affichage vue	

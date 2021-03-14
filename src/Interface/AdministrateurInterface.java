@@ -39,6 +39,10 @@ public interface AdministrateurInterface {
 	// Regarder
 	public boolean regarder(ElementCatalogue elementCatalogue);
 	
+	// Statistiques
+	public List<TitreMusical> topTitresEcoutes();
+	public List<Client> topUtilisateursEcoutes();
+	public List<TitreMusical> recommandationsDuMoment();
 	
 	//A VERIFIER
 	
@@ -49,10 +53,6 @@ public interface AdministrateurInterface {
 
 	
 	//TODO
-	
-	// Statistiques
-	public List<TitreMusical> topTitresEcoutes();
-	public List<Client> topUtilisateursEcoutes();
 	
 	// Parcourir Clients
 	public List<Client> rechercherParNomClient(String recherche);

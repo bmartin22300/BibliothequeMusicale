@@ -44,6 +44,10 @@ public interface ClientInterface {
 	public List<Album> rechercherParNomAlbum(String recherche);
 	Album getAlbum(int id);
 	
+	// Stats
+	public List<TitreMusical> topTitresEcoutes();
+	public List<TitreMusical> recommandationsDuMoment();
+	
 	//A VERIFIER
 	
 	//TODO

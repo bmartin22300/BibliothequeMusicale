@@ -1174,11 +1174,173 @@ public class Client implements ClientInterface {
 		return null;		
 	}
 	
+	
+	/*
+	 * Fonction topTitresEcoutes renvoie la List<TitreMusical> correspondant aux 10 titres les plus ecoutes
+	 */
+	@Override
+	public List<TitreMusical> topTitresEcoutes() {
+			// On recupere une connexion de type java.sql.Connection
+			Connection connexion = DBManager.getInstance().getConnection();
+			
+			try {				// On execute la requete SQL et on recupere un java.sql.ResultSet
+				String request = "SELECT * FROM vue_morceaux_populaires;";
+				
+				// Prepared statement 
+				PreparedStatement preparedQuery = connexion.prepareStatement(request);
+				
+				// Retour
+				ResultSet rs = preparedQuery.executeQuery();
+				
+				// Creation de la liste
+				List<TitreMusical> titres = new ArrayList<TitreMusical>();
+				// Vrai tant qu'il reste des lignes
+				while(rs.next()) {
+					// Creation du titre
+					int idTitre = rs.getInt("idCatalogue");
+					String titreTitre = rs.getString("titre");
+					int dateCreationTitre = rs.getInt("dateCreation"); 
+					int dureeTitre = rs.getInt("duree");
+					String stringGenre = rs.getString("nomGenre");
+					Genre nomGenre;
+					if(stringGenre==null) {
+						nomGenre = Genre.INCONNU;
+					}
+					else {
+						nomGenre = Genre.valueOf(rs.getString("nomGenre").toUpperCase());
+					}
+					int nbEcoute = rs.getInt("nbEcoute");
+					int nbEcouteMois = rs.getInt("nbEcouteMois");
+					Album albumTitre;
+					if((rs.getInt("Album_idCatalogue"))==0) {
+						albumTitre=null;
+					}else {
+						albumTitre = new Album(rs.getInt("Album_idCatalogue"));
+					}
+					
+					// On recherche les titres de l'interprete
+					String requestInterpretes = "CALL rechercherParIdCatalogueInterpretes(?);";
+					
+					// Prepared statement 
+					PreparedStatement preparedQueryInterpretes = connexion.prepareStatement(requestInterpretes);
+					preparedQueryInterpretes.setInt(1, idTitre);
+					
+					// Retour
+					ResultSet rsInterpretes = preparedQueryInterpretes.executeQuery();
+					//Creation de la liste des interpretes
+					List<Interprete> interpretes = new ArrayList<Interprete>();
+					
+					while(rsInterpretes.next()) {
+						// Creation de l'interprete
+						int idInterprete = rsInterpretes.getInt("idInterprete");
+						String pseudo = rsInterpretes.getString("pseudonyme");
+						String prenom = rsInterpretes.getString("prenom"); 
+						String nom = rsInterpretes.getString("nom");
+						Date dateNaissance = rsInterpretes.getDate("dateNaissance");
+						
+						interpretes.add(new Interprete(idInterprete, pseudo, prenom, nom, dateNaissance));
+					}
+					
+					// Ajout a la liste retournee
+					TitreMusical titreTemp = new TitreMusical(idTitre, titreTitre, dateCreationTitre, dureeTitre, nomGenre, albumTitre, null);
+					titreTemp.setNbEcoute(nbEcoute);
+					titreTemp.setNbEcouteMois(nbEcouteMois);
+					titres.add(titreTemp);						
+				}
+				return titres;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+	}
+	
+	/*
+	 * Fonction recommandationsDuMoment renvoie la liste des morceaux recommandés par un administrateur
+	 */
+	@Override
+	public List<TitreMusical> recommandationsDuMoment(){
+		// On recupere une connexion de type java.sql.Connection
+		Connection connexion = DBManager.getInstance().getConnection();
+		
+		try {				// On execute la requete SQL et on recupere un java.sql.ResultSet
+			String request = "SELECT * FROM vue_recommandations;";
+			
+			// Prepared statement 
+			PreparedStatement preparedQuery = connexion.prepareStatement(request);
+			
+			// Retour
+			ResultSet rs = preparedQuery.executeQuery();
+			
+			// Creation de la liste
+			List<TitreMusical> titres = new ArrayList<TitreMusical>();
+			// Vrai tant qu'il reste des lignes
+			while(rs.next()) {
+				// Creation du titre
+				int idTitre = rs.getInt("idCatalogue");
+				String titreTitre = rs.getString("titre");
+				int dateCreationTitre = rs.getInt("dateCreation"); 
+				int dureeTitre = rs.getInt("duree");
+				String stringGenre = rs.getString("nomGenre");
+				Genre nomGenre;
+				if(stringGenre==null) {
+					nomGenre = Genre.INCONNU;
+				}
+				else {
+					nomGenre = Genre.valueOf(rs.getString("nomGenre").toUpperCase());
+				}
+				int nbEcoute = rs.getInt("nbEcoute");
+				int nbEcouteMois = rs.getInt("nbEcouteMois");
+				Album albumTitre;
+				if((rs.getInt("Album_idCatalogue"))==0) {
+					albumTitre=null;
+				}else {
+					albumTitre = new Album(rs.getInt("Album_idCatalogue"));
+				}
+				
+				// On recherche les titres de l'interprete
+				String requestInterpretes = "CALL rechercherParIdCatalogueInterpretes(?);";
+				
+				// Prepared statement 
+				PreparedStatement preparedQueryInterpretes = connexion.prepareStatement(requestInterpretes);
+				preparedQueryInterpretes.setInt(1, idTitre);
+				
+				// Retour
+				ResultSet rsInterpretes = preparedQueryInterpretes.executeQuery();
+				//Creation de la liste des interpretes
+				List<Interprete> interpretes = new ArrayList<Interprete>();
+				
+				while(rsInterpretes.next()) {
+					// Creation de l'interprete
+					int idInterprete = rsInterpretes.getInt("idInterprete");
+					String pseudo = rsInterpretes.getString("pseudonyme");
+					String prenom = rsInterpretes.getString("prenom"); 
+					String nom = rsInterpretes.getString("nom");
+					Date dateNaissance = rsInterpretes.getDate("dateNaissance");
+					
+					interpretes.add(new Interprete(idInterprete, pseudo, prenom, nom, dateNaissance));
+				}
+				
+				// Ajout a la liste retournee
+				TitreMusical titreTemp = new TitreMusical(idTitre, titreTitre, dateCreationTitre, dureeTitre, nomGenre, albumTitre, null);
+				titreTemp.setNbEcoute(nbEcoute);
+				titreTemp.setNbEcouteMois(nbEcouteMois);
+				titres.add(titreTemp);						
+			}
+			return titres;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+		
 	@Override
 	public String toString() {
 		return "Client [mail=" + mail + ", civilite=" + civilite + ", nom=" + nom
 				+ ", prenom=" + prenom + ", dateNaissance=" + dateNaissance + ", adresseFacturation="
 				+ adresseFacturation + ", styleMusiquePrefere=" + styleMusiquePrefere + "]";
 	}
+
 
 }

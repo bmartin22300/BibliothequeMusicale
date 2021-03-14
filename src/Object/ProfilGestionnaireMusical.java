@@ -727,18 +727,6 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 	}
 
 	@Override
-	public List<TitreMusical> topTitresEcoutes() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Client> topUtilisateursEcoutes() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public boolean modifierRadio(Radio radio, String nom, Genre genreMusical) {
 		// TODO Auto-generated method stub
 		return false;
