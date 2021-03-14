@@ -2,7 +2,6 @@ package Servlet;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -13,10 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import Object.Administrateur;
 import Object.Album;
-import Object.ElementCatalogue;
+import Object.Client;
 import Object.Genre;
 import Object.Interprete;
-import Object.ProfilGestionnaireClient;
 import Object.ProfilGestionnaireMusical;
 import Object.TitreMusical;
 import Object.Utilisateur;
@@ -82,6 +80,11 @@ public class AdministrateurServlet extends HttpServlet {
 		                	vue = "/JSP/Administrateur/ProfilAdministrateur.jsp";
 		                }else {
 		                	if(servletPath.equals("/Statistiques")) {
+        						List<Client> clients = administrateur.topUtilisateursEcoutes();
+        						request.setAttribute("clients", clients);
+
+        						List<TitreMusical> titres = administrateur.topTitresEcoutes();
+        						request.setAttribute("titres", titres);        					
 		                    	vue = "/JSP/Administrateur/Statistiques.jsp";
 		                    }else {
 		                    	if(servletPath.equals("/ModificationProfil")) {  
@@ -107,7 +110,8 @@ public class AdministrateurServlet extends HttpServlet {
 			                    				String TypeElement = request.getParameter("TypeElement");
 			                    				
 			                    				vue = "/JSP/Administrateur/AjoutCatalogue.jsp";
-			                    			}
+			                    				
+		                    				}
 			                    		}
 		                    		}
 		                    	}

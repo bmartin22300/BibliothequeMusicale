@@ -49,6 +49,23 @@ function changerTypeElementsAffichesAjout(){
 	}
 }
 
+function changerTypeElementsStatistiques(){	
+	TypeElement = document.getElementById("TypeElement").value;
+	
+	switch (TypeElement) {
+	  case 'Clients':
+	 	document.getElementById("divClient").style.display = "grid";
+	 	document.getElementById("divVueTitre").style.display = "none";
+	    break;
+	  case 'VuesTitres':
+	 	document.getElementById("divClient").style.display = "none";
+	 	document.getElementById("divVueTitre").style.display = "grid";
+	  	break;
+	  default:
+	     console.log("default case");
+	}
+}
+
 function changerTypeElementsAffichesModification(){
 	TypeElement = document.getElementById("TypeElement").value;
 
