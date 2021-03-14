@@ -16,7 +16,7 @@
 	<% String adresse = (String)request.getAttribute("adresse"); %>
 	<% Date dateDeNaissance = (Date)request.getAttribute("dateDeNaissance"); %>
 	<% if(dateDeNaissance!=null){ %>
-		<% dateDeNaissance.toString(); %>
+	<% dateDeNaissance.toString(); %>
 	<%} %>
 	<% int nbEcoutes = (int)request.getAttribute("nbEcoutes"); %>
 	
