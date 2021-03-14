@@ -133,7 +133,6 @@ public class AdministrateurServlet extends HttpServlet {
 		String mail = request.getParameter("mail");
 		String motDePasse = request.getParameter("password");
 		String typeAdmin = request.getParameter("typeAdmin");
-		
 
 		if (action.equals("ModificationProfilAdministrateur")) {
 			// r�cup�ration param�tres
