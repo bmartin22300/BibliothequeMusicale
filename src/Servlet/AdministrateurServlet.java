@@ -135,12 +135,12 @@ public class AdministrateurServlet extends HttpServlet {
 		String typeAdmin = request.getParameter("typeAdmin");
 
 		if (action.equals("ModificationProfilAdministrateur")) {
-			// r�cup�ration param�tres
-			request.setAttribute("password", administrateur.getPassword());
-			request.setAttribute("email", administrateur.getMail());
-
 			// affectation param�tres � la vue
 			request.setAttribute("isAdministrateur", true);
+			request.setAttribute("isAdministrateurClient", true);
+			request.setAttribute("isAdministrateurMusical", true);
+			request.setAttribute("password", "");
+			request.setAttribute("email", "");
 
 			// mise � jour BDD
 			Administrateur administrateurModifie = administrateur.modifierInformations(mail, motDePasse);
