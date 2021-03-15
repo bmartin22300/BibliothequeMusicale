@@ -78,7 +78,11 @@
 		        		<% for( TitreMusical elem : titresMusicaux ) {%>
 							<tr id="tr">
 				            	<td><% out.print(elem.getTitre()); %></td>
-				            	<td><% out.print(elem.getInterpretes()); %></td>
+				            	<td><ul>
+				            		<% for(Interprete i : elem.getInterpretes()){ %>
+   										<li><% out.print(i.getPseudonyme()); %></li>
+				            		<%} %>
+				            	</td></ul>
 				            	<td><% out.print(elem.getAlbum()); %></td>
 				            	<td><% out.print(elem.getGenre()); %></td>
 				            	<td><% out.print(elem.getAnneeCreation()); %></td>

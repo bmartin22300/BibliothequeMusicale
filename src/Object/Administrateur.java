@@ -663,7 +663,7 @@ public abstract class Administrateur implements AdministrateurInterface {
 						}
 						
 						// Ajout a la liste retournee
-						titres.add(new TitreMusical(idTitre, titreTitre, dateCreationTitre, dureeTitre, nomGenre, albumTitre, null));						
+						titres.add(new TitreMusical(idTitre, titreTitre, dateCreationTitre, dureeTitre, nomGenre, albumTitre, interpretes));						
 					}
 					return titres;
 				} catch (SQLException e) {

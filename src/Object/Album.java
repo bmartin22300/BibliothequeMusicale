@@ -17,7 +17,11 @@ public class Album extends ElementCatalogue{
 		this.nom = nom;
 		this.anneeSortie = anneeSortie;
 		this.duree = duree;
-		this.titres = titres;
+		if(titres == null) {
+			titres = new ArrayList<TitreMusical>();
+		}else {
+			this.titres = titres;
+		}
 	}
 	
 	public Album(int idCatalogue) {
