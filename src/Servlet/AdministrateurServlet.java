@@ -338,6 +338,15 @@ public class AdministrateurServlet extends HttpServlet {
             						if(action.equals("FinAjoutInterpretesATitre")) {
             							//affectation vue
             							vue = "/JSP/Administrateur/AjoutCatalogue.jsp"; 
+            						}else if(action.equals("incrementeAudio")) {
+            							System.out.println("HELLO");
+            							String idTitreMusical = request.getParameter("idTitreMusical");
+            							int id = Integer.parseInt(idTitreMusical);
+            							for(TitreMusical t : titresMusicaux) {
+            								if(t.getIdCatalogue()==id) {
+            									administrateur.regarder(t);
+            								}
+            							}
             						}
             					}
             				}

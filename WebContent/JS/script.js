@@ -90,3 +90,6 @@ function changerTypeElementsAffichesModification(){
 	}
 }
 
+function audioIncremente(i){
+	document.getElementById("formIncremeteAudio"+i).submit();	
+}

@@ -35,10 +35,15 @@
        		<% for( TitreMusical elem : titresMusicaux ) {%>
 				<div class="card">	
 					<img src="ExternalRessource/Catalogue/Image/titreMusical.png" alt="Denim Jeans" style="width:100%">
-					<audio id="player" controls preload tabindex="0">
-						<source type="audio/mp3"/>
-						Your browser does not support HTML5 audio.
-					</audio>
+					<form method="POST" id="formIncremeteAudio<% out.print(elem.getIdCatalogue()); %>" name="formIncremeteAudio">
+						<input name="action" type="hidden" value="incrementeAudio">
+						<input type="file" accept="audio/*" capture  src="ExternalRessource/Catalogue/Musique/magma_isha.mp3">
+						<input value=<% out.print(elem.getIdCatalogue()); %> name="idTitreMusical" type="hidden">
+						<audio id="player" controls preload tabindex="0" src="ExternalRessource/Catalogue/Musique/magma_isha.mp3" onPlay="audioIncremente(<% out.print(elem.getIdCatalogue()); %>)">
+							<source type="audio/mp3"/>
+							Your browser does not support HTML5 audio.
+						</audio>
+					</form>
 				  <%if(elem.getTitre()!=null){ %><h1><%= elem.getTitre() %></h1><%} %>
 				  <%if(elem.getInterpretes()!=null){ %><p><%= elem.getInterpretes() %></p><%} %>
 				  <%if(elem.getGenre()!=null){ %><p class="price"><%= elem.getGenre() %></p><%} %>
