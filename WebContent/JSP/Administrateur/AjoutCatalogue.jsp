@@ -16,11 +16,11 @@
 			<input name="action" type="hidden" value="AjouterElement">
 	        <h1>Element a ajouter :</h1>
 	        
-	        <!-- choix du type d'élément -->
+	        <!-- choix du type d'ï¿½lï¿½ment -->
 	        <div style="margin:10px;">
 				<!-- select box -->
 				<p>
-				  <label for="cars">Type d'élément</label>
+				  <label for="cars">Type d'ï¿½lï¿½ment</label>
 				  <select id="TypeElement" onChange="changerTypeElementsAffichesAjout()" name="TypeElement">
 				    <option value="Titre musical">Titre musical</option>
 				    <option value="Interprete">Interprete</option>
@@ -61,7 +61,7 @@
 		       		<input id="titre" type="text" placeholder="300" name="Duree">
 		        </p>
 		
-		        <p style="padding-bottom:20px;"><input type="submit" id='submit' value='Ajouter'></p>
+		        <p style="padding-bottom:20px;"><input type="submit" id='submit' value='Suivant'></p>
 			</div>
 	    
 	    

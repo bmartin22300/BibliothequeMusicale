@@ -20,7 +20,11 @@ public class TitreMusical extends ElementCatalogue{
 		this.anneeCreation = anneeCreation;
 		this.duree = duree;
 		this.genre = genre;
-		this.interpretes = interpretes;
+		if(interpretes == null) {
+			interpretes = new ArrayList<Interprete>();
+		}else {
+			this.interpretes = interpretes;
+		}
 	}
 
 	public TitreMusical(int idCatalogue, String titre, int anneeCreation, int duree, Genre genre, Album album,
@@ -31,7 +35,11 @@ public class TitreMusical extends ElementCatalogue{
 		this.duree = duree;
 		this.genre = genre;
 		this.album = album;
-		this.interpretes = interpretes;
+		if(interpretes == null) {
+			interpretes = new ArrayList<Interprete>();
+		}else {
+			this.interpretes = interpretes;
+		}
 	}
 
 	public Album getAlbum() {

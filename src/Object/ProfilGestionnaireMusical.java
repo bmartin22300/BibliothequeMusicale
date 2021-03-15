@@ -397,8 +397,15 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 
 			// Execution
 			if(preparedQuery.executeUpdate()>0) {
-				titre.getInterprete().add(interprete); // On ajoute l'interprete
-				interprete.getTitres().add(titre); // On ajoute le titre
+				if(titre.getInterpretes()==null) {
+					titre.setInterpretes(new ArrayList<Interprete>());
+				}
+				titre.getInterpretes().add(interprete); // On ajoute l'interprete
+				if(interprete.getTitres()==null) {
+					interprete.setTitres(new ArrayList<TitreMusical>());
+				}
+				interprete.getTitres().add(titre); // On ajoute le titre			
+				
 				return true;
 			}
 		} catch (SQLException e) {

@@ -244,17 +244,19 @@ public class AdministrateurServlet extends HttpServlet {
 							if (!DureeString.equals("")) {
 								Duree = Integer.parseInt(request.getParameter("Duree"));
 							}
-
-							// requete BDD
-							TitreMusical interprete = ((ProfilGestionnaireMusical) administrateur).creerTitre(Titre,
-									AnneeCreation, null, Duree, styleMusique);
-							System.out.println(interprete);
-
-							// attribution vue
-							vue = "/JSP/Administrateur/AjoutCatalogue.jsp";
-						} else {
-							if (typeElement.equals("Interprete")) {
-								// r�cup param vue
+							
+							//requete BDD
+							TitreMusical titre = ((ProfilGestionnaireMusical) administrateur).creerTitre(Titre, AnneeCreation, null, Duree, styleMusique);
+							
+							//envoi param vue
+							request.setAttribute("titre", titre);
+							request.setAttribute("interpretes", interpretes);
+							
+							//attribution vue
+							vue = "/JSP/Administrateur/AjoutInterpretesATitre.jsp";
+						}else {
+							if(typeElement.equals("Interprete")) {
+								//r�cup param vue
 								String Pseudo = request.getParameter("Pseudo");
 								String Prenom = request.getParameter("Prenom");
 								String Nom = request.getParameter("Nom");
@@ -268,12 +270,12 @@ public class AdministrateurServlet extends HttpServlet {
 								Interprete interprete = ((ProfilGestionnaireMusical) administrateur)
 										.creerInterprete(Pseudo, Nom, Prenom, dateNaissance);
 								System.out.println(interprete);
-
-								// attribution vue
-								vue = "/JSP/Administrateur/AjoutCatalogue.jsp";
-							} else {
-								if (typeElement.equals("Album")) {
-
+								
+								//attribution vue
+								vue = "/JSP/Administrateur/AjoutCatalogue.jsp"; 
+							}else {
+								if(typeElement.equals("Album")) {
+									
 								}
 							}
 						}
@@ -290,23 +292,56 @@ public class AdministrateurServlet extends HttpServlet {
 									titre = t;
 								}
 							}
-							((ProfilGestionnaireMusical) administrateur).supprimerTitre(titre);
-						} else {
-							if (action.equals("SuppressionInterprete")) {
-								// r�cup param vue
-								String titreString = request.getParameter("titreString");
-								String idString = request.getParameter("idString");
-								int id = Integer.parseInt(idString);
-								List<Interprete> titres = administrateur.rechercherParPseudoInterprete(titreString);
-								Interprete titre = null;
-								for (Interprete t : titres) {
-									if (t.getId() == id) {
-										titre = t;
-									}
-								}
-								((ProfilGestionnaireMusical) administrateur).supprimerInterprete(titre);
-							}
-						}
+        					((ProfilGestionnaireMusical) administrateur).supprimerTitre(titre);
+        				}else {
+    						if(action.equals("SuppressionInterprete")) {
+            					//r�cup param vue
+    							String titreString= request.getParameter("titreString");
+    							String idString = request.getParameter("idString");
+    							int id = Integer.parseInt(idString);
+    							List<Interprete> titres = administrateur.rechercherParPseudoInterprete(titreString);
+    							Interprete titre=null;
+    							for(Interprete t : titres) {
+    								if(t.getId()==id) {
+    									titre=t;
+    								}
+    							}
+            					((ProfilGestionnaireMusical) administrateur).supprimerInterprete(titre);
+            				}else {
+            					if(action.equals("AjoutInterpretesATitre")) {
+            						//r�cup param vue
+        							String interpreteSelectBox = request.getParameter("interpreteSelectBox");
+        							TitreMusical titre = (TitreMusical) request.getSession().getAttribute("titre");
+        							
+        							int id = Integer.parseInt(interpreteSelectBox);
+        							
+        							Interprete interprete = null;
+        							//todo ajouter m�thode rechercherInterpreteParId
+        							for(Interprete i : interpretes){
+        								if(i.getId()==id) {
+        									interprete=i;
+        								}
+        							}
+        							
+        							//envoi param vue
+        							request.setAttribute("titre", titre);
+        							
+        							//requete BDD
+        							((ProfilGestionnaireMusical) administrateur).ajouterDiscographie(titre, interprete);
+        							System.out.println(titre.getInterpretes());//pb le titre est rechargé en java plus haut !
+        							System.out.println("OUI");
+        							request.setAttribute("interpretesAssocies", titre.getInterpretes());
+        							
+        							//affectation vue
+        							vue = "/JSP/Administrateur/AjoutInterpretesATitre.jsp"; 
+            					}else{
+            						if(action.equals("FinAjoutInterpretesATitre")) {
+            							//affectation vue
+            							vue = "/JSP/Administrateur/AjoutCatalogue.jsp"; 
+            						}
+            					}
+            				}
+    					}
 					}
 				}
 			}
