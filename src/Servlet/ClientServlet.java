@@ -63,6 +63,16 @@ public class ClientServlet extends HttpServlet {//clientServlet
     		vue = "/JSP/Utilisateur/AuthentificationClient.jsp";
     	}else {
     		//affectation param�tres � la vue
+    		
+    		// requeteBDD
+			List<TitreMusical> titresMusicaux = client.rechercherParNomTitre("");
+			List<Interprete> interpretes = client.rechercherParPseudoInterprete("");
+			List<Album> albums = client.rechercherParNomAlbum("");
+
+			// envoie de parametres a la vue
+			request.setAttribute("titresMusicaux", titresMusicaux);
+			request.setAttribute("interpretes", interpretes);
+			request.setAttribute("albums", albums);
     		request.setAttribute("isClient", true);
     		request.setAttribute("password", client.getPassword());
             request.setAttribute("civilite", client.getCivilite());
@@ -80,6 +90,7 @@ public class ClientServlet extends HttpServlet {//clientServlet
             }else if(servletPath.equals("/ProfilClient")){
             	vue = "/JSP/Client/ProfilClient.jsp";
             }else if(servletPath.equals("/AccueilClient")){
+            	
             	vue = "/JSP/Client/AccueilClient.jsp";
             }else if(servletPath.equals("/ModificationProfilClient")){
                 vue = "/JSP/Client/ModificationProfilClient.jsp";
