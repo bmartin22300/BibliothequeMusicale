@@ -1167,7 +1167,7 @@ public abstract class Administrateur implements AdministrateurInterface {
 			// Execution
 			if(preparedQuery.executeUpdate()>0) { // Succes de la modification
 				// Maj Objet
-				this.setPassword(mail);
+				this.setMail(mail);
 				this.setPassword(password);
 				
 				return this;

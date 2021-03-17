@@ -137,16 +137,19 @@ public class AdministrateurServlet extends HttpServlet {
 		if (action.equals("ModificationProfilAdministrateur")) {
 			// affectation param�tres � la vue
 			request.setAttribute("isAdministrateur", true);
-			request.setAttribute("isAdministrateurClient", true);
-			request.setAttribute("isAdministrateurMusical", true);
+			request.setAttribute("isAdministrateurClient", false);
+			request.setAttribute("isAdministrateurMusical", false);
 			request.setAttribute("password", "");
-			request.setAttribute("email", "");
+			request.setAttribute("email", mail);
 
 			// mise � jour BDD
 			Administrateur administrateurModifie = administrateur.modifierInformations(mail, motDePasse);
 			if (administrateurModifie != null) {
 				this.administrateur = administrateurModifie;
+				System.out.println("Switch success");
 			}
+			System.out.println(administrateur.getMail());
+			System.out.println(mail);
 
 			// choix de la vue
 			vue = "/JSP/Administrateur/ProfilAdministrateur.jsp";
