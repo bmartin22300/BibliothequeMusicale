@@ -90,24 +90,11 @@ public class AdministrateurServlet extends HttpServlet {
 				vue = "/JSP/Administrateur/ModificationProfil.jsp";
 			} else if (servletPath.equals("/ModificationCatalogue")) {
 				vue = "/JSP/Administrateur/ModificationCatalogue.jsp";
-			} else if (servletPath.equals("/ModificationTitre")) {
-				// section Administrateur musical
-				// todo v�rif identit�
-
-				// r�cup�ration de param�tre de la vue
-				String titre = request.getParameter("titre");
-
-				// envoie de parametres a la vue
-				request.setAttribute("titre", titre);
-
-				vue = "/JSP/Administrateur/ModificationCatalogue.jsp";
 			} else if (servletPath.equals("/AjoutCatalogue")) {
 				// r�cup�ration de param�tre de la vue
 				String TypeElement = request.getParameter("TypeElement");
 
 				vue = "/JSP/Administrateur/AjoutCatalogue.jsp";
-			} else if(servletPath.equals("/ModificationProfilAdministrateur")){
-				vue = "/JSP/Administrateur/ModificationProfilAdministrateur.jsp";
 			}
 		}
 
@@ -300,44 +287,43 @@ public class AdministrateurServlet extends HttpServlet {
 						//attribution vue
 						vue = "/JSP/Administrateur/AjoutTitresAAlbum.jsp"; 
 					}
-				} else if (action.equals("SuppressionTitre")) {						
-					// r�cup param vue
-					String titreString = request.getParameter("titreString");
-					String idString = request.getParameter("idString");
-					int id = Integer.parseInt(idString);
-					TitreMusical titre = administrateur.getTitreMusical(id);
-					((ProfilGestionnaireMusical) administrateur).supprimerTitre(titre);
-					
-					// requeteBDD
-					titresMusicaux = administrateur.rechercherParNomTitre("");
+				} else {
+					if (action.equals("SuppressionTitre")) {						
+						// r�cup param vue
+						String idString = request.getParameter("idString");
+						int id = Integer.parseInt(idString);
+						TitreMusical titre = administrateur.getTitreMusical(id);
+						((ProfilGestionnaireMusical) administrateur).supprimerTitre(titre);
+						
+						// requeteBDD
+						titresMusicaux = administrateur.rechercherParNomTitre("");
 
-					// envoie de parametres a la vue
-					request.setAttribute("titresMusicaux", titresMusicaux);
-					request.setAttribute("TypeElement", "Titres musicaux");
-				}else if(action.equals("SuppressionInterprete")) {
-					//r�cup param vue
-					String titreString= request.getParameter("titreString");
-					String idString = request.getParameter("idString");
-					int id = Integer.parseInt(idString);
-					Interprete i = administrateur.getInterprete(id);
-					((ProfilGestionnaireMusical) administrateur).supprimerInterprete(i);
-					
-					// requeteBDD
-					interpretes = administrateur.rechercherParPseudoInterprete("");
+						// envoie de parametres a la vue
+						request.setAttribute("titresMusicaux", titresMusicaux);
+						request.setAttribute("TypeElement", "Titres musicaux");
+					}else {
+						if(action.equals("SuppressionInterprete")) {
+							//r�cup param vue
+							String idString = request.getParameter("idString");
+							int id = Integer.parseInt(idString);
+							Interprete i = administrateur.getInterprete(id);
+							((ProfilGestionnaireMusical) administrateur).supprimerInterprete(i);
+							
+							// requeteBDD
+							interpretes = administrateur.rechercherParPseudoInterprete("");
 
-					// envoie de parametres a la vue
-					request.setAttribute("interpretes", interpretes);
-					request.setAttribute("TypeElement", "Interpretes");
-				}else if(action.equals("SuppressionAlbum")) {
-					// r�cup param vue
-					String nomString = request.getParameter("nomString");
-					String idString = request.getParameter("idString");
-					int id = Integer.parseInt(idString);
-					Album album = administrateur.getAlbum(id);
-					((ProfilGestionnaireMusical) administrateur).supprimerAlbum(album);
-					
-					// requeteBDD
-					albums = administrateur.rechercherParNomAlbum("");
+							// envoie de parametres a la vue
+							request.setAttribute("interpretes", interpretes);
+							request.setAttribute("TypeElement", "Interpretes");
+						}else if(action.equals("SuppressionAlbum")) {
+							// r�cup param vue
+							String idString = request.getParameter("idString");
+							int id = Integer.parseInt(idString);
+							Album album = administrateur.getAlbum(id);
+							((ProfilGestionnaireMusical) administrateur).supprimerAlbum(album);
+							
+							// requeteBDD
+							albums = administrateur.rechercherParNomAlbum("");
 
 					// envoie de parametres a la vue
 					request.setAttribute("albums", albums);
@@ -388,20 +374,40 @@ public class AdministrateurServlet extends HttpServlet {
 					((ProfilGestionnaireMusical) administrateur).ajoutTitreAlbum(titreMusical, album);
 					request.setAttribute("titresMusicauxAssocies", album.getTitres());
 
-					//affectation vue
-					vue = "/JSP/Administrateur/AjoutTitresAAlbum.jsp"; 
-				}else if(action.equals("FinAjoutInterpretesATitre")) {
-					//affectation vue
-					vue = "/JSP/Administrateur/AjoutCatalogue.jsp"; 
-				}else if(action.equals("FinAjoutTitresMusicauxAAlbum")) {
-					//affectation vue
-					vue = "/JSP/Administrateur/AjoutCatalogue.jsp"; 
-				}else if(action.equals("incrementeAudio")) {
-					String idTitreMusical = request.getParameter("idTitreMusical");
-					int id = Integer.parseInt(idTitreMusical);
-					for(TitreMusical t : titresMusicaux) {
-						if(t.getIdCatalogue()==id) {
-							administrateur.regarder(t);
+								//affectation vue
+								vue = "/JSP/Administrateur/AjoutTitresAAlbum.jsp"; 
+							}
+							else{
+								if(action.equals("FinAjoutInterpretesATitre")) {
+									//affectation vue
+									vue = "/JSP/Administrateur/AjoutCatalogue.jsp"; 
+								}else if(action.equals("FinAjoutTitresMusicauxAAlbum")) {
+									//affectation vue
+									vue = "/JSP/Administrateur/AjoutCatalogue.jsp"; 
+								}else if(action.equals("incrementeAudio")) {
+									String idTitreMusical = request.getParameter("idTitreMusical");
+									int id = Integer.parseInt(idTitreMusical);
+									for(TitreMusical t : titresMusicaux) {
+										if(t.getIdCatalogue()==id) {
+											administrateur.regarder(t);
+										}
+									}
+								}else if(action.equals("ModificationProfilAdministrateur")){
+									vue = "/JSP/Administrateur/ModificationProfilAdministrateur.jsp";
+								}else if(action.equals("ModificationInterprete")) {
+									//r�cup param vue
+									String idString = request.getParameter("idString");
+									
+									//cast int
+									int id=Integer.parseInt(idString);
+									
+									//envoi param vue
+									request.setAttribute("id", id);
+									
+									//affectation vue
+									vue = "/JSP/Administrateur/ModificationInterprete.jsp";
+								}
+							}
 						}
 					}
 				}else if(action.equals("RechercheAccueil")) {

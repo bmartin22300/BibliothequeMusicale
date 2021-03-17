@@ -83,10 +83,16 @@
    										<li><% out.print(i.getPseudonyme()); %></li>
 				            		<%} %>
 				            	</ul></td>
-				            	<td><% out.print(elem.getAlbum()); %></td>
+				            	<td><% if(elem.getAlbum()!=null){
+				            		out.print(elem.getAlbum());
+				            		} %></td>
 				            	<td><% out.print(elem.getGenre()); %></td>
-				            	<td><% out.print(elem.getAnneeCreation()); %></td>
-				            	<td><% out.print(elem.getDuree()); %></td>
+				            	<td><% if(elem.getAnneeCreation()!=0){
+				            		out.print(elem.getAnneeCreation());
+				            		}%></td>
+				            	<td><% if(elem.getDuree()!=0){
+				            		out.print(elem.getDuree()); 
+				            		}%></td>
 				            	<td>
 				            		<form method="POST">
 				            			<input name="action" type="hidden" value="ModificationTitre">
@@ -98,7 +104,6 @@
 				            		<form method="POST">
 				            			<input name="action" type="hidden" value="SuppressionTitre">
 				            			<input name="idString" type="hidden" value=<% out.print(elem.getIdCatalogue());%>>
-										<input name="titreString" type="hidden" value=<% out.print(elem.getTitre());%>>
 										<input type="submit" id='submit' value='Supprimer'>
 									</form>
 				            	</td>
@@ -129,12 +134,11 @@
 				            	<td><% out.print(elem.getPseudonyme()); %></td>
 				            	<td><% out.print(elem.getPrenom()); %></td>
 				            	<td><% out.print(elem.getNom()); %></td>
-				            	<td><% out.print(elem.getDateNaissance()); %></td>
+				            	<td><% if(elem.getDateNaissance()!=null){out.print(elem.getDateNaissance());} %></td>
 				            	<td>
 				            		<form method="POST">
-				            			<input name="action" type="hidden" value="SuppressionTitre">
-				            			<input name="idString" type="hidden" value="">
-										<input name="titreString" type="hidden" value="">
+				            			<input name="action" type="hidden" value="ModificationInterprete">
+				            			<input name="idString" type="hidden" value=<% out.print(elem.getId());%>>
 										<input type="submit" id='submit' value='Modifier'>
 									</form>
 				            	</td>
@@ -142,7 +146,6 @@
 				            		<form method="POST">
 				            			<input name="action" type="hidden" value="SuppressionInterprete">
 				            			<input name="idString" type="hidden" value=<% out.print(elem.getId());%>>
-										<input name="titreString" type="hidden" value=<% out.print(elem.getPseudonyme());%>>
 										<input type="submit" id='submit' value='Supprimer'>
 									</form>
 				            	</td>
@@ -176,12 +179,16 @@
    										<li><% out.print(t.getTitre()); %></li>
 				            		<%} %>
 				            	</ul></td>
-				            	<td><% out.print(elem.getDateSortie()); %></td>
-				            	<td><% out.print(elem.getDuree()); %></td>
+				            	<td><% if(elem.getDateSortie()!=0){
+				            		out.print(elem.getDateSortie()); 
+				            		}%></td>
+				            	<td><% if(elem.getDuree()!=0){
+				            		out.print(elem.getDuree()); 
+				            		}%></td>
 				            	<td>
 				            		<form method="POST">
 				            			<input name="action" type="hidden" value="ModificationAlbum">
-										<input name="idCatalogue" type="hidden" value=<%elem.getIdCatalogue();%>>
+										<input name="idString" type="hidden" value=<%elem.getIdCatalogue();%>>
 										<input type="submit" id='submit' value='Modifier'>
 									</form>
 				            	</td>
@@ -189,7 +196,6 @@
 				            		<form method="POST">
 				            			<input name="action" type="hidden" value="SuppressionAlbum">
 				            			<input name="idString" type="hidden" value=<% out.print(elem.getIdCatalogue());%>>
-										<input name="nomString" type="hidden" value=<% out.print(elem.getNom());%>>
 										<input type="submit" id='submit' value='Supprimer'>
 									</form>
 				            	</td>
