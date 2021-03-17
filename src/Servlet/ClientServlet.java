@@ -265,73 +265,124 @@ public class ClientServlet extends HttpServlet {//clientServlet
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String action = request.getParameter("action");//de quel form je viens ?
-		
+		String action = request.getParameter("action");// de quel form je viens ?
+
 		//affectation param�tres � la vue
 		request.setAttribute("isAdministrateur", false);
-		
-		//recuperation des param�tres du form
+
+		// recuperation des parametres du form
 		String mail = request.getParameter("mail");
 		String motDePasse = request.getParameter("password");
 		
-		if(action.equals("ModificationProfilClient")) {
-			//recuperation param�tres
-			String prenom = request.getParameter("prenom");	
-			String nom = request.getParameter("nom");
-			String adresse = request.getParameter("adresse");
-			String dateDeNaissanceString = request.getParameter("dateDeNaissance");
-			System.out.println(request.getParameter("civilite"));
-			String civilite="";
-			if(request.getParameter("civilite").equals("M")) {
-				civilite="M";
-			}else {
-				if(request.getParameter("civilite").equals("Mme")) {
-					civilite="Mme";
-				}else {
-					if(request.getParameter("civilite").equals("Autre")) {
-						civilite="Autre";
-					}
-				}
-			}
-			Date dateDeNaissance = null;
-			if(dateDeNaissanceString!=null && dateDeNaissanceString!="") {
-				dateDeNaissance = Date.valueOf(dateDeNaissanceString);
-			}  
-			String styleMusiquePrefereString = request.getParameter("styleMusiquePrefere");
-			Genre styleMusiquePrefere = Genre.valueOf(styleMusiquePrefereString);
-			
+		if(action.equals("AuthentificationClient")) {
+		//requ�te � la BDD
+		client = utilisateur.authentification(mail, motDePasse);
+		
+		if(client!=null) {
 			//affectation param�tres � la vue
 			request.setAttribute("isClient", true);
-			//le client est inaccessible depuis doPost ?!
-			/*
-            request.setAttribute("civilite", client.getCivilite());
-    		request.setAttribute("nom", client.getNom());
-    		request.setAttribute("prenom", client.getPrenom());
-    		request.setAttribute("email", client.getMail());
-    		request.setAttribute("adresse", client.getAdresseFacturation());
-    		request.setAttribute("nbEcoutes", client.getNbEcoute());
-    		request.setAttribute("dateDeNaissance", client.getDateNaissance());*/
-    		request.setAttribute("nom", "");
-    		request.setAttribute("prenom", "");
-    		request.setAttribute("email", "");
-    		request.setAttribute("adresse", "");
-    		request.setAttribute("nbEcoutes", 0);
-    		request.setAttribute("dateDeNaissance", new Date(System.currentTimeMillis()));
 			
-			//mise � jour BDD
-			//TODO : ajouter un supprimerClient pour pouvoir modifier le mail
-    		Client clientModifie=client.modifierInformations(mail, motDePasse, civilite, nom, prenom, dateDeNaissance, adresse, styleMusiquePrefere);
-    		System.out.println(clientModifie);
-    		if(clientModifie!=null) {
-    			this.client=clientModifie;
-    		}
-    		
-    		//choix de la vue
-			vue = "/JSP/Client/ProfilClient.jsp";//todo fix refresh page n�cessaire
-		}else {
-			if(action.equals("AuthentificationClient")) {
+			// requeteBDD
+			List<TitreMusical> titresMusicaux = client.rechercherParNomTitre("");
+			List<Interprete> interpretes = client.rechercherParPseudoInterprete("");
+			List<Album> albums = client.rechercherParNomAlbum("");
+
+			// envoie de parametres a la vue
+			request.setAttribute("titresMusicaux", titresMusicaux);
+			request.setAttribute("interpretes", interpretes);
+			request.setAttribute("albums", albums);
+			request.setAttribute("isClient", true);
+
+			//choix de la vue
+			vue = "/JSP/Client/AccueilClient.jsp";
+		}else {//echec
+			//affectation param�tres � la vue
+			request.setAttribute("isClient", false);
+			request.setAttribute("isErrorLogin", true);
+			request.setAttribute("notLogged", false);
+
+			//choix de la vue
+			vue = "/JSP/Utilisateur/AuthentificationClient.jsp";
+		}
+		} else {
+			///////////////////////////////////////////////////////partie CLIENT///////////////////////////////////////////////////////
+			if (client == null) {// verification que le client est connecte
+				// affectation param�tres � la vue
+				request.setAttribute("isClient", false);
+				request.setAttribute("isErrorLogin", false);
+				request.setAttribute("notLogged", true);
+
+				// affection vue
+				vue = "/JSP/Utilisateur/AuthentificationClient.jsp";
+			}
+			// requeteBDD
+			List<TitreMusical> titresMusicaux = client.rechercherParNomTitre("");
+			List<Interprete> interpretes = client.rechercherParPseudoInterprete("");
+			List<Album> albums = client.rechercherParNomAlbum("");
+
+			// envoie de parametres a la vue
+			request.setAttribute("titresMusicaux", titresMusicaux);
+			request.setAttribute("interpretes", interpretes);
+			request.setAttribute("albums", albums);
+			request.setAttribute("isClient", true);
+		
+			if(action.equals("ModificationProfilClient")) {
+				//recuperation param�tres
+				String prenom = request.getParameter("prenom");	
+				String nom = request.getParameter("nom");
+				String adresse = request.getParameter("adresse");
+				String dateDeNaissanceString = request.getParameter("dateDeNaissance");
+				System.out.println(request.getParameter("civilite"));
+				String civilite="";
+				if(request.getParameter("civilite").equals("M")) {
+					civilite="M";
+				}else {
+					if(request.getParameter("civilite").equals("Mme")) {
+						civilite="Mme";
+					}else {
+						if(request.getParameter("civilite").equals("Autre")) {
+							civilite="Autre";
+						}
+					}
+				}
+				Date dateDeNaissance = null;
+				if(dateDeNaissanceString!=null && dateDeNaissanceString!="") {
+					dateDeNaissance = Date.valueOf(dateDeNaissanceString);
+				}  
+				String styleMusiquePrefereString = request.getParameter("styleMusiquePrefere");
+				Genre styleMusiquePrefere = Genre.valueOf(styleMusiquePrefereString);
+				
+				//affectation param�tres � la vue
+				request.setAttribute("isClient", true);
+				//le client est inaccessible depuis doPost ?!
+				/*
+	            request.setAttribute("civilite", client.getCivilite());
+	    		request.setAttribute("nom", client.getNom());
+	    		request.setAttribute("prenom", client.getPrenom());
+	    		request.setAttribute("email", client.getMail());
+	    		request.setAttribute("adresse", client.getAdresseFacturation());
+	    		request.setAttribute("nbEcoutes", client.getNbEcoute());
+	    		request.setAttribute("dateDeNaissance", client.getDateNaissance());*/
+	    		request.setAttribute("nom", "");
+	    		request.setAttribute("prenom", "");
+	    		request.setAttribute("email", "");
+	    		request.setAttribute("adresse", "");
+	    		request.setAttribute("nbEcoutes", 0);
+	    		request.setAttribute("dateDeNaissance", new Date(System.currentTimeMillis()));
+				
+				//mise � jour BDD
+				//TODO : ajouter un supprimerClient pour pouvoir modifier le mail
+	    		Client clientModifie=client.modifierInformations(mail, motDePasse, civilite, nom, prenom, dateDeNaissance, adresse, styleMusiquePrefere);
+	    		System.out.println(clientModifie);
+	    		if(clientModifie!=null) {
+	    			this.client=clientModifie;
+	    		}
+	    		
+	    		//choix de la vue
+				vue = "/JSP/Client/ProfilClient.jsp";//todo fix refresh page n�cessaire
+			}else if(action.equals("InscriptionClient")) {
 				//requ�te � la BDD
-				client = utilisateur.authentification(mail, motDePasse);
+				client = utilisateur.creerCompte(mail, motDePasse);
 				
 				if(client!=null) {
 					//affectation param�tres � la vue
@@ -346,32 +397,31 @@ public class ClientServlet extends HttpServlet {//clientServlet
 					request.setAttribute("notLogged", false);
 					
 					//choix de la vue
-					vue = "/JSP/Utilisateur/AuthentificationClient.jsp";
+					vue = "/JSP/Utilisateur/InscriptionClient.jsp";
 				}
-			}else {
-				if(action.equals("InscriptionClient")) {
-					//requ�te � la BDD
-					client = utilisateur.creerCompte(mail, motDePasse);
-					
-					if(client!=null) {
-						//affectation param�tres � la vue
-						request.setAttribute("isClient", true);
-						
-						//choix de la vue
-						vue = "/JSP/Client/AccueilClient.jsp";
-					}else {//echec
-						//affectation param�tres � la vue
-						request.setAttribute("isClient", false);
-						request.setAttribute("isErrorLogin", true);
-						request.setAttribute("notLogged", false);
-						
-						//choix de la vue
-						vue = "/JSP/Utilisateur/InscriptionClient.jsp";
-					}
+			}else if(action.equals("RechercheAccueil")) {
+				// On recupere les parametres de la vue
+				String typeElement = request.getParameter("TypeElement");
+				String recherche = request.getParameter("recherche");
+				
+				if(typeElement.equals("Titres musicaux")) {
+					titresMusicaux=client.rechercherParNomTitre(recherche);
+					request.setAttribute("titresMusicaux", titresMusicaux);
+				}else if(typeElement.equals("Interpretes")) {
+					interpretes = client.rechercherParPseudoInterprete(recherche);
+					request.setAttribute("interpretes", interpretes);
+				}else if(typeElement.equals("Albums")) {
+					albums = client.rechercherParNomAlbum(recherche);
+					request.setAttribute("albums", albums);
 				}
+				
+				// envoi param vue
+				request.setAttribute("TypeElement", typeElement);
+	
+				// attribution vue
+				vue = "/JSP/Client/AccueilClient.jsp"; 
 			}
 		}
-		
 		//affichage de la vue
 		RequestDispatcher rd = getServletContext().getRequestDispatcher(vue);
 		try {
