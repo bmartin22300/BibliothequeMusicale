@@ -208,27 +208,25 @@ public class AdministrateurServlet extends HttpServlet {
 			}else if (action.equals("RechercheTitre")) {
 				// r�cup param vue
 				String typeElement = request.getParameter("TypeElement");
-				String titre = request.getParameter("titre");
-
+				String recherche = request.getParameter("recherche");
+				
+				if(typeElement.equals("Titres musicaux")) {
+					titresMusicaux=administrateur.rechercherParNomTitre(recherche);
+					request.setAttribute("titresMusicaux", titresMusicaux);
+				}else if(typeElement.equals("Interpretes")) {
+					interpretes = administrateur.rechercherParPseudoInterprete(recherche);
+					request.setAttribute("interpretes", interpretes);
+				}else if(typeElement.equals("Albums")) {
+					albums = administrateur.rechercherParNomAlbum(recherche);
+					request.setAttribute("albums", albums);
+				}
+				
 				// envoi param vue
-				request.setAttribute("titresMusicaux", titresMusicaux);
-				request.setAttribute("interpretes", interpretes);
-				request.setAttribute("albums", null);
 				request.setAttribute("TypeElement", typeElement);
-				request.setAttribute("isAdministrateur", true);
-				request.setAttribute("isAdministrateurMusical", true);
 
 				// attribution vue
 				vue = "/JSP/Administrateur/ModificationCatalogue.jsp";
-				/*
-				 * if(typeElement.equals("Titres musicaux")){
-				 * 
-				 * }else { if(typeElement.equals("Interpretes")){
-				 * 
-				 * }else { if(typeElement.equals("Albums")){
-				 * 
-				 * } } }
-				 */
+				
 			} else if (action.equals("AjouterElement")) {
 					// r�cup param vue
 					String typeElement = request.getParameter("TypeElement");

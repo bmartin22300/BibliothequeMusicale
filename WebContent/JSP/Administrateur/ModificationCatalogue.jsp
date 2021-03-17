@@ -46,7 +46,7 @@
 		</div>   
 		
         <label><b>Nom</b></label>
-        <input id="titre" type="text" placeholder="Entrer le nom" name="titre">
+        <input id="recherche" type="text" placeholder="Entrer le nom" name="recherche">
 
         <input type="submit" id='submit' value='Rechercher'>
     </form>
