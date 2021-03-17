@@ -402,10 +402,31 @@ public class AdministrateurServlet extends HttpServlet {
 					for(TitreMusical t : titresMusicaux) {
 						if(t.getIdCatalogue()==id) {
 							administrateur.regarder(t);
+						}
 					}
+				}else if(action.equals("RechercheAccueil")) {
+					// On recupere les parametres de la vue
+					String typeElement = request.getParameter("TypeElement");
+					String recherche = request.getParameter("recherche");
+					
+					if(typeElement.equals("Titres musicaux")) {
+						titresMusicaux=administrateur.rechercherParNomTitre(recherche);
+						request.setAttribute("titresMusicaux", titresMusicaux);
+					}else if(typeElement.equals("Interpretes")) {
+						interpretes = administrateur.rechercherParPseudoInterprete(recherche);
+						request.setAttribute("interpretes", interpretes);
+					}else if(typeElement.equals("Albums")) {
+						albums = administrateur.rechercherParNomAlbum(recherche);
+						request.setAttribute("albums", albums);
+					}
+					
+					// envoi param vue
+					request.setAttribute("TypeElement", typeElement);
+
+					// attribution vue
+					vue = "/JSP/Administrateur/AccueilAdministrateur.jsp"; 
 				}
 			}
-		}
 
 
 		// affichage de la vue
