@@ -360,7 +360,9 @@ public class ProfilGestionnaireMusical extends Administrateur implements ProfilG
 					interprete.getTitres().remove(titreMusical);
 				}
 				if(titreMusical.getAlbum()!=null) {
-					titreMusical.getAlbum().getTitres().remove(titreMusical);
+					if(titreMusical.getAlbum().getTitres()!=null) {
+						titreMusical.getAlbum().getTitres().remove(titreMusical);
+					}
 				}
 				return true;
 			}

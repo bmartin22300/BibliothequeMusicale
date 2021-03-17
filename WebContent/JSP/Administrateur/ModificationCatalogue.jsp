@@ -82,7 +82,7 @@
 				            		<% for(Interprete i : elem.getInterpretes()){ %>
    										<li><% out.print(i.getPseudonyme()); %></li>
 				            		<%} %>
-				            	</td></ul>
+				            	</ul></td>
 				            	<td><% out.print(elem.getAlbum()); %></td>
 				            	<td><% out.print(elem.getGenre()); %></td>
 				            	<td><% out.print(elem.getAnneeCreation()); %></td>
@@ -135,7 +135,7 @@
 				            			<input name="action" type="hidden" value="SuppressionTitre">
 				            			<input name="idString" type="hidden" value="">
 										<input name="titreString" type="hidden" value="">
-										<input type="submit" id='submit' value='Supprimer'>
+										<input type="submit" id='submit' value='Modifier'>
 									</form>
 				            	</td>
 				            	<td>
@@ -158,14 +158,41 @@
 			<table>
 			    <thead>
 			        <tr>
-			            
+			            <th>Nom</th>
+			            <th>Titres musicaux</th>
+			            <th>Annee de sortie</th>
+			            <th>Duree</th>
+			            <th>Modifier</th>
+			            <th>Supprimer</th>
 			        </tr>
 			    </thead>
 			    <tbody>
 		        	<% if (albums!=null) {%>
 		        		<% for(Album elem : albums) {%>
 							<tr id="tr">
-				            	
+				            	<td><% out.print(elem.getNom()); %></td>
+				            	<td><ul>
+				            		<% for(TitreMusical t : elem.getTitres()){ %>
+   										<li><% out.print(t.getTitre()); %></li>
+				            		<%} %>
+				            	</ul></td>
+				            	<td><% out.print(elem.getDateSortie()); %></td>
+				            	<td><% out.print(elem.getDuree()); %></td>
+				            	<td>
+				            		<form method="POST">
+				            			<input name="action" type="hidden" value="ModificationAlbum">
+										<input name="idCatalogue" type="hidden" value=<%elem.getIdCatalogue();%>>
+										<input type="submit" id='submit' value='Modifier'>
+									</form>
+				            	</td>
+				            	<td>
+				            		<form method="POST">
+				            			<input name="action" type="hidden" value="SuppressionAlbum">
+				            			<input name="idString" type="hidden" value=<% out.print(elem.getIdCatalogue());%>>
+										<input name="nomString" type="hidden" value=<% out.print(elem.getNom());%>>
+										<input type="submit" id='submit' value='Supprimer'>
+									</form>
+				            	</td>
 			            	</tr>
 			            <% } %>
 		        	<% } %>

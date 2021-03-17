@@ -11,7 +11,6 @@
 	<%@ page import="Object.Interprete" %>
 	<%@ page import="Object.TitreMusical" %>
 	
-	<% String TypeElement = (String)request.getAttribute("TypeElement"); %>
 	<% List<Interprete> interpretes = (List<Interprete>)request.getAttribute("interpretes"); %>
 	<% List<Interprete> interpretesAssocies = (List<Interprete>)request.getAttribute("interpretesAssocies"); %>
 	<% TitreMusical titre = (TitreMusical)request.getAttribute("titre"); %>
