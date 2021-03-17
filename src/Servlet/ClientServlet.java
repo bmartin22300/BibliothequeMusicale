@@ -363,28 +363,28 @@ public class ClientServlet extends HttpServlet {//clientServlet
 				String styleMusiquePrefereString = request.getParameter("styleMusiquePrefere");
 				Genre styleMusiquePrefere = Genre.valueOf(styleMusiquePrefereString);
 				
-				//affectation param�tres � la vue
+				//mise � jour BDD
+				//TODO : ajouter un supprimerClient pour pouvoir modifier le mail
+	    		Client clientModifie=client.modifierInformations(mail, motDePasse, civilite, nom, prenom, dateDeNaissance, adresse, styleMusiquePrefere);
+	    		
+	    		//affectation param�tres � la vue
 				request.setAttribute("isClient", true);
 				//le client est inaccessible depuis doPost ?!
-				/*
 	            request.setAttribute("civilite", client.getCivilite());
 	    		request.setAttribute("nom", client.getNom());
 	    		request.setAttribute("prenom", client.getPrenom());
 	    		request.setAttribute("email", client.getMail());
 	    		request.setAttribute("adresse", client.getAdresseFacturation());
 	    		request.setAttribute("nbEcoutes", client.getNbEcoute());
-	    		request.setAttribute("dateDeNaissance", client.getDateNaissance());*/
+	    		request.setAttribute("dateDeNaissance", client.getDateNaissance());
+	    		/*
 	    		request.setAttribute("nom", "");
 	    		request.setAttribute("prenom", "");
 	    		request.setAttribute("email", "");
 	    		request.setAttribute("adresse", "");
 	    		request.setAttribute("nbEcoutes", 0);
-	    		request.setAttribute("dateDeNaissance", new Date(System.currentTimeMillis()));
-				
-				//mise � jour BDD
-				//TODO : ajouter un supprimerClient pour pouvoir modifier le mail
-	    		Client clientModifie=client.modifierInformations(mail, motDePasse, civilite, nom, prenom, dateDeNaissance, adresse, styleMusiquePrefere);
-	    		System.out.println(clientModifie);
+	    		request.setAttribute("dateDeNaissance", new Date(System.currentTimeMillis()));*/
+	    		
 	    		if(clientModifie!=null) {
 	    			this.client=clientModifie;
 	    		}

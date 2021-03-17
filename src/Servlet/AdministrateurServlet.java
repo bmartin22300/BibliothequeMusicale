@@ -116,7 +116,9 @@ public class AdministrateurServlet extends HttpServlet {
 				String TypeElement = request.getParameter("TypeElement");
 
 				vue = "/JSP/Administrateur/AjoutCatalogue.jsp";
-			}
+			}else if(servletPath.equals("/ModificationProfilAdministrateur")){
+                vue = "/JSP/Administrateur/ModificationProfilAdministrateur.jsp";
+	        }
 		}
 
 		// affichage vue
