@@ -1,202 +1,201 @@
-
-
 /* nav-tab */
 
 /* Add a black background color to the top navigation */
 .topnav {
-  background-color: #00003d;
-  overflow: hidden;
-  border: 3px solid #8B0000;
-  border-radius: 10px;
-  font-family: 'Sonsie One', cursive;
-  font-style: normal;
+	background-color: #00003d;
+	overflow: hidden;
+	border: 3px solid #8B0000;
+	border-radius: 10px;
+	font-family: 'Sonsie One', cursive;
+	font-style: normal;
 }
 
 /* Style the links inside the navigation bar */
 .topnav a {
-  float: left;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
+	float: left;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
 }
 
 /* Change the color of links on hover */
 .topnav a:hover {
-  background-color: #ddd;
-  color: black;
+	background-color: #ddd;
+	color: black;
 }
 
 /* Add a color to the/current link */
 .topnav a.active {
-  background-color: rgb(0, 128, 0);
-  color: white;
+	background-color: rgb(0, 128, 0);
+	color: white;
 }
 
 /* catalogue element */
 .card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 300px;
-  margin: auto;
-  text-align: center;
-  background-color: #c0c0c0;
-  overflow: hidden;
-  border: 1px solid #8B0000;
-  border-radius: 10px;
-  font-family: 'Sonsie One', cursive;
-  font-style: normal;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	max-width: 300px;
+	margin: auto;
+	text-align: center;
+	background-color: #c0c0c0;
+	overflow: hidden;
+	border: 1px solid #8B0000;
+	border-radius: 10px;
+	font-family: 'Sonsie One', cursive;
+	font-style: normal;
 }
 
 .price {
-  color: #00003d;
-  font-size: 22px;
+	color: #00003d;
+	font-size: 22px;
 }
 
 .card button {
-  border: none;
-  outline: 0;
-  padding: 12px;
-  color: white;
-  background-color: #00003d;
-  text-align: center;
-  cursor: pointer;
-  width: 100%;
-  font-size: 18px;
-  border: 1px solid #8B0000;
+	border: none;
+	outline: 0;
+	padding: 12px;
+	color: white;
+	background-color: #00003d;
+	text-align: center;
+	cursor: pointer;
+	width: 100%;
+	font-size: 18px;
+	border: 1px solid #8B0000;
 }
 
 .card button:hover {
-  color:#fdcc0d;
-  opacity: 0.8;
+	color: #fdcc0d;
+	opacity: 0.8;
 }
 
 /* catalogue */
 .wrapper {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 10px;
-  grid-auto-rows: minmax(100px, auto);
-  padding-top: 10px;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 10px;
+	grid-auto-rows: minmax(100px, auto);
+	padding-top: 10px;
 }
 
 /* Champ de recherche */
 .rechercheTextBox {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  text-align: center;
-  background-color: #c0c0c0;
-  border: 1px solid #8B0000;
-  font-family: 'Sonsie One', cursive;
-  font-style: normal;
-  padding: 12px;
-  margin-bottom : 10px;
-  margin-top : 10px;
-  border-radius: 15px;
-  align-items: center;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	text-align: center;
+	background-color: #c0c0c0;
+	border: 1px solid #8B0000;
+	font-family: 'Sonsie One', cursive;
+	font-style: normal;
+	padding: 12px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	border-radius: 15px;
+	align-items: center;
 }
-
-
-
-
-
-
 
 /* profile page */
 .cardProfile {
-  padding-top:10px;
-  margin-top:20px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 500px;
-  text-align: center;
-  background-color: #c0c0c0;
-  border: 2px solid #8B0000;
-  border-radius: 10px;
-  font-family: 'Sonsie One', cursive;
-  font-style: normal;
-  margin-left:auto;
-  margin-right:auto;
+	padding-top: 10px;
+	margin-top: 20px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	max-width: 500px;
+	text-align: center;
+	background-color: #c0c0c0;
+	border: 2px solid #8B0000;
+	border-radius: 10px;
+	font-family: 'Sonsie One', cursive;
+	font-style: normal;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .title {
-  color: #00003d;
-  font-size: 18px;
+	color: #00003d;
+	font-size: 18px;
 }
 
 a {
-  text-decoration: none;
-  font-size: 22px;
-  color: black;
+	text-decoration: none;
+	font-size: 22px;
+	color: black;
 }
 
 button:hover, a:hover {
-  color:#fdcc0d;
-  opacity: 0.8;
+	color: #fdcc0d;
+	opacity: 0.8;
 }
 
 .button {
-  outline: 0;
-  display: inline-block;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  color: white;
-  background-color: #00003d;
-  text-align: center;
-  cursor: pointer;
-  width: 40%;
-  font-size: 18px;
-  font-family: 'Sonsie One', cursive;
-  font-style: normal;
-  border: 2px solid #8B0000;
-  border-radius: 10px;
+	outline: 0;
+	display: inline-block;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	color: white;
+	background-color: #00003d;
+	text-align: center;
+	cursor: pointer;
+	width: 40%;
+	font-size: 18px;
+	font-family: 'Sonsie One', cursive;
+	font-style: normal;
+	border: 2px solid #8B0000;
+	border-radius: 10px;
 }
 
 .button:hover, a:hover {
-  color:#fdcc0d;
-  opacity: 0.8;
+	color: #fdcc0d;
+	opacity: 0.8;
 }
 
 /* Connexion */
-
 .connexion {
-  padding-top:10px;
-  margin-top:20px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 60%;
-  text-align: center;
-  background-color: #c0c0c0;
-  border: 2px solid #8B0000;
-  border-radius: 10px;
-  font-family: 'Sonsie One', cursive;
-  font-style: normal;
-  margin-left:auto;
-  margin-right:auto;
+	padding-top: 10px;
+	margin-top: 20px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	max-width: 60%;
+	text-align: center;
+	background-color: #c0c0c0;
+	border: 2px solid #8B0000;
+	border-radius: 10px;
+	font-family: 'Sonsie One', cursive;
+	font-style: normal;
+	margin-left: auto;
+	margin-right: auto;
 }
-
-
 
 /* tableau resultat de recherche */
-table,
-td {
-    border: 1px solid #8B0000;
-    text-align:center; 
-  	background-color: #c0c0c0;
-  	font-family: 'Sonsie One', cursive;
-  	font-style: normal;
-  	width:auto;
-  	margin:auto;
-  	
+table, td {
+	border: 1px solid #8B0000;
+	text-align: center;
+	background-color: #c0c0c0;
+	font-family: 'Sonsie One', cursive;
+	font-style: normal;
+	width: auto;
+	margin: auto;
 }
 
-
-thead,
-tfoot {
-    background-color: #00003d;
-    color: #fff;
+thead, tfoot {
+	background-color: #00003d;
+	color: #fff;
 }
 
 html {
-  background-color: #e6e6e6;
+	background-color: #e6e6e6;
 }
 
-
-
+.footer {
+	display: block;
+	text-align: center;
+	border-top: 3px solid #8B0000;
+	overflow: hidden;
+	
+	background-color: #00003D;
+	color: white;
+	font-family: 'Sonsie One', cursive;
+	font-style: normal;
+	
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+}
