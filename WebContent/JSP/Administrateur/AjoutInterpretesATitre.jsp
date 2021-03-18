@@ -16,43 +16,45 @@
 	<% TitreMusical titre = (TitreMusical)request.getAttribute("titre"); %>
 	<% request.getSession().setAttribute("titre",titre); %>
 	
-	<!-- formulaire -->
-	<form method="POST">
-	
-	<input name="action" type="hidden" value="AjoutInterpretesATitre">
-	
-	<h1>Ajouter un interprete</h1>
-		 <!-- choix du type d'�l�ment -->
-        <div style="margin:10px;">
-			<!-- select box -->
-			<p>
-			  <label for="cars">Interprete</label>
-			  <% if(interpretes!=null){ %>
-				  	<select name="interpreteSelectBox"> 
-				  		<% for(Interprete interprete : interpretes) {%>
-					  		<option value=<%= interprete.getId() %>><%= interprete.getPseudonyme() %></option>
-					    <% } %>
-				  	</select>
-			  <%} %>
-			  <input type="submit" id='submit' value='Ajouter'>
-			</p>				
-		</div>   
-    </form>
-    
-    <!-- liste des interpretes associe au titre -->
-    <ul>
-    	<% if(interpretesAssocies!=null) {%>
-    		<% for(Interprete interpreteAssocie : interpretesAssocies) {%>
-		  		<li><%= interpreteAssocie.getPseudonyme() %></li>
-		    <% } %>
-    	<%} %>
-    </ul>
-    
-    <!-- fin d'ajout -->
-    <form method="POST">
-		<input name="action" type="hidden" value="FinAjoutInterpretesATitre">
-		<input type="submit" id='submit' value='Terminer'>
-	</form>
+	<div class="mainContent">
+		<!-- formulaire -->
+		<form method="POST">
+		
+		<input name="action" type="hidden" value="AjoutInterpretesATitre">
+		
+		<h1>Ajouter un interprete</h1>
+			 <!-- choix du type d'�l�ment -->
+	        <div style="margin:10px;">
+				<!-- select box -->
+				<p>
+				  <label for="cars">Interprete</label>
+				  <% if(interpretes!=null){ %>
+					  	<select name="interpreteSelectBox"> 
+					  		<% for(Interprete interprete : interpretes) {%>
+						  		<option value=<%= interprete.getId() %>><%= interprete.getPseudonyme() %></option>
+						    <% } %>
+					  	</select>
+				  <%} %>
+				  <input type="submit" id='submit' value='Ajouter'>
+				</p>				
+			</div>   
+	    </form>
+	    
+	    <!-- liste des interpretes associe au titre -->
+	    <ul>
+	    	<% if(interpretesAssocies!=null) {%>
+	    		<% for(Interprete interpreteAssocie : interpretesAssocies) {%>
+			  		<li><%= interpreteAssocie.getPseudonyme() %></li>
+			    <% } %>
+	    	<%} %>
+	    </ul>
+	    
+	    <!-- fin d'ajout -->
+	    <form method="POST">
+			<input name="action" type="hidden" value="FinAjoutInterpretesATitre">
+			<input type="submit" id='submit' value='Terminer'>
+		</form>
+    </div>
     
     <%@include file="../footer.jsp" %>
 </body>

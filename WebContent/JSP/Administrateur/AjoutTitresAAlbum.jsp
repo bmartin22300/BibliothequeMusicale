@@ -16,43 +16,45 @@
 	<% Album album = (Album)request.getAttribute("album"); %>
 	<% request.getSession().setAttribute("album",album); %>
 	
-	<!-- formulaire -->
-	<form method="POST">
-	
-	<input name="action" type="hidden" value="AjoutTitresAAlbum">
-	
-	<h1>Ajouter un titre musical</h1>
-		 <!-- choix du type d'�l�ment -->
-        <div style="margin:10px;">
-			<!-- select box -->
-			<p>
-			  <label for="cars">Titre musical</label>
-			  <% if(titresMusicaux!=null){ %>
-				  	<select name="titresMusicauxSelectBox"> 
-				  		<% for(TitreMusical titreMusical : titresMusicaux) {%>
-					  		<option value=<%= titreMusical.getIdCatalogue() %>><%= titreMusical.getTitre() %></option>
-					    <% } %>
-				  	</select>
-			  <%} %>
-			  <input type="submit" id='submit' value='Ajouter'>
-			</p>				
-		</div>   
-    </form>
-    
-    <!-- liste des titresMusicaux associe a l'album -->
-    <ul>
-    	<% if(titresMusicauxAssocies!=null) {%>
-    		<% for(TitreMusical titreMusicalAssocie : titresMusicauxAssocies) {%>
-		  		<li><%= titreMusicalAssocie.getTitre() %></li>
-		    <% } %>
-    	<%} %>
-    </ul>
-    
-    <!-- fin d'ajout -->
-    <form method="POST">
-		<input name="action" type="hidden" value="FinAjoutTitresMusicauxAAlbum">
-		<input type="submit" id='submit' value='Terminer'>
-	</form>
+	<div class="mainContent">
+		<!-- formulaire -->
+		<form method="POST">
+		
+		<input name="action" type="hidden" value="AjoutTitresAAlbum">
+		
+		<h1>Ajouter un titre musical</h1>
+			 <!-- choix du type d'�l�ment -->
+	        <div style="margin:10px;">
+				<!-- select box -->
+				<p>
+				  <label for="cars">Titre musical</label>
+				  <% if(titresMusicaux!=null){ %>
+					  	<select name="titresMusicauxSelectBox"> 
+					  		<% for(TitreMusical titreMusical : titresMusicaux) {%>
+						  		<option value=<%= titreMusical.getIdCatalogue() %>><%= titreMusical.getTitre() %></option>
+						    <% } %>
+					  	</select>
+				  <%} %>
+				  <input type="submit" id='submit' value='Ajouter'>
+				</p>				
+			</div>   
+	    </form>
+	    
+	    <!-- liste des titresMusicaux associe a l'album -->
+	    <ul>
+	    	<% if(titresMusicauxAssocies!=null) {%>
+	    		<% for(TitreMusical titreMusicalAssocie : titresMusicauxAssocies) {%>
+			  		<li><%= titreMusicalAssocie.getTitre() %></li>
+			    <% } %>
+	    	<%} %>
+	    </ul>
+	    
+	    <!-- fin d'ajout -->
+	    <form method="POST">
+			<input name="action" type="hidden" value="FinAjoutTitresMusicauxAAlbum">
+			<input type="submit" id='submit' value='Terminer'>
+		</form>
+    </div>
     
     <%@include file="../footer.jsp" %>
 </body>

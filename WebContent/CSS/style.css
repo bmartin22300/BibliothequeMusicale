@@ -179,8 +179,14 @@ thead, tfoot {
 	color: #fff;
 }
 
-html {
+html, body {
 	background-color: #e6e6e6;
+	height:100%;
+}
+
+.mainContent{	
+	min-height: 100%;
+    height: auto;
 }
 
 .footer {
@@ -193,9 +199,11 @@ html {
 	color: white;
 	font-family: 'Sonsie One', cursive;
 	font-style: normal;
-	
-	position: fixed;
+
+	margin-top: 20px;
+	position: relative;
 	left: 0;
 	bottom: 0;
 	width: 100%;
+
 }

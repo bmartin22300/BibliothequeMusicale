@@ -32,3 +32,9 @@
 	<%} %>
 </div>
 
+<script>
+	$(document).ready(function() {
+	  $('a.active').removeClass('active');
+	  $('a[href="' + location.pathname + '"]').closest('li').addClass('active'); 
+	});
+</script>

@@ -7,7 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<div class="mainContent">
+	
+	</div>
 	<%@include file="../footer.jsp"%>
 </body>
 </html>

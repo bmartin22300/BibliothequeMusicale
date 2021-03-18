@@ -7,8 +7,9 @@
 </head>
 <body>
 	<%@include file="../header.jsp" %>
-	gestionPlaylist
-	
+	<div class="mainContent">
+		gestionPlaylist
+	</div>
 	<%@include file="../footer.jsp" %>
 </body>
 </html>

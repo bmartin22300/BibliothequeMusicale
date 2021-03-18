@@ -13,16 +13,18 @@
 	<% Boolean isAdministrateurClient = (Boolean)request.getAttribute("isAdministrateurClient"); %>
 	<% Boolean isAdministrateurMusical = (Boolean)request.getAttribute("isAdministrateurMusical"); %>
 	
-	<div class="cardProfile">
-	  <img src="ExternalRessource/User/profile.jpg" alt="John" style="width:100%">
-	  <h1><%= email %></h1>
-	   <% if(isAdministrateurClient != null && isAdministrateurClient==true){ %>
-	   	<p>Ce profil est un administrateur client</p>
-	   <% } %>
-	   <% if(isAdministrateurMusical!=null  && isAdministrateurMusical==true){ %>
-	   	<p>Ce profil est un administrateur musical</p>
-	   <% } %>
-	  <p><a href="ModificationProfilAdministrateur" class="button">Modifier</a></p>
+	<div class="mainContent">
+		<div class="cardProfile">
+		  <img src="ExternalRessource/User/profile.jpg" alt="John" style="width:100%">
+		  <h1><%= email %></h1>
+		   <% if(isAdministrateurClient != null && isAdministrateurClient==true){ %>
+		   	<p>Ce profil est un administrateur client</p>
+		   <% } %>
+		   <% if(isAdministrateurMusical!=null  && isAdministrateurMusical==true){ %>
+		   	<p>Ce profil est un administrateur musical</p>
+		   <% } %>
+		  <p><a href="ModificationProfilAdministrateur" class="button">Modifier</a></p>
+		</div>
 	</div>
 	
 	<%@include file="../footer.jsp" %>
