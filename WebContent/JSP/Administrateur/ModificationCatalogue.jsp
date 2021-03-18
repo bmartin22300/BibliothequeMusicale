@@ -135,8 +135,8 @@
 			        		<% for( Interprete elem : interpretes ) {%>
 								<tr id="tr">
 					            	<td><% out.print(elem.getPseudonyme()); %></td>
-					            	<td><% out.print(elem.getPrenom()); %></td>
-					            	<td><% out.print(elem.getNom()); %></td>
+					            	<td><% if(elem.getPrenom()!=null){out.print(elem.getPrenom());} %></td>
+					            	<td><% if(elem.getNom()!=null){out.print(elem.getNom());} %></td>
 					            	<td><% if(elem.getDateNaissance()!=null){out.print(elem.getDateNaissance());} %></td>
 					            	<td>
 					            		<form method="POST">

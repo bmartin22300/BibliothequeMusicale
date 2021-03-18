@@ -2,6 +2,7 @@ package Servlet;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -201,7 +202,7 @@ public class AdministrateurServlet extends HttpServlet {
 				// affection vue
 				vue = "/JSP/Utilisateur/AuthentificationAdministrateur.jsp";
 			}
-			// PARTIE COMMUNE
+			///////////////////////////////////////////////////////PARTIE COMMUNE///////////////////////////////////////////////////////
 			// requeteBDD
 			List<TitreMusical> titresMusicaux = administrateur.rechercherParNomTitre("");
 			List<Interprete> interpretes = administrateur.rechercherParPseudoInterprete("");
@@ -264,7 +265,7 @@ public class AdministrateurServlet extends HttpServlet {
 				vue = "/JSP/Administrateur/AccueilAdministrateur.jsp"; 
 			}
 			
-			//PARTIE GESTIONNAIRE MUSICAL
+			///////////////////////////////////////////////////////PARTIE GESTIONNAIRE MUSICAL///////////////////////////////////////////////////////
 			if(administrateur instanceof ProfilGestionnaireMusical) {
 				request.setAttribute("isAdministrateurClient", false);
 				request.setAttribute("isAdministrateurMusical", true);
@@ -473,15 +474,18 @@ public class AdministrateurServlet extends HttpServlet {
 
 					//cast int
 					int id=Integer.parseInt(idString);
-
+					
+					//requete BDD
+					Interprete i = administrateur.getInterprete(id);
+					
 					//envoi param vue
-					request.setAttribute("id", id);
+					request.getSession().setAttribute("i", i);
 
 					//affectation vue
 					vue = "/JSP/Administrateur/ModificationInterprete.jsp";
 				}
 			}
-			// PARTIE GESTIONNAIRE CLIENT
+			///////////////////////////////////////////////////////PARTIE GESTIONNAIRE CLIENT///////////////////////////////////////////////////////
 			else if(administrateur instanceof ProfilGestionnaireClient) {
 				request.setAttribute("isAdministrateurClient", true);
 				request.setAttribute("isAdministrateurMusical", false);
