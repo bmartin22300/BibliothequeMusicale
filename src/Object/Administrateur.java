@@ -119,7 +119,7 @@ public abstract class Administrateur implements AdministrateurInterface {
 				}
 				
 				// Ajout a la liste retournee
-				TitreMusical titreTemp = new TitreMusical(idTitre, titreTitre, dateCreationTitre, dureeTitre, nomGenre, albumTitre, null);
+				TitreMusical titreTemp = new TitreMusical(idTitre, titreTitre, dateCreationTitre, dureeTitre, nomGenre, albumTitre, interpretes);
 				titreTemp.setNbEcoute(nbEcoute);
 				titreTemp.setNbEcouteMois(nbEcouteMois);
 				titres.add(titreTemp);						
@@ -199,7 +199,7 @@ public abstract class Administrateur implements AdministrateurInterface {
 				}
 				
 				// Ajout a la liste retournee
-				TitreMusical titreTemp = new TitreMusical(idTitre, titreTitre, dateCreationTitre, dureeTitre, nomGenre, albumTitre, null);
+				TitreMusical titreTemp = new TitreMusical(idTitre, titreTitre, dateCreationTitre, dureeTitre, nomGenre, albumTitre, interpretes);
 				titreTemp.setNbEcoute(nbEcoute);
 				titreTemp.setNbEcouteMois(nbEcouteMois);
 				titres.add(titreTemp);						
@@ -738,7 +738,7 @@ public abstract class Administrateur implements AdministrateurInterface {
 				}
 				
 				// On retourne le titre
-				return new TitreMusical(idTitre, titreTitre, dateCreationTitre, dureeTitre, nomGenre, albumTitre, null);						
+				return new TitreMusical(idTitre, titreTitre, dateCreationTitre, dureeTitre, nomGenre, albumTitre, interpretes);						
 			}
 			else {
 				return null;

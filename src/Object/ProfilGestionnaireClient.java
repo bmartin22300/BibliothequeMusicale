@@ -114,4 +114,37 @@ public class ProfilGestionnaireClient extends Administrateur implements ProfilGe
 		}
 		return false;
 	}
+	
+	/*
+	 * Fonction supprimerClient, retire le Client de la BD
+	 * Renvoie true si la suppression a lieu, false sinon
+	 */
+	@Override
+	public boolean supprimerClient(Client client) {
+		// Recuperer la connexion
+		Connection connexion = DBManager.getInstance().getConnection();
+		
+		try {
+			
+			// Maj BDD
+			String request = "CALL supprimer_client(?);";
+			
+			// Prepared statement 
+			PreparedStatement preparedQuery = connexion.prepareStatement(request);
+			preparedQuery.setInt(1, client.getId());
+			
+			// Execution
+			if(preparedQuery.executeUpdate()>0) { // Succes de la suppression
+				return true;
+			}
+			else{ // La suppression echoue
+				return false;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
 }

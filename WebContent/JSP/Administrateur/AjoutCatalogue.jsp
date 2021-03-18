@@ -20,7 +20,7 @@
 	        <div style="margin:10px;">
 				<!-- select box -->
 				<p>
-				  <label for="cars">Type d'ï¿½lï¿½ment</label>
+				  <label for="cars">Type d'element</label>
 				  <select id="TypeElement" onChange="changerTypeElementsAffichesAjout()" name="TypeElement">
 				    <option value="Titre musical">Titre musical</option>
 				    <option value="Interprete">Interprete</option>
@@ -93,10 +93,14 @@
 	    	<!-- Album -->
 			<div id="formAlbum">
 				<h1>
-					<label><b>Titre</b></label>
-					<input id="titre" type="text" placeholder="Entrer le titre" name="Titre">
+					<label><b>Nom</b></label>
+					<input id="Nom" type="text" placeholder="Entrer le nom" name="Nom2">
 				</h1>
-		        
+				<h1>
+					<label><b>Annee de sortie</b></label>
+					<input id="Année de sortie" type="text" placeholder="Entrer l'annee de sortie" name="Annee de sortie">
+				</h1>
+				
 		        <p style="padding-bottom:20px;"><input type="submit" id='submit' value='Ajouter'></p>
 			</div>
 	    </form>	

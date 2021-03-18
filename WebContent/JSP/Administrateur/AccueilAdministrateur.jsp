@@ -13,14 +13,42 @@
 	<%@ page import="Object.Album" %>
 	
 	<!--  ExternalRessource/Catalogue -->
-	<div style="margin:10px;">
-		<!-- select box -->
-		<label for="pet-select">Element a rechercher</label>
-		<select name="pets" id="TypeElement" onChange="changerTypeElementsAffichesRecherche()">
-	    	<option value="Titres musicaux">Titres musicaux</option>
-		    <option value="Interpretes">Interpretes</option>
-		    <option value="Albums">Albums</option>
-		</select>
+	
+	<div  class = "rechercheTextBox">
+		<!-- formulaire -->
+		<form method="POST">
+		
+		<input name="action" type="hidden" value="RechercheAccueil">
+			
+			 <!-- choix du type d'élément -->
+			<div style="margin:10px;">
+				<!-- select box -->
+				<p>
+				<% String TypeElement = (String)request.getAttribute("TypeElement"); %>
+					<label for="cars">Type d'element</label>
+				  <select id="TypeElement" onChange="changerTypeElementsAffichesRecherche()" name="TypeElement">
+				    <option value="Titres musicaux"
+				    	<% if ((TypeElement!=null) && TypeElement.equals("Titres musicaux")) {%>
+				    		selected="selected"
+				    	<%} %>
+				    >Titres musicaux</option>
+				    <option value="Interpretes" 
+				    	<% if ((TypeElement!=null) && TypeElement.equals("Interpretes")) {%>
+				    		selected="selected"
+				    	<%} %>
+				    >Interpretes</option>
+				    <option value="Albums"
+				    	<% if ((TypeElement!=null) && TypeElement.equals("Albums")) {%>
+				    		selected="selected"
+				    	<%} %>
+				    >Albums</option>
+				  </select>
+				</p>
+			</div>
+	        <label><b>Nom</b></label>
+	        <input id="recherche" type="text" placeholder="Entrer le nom" name="recherche">
+	        <input type="submit" id='submit' value='Rechercher'>
+	    </form>
 	</div>
 	
 	<% List<TitreMusical> titresMusicaux = (List<TitreMusical>)request.getAttribute("titresMusicaux"); %>
@@ -59,7 +87,7 @@
        		<% for( Interprete elem : interpretes ) {%>
 				<div class="card">	
 					<!-- ExternalRessource/Catalogue element -->
-					<img src="ExternalRessource/Catalogue/Image/interprete3.png" alt="Denim Jeans" style="width:100%">
+					<img src="ExternalRessource/Catalogue/Image/interprete.png" alt="Denim Jeans" style="width:100%">
 				  <%if(elem.getPseudonyme()!=null){ %><h1><%= elem.getPseudonyme() %></h1><%} %>
 				  <%if(elem.getPrenom()!=null){ %><p class="price"><%= elem.getPrenom() %></p><%} %>
 				  <%if(elem.getNom()!=null){ %><p class="price"><%= elem.getNom() %></p><%} %>
@@ -70,8 +98,19 @@
 	</div>
 	
 	<!--  albums -->
-	<div id="catalogueAlbums">	
-		<%= albums %>
+	<div class="wrapper" id="catalogueAlbums">	
+		<% if (albums!=null) {%>
+       		<% for( Album elem : albums ) {%>
+				<div class="card">	
+					<!-- ExternalRessource/Catalogue element -->
+					<img src="ExternalRessource/Catalogue/Image/album.png" alt="Denim Jeans" style="width:100%">
+				  <%if(elem.getNom()!=null){ %><h1><%= elem.getNom() %></h1><%} %>
+				  <%if(elem.getDateSortie()!=0){ %><p class="price"><%= elem.getDateSortie() %></p><%} %>
+				  <%if(elem.getDuree()!=0){ %><p class="price"><%= elem.getDuree() %></p><%} %>
+				  <%if(elem.getDateSortie()!=0){ %><p><button><%= elem.getDateSortie() %></button></p><%} %>
+				</div>
+			<% } %>
+		<% } %>
 	</div>
 	
 </body>
