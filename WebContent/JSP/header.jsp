@@ -12,7 +12,6 @@
 			<a class="aref <% if(navBarActive!=null){if(navBarActive.equals("AjoutPlaylist")){out.print("active");}}%>" href=AjoutPlaylist>Créer une playlist</a>
 			<a class="aref <% if(navBarActive!=null){if(navBarActive.equals("ProfilClient")){out.print("active");}}%>" href=ProfilClient>Modifier mon profil</a>
 			<a class="aref <% if(navBarActive!=null){if(navBarActive.equals("Accueil")){out.print("active");}}%>" href=Accueil>Déconnexion</a>	
-			<a class="aref <% if(navBarActive!=null){if(navBarActive.equals("Sandbox")){out.print("active");}}%>" href=Sandbox>Sandbox</a>
 		</div>
 	<% }else{ %>
 		<!-- administrateur -->

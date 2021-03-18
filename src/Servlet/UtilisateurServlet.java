@@ -47,7 +47,6 @@ public class UtilisateurServlet extends HttpServlet {//utilisateurServlet
 		
 		// requeteBDD
 		List<TitreMusical> titresMusicaux = utilisateur.topTitresEcoutes();
-		System.out.println(titresMusicaux);
 
 		// envoie de parametres a la vue
 		request.setAttribute("titresMusicaux", titresMusicaux);
