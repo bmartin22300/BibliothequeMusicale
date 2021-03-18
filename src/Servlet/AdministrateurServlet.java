@@ -29,15 +29,15 @@ public class AdministrateurServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String servletPath = request.getServletPath();// rï¿½cupï¿½ration URL
+		String servletPath = request.getServletPath();// recuperation URL
 
-		// affectation paramï¿½tres ï¿½ la vue
+		// affectation parametres e la vue
 		request.setAttribute("isClient", false);
 
-		// section administrateur non connectï¿½
+		// section administrateur non connecte
 		if (servletPath.equals("/AuthentificationAdministrateur")) {
 			request.setAttribute("nav-bar-active", "Connexion");
-			// affectation paramï¿½tres ï¿½ la vue
+			// affectation parametres e la vue
 			request.setAttribute("isAdministrateur", false);
 			request.setAttribute("isErrorLogin", false);
 			request.setAttribute("notLogged", false);
@@ -46,15 +46,15 @@ public class AdministrateurServlet extends HttpServlet {
 			vue = "/JSP/Utilisateur/AuthentificationAdministrateur.jsp";
 		} else if (servletPath.equals("/InscriptionAdministrateur")) {
 			request.setAttribute("nav-bar-active", "Connexion");
-			// affectation paramï¿½tres ï¿½ la vue
+			// affectation parametres e la vue
 			request.setAttribute("isAdministrateur", false);
 			// affection vue
 			vue = "/JSP/Utilisateur/InscriptionAdministrateur.jsp";
 		}
 		/////////////////////////////////////////////////////// section Administrateur //////////////////////////// ////////////////////////////
-		else if (administrateur == null) {// verification que l'Administrateur est connectï¿½
+		else if (administrateur == null) {// verification que l'Administrateur est connecte
 			request.setAttribute("nav-bar-active", "Connexion");
-			// affectation paramï¿½tres ï¿½ la vue
+			// affectation parametres e la vue
 			request.setAttribute("isAdministrateur", false);
 			request.setAttribute("isErrorLogin", false);
 			request.setAttribute("notLogged", true);
@@ -62,7 +62,7 @@ public class AdministrateurServlet extends HttpServlet {
 			// affection vue
 			vue = "/JSP/Utilisateur/AuthentificationAdministrateur.jsp";
 		} else {
-			// affectation paramï¿½tres ï¿½ la vue
+			// affectation parametres e la vue
 			request.setAttribute("isAdministrateur", true);
 			request.setAttribute("isAdministrateurMusical", administrateur instanceof ProfilGestionnaireMusical);
 			request.setAttribute("isAdministrateurClient", administrateur instanceof ProfilGestionnaireClient);
@@ -111,22 +111,9 @@ public class AdministrateurServlet extends HttpServlet {
 			} else if (servletPath.equals("/ModificationCatalogue")) {
 				request.setAttribute("nav-bar-active", "ModificationCatalogue");
 				vue = "/JSP/Administrateur/ModificationCatalogue.jsp";
-			} else if (servletPath.equals("/ModificationTitre")) {
-				request.setAttribute("nav-bar-active", "ModificationCatalogue");
-				// section Administrateur musical
-				// todo vï¿½rif identitï¿½
-
-				// rï¿½cupï¿½ration de paramï¿½tre de la vue
-				String titre = request.getParameter("titre");
-
-				// envoie de parametres a la vue
-				request.setAttribute("titre", titre);
-
-				vue = "/JSP/Administrateur/ModificationCatalogue.jsp";
 			} else if (servletPath.equals("/AjoutCatalogue")) {
 				request.setAttribute("nav-bar-active", "AjoutCatalogue");
-				// rï¿½cupï¿½ration de paramï¿½tre de la vue
-				String TypeElement = request.getParameter("TypeElement");
+				// recuperation de parametre de la vue
 
 				vue = "/JSP/Administrateur/AjoutCatalogue.jsp";
 			}else if(servletPath.equals("/ModificationProfilAdministrateur")){
@@ -150,16 +137,16 @@ public class AdministrateurServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String action = request.getParameter("action");// de quel form je viens ?
 
-		// affectation paramï¿½tres ï¿½ la vue
+		// affectation parametres e la vue
 		request.setAttribute("isClient", false);
 
-		// rï¿½cupï¿½ration des paramï¿½tres du form
+		// recuperation des parametres du form
 		String mail = request.getParameter("mail");
 		String motDePasse = request.getParameter("password");
 		String typeAdmin = request.getParameter("typeAdmin");
 
 		if (action.equals("AuthentificationAdministrateur")) {
-			// requï¿½te ï¿½ la BDD
+			// requete e la BDD
 			administrateur = utilisateur.authentificationAdmin(mail, motDePasse);
 
 			if (administrateur != null) {
@@ -182,7 +169,7 @@ public class AdministrateurServlet extends HttpServlet {
 				vue = "/JSP/Administrateur/AccueilAdministrateur.jsp";
 			} else {// echec
 				request.setAttribute("nav-bar-active", "Connexion");
-				// affectation paramï¿½tres ï¿½ la vue
+				// affectation parametres e la vue
 				request.setAttribute("isAdministrateur", false);
 				request.setAttribute("isErrorLogin", true);
 				request.setAttribute("notLogged", false);
@@ -192,9 +179,9 @@ public class AdministrateurServlet extends HttpServlet {
 			}
 		} else {
 			///////////////////////////////////////////////////////partie ADMIN///////////////////////////////////////////////////////
-			if (administrateur == null) {// verification que l'Administrateur est connectï¿½
+			if (administrateur == null) {// verification que l'Administrateur est connecte
 				request.setAttribute("nav-bar-active", "Connexion");
-				// affectation paramï¿½tres ï¿½ la vue
+				// affectation parametres e la vue
 				request.setAttribute("isAdministrateur", false);
 				request.setAttribute("isErrorLogin", false);
 				request.setAttribute("notLogged", true);
@@ -214,18 +201,18 @@ public class AdministrateurServlet extends HttpServlet {
 			request.setAttribute("interpretes", interpretes);
 			request.setAttribute("albums", albums);
 
-			// affectation paramï¿½tres ï¿½ la vue
+			// affectation parametres e la vue
 			request.setAttribute("isAdministrateur", true);
 			request.setAttribute("isAdministrateurClient", false);
 			request.setAttribute("isAdministrateurMusical", false);
 
 			if (action.equals("ModificationProfilAdministrateur")) {
 				request.setAttribute("nav-bar-active", "ProfilAdministrateur");
-				// affectation paramï¿½tres ï¿½ la vue
+				// affectation parametres e la vue
 				request.setAttribute("password", "");
 				request.setAttribute("email", mail);
 
-				// mise ï¿½ jour BDD
+				// mise e jour BDD
 				Administrateur administrateurModifie = administrateur.modifierInformations(mail, motDePasse);
 				if (administrateurModifie != null) {
 					this.administrateur = administrateurModifie;
@@ -272,7 +259,7 @@ public class AdministrateurServlet extends HttpServlet {
 				
 				if (action.equals("RechercheTitre")) {
 					request.setAttribute("nav-bar-active", "ModificationCatalogue");
-					// rï¿½cup param vue
+					// recup param vue
 					String typeElement = request.getParameter("TypeElement");
 					String recherche = request.getParameter("recherche");
 
@@ -295,11 +282,11 @@ public class AdministrateurServlet extends HttpServlet {
 
 				} else if (action.equals("AjouterElement")) {
 					request.setAttribute("nav-bar-active", "AjoutCatalogue");
-					// rï¿½cup param vue
+					// recup param vue
 					String typeElement = request.getParameter("TypeElement");
 
 					if (typeElement.equals("Titre musical")) {
-						// rï¿½cup param vue
+						// recup param vue
 						String Titre = request.getParameter("Titre");
 						String GenreString = request.getParameter("Genre");
 						Genre styleMusique = Genre.valueOf(GenreString);
@@ -324,7 +311,7 @@ public class AdministrateurServlet extends HttpServlet {
 						//attribution vue
 						vue = "/JSP/Administrateur/AjoutInterpretesATitre.jsp";
 					}else if(typeElement.equals("Interprete")) {
-						//rï¿½cup param vue
+						//recup param vue
 						String Pseudo = request.getParameter("Pseudo");
 						String Prenom = request.getParameter("Prenom");
 						String Nom = request.getParameter("Nom");
@@ -341,7 +328,7 @@ public class AdministrateurServlet extends HttpServlet {
 						//attribution vue
 						vue = "/JSP/Administrateur/AjoutCatalogue.jsp"; 
 					}else if(typeElement.equals("Album")) {
-						//rï¿½cup param vue
+						//recup param vue
 						String Nom = request.getParameter("Nom2");
 						String AnneeSortieString = request.getParameter("Annee de sortie");
 						String DureeString = request.getParameter("Duree");
@@ -368,7 +355,7 @@ public class AdministrateurServlet extends HttpServlet {
 						vue = "/JSP/Administrateur/AjoutTitresAAlbum.jsp"; 
 					}
 				} else if (action.equals("SuppressionTitre")) {
-					// rï¿½cup param vue
+					// recup param vue
 					String idString = request.getParameter("idString");
 					int id = Integer.parseInt(idString);
 					TitreMusical titre = administrateur.getTitreMusical(id);
@@ -381,7 +368,7 @@ public class AdministrateurServlet extends HttpServlet {
 					request.setAttribute("titresMusicaux", titresMusicaux);
 					request.setAttribute("TypeElement", "Titres musicaux");
 				}else if(action.equals("SuppressionInterprete")) {
-					//rï¿½cup param vue
+					//recup param vue
 					String idString = request.getParameter("idString");
 					int id = Integer.parseInt(idString);
 					Interprete i = administrateur.getInterprete(id);
@@ -394,7 +381,7 @@ public class AdministrateurServlet extends HttpServlet {
 					request.setAttribute("interpretes", interpretes);
 					request.setAttribute("TypeElement", "Interpretes");
 				}else if(action.equals("SuppressionAlbum")) {
-					// rï¿½cup param vue
+					// recup param vue
 					String idString = request.getParameter("idString");
 					int id = Integer.parseInt(idString);
 					Album album = administrateur.getAlbum(id);
@@ -408,14 +395,14 @@ public class AdministrateurServlet extends HttpServlet {
 					request.setAttribute("TypeElement", "Albums");
 				}else if(action.equals("AjoutInterpretesATitre")) {
 					request.setAttribute("nav-bar-active", "AjoutCatalogue");
-					//rï¿½cup param vue
+					//recup param vue
 					String interpreteSelectBox = request.getParameter("interpreteSelectBox");
 					TitreMusical titre = (TitreMusical) request.getSession().getAttribute("titre");
 
 					int id = Integer.parseInt(interpreteSelectBox);
 
 					Interprete interprete = null;
-					//todo ajouter mï¿½thode rechercherInterpreteParId
+					//todo ajouter methode rechercherInterpreteParId
 					for(Interprete i : interpretes){
 						if(i.getId()==id) {
 							interprete=i;
@@ -433,14 +420,14 @@ public class AdministrateurServlet extends HttpServlet {
 					vue = "/JSP/Administrateur/AjoutInterpretesATitre.jsp"; 
 				}else if(action.equals("AjoutTitresAAlbum")) {
 					request.setAttribute("nav-bar-active", "AjoutCatalogue");
-					//rï¿½cup param vue
+					//recup param vue
 					String titresMusicauxSelectBox = request.getParameter("titresMusicauxSelectBox");
 					Album album = (Album) request.getSession().getAttribute("album");
 
 					int id = Integer.parseInt(titresMusicauxSelectBox);
 
 					TitreMusical titreMusical = null;
-					//todo ajouter mï¿½thode rechercherInterpreteParId
+					//todo ajouter methode rechercherInterpreteParId
 					for(TitreMusical t : titresMusicaux){
 						if(t.getIdCatalogue()==id) {
 							titreMusical=t;
@@ -467,9 +454,17 @@ public class AdministrateurServlet extends HttpServlet {
 				}else if(action.equals("ModificationProfilAdministrateur")){
 					request.setAttribute("nav-bar-active", "ProfilAdministrateur");
 					vue = "/JSP/Administrateur/ModificationProfilAdministrateur.jsp";
-				}else if(action.equals("ModificationInterprete")) {
+				}
+				
+				
+				
+				//modififcation des elements du catalogue
+				
+				//interprete
+				
+				else if(action.equals("ModificationInterprete")) {
 					request.setAttribute("nav-bar-active", "ModificationCatalogue");
-					//r�cup param vue
+					//recup param vue
 					String idString = request.getParameter("idString");
 
 					//cast int
@@ -484,7 +479,7 @@ public class AdministrateurServlet extends HttpServlet {
 					//affectation vue
 					vue = "/JSP/Administrateur/ModificationInterprete.jsp";
 				}else if(action.equals("ModificationInterpreteFin")) {
-					//r�cup param vue
+					//recup param vue
 					String Pseudo = request.getParameter("Pseudo");
 					String Prenom = request.getParameter("Prenom");
 					String Nom = request.getParameter("Nom");
@@ -504,12 +499,163 @@ public class AdministrateurServlet extends HttpServlet {
 					interpretes=administrateur.rechercherParPseudoInterprete("");
 					
 					//envoi param vue
-					request.getSession().setAttribute("i", i);
 					request.setAttribute("TypeElement","Interpretes");
 					request.setAttribute("interpretes",interpretes);
 					
 					//affectation vue
 					vue = "/JSP/Administrateur/ModificationCatalogue.jsp";
+				}
+				
+				//titre musical
+				
+				else if(action.equals("ModificationTitreMusical")) {
+					//recup param vue
+					String idString = request.getParameter("idString");
+
+					//cast int
+					int id=Integer.parseInt(idString);
+					
+					//requete BDD
+					TitreMusical t = administrateur.getTitreMusical(id);
+					
+					//envoi param vue
+					request.getSession().setAttribute("t", t);
+					request.setAttribute("nav-bar-active", "ModificationCatalogue");
+
+					//affectation vue
+					vue = "/JSP/Administrateur/ModificationTitreMusical.jsp";
+				}else if(action.equals("ModificationTitreMusicalFin")) {
+					//recup param vue
+					String Titre = request.getParameter("Titre");
+					String GenreString = request.getParameter("Genre");
+					String AnneeCreationString = request.getParameter("Annee de creation");
+					String DureeString = request.getParameter("Duree");
+					String idString = request.getParameter("id");
+					
+					//cast 
+					int id=Integer.parseInt(idString); 
+					Genre genre = null;
+					if (GenreString != "") {
+						genre = Genre.valueOf(GenreString); // Conversion genre
+					}
+					int AnneeCreation = 0;
+					if (AnneeCreationString != "") {
+						AnneeCreation = Integer.parseInt(AnneeCreationString);  
+					}
+					int Duree = 0;
+					if (DureeString != "") {
+						Duree = Integer.parseInt(DureeString);  
+					}
+					
+					//requete BDD
+					TitreMusical t = administrateur.getTitreMusical(id);
+					((ProfilGestionnaireMusical) administrateur).modifierTitre(t, Titre, AnneeCreation, Duree, genre);
+					titresMusicaux=administrateur.rechercherParNomTitre("");
+					
+					//envoi param vue
+					request.getSession().setAttribute("titresMusicaux",titresMusicaux);
+					request.getSession().setAttribute("interpretes",interpretes);
+					request.getSession().setAttribute("interpretesAssocies",t.getInterprete());
+					request.getSession().setAttribute("t",t);
+					
+					//affectation vue
+					vue = "/JSP/Administrateur/ModificationTitreMusicalInterpretes.jsp";
+				}else if(action.equals("ModificationTitreMusicalInterpretesAjout")) {
+					request.setAttribute("nav-bar-active", "AjoutCatalogue");
+					//recup param vue
+					String interpreteSelectBox = request.getParameter("interpreteSelectBox");
+					TitreMusical titre = (TitreMusical) request.getSession().getAttribute("titre");
+					
+					int id = Integer.parseInt(interpreteSelectBox);
+
+					Interprete i = administrateur.getInterprete(id);
+
+					//envoi param vue
+					request.setAttribute("titre", titre);
+
+					//requete BDD
+					((ProfilGestionnaireMusical) administrateur).ajouterDiscographie(titre, i);
+					request.getSession().setAttribute("interpretesAssocies", titre.getInterpretes());
+
+					//affectation vue
+					vue = "/JSP/Administrateur/ModificationTitreMusicalInterpretes.jsp"; 
+				}else if(action.equals("ModificationTitreMusicalInterpretesFin")){
+					//envoi param vue
+					request.setAttribute("TypeElement","Titres musicaux");
+					
+					//affectation vue
+					vue = "/JSP/Administrateur/ModificationCatalogue.jsp"; 
+				}
+				
+				//albums
+				
+				else if(action.equals("ModificationAlbum")) {
+					//recup param vue
+					String idString = request.getParameter("idString");
+
+					//cast int
+					int id=Integer.parseInt(idString);
+					
+					//requete BDD
+					Album a = administrateur.getAlbum(id);
+					
+					//envoi param vue
+					request.getSession().setAttribute("a", a);
+					request.setAttribute("nav-bar-active", "ModificationCatalogue");
+
+					//affectation vue
+					vue = "/JSP/Administrateur/ModificationAlbum.jsp";
+				}else if(action.equals("ModificationAlbumFin")) {
+					//recup param vue
+					String Titre = request.getParameter("Titre");
+					String AnneeCreationString = request.getParameter("Annee de creation");
+					String idString = request.getParameter("id");
+					
+					//cast 
+					int id=Integer.parseInt(idString); 
+					int AnneeCreation = 0;
+					if (AnneeCreationString != "") {
+						AnneeCreation = Integer.parseInt(AnneeCreationString);  
+					}
+					
+					//requete BDD
+					Album a = administrateur.getAlbum(id);
+					((ProfilGestionnaireMusical) administrateur).modifierAlbum(a, Titre, AnneeCreation);
+					albums=administrateur.rechercherParNomAlbum("");
+					
+					//envoi param vue
+					request.getSession().setAttribute("albums",albums);
+					request.getSession().setAttribute("titresMusicaux",titresMusicaux);
+					request.getSession().setAttribute("titresMusicauxAssocies", a.getTitres());
+					request.getSession().setAttribute("a",a);
+					
+					//affectation vue
+					vue = "/JSP/Administrateur/ModificationAlbumTitres.jsp";
+				}else if(action.equals("ModificationAlbumTitresAjout")) {
+					request.setAttribute("nav-bar-active", "AjoutCatalogue");
+					//recup param vue
+					String interpreteSelectBox = request.getParameter("interpreteSelectBox");
+					Album album = (Album) request.getSession().getAttribute("album");
+					
+					int id = Integer.parseInt(interpreteSelectBox);
+
+					TitreMusical t = administrateur.getTitreMusical(id);
+
+					//envoi param vue
+					request.setAttribute("Album", album);
+
+					//requete BDD
+					((ProfilGestionnaireMusical) administrateur).ajoutTitreAlbum(t, album);
+					request.getSession().setAttribute("titresMusicauxAssocies", album.getTitres());
+
+					//affectation vue
+					vue = "/JSP/Administrateur/ModificationAlbumTitres.jsp"; 
+				}else if(action.equals("ModificationAlbumTitresFin")){
+					//envoi param vue
+					request.setAttribute("TypeElement","Albums");
+					
+					//affectation vue
+					vue = "/JSP/Administrateur/ModificationCatalogue.jsp"; 
 				}
 			}
 			///////////////////////////////////////////////////////PARTIE GESTIONNAIRE CLIENT///////////////////////////////////////////////////////
@@ -534,7 +680,7 @@ public class AdministrateurServlet extends HttpServlet {
 					vue = "/JSP/Administrateur/ModificationProfil.jsp";
 				}else if(action.equals("SuppressionClient")) {
 					request.setAttribute("nav-bar-active", "ModificationProfil");
-					// rï¿½cup param vue
+					// recup param vue
 					String idString = request.getParameter("idString");
 					int id = Integer.parseInt(idString);
 					Client client = administrateur.getClient(id);

@@ -98,8 +98,8 @@
 					            		}%></td>
 					            	<td>
 					            		<form method="POST">
-					            			<input name="action" type="hidden" value="ModificationTitre">
-											<input name="idCatalogue" type="hidden" value=<%elem.getIdCatalogue();%>>
+					            			<input name="action" type="hidden" value="ModificationTitreMusical">
+											<input name="idString" type="hidden" value=<%= elem.getIdCatalogue()%>>
 											<input type="submit" id='submit' value='Modifier'>
 										</form>
 					            	</td>
@@ -191,7 +191,7 @@
 					            	<td>
 					            		<form method="POST">
 					            			<input name="action" type="hidden" value="ModificationAlbum">
-											<input name="idString" type="hidden" value=<%elem.getIdCatalogue();%>>
+											<input name="idString" type="hidden" value=<% out.print(elem.getIdCatalogue());%>>
 											<input type="submit" id='submit' value='Modifier'>
 										</form>
 					            	</td>

@@ -102,7 +102,7 @@
 						<input id="Année de sortie" type="text" placeholder="Entrer l'annee de sortie" name="Annee de sortie">
 					</h1>
 					
-			        <p style="padding-bottom:20px;"><input type="submit" id='submit' value='Ajouter'></p>
+			        <p style="padding-bottom:20px;"><input type="submit" id='submit' value='Suivant'></p>
 				</div>
 		    </form>	
 	    </div>

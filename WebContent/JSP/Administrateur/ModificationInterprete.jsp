@@ -27,28 +27,29 @@
 				<div>
 					<h1>
 						<label><b>Pseudo</b></label>
-						<input id="titre" type="text" value=<%= i.getPseudonyme() %> name="Pseudo">
+						<input id="titre" type="text" name="Pseudo"
+						<% if(i.getPseudonyme()==null){out.print("placeholder=\"Entrer le pseudonyme\"");}else{out.print("value=\""+i.getPseudonyme()+"\"");}%>>
 					</h1>
 			        
 			        <p>
 			        	<label><b>Prenom</b></label>
 			        	<input id="titre" type="text" name="Prenom"
-			        	<% if(i.getPrenom()==null){out.print("placeholder=\"Entrer le prenom\"");}else{out.print("value="+i.getPrenom());}%>>
+			        	<% if(i.getPrenom()==null){out.print("placeholder=\"Entrer le prenom\"");}else{out.print("value=\""+i.getPrenom()+"\"");}%>>
 			        </p>
 			        
 			        <p>
 			        	<label><b>Nom</b></label>
 			        	<input id="titre" type="text" name="Nom"
-			        	<% if(i.getNom()==null){out.print("placeholder=\"Entrer le nom\"");}else{out.print("value="+i.getNom());}%>>
+			        	<% if(i.getNom()==null){out.print("placeholder=\"Entrer le nom\"");}else{out.print("value=\""+i.getNom()+"\"");}%>>
 			        </p>
 			        		        
 			        <p>
 			       		<label><b>Date de naissance</b></label>
 			       		<input id="titre" type="text" name="Date de naissance"
-			       		<% if(i.getDateNaissance()==null){out.print("placeholder=\"YYYY-MM-DD\"");}else{out.print("value="+i.getDateNaissance());}%>>
+			       		<% if(i.getDateNaissance()==null){out.print("placeholder=\"YYYY-MM-DD\"");}else{out.print("value=\""+i.getDateNaissance()+"\"");}%>>
 			        </p>
 			
-			        <p style="padding-bottom:20px;"><input type="submit" id='submit' value='Suivant'></p>
+			        <p style="padding-bottom:20px;"><input class="button" type="submit" id='submit' value='Terminer'></p>
 				</div>    
 			</form>
 		</div>
