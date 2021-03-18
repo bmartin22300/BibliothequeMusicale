@@ -30,14 +30,14 @@ public class AdministrateurServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String servletPath = request.getServletPath();// recuperation URL
-
+		
 		// affectation parametres e la vue
 		request.setAttribute("isClient", false);
 
 		// section administrateur non connecte
 		if (servletPath.equals("/AuthentificationAdministrateur")) {
 			request.setAttribute("nav-bar-active", "Connexion");
-			// affectation parametres e la vue
+			// affectation parametres a la vue
 			request.setAttribute("isAdministrateur", false);
 			request.setAttribute("isErrorLogin", false);
 			request.setAttribute("notLogged", false);
@@ -68,19 +68,19 @@ public class AdministrateurServlet extends HttpServlet {
 			request.setAttribute("isAdministrateurClient", administrateur instanceof ProfilGestionnaireClient);
 			request.setAttribute("password", administrateur.getPassword());
 			request.setAttribute("email", administrateur.getMail());
-
-			// requeteBDD
-			List<TitreMusical> titresMusicaux = administrateur.rechercherParNomTitre("");
-			List<Interprete> interpretes = administrateur.rechercherParPseudoInterprete("");
-			List<Album> albums = administrateur.rechercherParNomAlbum("");
-
-			// envoie de parametres a la vue
-			request.setAttribute("titresMusicaux", titresMusicaux);
-			request.setAttribute("interpretes", interpretes);
-			request.setAttribute("albums", albums);
-
+			
 			if (servletPath.equals("/AccueilAdministrateur")) {
 				request.setAttribute("nav-bar-active", "AccueilAdministrateur");
+				// requeteBDD
+				List<TitreMusical> titresMusicaux = administrateur.rechercherParNomTitre("");
+				List<Interprete> interpretes = administrateur.rechercherParPseudoInterprete("");
+				List<Album> albums = administrateur.rechercherParNomAlbum("");
+
+				// envoie de parametres a la vue
+				request.setAttribute("titresMusicaux", titresMusicaux);
+				request.setAttribute("interpretes", interpretes);
+				request.setAttribute("albums", albums);
+				
 				// requeteBDD
 				titresMusicaux = administrateur.rechercherParNomTitre("");
 				interpretes = administrateur.rechercherParPseudoInterprete("");
@@ -143,7 +143,6 @@ public class AdministrateurServlet extends HttpServlet {
 		// recuperation des parametres du form
 		String mail = request.getParameter("mail");
 		String motDePasse = request.getParameter("password");
-		String typeAdmin = request.getParameter("typeAdmin");
 
 		if (action.equals("AuthentificationAdministrateur")) {
 			// requete e la BDD
@@ -155,7 +154,6 @@ public class AdministrateurServlet extends HttpServlet {
 				List<TitreMusical> titresMusicaux = administrateur.rechercherParNomTitre("");
 				List<Interprete> interpretes = administrateur.rechercherParPseudoInterprete("");
 				List<Album> albums = administrateur.rechercherParNomAlbum("");
-				List<Client> clients = administrateur.rechercherParMailClient("");
 
 				// envoie de parametres a la vue
 				request.setAttribute("titresMusicaux", titresMusicaux);
