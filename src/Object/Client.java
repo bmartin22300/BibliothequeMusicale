@@ -410,7 +410,7 @@ public class Client implements ClientInterface {
 			// Execution
 			if(preparedQuery.executeUpdate()>0) { // Succes de la modification
 				// Maj Objet
-				this.setPassword(mail);
+				this.setMail(mail);
 				this.setPassword(password);
 				this.setCivilite(civilite);
 				this.setNom(nom);
