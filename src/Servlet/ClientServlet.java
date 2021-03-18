@@ -90,6 +90,10 @@ public class ClientServlet extends HttpServlet {//clientServlet
     		//affection vue
     		if(servletPath.equals("/GestionPlaylist")) {
     			request.setAttribute("nav-bar-active", "GestionPlaylist");
+
+				request.setAttribute("playlists", client.getPlaylists());
+
+				// attribution vue
             	vue = "/JSP/Client/GestionPlaylist.jsp";
             }else if(servletPath.equals("/AjoutPlaylist")) {
             	request.setAttribute("nav-bar-active", "AjoutPlaylist");
@@ -490,6 +494,23 @@ public class ClientServlet extends HttpServlet {//clientServlet
 				request.setAttribute("titresMusicauxAssocies", playlist.getTitresMusicaux());
 				//affectation vue
 				vue = "/JSP/Client/AjoutTitresAPlaylist.jsp"; 
+			}else if(action.equals("SuppressionPlaylist")) {
+				// rï¿½cup param vue
+				String idString = request.getParameter("idString");
+				int id = Integer.parseInt(idString);
+				
+				Playlist playlist = null;
+				for(Playlist elem : client.getPlaylists()) {
+					if(elem.getIdPlaylist()==id){
+						playlist = elem;
+					}
+				}
+				if(playlist!=null) {
+					client.supprimerPlaylist(playlist);
+				}
+
+				// envoie de parametres a la vue
+				request.setAttribute("playlists", client.getPlaylists());
 			}
 		}
 		//affichage de la vue

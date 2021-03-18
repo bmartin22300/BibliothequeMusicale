@@ -257,7 +257,6 @@ public class Client implements ClientInterface {
 	public boolean supprimerPlaylist(Playlist playlist) {
 		// Recuperer la connexion
 		Connection connexion = DBManager.getInstance().getConnection();
-		
 		try {
 			
 			// Maj BDD
