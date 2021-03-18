@@ -4,8 +4,12 @@
 
 /* Add a black background color to the top navigation */
 .topnav {
-  background-color: #333;
+  background-color: #00003d;
   overflow: hidden;
+  border: 3px solid #8B0000;
+  border-radius: 10px;
+  font-family: 'Sonsie One', cursive;
+  font-style: normal;
 }
 
 /* Style the links inside the navigation bar */
@@ -24,14 +28,11 @@
   color: black;
 }
 
-/* Add a color to the active/current link */
+/* Add a color to the/current link */
 .topnav a.active {
-  background-color: #4CAF50;
+  background-color: rgb(0, 128, 0);
   color: white;
 }
-
-
-
 
 /* catalogue element */
 .card {
@@ -39,11 +40,16 @@
   max-width: 300px;
   margin: auto;
   text-align: center;
-  font-family: arial;
+  background-color: #c0c0c0;
+  overflow: hidden;
+  border: 1px solid #8B0000;
+  border-radius: 10px;
+  font-family: 'Sonsie One', cursive;
+  font-style: normal;
 }
 
 .price {
-  color: grey;
+  color: #00003d;
   font-size: 22px;
 }
 
@@ -52,21 +58,18 @@
   outline: 0;
   padding: 12px;
   color: white;
-  background-color: #000;
+  background-color: #00003d;
   text-align: center;
   cursor: pointer;
   width: 100%;
   font-size: 18px;
+  border: 1px solid #8B0000;
 }
 
 .card button:hover {
-  opacity: 0.7;
+  color:#fdcc0d;
+  opacity: 0.8;
 }
-
-
-
-
-
 
 /* catalogue */
 .wrapper {
@@ -77,12 +80,20 @@
   padding-top: 10px;
 }
 
-
-
-
-
-
-
+/* Champ de recherche */
+.rechercheTextBox {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  text-align: center;
+  background-color: #c0c0c0;
+  border: 1px solid #8B0000;
+  font-family: 'Sonsie One', cursive;
+  font-style: normal;
+  padding: 12px;
+  margin-bottom : 10px;
+  margin-top : 10px;
+  border-radius: 15px;
+  align-items: center;
+}
 
 
 
@@ -92,15 +103,22 @@
 
 /* profile page */
 .cardProfile {
-	padding-top:10px;
+  padding-top:10px;
+  margin-top:20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 300px;
-  margin: auto;
+  max-width: 500px;
   text-align: center;
+  background-color: #c0c0c0;
+  border: 2px solid #8B0000;
+  border-radius: 10px;
+  font-family: 'Sonsie One', cursive;
+  font-style: normal;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 .title {
-  color: grey;
+  color: #00003d;
   font-size: 18px;
 }
 
@@ -111,44 +129,74 @@ a {
 }
 
 button:hover, a:hover {
-  opacity: 0.7;
+  color:#fdcc0d;
+  opacity: 0.8;
 }
 
 .button {
-  border: none;
   outline: 0;
   display: inline-block;
   padding-top: 8px;
   padding-bottom: 8px;
   color: white;
-  background-color: #000;
+  background-color: #00003d;
   text-align: center;
   cursor: pointer;
-  width: 100%;
+  width: 40%;
   font-size: 18px;
+  font-family: 'Sonsie One', cursive;
+  font-style: normal;
+  border: 2px solid #8B0000;
+  border-radius: 10px;
 }
 
 .button:hover, a:hover {
-  opacity: 0.7;
+  color:#fdcc0d;
+  opacity: 0.8;
 }
 
+/* Connexion */
+
+.connexion {
+  padding-top:10px;
+  margin-top:20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 60%;
+  text-align: center;
+  background-color: #c0c0c0;
+  border: 2px solid #8B0000;
+  border-radius: 10px;
+  font-family: 'Sonsie One', cursive;
+  font-style: normal;
+  margin-left:auto;
+  margin-right:auto;
+}
 
 
 
 /* tableau resultat de recherche */
 table,
 td {
-    border: 1px solid #333;
-    text-align:center
+    border: 1px solid #8B0000;
+    text-align:center; 
+  	background-color: #c0c0c0;
+  	font-family: 'Sonsie One', cursive;
+  	font-style: normal;
+  	width:auto;
+  	margin:auto;
+  	
 }
 
 
 thead,
 tfoot {
-    background-color: #333;
+    background-color: #00003d;
     color: #fff;
 }
 
+html {
+  background-color: #e6e6e6;
+}
 
 
 

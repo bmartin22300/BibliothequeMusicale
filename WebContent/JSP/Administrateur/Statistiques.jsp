@@ -12,24 +12,28 @@
 	<%@ page import="Object.TitreMusical" %>
 	<% List<Client> clients = (List<Client>)request.getAttribute("clients"); %>
 	<% List<TitreMusical> titres = (List<TitreMusical>)request.getAttribute("titres"); %>
-	<!-- formulaire -->
-	<form method="POST">
 	
-	<input name="action" type="hidden" value="RechercheTitre">
+	<div  class = "rechercheTextBox">
+		<!-- formulaire -->
+		<form method="POST">
+		
+		<input name="action" type="hidden" value="RechercheTitre">
+		
+		<h3>Statistiques</h3>
+			 <!-- choix du type d'élément -->
+	        <div style="margin:10px;">
+				<!-- select box -->
+				<p>
+				  <label for="cars">Type d'element</label>
+				  <select id="TypeElement" onChange="changerTypeElementsStatistiques()" name="TypeElement">
+				    <option value="Clients">Clients </option>
+				    <option value="VuesTitres">Vues titres </option>
+				  </select>
+				</p>				
+			</div>   
+	    </form>
+	</div>
 	
-	<h1>Statistiques</h1>
-		 <!-- choix du type d'élément -->
-        <div style="margin:10px;">
-			<!-- select box -->
-			<p>
-			  <label for="cars">Type d'element</label>
-			  <select id="TypeElement" onChange="changerTypeElementsStatistiques()" name="TypeElement">
-			    <option value="Clients">Clients </option>
-			    <option value="VuesTitres">Vues titres </option>
-			  </select>
-			</p>				
-		</div>   
-    </form>
     <!-- Clients -->
     <div id="divClient">
     	<table>

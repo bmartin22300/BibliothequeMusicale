@@ -15,39 +15,41 @@
 	<!--  ExternalRessource/Catalogue -->
 	
 	<!-- formulaire -->
-	<form method="POST">
-	
-	<input name="action" type="hidden" value="RechercheAccueil">
+	<div  class = "rechercheTextBox">
+		<form method="POST">
 		
-		 <!-- choix du type d'élément -->
-		<div style="margin:10px;">
-			<!-- select box -->
-			<p>
-			<% String TypeElement = (String)request.getAttribute("TypeElement"); %>
-				<label for="cars">Type d'element</label>
-			  <select id="TypeElement" onChange="changerTypeElementsAffichesRecherche()" name="TypeElement">
-			    <option value="Titres musicaux"
-			    	<% if ((TypeElement!=null) && TypeElement.equals("Titres musicaux")) {%>
-			    		selected="selected"
-			    	<%} %>
-			    >Titres musicaux</option>
-			    <option value="Interpretes" 
-			    	<% if ((TypeElement!=null) && TypeElement.equals("Interpretes")) {%>
-			    		selected="selected"
-			    	<%} %>
-			    >Interpretes</option>
-			    <option value="Albums"
-			    	<% if ((TypeElement!=null) && TypeElement.equals("Albums")) {%>
-			    		selected="selected"
-			    	<%} %>
-			    >Albums</option>
-			  </select>
-			</p>
-		</div>
-        <label><b>Nom</b></label>
-        <input id="recherche" type="text" placeholder="Entrer le nom" name="recherche">
-        <input type="submit" id='submit' value='Rechercher'>
-    </form>
+		<input name="action" type="hidden" value="RechercheAccueil">
+			
+			 <!-- choix du type d'élément -->
+			<div style="margin:10px;">
+				<!-- select box -->
+				<p>
+				<% String TypeElement = (String)request.getAttribute("TypeElement"); %>
+					<label for="cars">Type d'element</label>
+				  <select id="TypeElement" onChange="changerTypeElementsAffichesRecherche()" name="TypeElement">
+				    <option value="Titres musicaux"
+				    	<% if ((TypeElement!=null) && TypeElement.equals("Titres musicaux")) {%>
+				    		selected="selected"
+				    	<%} %>
+				    >Titres musicaux</option>
+				    <option value="Interpretes" 
+				    	<% if ((TypeElement!=null) && TypeElement.equals("Interpretes")) {%>
+				    		selected="selected"
+				    	<%} %>
+				    >Interpretes</option>
+				    <option value="Albums"
+				    	<% if ((TypeElement!=null) && TypeElement.equals("Albums")) {%>
+				    		selected="selected"
+				    	<%} %>
+				    >Albums</option>
+				  </select>
+				</p>
+			</div>
+	        <label><b>Nom</b></label>
+	        <input id="recherche" type="text" placeholder="Entrer le nom" name="recherche">
+	        <input type="submit" id='submit' value='Rechercher'>
+	    </form>
+	</div>
 	
 	<% List<TitreMusical> titresMusicaux = (List<TitreMusical>)request.getAttribute("titresMusicaux"); %>
 	<% List<Interprete> interpretes = (List<Interprete>)request.getAttribute("interpretes"); %>

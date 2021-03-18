@@ -11,18 +11,20 @@
 	<%@ page import="Object.Client" %>
 	
 	<!-- formulaire -->
-	<form method="POST">
+	<div  class = "rechercheTextBox">
+		<form method="POST">
+		
+			<input name="action" type="hidden" value="ModificationProfil">
 	
-		<input name="action" type="hidden" value="ModificationProfil">
-
-		 <!-- choix du type d'élément -->
-		<% String TypeElement = (String)request.getAttribute("TypeElement"); %>
-
-        <label><b>Nom</b></label>
-        <input id="recherche" type="text" placeholder="Entrer le nom" name="recherche">
-
-        <input type="submit" id='submit' value='Rechercher'>
-    </form>
+			 <!-- choix du type d'élément -->
+			<% String TypeElement = (String)request.getAttribute("TypeElement"); %>
+	
+	        <label><b>Nom</b></label>
+	        <input id="recherche" type="text" placeholder="Entrer le nom" name="recherche">
+	
+	        <input type="submit" id='submit' value='Rechercher'>
+	    </form>
+	</div>
     
     <% List<Client> clients = (List<Client>)request.getAttribute("clients"); %>
     
