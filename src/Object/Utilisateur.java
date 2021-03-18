@@ -418,4 +418,81 @@ public class Utilisateur implements UtilisateurInterface {
 		}
 		return null;
 	}
+	
+	/*
+	 * Fonction getTitreMusical renvoie le TitreMusical associé à l'id en parametre
+	 */
+	@Override
+	public TitreMusical getTitreMusical(int idTitreMusical) {
+		// On recupere une connexion de type java.sql.Connection
+		Connection connexion = DBManager.getInstance().getConnection();
+		
+		try {
+			// On execute la requete SQL et on recupere un java.sql.ResultSet
+			String request = "CALL getTitreMusical(?);";
+			
+			// Prepared statement 
+			PreparedStatement preparedQuery = connexion.prepareStatement(request);
+			preparedQuery.setInt(1, idTitreMusical);
+			
+			// Retour
+			ResultSet rs = preparedQuery.executeQuery();
+			
+			// Vrai si on a un resultat
+			if(rs.next()) {					
+				// Creation du titre
+				int idTitre = rs.getInt("idCatalogue");
+				String titreTitre = rs.getString("titre");
+				int dateCreationTitre = rs.getInt("dateCreation"); 
+				int dureeTitre = rs.getInt("duree");
+				String stringGenre = rs.getString("nomGenre");
+				Genre nomGenre;
+				if(stringGenre==null) {
+					nomGenre = Genre.INCONNU;
+				}
+				else {
+					nomGenre = Genre.valueOf(rs.getString("nomGenre").toUpperCase());
+				}
+				Album albumTitre;
+				if((rs.getInt("Album_idCatalogue"))==0) {
+					albumTitre=null;
+				}else {
+					albumTitre = new Album(rs.getInt("Album_idCatalogue"));
+				}
+				
+				// On recherche les titres de l'interprete
+				String requestInterpretes = "CALL rechercherParIdCatalogueInterpretes(?);";
+				
+				// Prepared statement 
+				PreparedStatement preparedQueryInterpretes = connexion.prepareStatement(requestInterpretes);
+				preparedQueryInterpretes.setInt(1, idTitre);
+				
+				// Retour
+				ResultSet rsInterpretes = preparedQueryInterpretes.executeQuery();
+				//Creation de la liste des interpretes
+				List<Interprete> interpretes = new ArrayList<Interprete>();
+				
+				while(rsInterpretes.next()) {
+					// Creation de l'interprete
+					int idInterprete = rsInterpretes.getInt("idInterprete");
+					String pseudo = rsInterpretes.getString("pseudonyme");
+					String prenom = rsInterpretes.getString("prenom"); 
+					String nom = rsInterpretes.getString("nom");
+					Date dateNaissance = rsInterpretes.getDate("dateNaissance");
+					
+					interpretes.add(new Interprete(idInterprete, pseudo, prenom, nom, dateNaissance));
+				}
+				
+				// On retourne le titre
+				return new TitreMusical(idTitre, titreTitre, dateCreationTitre, dureeTitre, nomGenre, albumTitre, interpretes);						
+			}
+			else {
+				return null;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

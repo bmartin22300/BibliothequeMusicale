@@ -86,8 +86,8 @@
 	   										<li><% out.print(i.getPseudonyme()); %></li>
 					            		<%} %>
 					            	</ul></td>
-					            	<td><% if(elem.getAlbum()!=null){
-					            		out.print(elem.getAlbum());
+					            	<td><% if(elem.getAlbum()!=null && elem.getAlbum().getNom()!=null){
+					            			out.print(elem.getAlbum().getNom());
 					            		} %></td>
 					            	<td><% out.print(elem.getGenre()); %></td>
 					            	<td><% if(elem.getAnneeCreation()!=0){

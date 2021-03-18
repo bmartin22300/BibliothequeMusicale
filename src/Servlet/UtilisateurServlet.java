@@ -31,6 +31,15 @@ public class UtilisateurServlet extends HttpServlet {//utilisateurServlet
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// recuperation des parametres du form
+		String action = request.getParameter("action");
+		
+		if(action.equals("incrementeAudio")) {
+			String idTitreMusical = request.getParameter("idTitreMusical");
+			int id = Integer.parseInt(idTitreMusical);
+			TitreMusical t = utilisateur.getTitreMusical(id);
+			utilisateur.regarder(t);
+		}
 		try {
 			doProcess(request,response);
 		} catch (NumberFormatException e) {

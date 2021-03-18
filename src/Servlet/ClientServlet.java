@@ -342,6 +342,11 @@ public class ClientServlet extends HttpServlet {//clientServlet
 
 				// envoie de parametres a la vue
 				request.setAttribute("playlists", client.getPlaylists());
+			}else if(action.equals("incrementeAudio")) {
+				String idTitreMusical = request.getParameter("idTitreMusical");
+				int id = Integer.parseInt(idTitreMusical);
+				TitreMusical t = client.getTitreMusical(id);
+				client.regarder(t);
 			}
 		}
 		//affichage de la vue

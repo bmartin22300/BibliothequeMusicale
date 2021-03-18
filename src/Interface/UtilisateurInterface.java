@@ -27,7 +27,11 @@ public interface UtilisateurInterface {
 	public List<TitreMusical> topTitresEcoutes();
 	
 	public List<TitreMusical> recommandationsDuMoment();
+	
+	TitreMusical getTitreMusical(int idTitreMusical);
 	//A VERIFIER	
+
+	
 
 	
 	//TODO

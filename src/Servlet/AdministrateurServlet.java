@@ -223,11 +223,8 @@ public class AdministrateurServlet extends HttpServlet {
 			}else if(action.equals("incrementeAudio")) {
 				String idTitreMusical = request.getParameter("idTitreMusical");
 				int id = Integer.parseInt(idTitreMusical);
-				for(TitreMusical t : titresMusicaux) {
-					if(t.getIdCatalogue()==id) {
-						administrateur.regarder(t);
-					}
-				}
+				TitreMusical t = administrateur.getTitreMusical(id);
+				administrateur.regarder(t);
 			}else if(action.equals("RechercheAccueil")) {
 				request.setAttribute("nav-bar-active", "AccueilAdministrateur");
 				// On recupere les parametres de la vue
