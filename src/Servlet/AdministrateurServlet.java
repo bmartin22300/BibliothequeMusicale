@@ -483,6 +483,33 @@ public class AdministrateurServlet extends HttpServlet {
 
 					//affectation vue
 					vue = "/JSP/Administrateur/ModificationInterprete.jsp";
+				}else if(action.equals("ModificationInterpreteFin")) {
+					//r�cup param vue
+					String Pseudo = request.getParameter("Pseudo");
+					String Prenom = request.getParameter("Prenom");
+					String Nom = request.getParameter("Nom");
+					String DateNaissanceString = request.getParameter("Date de naissance");
+					String idString = request.getParameter("id");
+					
+					//cast 
+					int id=Integer.parseInt(idString); 
+					Date dateNaissance = null;
+					if (DateNaissanceString != "") {
+						dateNaissance = Date.valueOf(DateNaissanceString); // Conversion Date
+					}
+					
+					//requete BDD
+					Interprete i = administrateur.getInterprete(id);
+					((ProfilGestionnaireMusical) administrateur).modifierInterprete(i, Pseudo, Prenom, Nom, dateNaissance);
+					interpretes=administrateur.rechercherParPseudoInterprete("");
+					
+					//envoi param vue
+					request.getSession().setAttribute("i", i);
+					request.setAttribute("TypeElement","Interpretes");
+					request.setAttribute("interpretes",interpretes);
+					
+					//affectation vue
+					vue = "/JSP/Administrateur/ModificationCatalogue.jsp";
 				}
 			}
 			///////////////////////////////////////////////////////PARTIE GESTIONNAIRE CLIENT///////////////////////////////////////////////////////
