@@ -22,7 +22,7 @@
 		        <label><b>Mot de passe</b></label>
 		        <input type="password" placeholder="Entrer le mot de passe" name="password" required><br>
 		
-		        <input type="submit" id='submit' value='LOGIN' >
+		        <input type="submit" class="button" id='submit' value='Connexion' >
 		    </form>
 		    
 		    <!-- erreur de login -->
@@ -35,12 +35,13 @@
 		    <!-- tentative de manipulation d'url pour contourné la connexion -->
 		    <% boolean notLogged = (boolean)request.getAttribute("notLogged"); %>
 		    <% if(notLogged==true){ %>
-		    	<a>Attention : merci de ne pas jouer avec l'url sinon j'appelle Adopi !</a>
+		    	<p>Attention : merci de ne pas jouer avec l'url sinon j'appelle Adopi !</p>
 		    	<br>
 		    <% } %>
 		    
 		    <!-- connexion client -->
-		    <a href="AuthentificationClient">Connexion client</a>
+		    <br><br>
+		    <a href="AuthentificationClient" class="button">Connexion client</a>
 		    <br>
 	    </div>
     </div>

@@ -23,7 +23,7 @@
 		        <label><b>Mot de passe</b></label>
 		        <input type="password" placeholder="Entrer le mot de passe" name="password" required><br>
 		
-		        <input type="submit" id='submit' value='LOGIN' >
+		        <input type="submit" class="button" id='submit' value='Connexion' >
 		    </form>
 		    
 		    <!-- erreur de login -->
@@ -41,11 +41,12 @@
 		    <% } %>
 		    
 		    <!-- inscription client -->
-		    <a href="InscriptionClient">Créer un compte</a>	
-		    <br>
+		    
+		    <br><br>
+		    <a href="InscriptionClient" class="button">S'inscrire</a>			    
 		    
 		    <!-- connexion administrateur -->
-		    <a href="AuthentificationAdministrateur">Connexion administrateur</a>
+		    <a href="AuthentificationAdministrateur" class="button">Connexion administrateur</a>
 	    </div>
     </div>
     

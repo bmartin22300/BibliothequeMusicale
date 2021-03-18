@@ -22,7 +22,7 @@
 		        <label><b>Mot de passe</b></label>
 		        <input type="password" placeholder="Entrer le mot de passe" name="password" required><br>
 		
-		        <input type="submit" id='submit' value='LOGIN' >
+		        <input type="submit" class="button" id='submit' value="S'inscrire" >
 		    </form>
 	    
 		    <!-- erreur de login -->
@@ -34,7 +34,8 @@
 		    
 		    
 		    <!-- connexion client -->
-		    <a href="AuthentificationClient">Se connecter</a>
+		    <br><br>
+		    <a href="AuthentificationClient" class="button">J'ai déjà un compte</a>
 	   </div>
 	</div>
    

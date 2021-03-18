@@ -116,40 +116,92 @@
 
 a {
 	text-decoration: none;
-	font-size: 22px;
+	font-size: 16px;
 	color: black;
+	font-family: 'Sonsie One', cursive;
+	font-style: normal;
 }
 
-button:hover {
-	color: #fdcc0d;
-	opacity: 0.8;
-}
 
 a:hover {
 	color: #8B0000;
 	opacity: 0.8;
 }
 
-.button {
+label {
+	text-decoration: none;
+	font-size: 22px;
+	color: black;
+	
+}
+
+/* Boutons */
+#submit, .button {
 	outline: 0;
 	display: inline-block;
-	padding-top: 8px;
-	padding-bottom: 8px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 	color: white;
 	background-color: #00003d;
 	text-align: center;
 	cursor: pointer;
-	width: 40%;
+	padding-left: 40px;
+	padding-right: 40px;
 	font-size: 18px;
 	font-family: 'Sonsie One', cursive;
 	font-style: normal;
 	border: 2px solid #8B0000;
 	border-radius: 10px;
+	margin:8px;
 }
 
-.button:hover{
+#submit:hover, .button:hover {
 	color: #fdcc0d;
 	opacity: 0.8;
+}
+
+/* Textbox */
+#recherche{
+	outline: 0;
+	display: inline-block;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	color: #00003d;
+	background-color: #f0f0f0;
+	text-align: center;
+	cursor: cursor;
+	padding-left: 40px;
+	padding-right: 40px;
+	font-size: 18px;
+	font-family: 'Sonsie One', cursive;
+	font-style: normal;
+	border: 2px solid #8B0000;
+	border-radius: 10px;
+	margin:8px;
+}
+
+#recherche:hover{
+	opacity: 0.9;
+}
+
+/* Input */
+option, select, input{
+	outline: 0;
+	display: inline-block;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	color: #00003d;
+	background-color: #f0f0f0;
+	text-align: center;
+	cursor: cursor;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-size: 18px;
+	font-family: 'Sonsie One', cursive;
+	font-style: normal;
+	border: 2px solid #8B0000;
+	border-radius: 10px;
+	margin:8px;
 }
 
 /* Connexion */
