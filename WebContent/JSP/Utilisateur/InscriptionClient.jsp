@@ -36,5 +36,7 @@
 	    <!-- connexion client -->
 	    <a href="AuthentificationClient">Se connecter</a>
    </div>
+   
+   <%@include file="../footer.jsp" %>
 </body>
 </html>

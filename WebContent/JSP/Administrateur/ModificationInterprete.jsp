@@ -44,5 +44,6 @@
 		        <p style="padding-bottom:20px;"><input type="submit" id='submit' value='Suivant'></p>
 			</div>    
 		
+		<%@include file="../footer.jsp" %>
 </body>
 </html>

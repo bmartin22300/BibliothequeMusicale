@@ -46,5 +46,7 @@
 	    <!-- connexion administrateur -->
 	    <a href="AuthentificationAdministrateur">Connexion administrateur</a>
     </div>
+    
+    <%@include file="../footer.jsp" %>
 </body>
 </html>

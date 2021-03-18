@@ -25,5 +25,6 @@
 	  <p><a href="ModificationProfilAdministrateur" class="button">Modifier</a></p>
 	</div>
 	
+	<%@include file="../footer.jsp" %>
 </body>
 </html>

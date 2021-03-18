@@ -8,5 +8,7 @@
 <body>
 	<%@include file="../header.jsp" %>
 	gestionPlaylist
+	
+	<%@include file="../footer.jsp" %>
 </body>
 </html>

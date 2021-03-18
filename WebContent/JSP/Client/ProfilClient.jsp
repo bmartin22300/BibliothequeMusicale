@@ -36,5 +36,6 @@
 	  <p><a href="ModificationProfilClient" class="button">Modifier</a></p>
 	</div>
 	
+	<%@include file="../footer.jsp" %>
 </body>
 </html>
