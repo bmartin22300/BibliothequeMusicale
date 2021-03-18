@@ -6,10 +6,9 @@
 	<%@include file="../head.jsp" %>	 
 </head>
 <body>
-	<div class="mainContent">
-		<%@include file="../header.jsp" %>
-		<br>
-		
+	<%@include file="../header.jsp" %><br>
+	
+	<div class="mainContent">		
 		<!-- formulaire de connexion -->
 		<div class="connexion">
 			<form method="POST">

@@ -35,6 +35,7 @@ public class AdministrateurServlet extends HttpServlet {
 
 		// section administrateur non connectï¿½
 		if (servletPath.equals("/AuthentificationAdministrateur")) {
+			request.setAttribute("nav-bar-active", "Connexion");
 			// affectation paramï¿½tres ï¿½ la vue
 			request.setAttribute("isAdministrateur", false);
 			request.setAttribute("isErrorLogin", false);
@@ -43,6 +44,7 @@ public class AdministrateurServlet extends HttpServlet {
 			// affection vue
 			vue = "/JSP/Utilisateur/AuthentificationAdministrateur.jsp";
 		} else if (servletPath.equals("/InscriptionAdministrateur")) {
+			request.setAttribute("nav-bar-active", "Connexion");
 			// affectation paramï¿½tres ï¿½ la vue
 			request.setAttribute("isAdministrateur", false);
 			// affection vue
@@ -50,6 +52,7 @@ public class AdministrateurServlet extends HttpServlet {
 		}
 		/////////////////////////////////////////////////////// section Administrateur //////////////////////////// ////////////////////////////
 		else if (administrateur == null) {// verification que l'Administrateur est connectï¿½
+			request.setAttribute("nav-bar-active", "Connexion");
 			// affectation paramï¿½tres ï¿½ la vue
 			request.setAttribute("isAdministrateur", false);
 			request.setAttribute("isErrorLogin", false);
@@ -76,6 +79,7 @@ public class AdministrateurServlet extends HttpServlet {
 			request.setAttribute("albums", albums);
 
 			if (servletPath.equals("/AccueilAdministrateur")) {
+				request.setAttribute("nav-bar-active", "AccueilAdministrateur");
 				// requeteBDD
 				titresMusicaux = administrateur.rechercherParNomTitre("");
 				interpretes = administrateur.rechercherParPseudoInterprete("");
@@ -88,8 +92,10 @@ public class AdministrateurServlet extends HttpServlet {
 
 				vue = "/JSP/Administrateur/AccueilAdministrateur.jsp";
 			} else if (servletPath.equals("/ProfilAdministrateur")) {
+				request.setAttribute("nav-bar-active", "ProfilAdministrateur");
 				vue = "/JSP/Administrateur/ProfilAdministrateur.jsp";
 			} else if (servletPath.equals("/Statistiques")) {
+				request.setAttribute("nav-bar-active", "Statistiques");
 				List<Client> clients = administrateur.topUtilisateursEcoutes();
 				request.setAttribute("clients", clients);
 
@@ -97,12 +103,15 @@ public class AdministrateurServlet extends HttpServlet {
 				request.setAttribute("titres", titres);
 				vue = "/JSP/Administrateur/Statistiques.jsp";
 			} else if (servletPath.equals("/ModificationProfil")) {
+				request.setAttribute("nav-bar-active", "ModificationProfil");
 				List<Client> clients = administrateur.rechercherParMailClient("");
 				request.setAttribute("clients", clients);
 				vue = "/JSP/Administrateur/ModificationProfil.jsp";
 			} else if (servletPath.equals("/ModificationCatalogue")) {
+				request.setAttribute("nav-bar-active", "ModificationCatalogue");
 				vue = "/JSP/Administrateur/ModificationCatalogue.jsp";
 			} else if (servletPath.equals("/ModificationTitre")) {
+				request.setAttribute("nav-bar-active", "ModificationCatalogue");
 				// section Administrateur musical
 				// todo vï¿½rif identitï¿½
 
@@ -114,11 +123,13 @@ public class AdministrateurServlet extends HttpServlet {
 
 				vue = "/JSP/Administrateur/ModificationCatalogue.jsp";
 			} else if (servletPath.equals("/AjoutCatalogue")) {
+				request.setAttribute("nav-bar-active", "AjoutCatalogue");
 				// rï¿½cupï¿½ration de paramï¿½tre de la vue
 				String TypeElement = request.getParameter("TypeElement");
 
 				vue = "/JSP/Administrateur/AjoutCatalogue.jsp";
 			}else if(servletPath.equals("/ModificationProfilAdministrateur")){
+				request.setAttribute("nav-bar-active", "ProfilAdministrateur");
                 vue = "/JSP/Administrateur/ModificationProfilAdministrateur.jsp";
 	        }
 		}
@@ -151,6 +162,7 @@ public class AdministrateurServlet extends HttpServlet {
 			administrateur = utilisateur.authentificationAdmin(mail, motDePasse);
 
 			if (administrateur != null) {
+				request.setAttribute("nav-bar-active", "AccueilAdministrateur");
 				// requeteBDD
 				List<TitreMusical> titresMusicaux = administrateur.rechercherParNomTitre("");
 				List<Interprete> interpretes = administrateur.rechercherParPseudoInterprete("");
@@ -168,6 +180,7 @@ public class AdministrateurServlet extends HttpServlet {
 				// choix de la vue
 				vue = "/JSP/Administrateur/AccueilAdministrateur.jsp";
 			} else {// echec
+				request.setAttribute("nav-bar-active", "Connexion");
 				// affectation paramï¿½tres ï¿½ la vue
 				request.setAttribute("isAdministrateur", false);
 				request.setAttribute("isErrorLogin", true);
@@ -179,6 +192,7 @@ public class AdministrateurServlet extends HttpServlet {
 		} else {
 			///////////////////////////////////////////////////////partie ADMIN///////////////////////////////////////////////////////
 			if (administrateur == null) {// verification que l'Administrateur est connectï¿½
+				request.setAttribute("nav-bar-active", "Connexion");
 				// affectation paramï¿½tres ï¿½ la vue
 				request.setAttribute("isAdministrateur", false);
 				request.setAttribute("isErrorLogin", false);
@@ -205,6 +219,7 @@ public class AdministrateurServlet extends HttpServlet {
 			request.setAttribute("isAdministrateurMusical", false);
 
 			if (action.equals("ModificationProfilAdministrateur")) {
+				request.setAttribute("nav-bar-active", "ProfilAdministrateur");
 				// affectation paramï¿½tres ï¿½ la vue
 				request.setAttribute("password", "");
 				request.setAttribute("email", mail);
@@ -226,6 +241,7 @@ public class AdministrateurServlet extends HttpServlet {
 					}
 				}
 			}else if(action.equals("RechercheAccueil")) {
+				request.setAttribute("nav-bar-active", "AccueilAdministrateur");
 				// On recupere les parametres de la vue
 				String typeElement = request.getParameter("TypeElement");
 				String recherche = request.getParameter("recherche");
@@ -254,6 +270,7 @@ public class AdministrateurServlet extends HttpServlet {
 				request.setAttribute("isAdministrateurMusical", true);
 				
 				if (action.equals("RechercheTitre")) {
+					request.setAttribute("nav-bar-active", "ModificationCatalogue");
 					// rï¿½cup param vue
 					String typeElement = request.getParameter("TypeElement");
 					String recherche = request.getParameter("recherche");
@@ -276,6 +293,7 @@ public class AdministrateurServlet extends HttpServlet {
 					vue = "/JSP/Administrateur/ModificationCatalogue.jsp";
 
 				} else if (action.equals("AjouterElement")) {
+					request.setAttribute("nav-bar-active", "AjoutCatalogue");
 					// rï¿½cup param vue
 					String typeElement = request.getParameter("TypeElement");
 
@@ -348,7 +366,7 @@ public class AdministrateurServlet extends HttpServlet {
 						//attribution vue
 						vue = "/JSP/Administrateur/AjoutTitresAAlbum.jsp"; 
 					}
-				} else if (action.equals("SuppressionTitre")) {						
+				} else if (action.equals("SuppressionTitre")) {
 					// rï¿½cup param vue
 					String idString = request.getParameter("idString");
 					int id = Integer.parseInt(idString);
@@ -388,6 +406,7 @@ public class AdministrateurServlet extends HttpServlet {
 					request.setAttribute("albums", albums);
 					request.setAttribute("TypeElement", "Albums");
 				}else if(action.equals("AjoutInterpretesATitre")) {
+					request.setAttribute("nav-bar-active", "AjoutCatalogue");
 					//rï¿½cup param vue
 					String interpreteSelectBox = request.getParameter("interpreteSelectBox");
 					TitreMusical titre = (TitreMusical) request.getSession().getAttribute("titre");
@@ -412,6 +431,7 @@ public class AdministrateurServlet extends HttpServlet {
 					//affectation vue
 					vue = "/JSP/Administrateur/AjoutInterpretesATitre.jsp"; 
 				}else if(action.equals("AjoutTitresAAlbum")) {
+					request.setAttribute("nav-bar-active", "AjoutCatalogue");
 					//rï¿½cup param vue
 					String titresMusicauxSelectBox = request.getParameter("titresMusicauxSelectBox");
 					Album album = (Album) request.getSession().getAttribute("album");
@@ -436,26 +456,18 @@ public class AdministrateurServlet extends HttpServlet {
 					//affectation vue
 					vue = "/JSP/Administrateur/AjoutTitresAAlbum.jsp"; 
 				}else if(action.equals("FinAjoutInterpretesATitre")) {
+					request.setAttribute("nav-bar-active", "AjoutCatalogue");
 					//affectation vue
 					vue = "/JSP/Administrateur/AjoutCatalogue.jsp"; 
 				}else if(action.equals("FinAjoutTitresMusicauxAAlbum")) {
+					request.setAttribute("nav-bar-active", "AjoutCatalogue");
 					//affectation vue
 					vue = "/JSP/Administrateur/AjoutCatalogue.jsp"; 
 				}else if(action.equals("ModificationProfilAdministrateur")){
+					request.setAttribute("nav-bar-active", "ProfilAdministrateur");
 					vue = "/JSP/Administrateur/ModificationProfilAdministrateur.jsp";
 				}else if(action.equals("ModificationInterprete")) {
-					//r�cup param vue
-					String idString = request.getParameter("idString");
-
-					//cast int
-					int id=Integer.parseInt(idString);
-
-					//envoi param vue
-					request.setAttribute("id", id);
-
-					//affectation vue
-					vue = "/JSP/Administrateur/ModificationInterprete.jsp";
-				}else if(action.equals("ModificationInterprete")) {
+					request.setAttribute("nav-bar-active", "ModificationCatalogue");
 					//r�cup param vue
 					String idString = request.getParameter("idString");
 
@@ -475,28 +487,8 @@ public class AdministrateurServlet extends HttpServlet {
 				request.setAttribute("isAdministrateurMusical", false);
 				
 				// Lecture seule
-				if (action.equals("RechercheTitre")) {
-					// rï¿½cup param vue
-					String typeElement = request.getParameter("TypeElement");
-					String recherche = request.getParameter("recherche");
-
-					if(typeElement.equals("Titres musicaux")) {
-						titresMusicaux=administrateur.rechercherParNomTitre(recherche);
-						request.setAttribute("titresMusicaux", titresMusicaux);
-					}else if(typeElement.equals("Interpretes")) {
-						interpretes = administrateur.rechercherParPseudoInterprete(recherche);
-						request.setAttribute("interpretes", interpretes);
-					}else if(typeElement.equals("Albums")) {
-						albums = administrateur.rechercherParNomAlbum(recherche);
-						request.setAttribute("albums", albums);
-					}
-
-					// envoi param vue
-					request.setAttribute("TypeElement", typeElement);
-
-					// attribution vue
-					vue = "/JSP/Administrateur/ModificationCatalogue.jsp";
-				}else if(action.equals("ModificationProfil")) {
+				if(action.equals("ModificationProfil")) {
+					request.setAttribute("nav-bar-active", "ModificationProfil");
 					//recuperer parametre vue
 					String typeElement = request.getParameter("TypeElement");
 					String recherche = request.getParameter("recherche");
@@ -510,6 +502,7 @@ public class AdministrateurServlet extends HttpServlet {
 					//affectation vue
 					vue = "/JSP/Administrateur/ModificationProfil.jsp";
 				}else if(action.equals("SuppressionClient")) {
+					request.setAttribute("nav-bar-active", "ModificationProfil");
 					// rï¿½cup param vue
 					String idString = request.getParameter("idString");
 					int id = Integer.parseInt(idString);

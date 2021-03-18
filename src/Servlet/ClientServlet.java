@@ -37,6 +37,7 @@ public class ClientServlet extends HttpServlet {//clientServlet
 		
         //section utilisateur non connecte
 		if(servletPath.equals("/AuthentificationClient")) {
+			request.setAttribute("nav-bar-active", "Connexion");
 			//affectation param�tres � la vue
 			request.setAttribute("isClient", false);
 			request.setAttribute("isErrorLogin", false);
@@ -45,6 +46,7 @@ public class ClientServlet extends HttpServlet {//clientServlet
 			//affection vue
 			vue = "/JSP/Utilisateur/AuthentificationClient.jsp";
 		}else if(servletPath.equals("/InscriptionClient")){
+			request.setAttribute("nav-bar-active", "Connexion");
 			//affectation param�tres � la vue
 			request.setAttribute("isClient", false);
 			request.setAttribute("isErrorLogin", false);
@@ -53,6 +55,7 @@ public class ClientServlet extends HttpServlet {//clientServlet
 			vue = "/JSP/Utilisateur/InscriptionClient.jsp";
 		}else if(client==null){ //verification que le client est connecte 
 			//section client
+			request.setAttribute("nav-bar-active", "Connexion");
 		
 			//affectation param�tres � la vue
 			request.setAttribute("isClient", false);
@@ -89,15 +92,19 @@ public class ClientServlet extends HttpServlet {//clientServlet
     			request.setAttribute("nav-bar-active", "GestionPlaylist");
             	vue = "/JSP/Client/GestionPlaylist.jsp";
             }else if(servletPath.equals("/AjoutPlaylist")) {
+            	request.setAttribute("nav-bar-active", "AjoutPlaylist");
             	vue = "/JSP/Client/AjoutPlaylist.jsp";
             }else if(servletPath.equals("/ProfilClient")){
+            	request.setAttribute("nav-bar-active", "ProfilClient");
             	vue = "/JSP/Client/ProfilClient.jsp";
             }else if(servletPath.equals("/AccueilClient")){
-            	
+            	request.setAttribute("nav-bar-active", "AccueilClient");
             	vue = "/JSP/Client/AccueilClient.jsp";
             }else if(servletPath.equals("/ModificationProfilClient")){
+            	request.setAttribute("nav-bar-active", "ModificationProfilClient");
                 vue = "/JSP/Client/ModificationProfilClient.jsp";
-	        }else if(servletPath.equals("/Sandbox")) {	 
+	        }else if(servletPath.equals("/Sandbox")) {
+	        	request.setAttribute("nav-bar-active", "Sandbox");
     			vue = "/JSP/Client/Sandbox.jsp";
     			// Main d'Erwan
     			//DATA
@@ -293,6 +300,7 @@ public class ClientServlet extends HttpServlet {//clientServlet
 		client = utilisateur.authentification(mail, motDePasse);
 		
 		if(client!=null) {
+			request.setAttribute("nav-bar-active", "AccueilClient");
 			//affectation param�tres � la vue
 			request.setAttribute("isClient", true);
 			
@@ -310,6 +318,7 @@ public class ClientServlet extends HttpServlet {//clientServlet
 			//choix de la vue
 			vue = "/JSP/Client/AccueilClient.jsp";
 		}else {//echec
+			request.setAttribute("nav-bar-active", "Connexion");
 			//affectation param�tres � la vue
 			request.setAttribute("isClient", false);
 			request.setAttribute("isErrorLogin", true);
