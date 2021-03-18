@@ -167,7 +167,7 @@ public class Utilisateur implements UtilisateurInterface {
 		}
 		return null;		
 	}
-	
+
 	/*
 	 * Fonction creerCompte, creation d'un nouveau Client dans la BDD
 	 * Renvoie l'objet Client si succès, null sinon
@@ -494,5 +494,59 @@ public class Utilisateur implements UtilisateurInterface {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	// attention ceci ne constitue pas un vrai chiffrement mais il permet seulement de rendre illisible le mdp au premier coup d'oeil
+	
+	//chiffrement mdp
+	/*
+	char[] passwordChar = password.toCharArray();
+	char[] passwordCharChiffre = chiffrementMDP(passwordChar);
+	String passwordChiffre="";
+	for(char monChar : passwordCharChiffre) {
+		passwordChiffre+=String.valueOf(monChar);  
+	}
+	System.out.println(passwordChiffre);
+	
+	//dechiffrement mdp
+	char[] passwordChar2 = passwordChiffre.toCharArray();
+	char[] passwordCharDechiffre = deChiffrementMDP(passwordChar2); 
+	String passwordDechiffre="";
+	for(char monChar : passwordCharDechiffre) {
+		passwordDechiffre+=String.valueOf(monChar);  
+	}
+	System.out.println(passwordDechiffre);
+	*/
+	
+	private String chiffrementMDP(String password) {
+		//chiffrement mdp
+		char[] passwordChar = password.toCharArray();
+		
+		char[] passwordCharChiffre = passwordChar.clone();
+		for(int i=0;i<passwordCharChiffre.length;i++) {
+			passwordCharChiffre[i]+=36;
+		}
+		
+		String passwordChiffre="";
+		for(char monChar : passwordCharChiffre) {
+			passwordChiffre+=String.valueOf(monChar);  
+		}
+		return passwordChiffre;
+	}
+	
+	private String deChiffrementMDP(String password) {
+		//chiffrement mdp
+		char[] passwordChar = password.toCharArray();
+		
+		char[] passwordCharChiffre = passwordChar.clone();
+		for(int i=0;i<passwordCharChiffre.length;i++) {
+			passwordCharChiffre[i]-=36;
+		}
+		
+		String passwordChiffre="";
+		for(char monChar : passwordCharChiffre) {
+			passwordChiffre+=String.valueOf(monChar);  
+		}
+		return passwordChiffre;
 	}
 }

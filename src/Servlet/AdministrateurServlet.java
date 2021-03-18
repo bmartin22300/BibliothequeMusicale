@@ -448,13 +448,8 @@ public class AdministrateurServlet extends HttpServlet {
 					request.setAttribute("nav-bar-active", "AjoutCatalogue");
 					//affectation vue
 					vue = "/JSP/Administrateur/AjoutCatalogue.jsp"; 
-				}else if(action.equals("ModificationProfilAdministrateur")){
-					request.setAttribute("nav-bar-active", "ProfilAdministrateur");
-					vue = "/JSP/Administrateur/ModificationProfilAdministrateur.jsp";
-				}
-				
-				
-				
+				}		
+								
 				//modififcation des elements du catalogue
 				
 				//interprete
