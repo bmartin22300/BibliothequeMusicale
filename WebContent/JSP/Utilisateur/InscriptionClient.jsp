@@ -29,7 +29,7 @@
 		    <!-- erreur de login -->
 		    <% boolean isErrorLogin = (boolean)request.getAttribute("isErrorLogin"); %>
 		    <% if(isErrorLogin==true){ %>
-		    	<a>Erreur : mail deja utilise</a>
+		    	<p>Erreur : mail deja utilise</p>
 		    	<br>
 		    <% } %>
 		    

@@ -25,6 +25,7 @@
     <url-pattern>/InscriptionClient</url-pattern>
     <url-pattern>/AccueilClient</url-pattern>
     <url-pattern>/GestionPlaylist</url-pattern>
+    <url-pattern>/AjoutPlaylist</url-pattern>
     <url-pattern>/ProfilClient</url-pattern>
 	<url-pattern>/ModificationProfilClient</url-pattern>
     <url-pattern>/Sandbox</url-pattern>

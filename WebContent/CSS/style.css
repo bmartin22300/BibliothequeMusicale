@@ -120,8 +120,13 @@ a {
 	color: black;
 }
 
-button:hover, a:hover {
+button:hover {
 	color: #fdcc0d;
+	opacity: 0.8;
+}
+
+a:hover {
+	color: #8B0000;
 	opacity: 0.8;
 }
 
@@ -142,7 +147,7 @@ button:hover, a:hover {
 	border-radius: 10px;
 }
 
-.button:hover, a:hover {
+.button:hover{
 	color: #fdcc0d;
 	opacity: 0.8;
 }

@@ -14,7 +14,7 @@
 			<form method="POST">
 				<input name="action" type="hidden" value="AuthentificationAdministrateur">
 			
-		        <h1>Connexion</h1>
+		        <h1>Connexion administrateur</h1>
 		        
 		        <label><b>Mail</b></label>
 		        <input type="text" placeholder="Entrer le mail" name="mail" required><br>
@@ -28,7 +28,7 @@
 		    <!-- erreur de login -->
 		    <% boolean isErrorLogin = (boolean)request.getAttribute("isErrorLogin"); %>
 		    <% if(isErrorLogin==true){ %>
-		    	<a>Erreur : pseudonyme ou mot de passe incorrect</a>
+		    	<p>Erreur : pseudonyme ou mot de passe incorrect</p>
 		    	<br>
 		    <% } %>
 		    

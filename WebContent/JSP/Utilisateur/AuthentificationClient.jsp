@@ -15,7 +15,7 @@
 			<form method="POST">
 				<input name="action" type="hidden" value="AuthentificationClient">
 			
-		        <h1>Connexion</h1>
+		        <h1>Connexion client</h1>
 		        
 		        <label><b>Mail</b></label>
 		        <input type="text" placeholder="Entrer le mail" name="mail" required><br>
@@ -29,14 +29,14 @@
 		    <!-- erreur de login -->
 		    <% boolean isErrorLogin = (boolean)request.getAttribute("isErrorLogin"); %>
 		    <% if(isErrorLogin==true){ %>
-		    	<a>Erreur : pseudonyme ou mot de passe incorrect</a>
+		    	<p>Erreur : pseudonyme ou mot de passe incorrect</p>
 		    	<br>
 		    <% } %>
 		    
 		    <!-- tentative de manipulation d'url pour contourné la connexion -->
 		    <% boolean notLogged = (boolean)request.getAttribute("notLogged"); %>
 		    <% if(notLogged==true){ %>
-		    	<a>Attention : merci de ne pas jouer avec l'url sinon j'appelle Adopi !</a>
+		    	<p>Attention : merci de ne pas jouer avec l'url sinon j'appelle Adopi !</p>
 		    	<br>
 		    <% } %>
 		    

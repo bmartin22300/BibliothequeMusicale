@@ -86,7 +86,10 @@ public class ClientServlet extends HttpServlet {//clientServlet
 	  
     		//affection vue
     		if(servletPath.equals("/GestionPlaylist")) {
+    			request.setAttribute("nav-bar-active", "GestionPlaylist");
             	vue = "/JSP/Client/GestionPlaylist.jsp";
+            }else if(servletPath.equals("/AjoutPlaylist")) {
+            	vue = "/JSP/Client/AjoutPlaylist.jsp";
             }else if(servletPath.equals("/ProfilClient")){
             	vue = "/JSP/Client/ProfilClient.jsp";
             }else if(servletPath.equals("/AccueilClient")){
