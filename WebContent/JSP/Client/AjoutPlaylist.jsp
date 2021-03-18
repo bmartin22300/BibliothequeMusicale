@@ -25,13 +25,6 @@
 						<input id="titre" type="text" placeholder="Nom de la playlist" name="nomPlaylist">
 					</h1>
 
-					<!--  Ajout titre -->
-					<h1>
-						<label><b>Titre</b></label>
-
-					</h1>
-					
-					
 			        <p style="padding-bottom:20px;"><input type="submit" id='submit' value='Creer'></p>
 				</div>
 		    

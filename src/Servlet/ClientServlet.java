@@ -359,7 +359,6 @@ public class ClientServlet extends HttpServlet {//clientServlet
 				String nom = request.getParameter("nom");
 				String adresse = request.getParameter("adresse");
 				String dateDeNaissanceString = request.getParameter("dateDeNaissance");
-				System.out.println(request.getParameter("civilite"));
 				String civilite="";
 				if(request.getParameter("civilite").equals("M")) {
 					civilite="M";
@@ -447,6 +446,50 @@ public class ClientServlet extends HttpServlet {//clientServlet
 	
 				// attribution vue
 				vue = "/JSP/Client/AccueilClient.jsp"; 
+			}else if(action.equals("CreerPlaylist")) {
+				request.setAttribute("nav-bar-active", "AjoutPlaylist");
+				//rï¿½cup param vue
+				String nom = request.getParameter("nomPlaylist");
+
+				// requete BDD
+				titresMusicaux = client.rechercherParNomTitre("");
+				Playlist playlist = client.creerPlaylist(nom, null);
+				
+				//envoi param vue
+				request.setAttribute("playlist", playlist);
+				request.setAttribute("titresMusicaux", titresMusicaux);
+
+				//attribution vue
+				vue = "/JSP/Client/AjoutTitresAPlaylist.jsp"; 
+			}else if(action.equals("FinAjoutTitresMusicauxAPlaylist")) {
+				request.setAttribute("nav-bar-active", "AjoutPlaylist");
+				//affectation vue
+				vue = "/JSP/Client/AjoutPlaylist.jsp"; 
+			}else if(action.equals("AjouterTitresAPlaylist")) {
+				request.setAttribute("nav-bar-active", "AjoutPlaylist");
+				//rï¿½cup param vue
+				String titresMusicauxSelectBox = request.getParameter("titresMusicauxSelectBox");
+				Playlist playlist = (Playlist) request.getSession().getAttribute("playlist");
+				String titreMusicalString = request.getParameter("titreMusical");
+				
+				int id = Integer.parseInt(titresMusicauxSelectBox);
+
+				TitreMusical titreMusical = null;
+				//todo ajouter mï¿½thode rechercherInterpreteParId
+				for(TitreMusical t : client.rechercherParNomTitre("")){
+					if(t.getIdCatalogue()==id) {
+						titreMusical=t;
+					}
+				}
+				
+				//envoi param vue
+				request.setAttribute("playlist", playlist);
+
+				//requete BDD
+				client.ajouterTitrePlaylist(titreMusical, playlist);
+				request.setAttribute("titresMusicauxAssocies", playlist.getTitresMusicaux());
+				//affectation vue
+				vue = "/JSP/Client/AjoutTitresAPlaylist.jsp"; 
 			}
 		}
 		//affichage de la vue
