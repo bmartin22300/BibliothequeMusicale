@@ -317,6 +317,9 @@ public class ClientServlet extends HttpServlet {//clientServlet
 		}
 		} else {
 			///////////////////////////////////////////////////////partie CLIENT///////////////////////////////////////////////////////
+			List<TitreMusical> titresMusicaux;
+			List<Interprete> interpretes;
+			List<Album> albums;
 			if (client == null) {// verification que le client est connecte
 				// affectation param�tres � la vue
 				request.setAttribute("isClient", false);
@@ -325,17 +328,18 @@ public class ClientServlet extends HttpServlet {//clientServlet
 
 				// affection vue
 				vue = "/JSP/Utilisateur/AuthentificationClient.jsp";
-			}
-			// requeteBDD
-			List<TitreMusical> titresMusicaux = client.rechercherParNomTitre("");
-			List<Interprete> interpretes = client.rechercherParPseudoInterprete("");
-			List<Album> albums = client.rechercherParNomAlbum("");
+			}else {
+				// requeteBDD
+				titresMusicaux = client.rechercherParNomTitre("");
+				interpretes = client.rechercherParPseudoInterprete("");
+				albums = client.rechercherParNomAlbum("");
 
-			// envoie de parametres a la vue
-			request.setAttribute("titresMusicaux", titresMusicaux);
-			request.setAttribute("interpretes", interpretes);
-			request.setAttribute("albums", albums);
-			request.setAttribute("isClient", true);
+				// envoie de parametres a la vue
+				request.setAttribute("titresMusicaux", titresMusicaux);
+				request.setAttribute("interpretes", interpretes);
+				request.setAttribute("albums", albums);
+				request.setAttribute("isClient", true);
+			}			
 		
 			if(action.equals("ModificationProfilClient")) {
 				//recuperation param�tres

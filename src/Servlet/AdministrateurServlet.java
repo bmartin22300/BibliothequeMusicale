@@ -97,6 +97,8 @@ public class AdministrateurServlet extends HttpServlet {
 				request.setAttribute("titres", titres);
 				vue = "/JSP/Administrateur/Statistiques.jsp";
 			} else if (servletPath.equals("/ModificationProfil")) {
+				List<Client> clients = administrateur.rechercherParMailClient("");
+				request.setAttribute("clients", clients);
 				vue = "/JSP/Administrateur/ModificationProfil.jsp";
 			} else if (servletPath.equals("/ModificationCatalogue")) {
 				vue = "/JSP/Administrateur/ModificationCatalogue.jsp";
@@ -153,6 +155,7 @@ public class AdministrateurServlet extends HttpServlet {
 				List<TitreMusical> titresMusicaux = administrateur.rechercherParNomTitre("");
 				List<Interprete> interpretes = administrateur.rechercherParPseudoInterprete("");
 				List<Album> albums = administrateur.rechercherParNomAlbum("");
+				List<Client> clients = administrateur.rechercherParMailClient("");
 
 				// envoie de parametres a la vue
 				request.setAttribute("titresMusicaux", titresMusicaux);
@@ -188,6 +191,7 @@ public class AdministrateurServlet extends HttpServlet {
 			List<TitreMusical> titresMusicaux = administrateur.rechercherParNomTitre("");
 			List<Interprete> interpretes = administrateur.rechercherParPseudoInterprete("");
 			List<Album> albums = administrateur.rechercherParNomAlbum("");
+			List<Client> clients = administrateur.rechercherParMailClient("");
 
 			// envoie de parametres a la vue
 			request.setAttribute("titresMusicaux", titresMusicaux);
@@ -458,6 +462,32 @@ public class AdministrateurServlet extends HttpServlet {
 
 				//affectation vue
 				vue = "/JSP/Administrateur/ModificationInterprete.jsp";
+			}else if(action.equals("ModificationProfil")) {
+				//recuperer parametre vue
+				String typeElement = request.getParameter("TypeElement");
+				String recherche = request.getParameter("recherche");
+
+				clients=administrateur.rechercherParMailClient(recherche);
+				request.setAttribute("clients", clients);
+				
+				// envoi param vue
+				request.setAttribute("TypeElement", typeElement);
+
+				//affectation vue
+				vue = "/JSP/Administrateur/ModificationProfil.jsp";
+			}else if(action.equals("SuppressionClient")) {
+				// rï¿½cup param vue
+				String idString = request.getParameter("idString");
+				int id = Integer.parseInt(idString);
+				Client client = administrateur.getClient(id);
+				((ProfilGestionnaireClient) administrateur).supprimerClient(client);
+
+				// requeteBDD
+				clients = administrateur.rechercherParMailClient("");
+
+				// envoie de parametres a la vue
+				request.setAttribute("clients", clients);
+				vue = "/JSP/Administrateur/ModificationProfil.jsp";
 			}
 		}
 		// affichage de la vue
