@@ -11,7 +11,7 @@
 			<a class="aref <% if(navBarActive!=null){if(navBarActive.equals("GestionPlaylist")){out.print("active");}}%>" href=GestionPlaylist>Gérer mes playlists</a>
 			<a class="aref <% if(navBarActive!=null){if(navBarActive.equals("AjoutPlaylist")){out.print("active");}}%>" href=AjoutPlaylist>Créer une playlist</a>
 			<a class="aref <% if(navBarActive!=null){if(navBarActive.equals("ProfilClient")){out.print("active");}}%>" href=ProfilClient>Modifier mon profil</a>
-			<a class="aref <% if(navBarActive!=null){if(navBarActive.equals("Accueil")){out.print("active");}}%>" href=Accueil>Déconnexion</a>	
+			<a class="aref dec <% if(navBarActive!=null){if(navBarActive.equals("Accueil")){out.print("active");}}%>" href=Accueil>Déconnexion</a>	
 		</div>
 	<% }else{ %>
 		<!-- administrateur -->
@@ -27,13 +27,13 @@
 				<% } %>			
 				<a class="aref <% if(navBarActive!=null){if(navBarActive.equals("Statistiques")){out.print("active");}}%>" href=Statistiques>Consulter les statistiques</a>
 				<a class="aref <% if(navBarActive!=null){if(navBarActive.equals("ProfilAdministrateur")){out.print("active");}}%>" href=ProfilAdministrateur>Modifier mon profil</a>
-				<a class="aref <% if(navBarActive!=null){if(navBarActive.equals("Accueil")){out.print("active");}}%>" href=Accueil>Déconnexion</a>
+				<a class="aref dec <% if(navBarActive!=null){if(navBarActive.equals("Accueil")){out.print("active");}}%>" href=Accueil>Déconnexion</a>
 			</div>	
 		<!-- utilisateur -->
 		<% }else{ %>
 			<div id="myDIV">
 				<a class="aref <% if(navBarActive!=null){if(navBarActive.equals("Accueil")){out.print("active");}}else{out.print("active");}%>" href=Accueil>Accueil</a>
-				<a class="aref <% if(navBarActive!=null){if(navBarActive.equals("Connexion")){out.print("active");}}%>" href=AuthentificationClient>Connexion</a>
+				<a class="aref con <% if(navBarActive!=null){if(navBarActive.equals("Connexion")){out.print("active");}}%>" href=AuthentificationClient>Connexion</a>
 			</div>
 		<%} %>
 	<%} %>
