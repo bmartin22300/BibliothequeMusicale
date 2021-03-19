@@ -40,7 +40,6 @@
 			            <th>Mail</th>
 			            <th>Nom</th>
 			            <th>Prenom</th>
-	       			    <th>Mot de passe</th>
 			            <th>Civilite</th>
 	       				<th>Date de naissance</th>
 	       				<th>Adresse</th>
@@ -52,12 +51,11 @@
 		        		<% for( Client elem : clients ) {%>
 							<tr id="tr">
 				            	<td><% out.print(elem.getMail()); %></td>
-				            	<td><% out.print(elem.getNom()); %></td>
-				            	<td><% out.print(elem.getPrenom()); %></td>
-				            	<td><% out.print(elem.getPassword()); %></td>
+				            	<td><% if(elem.getNom()!=null){out.print(elem.getNom());} %></td>
+				            	<td><% if(elem.getPrenom()!=null){out.print(elem.getPrenom());} %></td>
 				            	<td><% out.print(elem.getCivilite()); %></td>
-				            	<td><% out.print(elem.getDateNaissance()); %></td>
-				            	<td><% out.print(elem.getAdresseFacturation()); %></td>
+				            	<td><% if(elem.getDateNaissance()!=null){out.print(elem.getDateNaissance());} %></td>
+				            	<td><% if(elem.getAdresseFacturation()!=null){out.print(elem.getAdresseFacturation());} %></td>
 				            	<td><% out.print(elem.getStyleMusiquePrefere()); %></td>
 				            	<td>
 				            		<form method="POST">
