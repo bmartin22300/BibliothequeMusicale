@@ -6,7 +6,6 @@ build/
 *.class
  
 # Package Files #
-*.war
 *.ear
 *.db
 rebel.xml
