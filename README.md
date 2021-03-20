@@ -1,14 +1,3 @@
-BibliothequeMusicale
-
-#Groupe 8
-Étudiants :
-Erwan Garreau
-Kelig Jouquan-Mary
-Baptiste Martin
-Lilian Savona
-
-Nom branche GIT : main
-
 # BibliothequeMusicale
 * [Groupe](#Groupe_8)
 * [Branche](#branche)
