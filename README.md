@@ -4,9 +4,9 @@
 * [Exécution](#Exécution)
 
 # Groupe_8
-Erwan Garreau
-Kelig Jouquan-Mary
-Baptiste Martin
+Erwan Garreau,
+Kelig Jouquan-Mary,
+Baptiste Martin,
 Lilian Savona
 
 # branche GIT
